@@ -253,3 +253,343 @@ th{color:#FFFFFF; background-color:#373737;}
 tr, #comments li, #comments input[type="submit"], #comments input[type="reset"]{color:inherit; background-color:#FBFBFB;}
 tr:nth-child(even), #comments li:nth-child(even){color:inherit; background-color:#F7F7F7;}
 table a, #comments a{background-color:inherit;}
+
+
+
+/* New index sections */
+
+.section_zag {
+    text-align: center;
+    text-transform: uppercase;
+}
+section.big_img {
+    background-image: url(../../images/demo/sec_2.jpg);
+    background-size: cover;
+    background-position: center bottom;
+    width: 100%;
+    padding: 20px;
+}
+section.big_img .white_block {
+    width: 40%;
+    float: right;
+    background: white;
+    border: 2px solid #56AED4;
+    padding: 20px;
+}
+section.last_sec {
+
+}
+section.last_sec .text_block {
+    width: 49%;
+    float: left;
+}
+section.last_sec .img {
+    width: 49%;
+    float: right;
+}
+section.last_sec ul.revs_links {
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+section.last_sec ul.revs_links li {
+    display: inline-block;
+    margin: 0 15px;
+}
+section.last_sec ul.revs_links li.current {
+    color: black;
+}
+section.last_sec ul.revs_links li small {
+    display: block;
+}
+
+.cat {
+    width: 50%;
+    float: left;
+    font-size: 10px;
+}
+.date {
+    width: 50%;
+    float: right;
+    font-size: 10px;
+    text-align: right;
+}
+
+section.ads .lasts_ads {
+    width: 48%;
+    float: left;
+}
+section.ads .lasts_ads .list .one_ads {
+    border: 1px solid #D7D7D7;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+section.ads .lasts_ads .list .one_ads h6 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+section.ads .lasts_ads .list .one_ads p {
+    margin: 0;
+    font-size: 14px;
+}
+section.ads .lasts_ads .list .one_ads a {
+    display: inline-block;
+    float: left;
+}
+section.ads .lasts_ads .list .one_ads p.d {
+    float: right;
+}
+
+
+section.ads .ads_form {
+    width: 48%;
+    float: right;
+}
+section.ads .ads_form form {
+    background: #56AED4;
+    padding: 20px;
+    color: white;
+}
+section.ads .ads_form .big_input {
+    margin-bottom: 20px;
+}
+section.ads .ads_form input[type=text], select {
+    width: 100%;
+}
+section.ads .ads_form input[type=checkbox] {
+    display: inline-block;
+}
+section.ads .ads_form .left_form_part {
+    width: 48%;
+    float: left;
+}
+section.ads .ads_form .right_form_part {
+    width: 48%;
+    float: right;
+}
+section.ads .ads_form .right_form_part select {
+    width: auto;
+    display: inline-block;
+}
+section.ads form button {
+    border: 1px solid #56AED4;
+    background: white;
+    color: #56AED4;
+    width: 100%;
+    padding: 10px 0;
+}
+.all_olx {
+    display: block;
+    background: white;
+    color: black;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+.all_olx img {
+    width: 30px;
+}
+.add_olx {
+    display: block;
+    background: linear-gradient(to top, #56AED4, white);
+    color: black;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+.add_olx img {
+    width: 30px;
+}
+
+.subzag {
+    text-align: right;
+    font-size: 12px;
+    font-style: italic;
+}
+section.profs .prof {
+    display: flex;
+    display: -webkit-flex;
+}
+section.profs .prof .img {
+    background-size: cover;
+    background-position: center right;
+    width: 40%;
+}
+
+section.profs .prof .desc {
+    width: 60%;
+    padding: 0 0 0 40px;
+}
+section.profs .prof_right {
+    margin-top: 20px;
+}
+section.profs .prof_right .desc {
+    padding: 0 40px 0 0!important;
+}
+section.profs .prof .desc a.search {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    background: #56AED4;
+    color: white;
+    position: relative;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+section.profs .prof .desc a.search:before {
+    content: '';
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    display: block;
+}
+.divide_line {
+    width: 50%;
+    margin: 20px auto;
+}
+.blue_zag {
+    color: #56AED4;
+}
+
+/* New filters */
+
+#comments .filter p {
+    font-weight: bold;
+    font-size: 12px;
+}
+#comments h6 {
+    font-size: 18px;
+    color: #56AED4;
+}
+#comments .filter input[type=checkbox],
+#comments .filter select {
+    display: inline-block;
+    width: auto;
+}
+#comments .filter .filter_date {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+}
+#comments .filter .filter_date label {
+    width: 50px;
+}
+
+#comments .filter button {
+    border: 1px solid #D7D7D7;
+    background: #56AED4;
+    color: white;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.side_banner {
+    width: 100%;
+    border: 1px solid #D7D7D7;
+    margin: 20px 0;
+}
+.post_banner {
+    background: none!important;
+    width: 100%;
+    padding: 0!important;
+    margin: 20px 0!important;
+}
+#comments header {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+}
+#comments address {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+}
+.like {
+    color: white;
+    background: #56AED4;
+    padding: 2px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+}
+.like img {
+    width: 20px;
+}
+
+.rating_wrap {
+    margin: 5px 0 0 auto!important;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+}
+.rating_wrap .stars_wrap {
+    border: 1px solid #56AED4;
+    display: inline-block;
+    padding: 5px 0;
+    border-radius: 20px;
+    width: 122px;
+    text-align: center;
+    margin: 0 0 10px!important;
+}
+.rating_wrap .stars_empty {
+    width: 51px;
+    height: 11px;
+    margin: 0 auto!important;
+    background-image: url(../../images/demo/stars_empty.png);
+}
+.rating_wrap .stars {
+    height: 11px!important;
+    margin: 0!important;
+    background-image: url(../../images/demo/stars_full.png);
+}
+.like {
+    margin: 0!important;
+    padding: 10px 0;
+    width: 122px;
+    text-align: center;
+
+}
+
+.user_block {
+    display: flex;
+    display: -webkit-flex;
+    margin: 0!important;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+}
+.user_block .img {
+    margin-bottom: 0!important;
+    width: 135px;
+    flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+}
+.user_block .desc {
+    align-self: flex-start;
+    -webkit-align-self: flex-start;
+    padding-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 0!important;
+}
+.user_block .desc p {
+    margin-top: 0;
+}
+.user_head {
+    display: flex;
+    display: -webkit-flex;
+    margin: 0!important;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    align-items: flex-start;
+    -webkit-align-items: flex-start;
+}
