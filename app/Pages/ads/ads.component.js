@@ -6,16 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var AdsComponent = (function () {
+    function AdsComponent() {
     }
-    return AppComponent;
+    return AdsComponent;
 }());
-AppComponent = __decorate([
+AdsComponent = __decorate([
     core_1.Component({
-        selector: 'patrimoine',
-        templateUrl: 'app/app.component.html'
+        selector: "ads",
+        templateUrl: "app/Pages/ads/ads.component.html"
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], AdsComponent);
+exports.AdsComponent = AdsComponent;
+//# sourceMappingURL=ads.component.js.map

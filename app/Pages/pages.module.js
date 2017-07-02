@@ -6,16 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var common_1 = require("@angular/common");
+var index_1 = require("./index");
+var PageModule = (function () {
+    function PageModule() {
     }
-    return AppComponent;
+    return PageModule;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'patrimoine',
-        templateUrl: 'app/app.component.html'
+PageModule = __decorate([
+    core_1.NgModule({
+        imports: [common_1.CommonModule],
+        declarations: [index_1.AdsComponent, index_1.IndexComponent, index_1.UsersComponent, index_1.AdsDetailComponent, index_1.UserDetailComponent],
+        exports: [index_1.AdsComponent, index_1.IndexComponent, index_1.UsersComponent, index_1.AdsDetailComponent, index_1.UserDetailComponent]
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], PageModule);
+exports.PageModule = PageModule;
+//# sourceMappingURL=pages.module.js.map
