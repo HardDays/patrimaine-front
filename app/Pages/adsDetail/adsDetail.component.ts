@@ -12,8 +12,6 @@ import {MainService} from "./../../services/main.service";
 
 export class AdsDetailComponent implements OnInit{
     Ads : AdsModel;
-    private subscription: Subscription;
-    private id:number;
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -39,11 +37,6 @@ export class AdsDetailComponent implements OnInit{
                 .then(result => this.Ads = result);
         });*/
         
-    }
-    ngOnDestroy() {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.subscription.unsubscribe();
     }
 }
 

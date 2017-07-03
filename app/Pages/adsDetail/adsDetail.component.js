@@ -34,11 +34,6 @@ var AdsDetailComponent = (function () {
                 .then(result => this.Ads = result);
         });*/
     };
-    AdsDetailComponent.prototype.ngOnDestroy = function () {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.subscription.unsubscribe();
-    };
     return AdsDetailComponent;
 }());
 AdsDetailComponent = __decorate([
