@@ -1,15 +1,14 @@
-import { Component } from "@angular/core";
-
-import {IUser} from "./user.interface";
-
+import {CompanyModel} from './company.model';
 export class UserModel{
-    public Id:number;
-    public FullName: string;
-    public Phone: string;
-    public Email: string;
-    public Logo: string;
-    public Categories: string[];
-    public About: string;
-    public Rating: number;
+    constructor(
+        public id: number,
+        public email:string,
+        public first_name: string,
+        public last_name: string,
+        public phone: string,
+        public created_at: Date,
+        public updated_at: Date,
+        public company: CompanyModel
+    ){}
 
 }

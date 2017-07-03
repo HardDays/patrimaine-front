@@ -29,17 +29,16 @@
           <li *ngFor="let user of Users">
             <article>
               <div class="user_head">
-                <h2><a href="./user_detail">{{user.FullName}}</a></h2>
+                <h2><a (click)="OnSelectUser(user)">{{user.first_name + " " + user.last_name}}</a></h2>
                 <div class="like"><img src="../images/demo/like.png" alt=""> Like</div>
               </div>
               <div class="user_block">
-                <div class="img"><img class="borderedbox" [src]="user.Logo" alt=""></div>
+                <div class="img"><img class="borderedbox" [src]="user.company.logo_file_name" alt=""></div>
                 <div class="desc">
-                  <p><strong>Contacts:</strong> <br /><span><span class="icon-phone"></span>{{user.Phone}}</span><br /><span><span class="icon-envelope"></span>{{user.Email}}</span></p>
+                  <p><strong>Contacts:</strong> <br /><span><span class="icon-phone"></span>{{user.phone}}</span><br /><span><span class="icon-envelope"></span>{{user.company.email}}</span></p>
                   <p><strong>Category:</strong> 
-                    <span *ngFor="let cat of user.Categories; let last=last">
-                      <a href="#">{{cat}}</a>
-                      <span *ngIf="!last">,</span>
+                    <span >
+                      <a href="#">{{user.company.sub_category}}</a>
                     </span> 
                   </p>
                   <p><strong>About:</strong></p>
@@ -56,7 +55,7 @@
                 </div>
               </div>
               <div class="user_block_text">
-                {{user.About}}
+                {{user.company.description}}
               </div>
             </article>
           </li>

@@ -7,5 +7,4 @@ export * from './adsDetail/adsDetail.component';
 export * from "./pages.module";
 export * from "./pages.route";
 export * from "./../models/user.model";
-export * from "./../models/user.interface";
 export * from "./../models/ads.model";

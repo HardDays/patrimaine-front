@@ -1,6 +1,10 @@
-import { Component } from "@angular/core";
+import { Component,OnInit }      from '@angular/core';
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import {Subscription} from 'rxjs/Subscription';
 
-import { UserModel, IUser } from "./../index";
+import { UserModel} from "./../index";
+
+import {MainService} from "./../../services/main.service";
 
 @Component({
     selector: "userDetail",
@@ -8,15 +12,31 @@ import { UserModel, IUser } from "./../index";
 })
 
 export class UserDetailComponent{
-    User : UserModel = {
-        Id:1,
-        FullName: "User Name",
-        Logo: "../images/demo/imgr.gif",
-        Phone: "+00393939393939",
-        Email: "lorem@ipsum.com",
-        Categories: ["Fintech","Classique"],
-        About: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam nibh diam, sit amet pellentesque lacus porta id. Nunc at porttitor ante. Donec non magna vel nulla tristique elementum ac vitae lectus. Etiam mattis rutrum nunc, ut tempor ipsum. Ut ut odio orci. Maecenas quis sollicitudin ante, vel fermentum diam.",
-        Rating: 4
-    };
+    User : UserModel;
+    constructor(
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private service: MainService)
+    {
+        
+    }
 
+
+    ngOnInit() {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        this.activatedRoute.params.forEach((params:Params) => {
+            let adId = params["id"];
+            this.service
+                .GetUserById(adId)
+                .subscribe((data) => {this.User = data});
+        });
+        /*this.activatedRoute.params.forEach((params: Params)=>{
+            let id = params["id"];
+            this.service
+                .getAdsById(id)
+                .then(result => this.Ads = result);
+        });*/
+        
+    }
 }

@@ -17,23 +17,24 @@
       <main id="container" class="clear">
         <!-- container body -->
         <!-- ########################################################################################## -->
-        <h1 align="center"><a href="">{{User.FullName}}</a></h1>
-        <img class="imgr borderedbox" [src]="User.Logo" alt="" style="width:240px;">
+        <h1 align="center"><a href="">{{User.first_name + " " + User.last_name}}</a></h1>
+        <img class="imgr borderedbox" [src]="User.company.logo_file_name" alt="" style="width:240px;">
         <h3>Contacts</h3>
             <p>
-                <span class="icon-phone"></span> {{User.Phone}}
+                <span class="icon-phone"></span> {{User.company.phone}}
             </p>
             <p>
-                <span class="icon-envelope"></span> {{User.Email}}
+                <span class="icon-envelope"></span> {{User.company.email}}
             </p>
         <h3>Categories</h3>
-        <div *ngFor="let cat of User.Categories">
+        <p>{{User.company.sub_category}}</p>
+        <!--<div *ngFor="let cat of User.Categories">
             <p>{{cat}}</p>
-        </div>
+        </div>-->
         <h3>About</h3>
         <p>
-          {{User.About}} </p>
-        <h3>Rating</h3>
+          {{User.company.description}} </p>
+        <h3>Rating</h3> <!-- TODO {{User.company.rate}}
         <h4>
           <span class="icon-star"></span>
           <span class="icon-star"></span>

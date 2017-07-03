@@ -24,13 +24,13 @@
             <li *ngFor="let ad of Ads">
                 <article>
                     <header>
-                        <h2><a href="./ads_detail">{{ad.Title}}</a></h2>
-                        <span class="date">{{ad.CreatedDate | date: dMMy}}</span>
+                        <h2 ><a (click)="OnSelect(ad)">{{ad.title}}</a></h2>
+                        <span class="date">{{ad.created_at | date: dMMy}}</span>
                     </header>
                     <div class="user_block">
                         <div class="img"><img class="borderedbox" src="../images/demo/imgl.gif" alt=""></div>
                         <div class="desc">
-                            <p>{{ad.Description}}</p>
+                            <p>{{ad.description}}</p>
                             <address>
                                 <a href="./user_details">Author</a>
                             </address>

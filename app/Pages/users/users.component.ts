@@ -1,61 +1,28 @@
-import { Component } from "@angular/core";
+import { Component,OnInit }      from '@angular/core';
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import {Subscription} from 'rxjs/Subscription';
 
 import { UserModel} from "./../index";
+
+import {MainService} from "./../../services/main.service";
 
 @Component({
     selector: "users",
     templateUrl: "app/Pages/users/users.component.html"
 })
 
-export class UsersComponent{
-    Users : UserModel[] = [{
-        Id:1,
-        FullName: "User Name1",
-        Logo: "../images/demo/imgr.gif",
-        Phone: "+00393939393939",
-        Email: "lorem@ipsum.com",
-        Categories: ["Fintech","Classique"],
-        About: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam nibh diam, sit amet pellentesque lacus porta id. Nunc at porttitor ante. Donec non magna vel nulla tristique elementum ac vitae lectus. Etiam mattis rutrum nunc, ut tempor ipsum. Ut ut odio orci. Maecenas quis sollicitudin ante, vel fermentum diam.",
-        Rating: 4
-    },
+export class UsersComponent implements OnInit{
+    Users : UserModel[];
+
+    constructor(private router: Router,
+        private mainService: MainService){}
+    ngOnInit(){
+        this.mainService
+            .GetAllUsers("")
+            .subscribe((data) => {this.Users = data});
+    }
+    OnSelectUser(sel:UserModel)
     {
-        Id:2,
-        FullName: "User Name2",
-        Logo: "../images/demo/imgr.gif",
-        Phone: "+00393939393939",
-        Email: "lorem@ipsum.com",
-        Categories: ["Fintech","Classique"],
-        About: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam nibh diam, sit amet pellentesque lacus porta id. Nunc at porttitor ante. Donec non magna vel nulla tristique elementum ac vitae lectus. Etiam mattis rutrum nunc, ut tempor ipsum. Ut ut odio orci. Maecenas quis sollicitudin ante, vel fermentum diam.",
-        Rating: 4
-    },
-    {
-        Id:3,
-        FullName: "User Name3",
-        Logo: "../images/demo/imgr.gif",
-        Phone: "+00393939393939",
-        Email: "lorem@ipsum.com",
-        Categories: ["Fintech","Classique"],
-        About: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam nibh diam, sit amet pellentesque lacus porta id. Nunc at porttitor ante. Donec non magna vel nulla tristique elementum ac vitae lectus. Etiam mattis rutrum nunc, ut tempor ipsum. Ut ut odio orci. Maecenas quis sollicitudin ante, vel fermentum diam.",
-        Rating: 4
-    },
-    {
-        Id:4,
-        FullName: "User Name4",
-        Logo: "../images/demo/imgr.gif",
-        Phone: "+00393939393939",
-        Email: "lorem@ipsum.com",
-        Categories: ["Fintech","Classique"],
-        About: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam nibh diam, sit amet pellentesque lacus porta id. Nunc at porttitor ante. Donec non magna vel nulla tristique elementum ac vitae lectus. Etiam mattis rutrum nunc, ut tempor ipsum. Ut ut odio orci. Maecenas quis sollicitudin ante, vel fermentum diam.",
-        Rating: 4
-    },
-    {
-        Id:5,
-        FullName: "User Name5",
-        Logo: "../images/demo/imgr.gif",
-        Phone: "+00393939393939",
-        Email: "lorem@ipsum.com",
-        Categories: ["Fintech","Classique"],
-        About: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquam nibh diam, sit amet pellentesque lacus porta id. Nunc at porttitor ante. Donec non magna vel nulla tristique elementum ac vitae lectus. Etiam mattis rutrum nunc, ut tempor ipsum. Ut ut odio orci. Maecenas quis sollicitudin ante, vel fermentum diam.",
-        Rating: 4
-    }];
+        this.router.navigate(["users",sel.id]);
+    }
 }

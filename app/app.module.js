@@ -8,9 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var router_1 = require("@angular/router");
+var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
 var index_1 = require("./Pages/index");
 //TODO import another components
+var main_service_1 = require("./services/main.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -21,9 +23,11 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             router_1.RouterModule.forRoot(index_1.routs),
-            index_1.PageModule
+            index_1.PageModule,
+            http_1.HttpModule
         ],
         declarations: [app_component_1.AppComponent],
+        providers: [main_service_1.MainService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
