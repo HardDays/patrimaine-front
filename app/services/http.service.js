@@ -19,6 +19,7 @@ require("rxjs/add/observable/throw");
 var HttpService = (function () {
     function HttpService(http) {
         this.http = http;
+        this.serverUrl = "https://patrimoine.herokuapp.com";
     }
     HttpService.prototype.Login = function (email, password) {
         var _this = this;
@@ -33,17 +34,17 @@ var HttpService = (function () {
         });
     };
     HttpService.prototype.PostData = function (method, data) {
-        return this.http.post('url' + method, data, { headers: this.headers })
+        return this.http.post(this.serverUrl + method, data, { headers: this.headers })
             .map(function (resp) { return resp.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
     HttpService.prototype.GetData = function (method, params) {
-        return this.http.get('url' + method, { search: params, headers: this.headers })
+        return this.http.get(this.serverUrl + method, { search: params, headers: this.headers })
             .map(function (resp) { return resp.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
     HttpService.prototype.PutData = function (method, data) {
-        return this.http.put('url' + method, data, { headers: this.headers })
+        return this.http.put(this.serverUrl + method, data, { headers: this.headers })
             .map(function (resp) { return resp.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };

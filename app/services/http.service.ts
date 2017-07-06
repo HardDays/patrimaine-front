@@ -12,6 +12,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class HttpService
 {
+    serverUrl: string = "https://patrimoine.herokuapp.com";
     constructor(private http: Http){}
     headers:Headers;
 
@@ -30,20 +31,20 @@ export class HttpService
     
     PostData(method:string,data:string)
     {
-        return this.http.post('url' + method,data, {headers:this.headers})
+        return this.http.post(this.serverUrl + method,data, {headers:this.headers})
             .map((resp:Response)=>resp.json())
             .catch((error:any) =>{return Observable.throw(error);});
     }
 
     GetData(method:string,params:string)
     {
-        return this.http.get('url' + method,{search:params,headers:this.headers})
+        return this.http.get(this.serverUrl + method,{search:params,headers:this.headers})
             .map((resp:Response)=>resp.json())
             .catch((error:any) =>{return Observable.throw(error);});
     }
 
     PutData(method:string,data:string){
-        return this.http.put('url' + method,data,{headers:this.headers})
+        return this.http.put(this.serverUrl + method,data,{headers:this.headers})
             .map((resp:Response)=>resp.json())
             .catch((error:any) =>{return Observable.throw(error);});
     }
