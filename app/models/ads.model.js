@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var AdsModel = (function () {
     function AdsModel(id, title, description, address, user_id, c_type_id, sub_category_id, created_at, updated_at, sub_category, agrements, expertises) {
         this.id = id;

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var UserModel = (function () {
     function UserModel(id, email, first_name, last_name, phone, created_at, updated_at, company) {
         this.id = id;

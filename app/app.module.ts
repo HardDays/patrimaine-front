@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from "@angular/router";
-import {HttpModule} from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
 
 import { AppComponent }   from './app.component';
 import { routs, PageModule  } from "./Pages/index";
@@ -17,7 +17,7 @@ import {MainService} from "./services/main.service";
         HttpModule
     ],
     declarations: [ AppComponent],
-    providers: [ MainService],
+    providers: [ MainService, HttpModule],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

@@ -1,13 +1,17 @@
 import { Component,OnInit }      from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import {Subscription} from 'rxjs/Subscription';
+import { HttpService} from '../../services/http.service';
+
 
 import {AdsModel} from './../index';
 import {MainService} from "./../../services/main.service";
 
 @Component({
     selector: "ads",
-    templateUrl: "app/Pages/adsDetail/adsDetail.component.html"
+    templateUrl: "app/Pages/adsDetail/adsDetail.component.html",
+    providers: [HttpService]
+
 })
 
 export class AdsDetailComponent implements OnInit{

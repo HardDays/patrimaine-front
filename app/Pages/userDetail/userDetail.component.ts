@@ -1,6 +1,7 @@
 import { Component,OnInit }      from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import {Subscription} from 'rxjs/Subscription';
+import { HttpService} from '../../services/http.service';
 
 import { UserModel} from "./../index";
 
@@ -8,7 +9,8 @@ import {MainService} from "./../../services/main.service";
 
 @Component({
     selector: "userDetail",
-    templateUrl: "app/Pages/userDetail/userDetail.component.html"
+    templateUrl: "app/Pages/userDetail/userDetail.component.html",
+    providers: [HttpService]
 })
 
 export class UserDetailComponent{

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var CompanyModel = (function () {
     function CompanyModel(id, name, address, other_address, email, phone, opening_times, company_id, description, links, created_at, updated_at, logo_file_name, logo_content_type, logo_file_size, logo_updated_at, user_id, sub_category_id, c_type_id, c_type, sub_category, agrements, expertises) {
         this.id = id;
