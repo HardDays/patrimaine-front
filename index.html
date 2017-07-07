@@ -4,6 +4,8 @@
 <head>
 <title>Patrimoine</title>
 <meta charset="utf-8">
+<link rel="stylesheet" href="layout/styles/owl.carousel.min.css">
+<link rel="stylesheet" href="layout/styles/owl.theme.default.min.css">
 <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body id="top">
@@ -31,6 +33,9 @@
         <li><a class="faicon-rss" href="#"><i class="icon-rss"></i></a></li>
       </ul>
     </div>
+    <div class="fl_center">
+    	<a href="pages/login.html">Login</a> | <a href="pages/register.html">Register</a>
+    </div>
     <!-- ################################################################################################ --> 
   </div>
 </div>
@@ -40,27 +45,46 @@
 <div class="wrapper row1">
   <header id="header" class="clear"> 
     <!-- ################################################################################################ -->
-    <div id="logo" class="fl_left">
-      <h1><a href="./index.html">Patrimoine</a></h1>
+    <div id="logo" class="fl_left index_logo">
+      <h1><a href="./index.html"><img src="images/demo/patrimoineLogo.png" alt="Patrimoine"></a></h1>
     </div>
     <nav id="mainav" class="fl_right">
       <ul class="clear">
-        <li class="active"><a href="./index.html">Home</a></li>
-        <li><a class="drop" href="./pages/users.html">Concepteur</a>
-        <ul>
-												<li><a href="./pages/users.html">Classique</a></li>
-												<li><a href="./pages/users.html">E-brooker</a></li>
-												<li><a href="./pages/users.html">Fintech</a></li>
-												<li><a href="./pages/users.html">Crowdfunding</a></li>
-												<li><a href="./pages/users.html">Lendfunding</a></li>
+        <li class="active"><a href="./index.html">Accueil</a></li>
+        <li><a class="drop" href="./pages/users.html">Concepteurs de Solutions</a>
+	        <ul>
+				<li><a href="./pages/users.html">Classique</a></li>
+				<li><a href="./pages/users.html">E-brooker</a></li>
+				<li><a href="./pages/users.html">Fintech</a></li>
+				<li><a href="./pages/users.html">Crowdfunding</a></li>
+				<li><a href="./pages/users.html">Lendfunding</a></li>
 
-											</ul>
-      </li>
-      <li><a href="./pages/users.html">Conseiller</a>
-        <li><a href="./pages/posts.html">Application</a>
-          
-        </li>
-        
+			</ul>
+      	</li>
+      	<li><a class="drop" href="./pages/users.html">Professionnels du Chiffre et du Droit </a>
+      		<ul>
+				<li><a href="./pages/users.html">Tous</a></li>
+				<li><a href="./pages/users.html">Assureurs</a></li>
+				<li><a href="./pages/users.html">Avocats</a></li>
+				<li><a href="./pages/users.html">Conseillers en gestion de patrimoine</a></li>
+				<li><a href="./pages/users.html">Courtiers de prêts</a></li>
+				<li><a href="./pages/users.html">Experts-comptables</a></li>
+				<li><a href="./pages/users.html">Notaires</a></li>
+				<li><a href="./pages/users.html">Professionnels de l'immobilier</a></li>
+
+			</ul>
+      	</li>
+	    <li><a class="drop" href="./pages/posts.html">Annonces</a>
+	      	<ul>
+				<li><a href="./pages/users.html">Toutes</a></li>
+				<li><a href="./pages/users.html">Finance / Epargne / Assurance</a></li>
+				<li><a href="./pages/users.html">Placement écologique</a></li>
+				<li><a href="./pages/users.html">Investissement Immobilier</a></li>
+				<li><a href="./pages/users.html">Investissement plaisir</a></li>
+
+			</ul>
+	    </li>  
+	    <li><a href="">Forum du Patrimoine</a></li>      
       </ul>
     </nav>
     <!-- ################################################################################################ --> 
@@ -88,30 +112,27 @@
     <ul class="nospace push50 center clear">
       <li class="one_quarter first">
         <div class="push30"><span class="circle icon-flag"></span></div>
-        <h6 class="push10">Lorem ipsum</h6>
-        <p class="nospace push10">Lorem ipsum dolor sit amet</p>
+        <p class="nospace push10">Vous êtes un professionnel du chiffre et du droit</p>
         <p class="nospace"><a href="./pages/post_details.html">Read more &raquo;</a></p>
       </li>
       <li class="one_quarter">
         <div class="push30"><span class="circle icon-book"></span></div>
-        <h6 class="push10">Lorem ipsum</h6>
-        <p class="nospace push10">Lorem ipsum dolor sit amet</p>
+        <p class="nospace push10">Vous êtes un concepteur de solutions patrimoniales</p>
         <p class="nospace"><a href="./pages/post_details.html">Read more &raquo;</a></p>
       </li>
       <li class="one_quarter">
         <div class="push30"><span class="circle icon-trophy"></span></div>
-        <h6 class="push10">Lorem ipsum</h6>
-        <p class="nospace push10">Lorem ipsum dolor sit amet</p>
+        <p class="nospace push10">Vous êtes un chef d'entreprise ou professionnel</p>
         <p class="nospace"><a href="./pages/post_details.html">Read more &raquo;</a></p>
       </li>
       <li class="one_quarter">
         <div class="push30"><span class="circle icon-group"></span></div>
-        <h6 class="push10">Lorem ipsum</h6>
-        <p class="nospace push10">Lorem ipsum dolor sit amet</p>
+        <p class="nospace push10">Vous êtes un particulier</p>
         <p class="nospace"><a href="./pages/post_details.html">Read more &raquo;</a></p>
       </li>
     </ul>
     <hr class="nospace push50">
+    <h3 class="section_zag blue_zag">La place des annonces (Patrimoniales)</h3>
     <section class="ads push50">
       <div class="lasts_ads">
         <h5 class="blue_zag">Dernières annonces publiées</h5>
@@ -140,17 +161,52 @@
             <p class="d">20 Août 2016</p>
             <div class="clear"></div>
           </div>
+          <a href="#" class="all_annonces">Voir toutes les annonces »</a>
         </div>
       </div>
+      <div class="lasts_ads premium_ads">
+        <h5 class="blue_zag">Les annonces premiums</h5>
+        <div class="list">
+          <div class="one_ads">
+            <p class="c">Immobilier</p>
+            <h6>Aenean euismod bibendum laoreet.</h6>
+            <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
+            <a href="#">Voir l'offre »</a>
+            <p class="d">20 Août 2016</p>
+            <div class="clear"></div>
+          </div>
+          <div class="one_ads">
+            <p class="c">Immobilier</p>
+            <h6>Aenean euismod bibendum laoreet.</h6>
+            <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
+            <a href="#">Voir l'offre »</a>
+            <p class="d">20 Août 2016</p>
+            <div class="clear"></div>
+          </div>
+          <div class="one_ads">
+            <p class="c">Immobilier</p>
+            <h6>Aenean euismod bibendum laoreet.</h6>
+            <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
+            <a href="#">Voir l'offre »</a>
+            <p class="d">20 Août 2016</p>
+            <div class="clear"></div>
+          </div>
+          <a href="#" class="all_annonces">Voir toutes les annonces premiums »</a>
+        </div>
+      </div>
+      <div class="clear push50"></div>
       <div class="ads_form">
         <h5 class="blue_zag">Rechercher une annonce</h5>
         <form action="" method="post">
-          <div class="big_input">
-            <label>Mot clé</label>
-            <input type="text" placeholder="Renseigner un mot de recherche">
-          </div>
           <div class="left_form_part">
-            <label>Type d'investissement patrimonial</label>
+          	<label>Mot clé</label>
+            <input type="text" placeholder="Renseigner un mot de recherche">
+            <br>
+            <label>Date de mise en ligne de l'offre</label>
+            <input type="text" placeholder="Du-Au">
+          </div>
+          <div class="center_form_part">
+          	<label>Type d'investissement patrimonial</label>
             <select>
               <option>Tous les types</option>
             </select>
@@ -159,85 +215,106 @@
             <select>
               <option>Tous les publics</option>
             </select>
-            <br>
-            <label>Date de mise en ligne de l'offre</label>
-            <input type="text" placeholder="Du-Au">
           </div>
           <div class="right_form_part">
             <label>Dans quelle région</label>
             <input type="checkbox"> <select><option>France entiere</option></select><br>
-            <input type="checkbox"> Europe hors France<br>
-            <input type="checkbox"> Monde hors Europe
+            <div class="float_checkbox">
+            	<input type="checkbox"> Europe hors France
+            </div>
+            <div class="float_checkbox">
+            	<input type="checkbox"> Monde hors Europe
+        	</div>	
             <br>
             <br>
             <button type="submit">Lancer la recherche »</button>
           </div>
           <div class="clear"></div>
         </form>
-        <a href="#" class="all_olx"><img src="images/demo/olx_icon.png" alt="">&nbsp;&nbsp;Voir toutes les annonces</a>
-        <a href="#" class="add_olx"><img src="images/demo/add_olx_icon.png" alt="">&nbsp;&nbsp;Déposer une annonce</a>
+        <a href="#" class="add_olx push50"><img src="images/demo/add_olx_icon.png" alt="">&nbsp;&nbsp;Déposer une annonce</a>
       </div>
-      <div class="clear"></div>
+      <h5 class="blue_zag text-center">Offres exclusives</h5>
+      	<div class="nospace push50 clear offres_carousel owl-carousel">
+	      <div class="first"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+	        <div class="borderedbox pad15">
+	          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
+	          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
+	          <div class="nospace push10">
+	            <span class="cat">Immobilier</span>
+	            <span class="date">20 Août 2016</span>
+	          </div>
+	          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+	        </div>
+	      </div>
+	      <div class=""><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+	        <div class="borderedbox pad15">
+	          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
+	          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
+	          <div class="nospace push10">
+	            <span class="cat">Immobilier</span>
+	            <span class="date">20 Août 2016</span>
+	          </div>
+	          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+	        </div>
+	      </div>
+	      <div class=""><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+	        <div class="borderedbox pad15">
+	          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
+	          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
+	          <div class="nospace push10">
+	            <span class="cat">Immobilier</span>
+	            <span class="date">20 Août 2016</span>
+	          </div>
+	          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+	        </div>
+	      </div>
+	      <div class=""><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+	        <div class="borderedbox pad15">
+	          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
+	          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
+	          <div class="nospace push10">
+	            <span class="cat">Immobilier</span>
+	            <span class="date">20 Août 2016</span>
+	          </div>
+	          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+	        </div>
+	      </div>
+	      <div class=""><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+	        <div class="borderedbox pad15">
+	          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
+	          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
+	          <div class="nospace push10">
+	            <span class="cat">Immobilier</span>
+	            <span class="date">20 Août 2016</span>
+	          </div>
+	          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+	        </div>
+	      </div>
+	      <div class=""><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+	        <div class="borderedbox pad15">
+	          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
+	          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
+	          <div class="nospace push10">
+	            <span class="cat">Immobilier</span>
+	            <span class="date">20 Août 2016</span>
+	          </div>
+	          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+	        </div>
+	      </div>
+    	</div>
+      <p class="text-center">Vous voulez nous soumettre une solution patrimoniale différentiante ou nous solliciter pour une solution sur mesure, <a href="">contactez-nous</a></p>
     </section>
-    <hr class="nospace push50">
-    <h3 class="section_zag blue_zag">Offres exclusives</h3>
-    <ul class="nospace push50 clear">
-      <li class="one_quarter first"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
-        <div class="borderedbox pad15">
-          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
-          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
-          <div class="nospace push10">
-            <span class="cat">Immobilier</span>
-            <span class="date">20 Août 2016</span>
-          </div>
-          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
-        </div>
-      </li>
-      <li class="one_quarter"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
-        <div class="borderedbox pad15">
-          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
-          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
-          <div class="nospace push10">
-            <span class="cat">Immobilier</span>
-            <span class="date">20 Août 2016</span>
-          </div>
-          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
-        </div>
-      </li>
-      <li class="one_quarter"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
-        <div class="borderedbox pad15">
-          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
-          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
-          <div class="nospace push10">
-            <span class="cat">Immobilier</span>
-            <span class="date">20 Août 2016</span>
-          </div>
-          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
-        </div>
-      </li>
-      <li class="one_quarter"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
-        <div class="borderedbox pad15">
-          <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
-          <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
-          <div class="nospace push10">
-            <span class="cat">Immobilier</span>
-            <span class="date">20 Août 2016</span>
-          </div>
-          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
-        </div>
-      </li>
-    </ul>
     <!-- ########################################################################################## --> 
     <!-- / container body -->
 
     <hr class="nospace push50">
-    <h3 class="section_zag blue_zag">Professionnels du chiffre et du droit</h3>
+    <h3 class="section_zag blue_zag">PROFESSIONNELS (DU PATRIMOINE)</h3>
     <p class="subzag push50">Sur Place du Patrimoine, les professionnels du chiffre et du droit se rencontrent et remontent leur expérience pratique de gestion du patrimoine. Pour les particuliers et les chefs d'entreprises : l'occasion de les contacter, d'obtenir un conseil, de consulter leurs offres et de noter leurs prestations.</p>
     <section class="profs push50">
       <div class="prof">
         <div class="img" style="background-image: url(images/demo/business-people.jpg)"></div>
         <div class="desc">
-          <h4>Professionnels de la gestion du patrimoine</h4>
+          <h4>Professionnels du chiffre et du droit</h4>
           <p>Un professionnel de la gestion du patrimoine affilié, c'est consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Aenean euismod bibendum laoreet proin gravida dolor sit amet lacus ...</p>
           <a href="#">En savoir plus »</a><br>
           <a href="#" class="search">Trouver un professionnel</a><a href="#" class="search">Devenir priofessionnel affilié</a>
@@ -267,9 +344,9 @@
           <li>et magnis dis parturient montes,</li>
           <li>nascetur ridiculus mus.</li>
         </ul>
-        <h5>Un conseil pour mieux gérer votre patrimoine ?</h5>
+        <h5>Forum de la gestion de Patrimoine</h5>
         <p>Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-        <a href="#">En savoir plus »</a>
+        <a href="#" class="big_and_nice_link">Aller sur le forum</a>
       </div>
       <div class="clear"></div>
     </section>
@@ -290,6 +367,46 @@
         <li>Philippe <small>(Concepteur de solutions)</small></li>
       </ul>
     </section>
+    <hr class="nospace push50">
+    <h3 class="section_zag blue_zag">Presse</h3>
+    <!-- news -->
+    <section class="news push50">
+    	<div class="owl-carousel news_carousel">
+    		<div class="one-new">
+    			<img src="images/demo/sec_3.jpg" align="">
+    			<h4>The title of news</h4>
+    			<h6>The subtitle of news</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a href="#">En savoir plus »</a>
+    		</div>
+    		<div class="one-new">
+    			<h4>The title of news</h4>
+    			<h6>The subtitle of news</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a href="#">En savoir plus »</a>
+    			<img src="images/demo/sec_3.jpg" align="">
+    		</div>
+    		<div class="one-new">
+    			<img src="images/demo/sec_3.jpg" align="">
+    			<h4>The title of news</h4>
+    			<h6>The subtitle of news</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a href="#">En savoir plus »</a>
+    		</div>
+    	</div>
+    </section>
+    <hr class="nospace push50">
+    <h3 class="section_zag blue_zag">Partenaires</h3>
+    <section class="logos">
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    </section>
   </main>
 </div>
 <!-- ################################################################################################ --> 
@@ -300,6 +417,12 @@
     <!-- ################################################################################################ -->
     <div class="one_third first">
       <h6 class="title">Lorem ipsum dolor</h6>
+      <div class="footer_links">
+      	<a href="">Découvrir la place du patrimoine</a><br>
+      	<a href="">Qui sommes-nous?</a><br>
+      	<a href="">Conditions d’utilisations</a><br>
+      	<a href="">Nous contacter</a>
+      </div>
       <address class="push30">
       Company Name<br>
       Street Name &amp; Number<br>
@@ -354,22 +477,39 @@
 </div>
 <!-- JAVASCRIPTS --> 
 <script src="layout/scripts/jquery.min.js"></script> 
+<script src="layout/scripts/owl.carousel.min.js"></script>
 <script src="layout/scripts/supersized/supersized.min.js"></script> 
 <script>
 jQuery(function ($) {
     $.supersized({
         slides: [{
             image: 'images/demo/slider/1.png',
-            title: 'Lorem ipsum dolor<br><small>sit amet</small>'
+            title: 'Portail pour Professionnels du chiffre et du droit'
         }, {
             image: 'images/demo/slider/2.png',
-            title: 'Lorem Sit amet'
+            title: "Solutions patrimoniales pour Particuliers et Chefs d'entreprises"
         }, {
             image: 'images/demo/slider/3.png',
-            title: 'Lorem ipsum'
+            title: ''
         }]
     });
 });
+
+$(document).ready(function(){
+	  $(".offres_carousel").owlCarousel({
+	  	items: 4,
+	  	margin: 10,
+	  	nav: true,
+	  	navText: ['« Voir le précédent', 'Voir la prochaine »']
+	  });
+
+	  $(".news_carousel").owlCarousel({
+	  	items: 2,
+	  	margin: 50,
+	  	nav: true,
+	  	navText: ['« Voir le précédent', 'Voir la prochaine »']
+	  });
+	});
 </script>
 </body>
 </html>

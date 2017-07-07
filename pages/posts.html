@@ -30,6 +30,9 @@
         <li><a class="faicon-rss" href="#"><i class="icon-rss"></i></a></li>
       </ul>
     </div>
+    <div class="fl_center">
+      <a href="login.html">Login</a> | <a href="register.html">Register</a>
+    </div>
     <!-- ################################################################################################ -->
   </div>
 </div>
@@ -40,26 +43,45 @@
   <header id="header" class="clear"> 
     <!-- ################################################################################################ -->
     <div id="logo" class="fl_left">
-      <h1><a href="index.html">Patrimoine</a></h1>
+      <a href="../index.html"><img src="../images/demo/patrimoineLogo.png" alt="Patrimoine"></a>
     </div>
     <nav id="mainav" class="fl_right">
       <ul class="clear">
-        <li ><a href="../index.html">Home</a></li>
-        <li ><a class="drop" href="./users.html">Concepteur</a>
-        <ul>
-												<li><a href="./users.html">Classique</a></li>
-												<li><a href="./users.html">E-brooker</a></li>
-												<li><a href="./users.html">Fintech</a></li>
-												<li><a href="./users.html">Crowdfunding</a></li>
-												<li><a href="./users.html">Lendfunding</a></li>
+        <li><a href="./index.html">Accueil</a></li>
+        <li><a class="drop" href="users.html">Concepteurs de Solutions</a>
+          <ul>
+        <li><a href="users.html">Classique</a></li>
+        <li><a href="users.html">E-brooker</a></li>
+        <li><a href="users.html">Fintech</a></li>
+        <li><a href="users.html">Crowdfunding</a></li>
+        <li><a href="users.html">Lendfunding</a></li>
 
-											</ul>
-      </li>
-      <li><a href="./users.html">Conseiller</a>
-        <li class="active"><a href="./posts.html">Application</a>
-          
+      </ul>
         </li>
-        
+        <li><a class="drop" href="users.html">Professionnels du Chiffre et du Droit </a>
+          <ul>
+        <li><a href="users.html">Tous</a></li>
+        <li><a href="users.html">Assureurs</a></li>
+        <li><a href="users.html">Avocats</a></li>
+        <li><a href="users.html">Conseillers en gestion de patrimoine</a></li>
+        <li><a href="users.html">Courtiers de prêts</a></li>
+        <li><a href="users.html">Experts-comptables</a></li>
+        <li><a href="users.html">Notaires</a></li>
+        <li><a href="users.html">Professionnels de l'immobilier</a></li>
+
+      </ul>
+        </li>
+      <li class="active"><a class="drop" href="posts.html">Annonces</a>
+          <ul>
+        <li><a href="posts.html">Toutes</a></li>
+        <li><a href="posts.html">Finance / Epargne / Assurance</a></li>
+        <li><a href="posts.html">Placement écologique</a></li>
+        <li><a href="posts.html">Investissement Immobilier</a></li>
+        <li><a href="posts.html">Investissement plaisir</a></li>
+
+      </ul>
+      </li>  
+      <li><a href="">Forum du Patrimoine</a></li> 
       </ul>
     </nav>
     <!-- ################################################################################################ --> 
@@ -487,6 +509,12 @@
   <div class="side_banner">
     <img src="../images/demo/ads_demo.jpg" alt="">
   </div>
+  <div class="right_links">
+    <a href="#">Déposer une annonce</a>
+    <a href="#">Imprimer la liste</a>
+    <a href="#" id="open_modal">Configurer une alerte</a>
+  </div>
+
     </div>
 
       <!-- ########################################################################################## -->
@@ -505,6 +533,12 @@
     <!-- ################################################################################################ -->
     <div class="one_third first">
       <h6 class="title">Lorem ipsum dolor</h6>
+      <div class="footer_links">
+        <a href="">Découvrir la place du patrimoine</a><br>
+        <a href="">Qui sommes-nous?</a><br>
+        <a href="">Conditions d’utilisations</a><br>
+        <a href="">Nous contacter</a>
+      </div>
       <address class="push30">
       Company Name<br>
       Street Name &amp; Number<br>
@@ -556,5 +590,49 @@
     <!-- ################################################################################################ -->
   </div>
 </div>
+
+<div class="modal_mask"></div>
+<div id="modal">
+  <h5>Configurer une alerte</h5>
+  <form action="" method="post">
+    <label>Email</label>
+    <input type="text"><br>
+    <div class="part_modal">
+      <div>
+        <label>Type d'annonce</label>
+        <select>
+          <option>Immédiat</option>
+          <option>Journalier</option>
+          <option>Hebdomadaire</option>
+        </select>
+      </div>
+      <div>
+        <label>Fréquence d'alerte</label>
+        <select>
+          <option>Immédiat</option>
+          <option>Journalier</option>
+          <option>Hebdomadaire</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit">Recevoir d'annonce</button>
+  </form>
+</div>
+
+<script src="../layout/scripts/jquery.min.js"></script> 
+<script>
+  $(document).ready(function() {
+      $('#open_modal').click(function(e) {
+        e.preventDefault();
+        $('.modal_mask').show();
+        $('#modal').show();
+      });
+
+      $('.modal_mask').click(function() {
+        $('#modal').hide();
+        $('.modal_mask').hide();
+      });
+  });
+</script>
 
 </body></html>
