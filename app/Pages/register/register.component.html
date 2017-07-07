@@ -1,0 +1,111 @@
+<div class="wrapper row3">
+  <main id="container" class="clear">
+    <!-- container body -->
+    
+    <div class="register_block">
+      <div class="reg_block reg_left">
+        <h2>Professionnels du chiffre et du droit</h2>
+        <form action="" >
+          <label>Email</label>
+          <input type="text" name="email" [(ngModel)]="email"><br>
+          <label>Password</label>
+          <input type="password" name="password" [(ngModel)]="password"><br>
+          <label>First Name</label>
+          <input type="text" name="fname" [(ngModel)]="fname"><br>
+          <label>Last Name</label>
+          <input type="text" name="lname" [(ngModel)]="lname"><br>
+          <label>Phone</label>
+          <input type="text" name="phone" [(ngModel)]="phone"><br>
+          <button (click)="RegisterUser(email,password,fname,lname,phone)">Register</button>
+        </form>
+      </div>
+      <div class="reg_block reg_right">
+        <h2>Concepteurs de Solutions</h2>
+        <form >
+          <label>Email</label>
+          <input type="text" name="email" [(ngModel)]="email"><br>
+          <label>Password</label>
+          <input type="password" name="password" [(ngModel)]="password"><br>
+          <label>First Name</label>
+          <input type="text" name="fname" [(ngModel)]="fname"><br>
+          <label>Last Name</label>
+          <input type="text" name="lname" [(ngModel)]="lname"><br>
+          <label>Phone</label>
+          <input type="text" name="phone" [(ngModel)]="phone"><br>
+          <h3>Company</h3>
+          <label>Name</label>
+          <input type="text"><br>
+          <label>Address</label>
+          <input type="text"><br>
+          <label>Other Address</label>
+          <input type="text"><br>
+          <label>Email</label>
+          <input type="text"><br>
+          <label>Phone</label>
+          <input type="text"><br>
+          <label>Worktime</label>
+          <input type="text"><br>
+          <label>Description</label>
+          <textarea></textarea><br>
+          <label>Social links</label>
+          <textarea></textarea><br>
+          <label>Logo image</label>
+          <input type="file"><br>
+          <div class="part_reg">
+            <div>
+              <label>Company type</label>
+              <select>
+                <option>Concepteur</option>
+                <option>Conseiller</option>
+                <option>Both</option>
+              </select>
+            </div>
+            <div>
+              <label>Subcategory</label>
+              <select>
+                <option>Classique</option>
+                <option>E-brooker</option>
+                <option>Fintech</option>
+                <option>Crowdfunding</option>
+                <option>Lendfunding</option>
+                <option>Institutionnels</option>
+              </select>
+            </div>
+          </div><br>
+          <div class="part_reg">
+            <div>
+              <label>Expertises</label>
+              <select>
+                <option>Credit</option>
+                <option>Retraite</option>
+                <option>Placement</option>
+                <option>Allocation</option>
+                <option>Epargne</option>
+                <option>Investissement</option>
+                <option>Defiscalisation</option>
+                <option>Immobilier</option>
+                <option>Assurance</option>
+                <option>Investissement plaisir</option>
+              </select>
+            </div>
+            <div>
+              <label>Agrements</label>
+              <select>
+                <option>CJA</option>
+                <option>CIF</option>
+                <option>Courtier</option>
+                <option>IOSB</option>
+                <option>Carte-T</option>
+              </select>
+            </div>
+          </div><br>
+          <button (click)="RegisterUser(email,password,fname,lname,phone)">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ########################################################################################## -->
+    <!-- / container body -->
+    <div class="clear"></div>
+  </main>
+</div>

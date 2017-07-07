@@ -33,15 +33,15 @@
                 <div class="like"><img src="../images/demo/like.png" alt=""> Like</div>
               </div>
               <div class="user_block">
-                <div class="img"><img class="borderedbox" [src]="user.company.logo_file_name" alt=""></div>
+                <div *ngIf="user.company" class="img"><img class="borderedbox" [src]="user.company.logo_file_name" alt=""></div>
                 <div class="desc">
-                  <p><strong>Contacts:</strong> <br /><span><span class="icon-phone"></span>{{user.phone}}</span><br /><span><span class="icon-envelope"></span>{{user.company.email}}</span></p>
-                  <p><strong>Category:</strong> 
+                  <p *ngIf="user.phone || user.email"><strong>Contacts:</strong> <br /><span *ngIf="user.phone"><span class="icon-phone"></span>{{user.phone}}</span><br /><span *ngIf="user.email"><span class="icon-envelope"></span>{{user.email}}</span></p>
+                  <p *ngIf="user.company"><strong>Category:</strong> 
                     <span >
                       <a href="#">{{user.company.sub_category}}</a>
                     </span> 
                   </p>
-                  <p><strong>About:</strong></p>
+                  <p *ngIf="user.company"><strong>About:</strong></p>
                 </div>
                 <div class="rating_wrap">
                   <div class="stars_wrap">
@@ -54,7 +54,7 @@
                   </div>
                 </div>
               </div>
-              <div class="user_block_text">
+              <div class="user_block_text" *ngIf="user.company">
                 {{user.company.description}}
               </div>
             </article>

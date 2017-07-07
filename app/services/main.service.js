@@ -8,21 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_service_1 = require("./http.service");
 var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/observable/throw");
+require("rxjs/Rx");
 var MainService = (function () {
     function MainService(httpService) {
         this.httpService = httpService;
     }
     MainService.prototype.GetAllAds = function (params) {
-        return this.httpService.GetData('/ads/all', params)
-            .map(function (resp) { return resp.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error); });
+        return this.httpService.GetData('/ads/all', params);
     };
     MainService.prototype.GetAdsById = function (id) {
         return this.httpService.GetData('/ads/info/' + id, "")
@@ -46,24 +44,26 @@ var MainService = (function () {
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
     MainService.prototype.GetAllUsers = function (params) {
-        return this.httpService.GetData('/users/all', params)
-            .map(function (resp) { return resp.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error); });
+        /*return this.httpService.GetData('/users/all',params).toArray<UserModel>();*/
+        return this.httpService.GetData('/users/all', params);
     };
     MainService.prototype.GetUserById = function (id) {
-        return this.httpService.GetData('/users/info/' + id, "")
-            .map(function (resp) { return resp.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error); });
+        return this.httpService.GetData('/users/info/' + id, "");
     };
     MainService.prototype.CreateUser = function (user) {
-        return this.httpService.PostData('/users/create', JSON.stringify(user))
-            .map(function (resp) { return resp.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error); });
+        var params = {
+            user: user,
+            expertises: ["placement"],
+            agrements: ["CJA"]
+        };
+        console.log(JSON.stringify(params));
+        return this.httpService.PostData('/users/create', JSON.stringify(params)).toPromise();
     };
     MainService.prototype.UpdateUser = function (user) {
-        return this.httpService.PutData('/users/update', JSON.stringify(user))
-            .map(function (resp) { return resp.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error); });
+        return this.httpService.PutData('/users/update', JSON.stringify(user)).toPromise();
+    };
+    MainService.prototype.UserLogin = function (email, password) {
+        return this.httpService.Login(email, password);
     };
     return MainService;
 }());

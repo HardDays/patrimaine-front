@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
@@ -21,13 +20,13 @@ var UserDetailComponent = (function () {
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
         this.activatedRoute.params.forEach(function (params) {
             var adId = params["id"];
-            _this.service
-                .GetUserById(adId)
-                .subscribe(function (data) { _this.User = data; });
+            _this.service.GetUserById(adId)
+                .subscribe(function (data) {
+                _this.User = data;
+                console.log(_this.User);
+            });
         });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];

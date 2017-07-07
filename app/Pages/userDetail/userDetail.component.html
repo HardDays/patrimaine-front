@@ -13,37 +13,37 @@
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
-    <div class="wrapper row3">
-      <main id="container" class="clear">
-        <!-- container body -->
-        <!-- ########################################################################################## -->
-        <h1 align="center"><a href="">{{User.first_name + " " + User.last_name}}</a></h1>
-        <img class="imgr borderedbox" [src]="User.company.logo_file_name" alt="" style="width:240px;">
-        <h3>Contacts</h3>
-            <p>
-                <span class="icon-phone"></span> {{User.company.phone}}
-            </p>
-            <p>
-                <span class="icon-envelope"></span> {{User.company.email}}
-            </p>
-        <h3>Categories</h3>
-        <p>{{User.company.sub_category}}</p>
-        <!--<div *ngFor="let cat of User.Categories">
-            <p>{{cat}}</p>
-        </div>-->
-        <h3>About</h3>
-        <p>
-          {{User.company.description}} </p>
-        <h3>Rating</h3> <!-- TODO {{User.company.rate}}
-        <h4>
-          <span class="icon-star"></span>
-          <span class="icon-star"></span>
-          <span class="icon-star"></span>
-          <span class="icon-star"></span>
-          <span class="icon-star"></span>
-        </h4>
-        <!-- ########################################################################################## -->
-        <!-- / container body -->
-        <div class="clear"></div>
-      </main>
-    </div>
+<div class="wrapper row3">
+  <main id="container" class="clear">
+    <!-- container body -->
+    <!-- ########################################################################################## -->
+    <h1 align="center"><a href="">{{User.first_name + " " + User.last_name}}</a></h1>
+    <img *ngIf="User.company" class="imgr borderedbox" [src]="User.company.logo_file_name" alt="" style="width:240px;">
+    <h3 *ngIf="User.phone || User.email">Contacts</h3>
+        <p *ngIf="User.phone">
+            <span class="icon-phone"></span> {{User.phone}}
+        </p>
+        <p *ngIf="User.email">
+            <span class="icon-envelope"></span> {{User.email}}
+        </p>
+    <h3 *ngIf="User.company && User.company.sub_category">Categories</h3>
+    <p *ngIf="User.company && User.company.sub_category">{{User?.company?.sub_category}}</p>
+    <!--<div *ngFor="let cat of User.Categories">
+        <p>{{cat}}</p>
+    </div>-->
+    <h3 *ngIf="User.company && User.company.description">About</h3>
+    <p *ngIf="User.company && User.company.description">
+      {{User?.company?.description}} </p>
+    <h3>Rating</h3> <!-- TODO {{User.company.rate}}
+    <h4>
+      <span class="icon-star"></span>
+      <span class="icon-star"></span>
+      <span class="icon-star"></span>
+      <span class="icon-star"></span>
+      <span class="icon-star"></span>
+    </h4>
+    <!-- ########################################################################################## -->
+    <!-- / container body -->
+    <div class="clear"></div>
+  </main>
+</div>

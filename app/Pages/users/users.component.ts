@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs/Subscription';
 import { HttpService} from '../../services/http.service';
 
 import { UserModel} from "./../index";
+import { AllUsersModel} from "./../../models/allusers.model";
 
 import {MainService} from "./../../services/main.service";
 
@@ -19,9 +20,13 @@ export class UsersComponent implements OnInit{
     constructor(private router: Router,
         private mainService: MainService){}
     ngOnInit(){
-        this.mainService
-            .GetAllUsers("")
-            .subscribe((data) => {this.Users = data});
+        
+        this.mainService.GetAllUsers("").subscribe(
+            (data:AllUsersModel)=>{
+                this.Users = data.users;
+                console.log(this.Users);
+            });
+            
     }
     OnSelectUser(sel:UserModel)
     {

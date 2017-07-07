@@ -20,18 +20,13 @@ export class UserDetailComponent{
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
-        
     }
-
-
     ngOnInit() {
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
         this.activatedRoute.params.forEach((params:Params) => {
             let adId = params["id"];
-            this.service
-                .GetUserById(adId)
-                .subscribe((data) => {this.User = data});
+            this.service.GetUserById(adId)
+                .subscribe((data:UserModel) => {this.User = data;
+                console.log(this.User);});
         });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];

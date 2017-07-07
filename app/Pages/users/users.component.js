@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
@@ -20,9 +19,10 @@ var UsersComponent = (function () {
     }
     UsersComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.mainService
-            .GetAllUsers("")
-            .subscribe(function (data) { _this.Users = data; });
+        this.mainService.GetAllUsers("").subscribe(function (data) {
+            _this.Users = data.users;
+            console.log(_this.Users);
+        });
     };
     UsersComponent.prototype.OnSelectUser = function (sel) {
         this.router.navigate(["users", sel.id]);

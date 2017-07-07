@@ -2,11 +2,11 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from "@angular/router";
 import {Http, HttpModule} from "@angular/http";
+import { FormsModule }   from '@angular/forms';
 
 import { AppComponent }   from './app.component';
 import { routs, PageModule  } from "./Pages/index";
 //TODO import another components
-
 import {MainService} from "./services/main.service";
 
 @NgModule({
@@ -14,7 +14,8 @@ import {MainService} from "./services/main.service";
         BrowserModule,
         RouterModule.forRoot(routs),
         PageModule,
-        HttpModule
+        HttpModule,
+        FormsModule
     ],
     declarations: [ AppComponent],
     providers: [ MainService, HttpModule],

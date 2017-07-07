@@ -2,12 +2,16 @@ import { Injectable } from "@angular/core";
 import {Http} from "@angular/http";
 import {AdsModel} from "./../models/ads.model";
 import {UserModel} from "./../models/user.model";
+import {TokenModel} from "./../models/token.model";
+import {AllUsersModel} from "./../models/allusers.model";
+import {RegisterUserModel} from "./../models/register.user.model";
 import { HttpService } from "./http.service";
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import 'rxjs/Rx';
 
     @Injectable()
     export class MainService{
@@ -15,9 +19,7 @@ import 'rxjs/add/observable/throw';
             private httpService : HttpService
         ){}
         GetAllAds(params:string){
-            return this.httpService.GetData('/ads/all',params)
-                .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});
+            return this.httpService.GetData('/ads/all',params);
         }
 
         GetAdsById(id:number){
@@ -46,26 +48,29 @@ import 'rxjs/add/observable/throw';
 
         GetAllUsers(params:string)
         {
-            return this.httpService.GetData('/users/all',params)
-                .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});
+            /*return this.httpService.GetData('/users/all',params).toArray<UserModel>();*/
+            return this.httpService.GetData('/users/all',params);
         }
 
         GetUserById(id:number){
-            return this.httpService.GetData('/users/info/'+id,"")
-                .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});
+            return this.httpService.GetData('/users/info/'+id,"");
         }
 
-        CreateUser(user:UserModel){
-            return this.httpService.PostData('/users/create',JSON.stringify(user))
-                .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});
+        CreateUser(user:RegisterUserModel): Promise<UserModel>{
+            let params = {
+                user: user,
+                expertises: ["placement"],
+                agrements: ["CJA"]
+            };
+            console.log(JSON.stringify(params));
+            return this.httpService.PostData('/users/create',JSON.stringify(params)).toPromise<UserModel>();
         }
 
-        UpdateUser(user:UserModel){
-            return this.httpService.PutData('/users/update',JSON.stringify(user))
-                .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});
+        UpdateUser(user:UserModel): Promise<UserModel>{
+            return this.httpService.PutData('/users/update',JSON.stringify(user)).toPromise<UserModel>();
+        }
+
+        UserLogin(email:string, password:string){
+            return this.httpService.Login(email,password);
         }
     }

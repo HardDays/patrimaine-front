@@ -1,8 +1,9 @@
-import { Component,OnInit }      from '@angular/core';
+import { Component,OnInit,NgModule }      from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { HttpService} from '../../services/http.service';
 
-import {AdsModel} from './../index';
+import {AdsModel,CheckboxModel} from './../index';
+import {AllAdsModel} from './../../models/allads.model';
 import {MainService} from "./../../services/main.service";
 
 @Component({
@@ -12,18 +13,37 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class AdsComponent implements OnInit{
-    
+    private log:string = '';
     Ads: AdsModel[];
-
+    /*ExpertisesCheckboxes: CheckboxModel[] = [
+        new CheckboxModel("Credit","credit",false),
+        new CheckboxModel("Retraite","retraite",false),
+        new CheckboxModel("Placement","placement",false),
+        new CheckboxModel("Allocation","allocation",false),
+        new CheckboxModel("Epargne","epargne",false),
+        new CheckboxModel("Investissement","investissement",false),
+        new CheckboxModel("Defiscalisation","defiscalisation",false),
+        new CheckboxModel("Immobilier","immobilier",false),
+        new CheckboxModel("Assurance","assurance",false),
+        new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
+    ];
+    AgrementsCheckboxes: CheckboxModel[] = [
+        new CheckboxModel("CJA","CJA",false),
+        new CheckboxModel("CIF","CIF",false),
+        new CheckboxModel("Courtier","Courtier",false),
+        new CheckboxModel("IOSB","IOSB",false),
+        new CheckboxModel("Carte_T","Carte_T",false)
+    ];*/
     constructor(private router: Router,
         private mainService: MainService){}
     ngOnInit(){
         this.mainService
             .GetAllAds("")
-            .subscribe((data) => {this.Ads = data});
+            .subscribe((data:AllAdsModel) => {this.Ads = data.ads});
     }
     OnSelectAd(sel:AdsModel)
     {
         this.router.navigate(["ads",sel.id]);
     }
+
 }
