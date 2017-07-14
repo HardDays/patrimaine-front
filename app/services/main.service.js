@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var ads_model_1 = require("./../models/ads.model");
 var http_service_1 = require("./http.service");
 var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
@@ -16,26 +17,55 @@ require("rxjs/add/operator/catch");
 require("rxjs/add/observable/throw");
 require("rxjs/Rx");
 var Subject_1 = require("rxjs/Subject");
+var Ads = [
+    new ads_model_1.AdsModel(1, "Test1", "Test1Test1", "", 25, 1, 1, null, null, "fintech", [""], [""]),
+    new ads_model_1.AdsModel(2, "Test2", "Test2Test2", "", 25, 1, 1, null, null, "fintech", [""], [""]),
+    new ads_model_1.AdsModel(3, "Test3", "Test3Test3", "", 25, 1, 1, null, null, "fintech", [""], [""]),
+    new ads_model_1.AdsModel(4, "Test4", "Test4Test4", "", 25, 1, 1, null, null, "fintech", [""], [""]),
+    new ads_model_1.AdsModel(5, "Test5", "Test5Test5", "", 25, 1, 1, null, null, "fintech", [""], [""]),
+    new ads_model_1.AdsModel(6, "Test6", "Test6Test6", "", 25, 1, 1, null, null, "fintech", [""], [""]),
+];
+var AdsPromise = Promise.resolve(Ads);
 var MainService = (function () {
     function MainService(httpService) {
         this.httpService = httpService;
         this.onAuthChange$ = new Subject_1.Subject();
     }
     MainService.prototype.GetAllAds = function (params) {
-        return this.httpService.GetData('/ads/all', params);
+        return AdsPromise
+            .then(function (Ads) { return Ads.filter(function (x) { return x.description.includes(params); }); });
+        //return this.httpService.GetData('/ads/all',params);
     };
     MainService.prototype.GetAdsById = function (id) {
-        return this.httpService.GetData('/ads/info/' + id, "")
-            .map(function (resp) { return resp.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error); });
+        return AdsPromise
+            .then(function (Ads) { return Ads.find(function (x) { return x.id == id; }); });
+        /*return this.httpService.GetData('/ads/info/'+id,"")
+            .map((resp:Response)=>resp.json())
+            .catch((error:any) =>{return Observable.throw(error);});*/
+    };
+    MainService.prototype.GetAllAdByUserId = function (id) {
+        return AdsPromise
+            .then(function (Ads) { return Ads.filter(function (x) { return x.user_id == id; }); });
     };
     MainService.prototype.CreateAd = function (title, desc) {
+        var _this = this;
         var ad = { title: title, description: desc };
-        var params = new URLSearchParams();
-        params.set('ad', JSON.stringify(ad));
-        return this.httpService.PostData('/ads/create', JSON.stringify(params))
-            .map(function (resp) { return resp.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error); });
+        var id = Ads.length;
+        return AdsPromise
+            .then(function (Ads) { return Ads.push(new ads_model_1.AdsModel(id + 1, title, desc, "", _this.me.id, 1, 1, null, null, "fintech", [""], [""])); });
+        //let params = new URLSearchParams();
+        //params.set('ad',JSON.stringify(ad));
+        /*return this.httpService.PostData('/ads/create',JSON.stringify(params))
+            .map((resp:Response)=>resp.json())
+            .catch((error:any) =>{return Observable.throw(error);});*/
+    };
+    MainService.prototype.DeleteAd = function (ad) {
+        return AdsPromise
+            .then(function (Ads) {
+            var index = Ads.indexOf(ad, 0);
+            if (index > -1)
+                Ads.splice(index, 1);
+        });
     };
     MainService.prototype.UpdateAd = function (id, title, desc) {
         var ad = { title: title, description: desc };
@@ -70,6 +100,12 @@ var MainService = (function () {
     MainService.prototype.UserLogin = function (email, password) {
         var _this = this;
         return this.httpService.Login(email, password)
+            .add(function (data) {
+            _this.GetMe()
+                .subscribe(function (user) {
+                _this.me = user;
+            });
+        })
             .add(function (data) {
             _this.onAuthChange$.next(true);
         });

@@ -13,7 +13,6 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class AdsComponent implements OnInit{
-    private log:string = '';
     Ads: AdsModel[];
     /*ExpertisesCheckboxes: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
@@ -39,11 +38,16 @@ export class AdsComponent implements OnInit{
     ngOnInit(){
         this.mainService
             .GetAllAds("")
-            .subscribe((data:AllAdsModel) => {this.Ads = data.ads});
+            .then(result => this.Ads = result);
     }
     OnSelectAd(sel:AdsModel)
     {
         this.router.navigate(["ads",sel.id]);
+    }
+    SearchAdMyName(name:string)
+    {
+        this.mainService.GetAllAds(name)
+            .then(result=> this.Ads = result);
     }
 
 }

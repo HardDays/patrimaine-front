@@ -11,12 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
+var index_1 = require("./../index");
 var main_service_1 = require("./../../services/main.service");
 var AdsDetailComponent = (function () {
     function AdsDetailComponent(router, activatedRoute, service) {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.service = service;
+        this.Ads = new index_1.AdsModel(null, "", "", "", null, null, null, null, null, "", null, null);
+        this.Author = new index_1.UserModel(null, "", "", "", "", null, null, null);
     }
     AdsDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -26,7 +29,15 @@ var AdsDetailComponent = (function () {
             var adId = params["id"];
             _this.service
                 .GetAdsById(adId)
-                .subscribe(function (data) { _this.Ads = data; });
+                .then(function (Ad) {
+                console.log(Ad);
+                _this.Ads = Ad;
+                _this.service.GetUserById(_this.Ads.user_id)
+                    .subscribe(function (user) {
+                    _this.Author = user;
+                });
+            });
+            //.subscribe((data) => {this.Ads = data});
         });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];

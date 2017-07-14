@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs/Subscription';
 import { HttpService} from '../../services/http.service';
 
 
-import {AdsModel} from './../index';
+import {AdsModel, UserModel} from './../index';
 import {MainService} from "./../../services/main.service";
 
 @Component({
@@ -15,7 +15,8 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class AdsDetailComponent implements OnInit{
-    Ads : AdsModel;
+    Ads : AdsModel = new AdsModel(null,"","","",null,null,null,null,null,"",null,null);
+    Author: UserModel = new UserModel(null,"","","","",null,null,null);
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -32,7 +33,14 @@ export class AdsDetailComponent implements OnInit{
             let adId = params["id"];
             this.service
                 .GetAdsById(adId)
-                .subscribe((data) => {this.Ads = data});
+                .then(Ad => {
+                    console.log(Ad);
+                    this.Ads = Ad;
+                    this.service.GetUserById(this.Ads.user_id)
+                        .subscribe((user:UserModel)=>{
+                            this.Author = user;
+                        })});
+                //.subscribe((data) => {this.Ads = data});
         });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];

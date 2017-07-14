@@ -34,7 +34,29 @@
     <h3 *ngIf="User.company && User.company.description">About</h3>
     <p *ngIf="User.company && User.company.description">
       {{User?.company?.description}} </p>
+    <div *ngIf="isMe" class="ads_creation">
+      <div class="ad_create_form">
+      <h1>Create Ad</h1>
+      <form >
+        <label>Title</label>
+        <input type="text" name="title" [(ngModel)]="title">
+        <br>
+        <label>Description</label>
+        <textarea name="description" [(ngModel)]="description" ></textarea><br>
+        <button (click)="OnCreateAdButtonClick(title,description)">Create ad</button>
+      </form>
+    </div>
+    <div class="ads_userlist">
+      <ul>
+        <li *ngFor="let ad of myAds">
+          <p>{{ad.title}} <button (click)="OnDeleteAd(ad)" ><h5>X</h5></button></p>
+        </li>
+      </ul>
+    </div>
+    </div>
+    
     <h3>Rating</h3> <!-- TODO {{User.company.rate}}
+      
     <h4>
       <span class="icon-star"></span>
       <span class="icon-star"></span>

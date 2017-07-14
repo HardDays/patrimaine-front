@@ -19,6 +19,7 @@ var UserDetailComponent = (function () {
         this.activatedRoute = activatedRoute;
         this.service = service;
         this.User = new index_1.UserModel(null, "", "", "", "", null, null, null);
+        this.isMe = false;
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -27,10 +28,17 @@ var UserDetailComponent = (function () {
             console.log(userId);
             //TODO: REWRITE THIS HARDCODE
             if (userId == 'me') {
+                _this.isMe = true;
                 _this.service.GetMe()
                     .subscribe(function (data) {
-                    _this.User = data;
-                    console.log(_this.User);
+                    if (data.id) {
+                        _this.User = data;
+                        console.log(_this.User);
+                        _this.service.GetAllAdByUserId(data.id)
+                            .then(function (Ads) {
+                            _this.myAds = Ads;
+                        });
+                    }
                 });
             }
             else {
@@ -47,6 +55,27 @@ var UserDetailComponent = (function () {
                 .getAdsById(id)
                 .then(result => this.Ads = result);
         });*/
+    };
+    UserDetailComponent.prototype.OnCreateAdButtonClick = function (title, description) {
+        var _this = this;
+        this.service.CreateAd(title, description)
+            .then(function (result) {
+            _this.service.GetAllAds(description)
+                .then(function (result) {
+                _this.router.navigate(["ads", result[0].id]);
+            });
+        });
+    };
+    UserDetailComponent.prototype.OnDeleteAd = function (ad) {
+        var _this = this;
+        console.log(ad);
+        this.service.DeleteAd(ad)
+            .then(function (result) {
+            _this.service.GetAllAdByUserId(_this.User.id)
+                .then(function (Ads) {
+                _this.myAds = Ads;
+            });
+        });
     };
     return UserDetailComponent;
 }());

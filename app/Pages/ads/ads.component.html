@@ -26,7 +26,7 @@
             <li *ngFor="let ad of Ads">
                 <article>
                     <header>
-                        <h2 ><a (click)="OnSelect(ad)">{{ad.title}}</a></h2>
+                        <h2 ><a (click)="OnSelectAd(ad)">{{ad.title}}</a></h2>
                         <span class="date">{{ad.created_at | date: dMMy}}</span>
                     </header>
                     <div class="user_block">
@@ -83,7 +83,7 @@
         <div class="sdb_holder" id="comments">
             <form class="filter">
                 <h6>Mot clé</h6>
-                <input type="text" name="name" id="name" value="" size="22" placeholder="Name" class="push50">
+                <input type="text" name="name" [(ngModel)]="name" id="name" value="" size="22" placeholder="Name" class="push50">
                 <h6>Type d'investissement</h6>
                 <p>Finance / Epargne / Assurance</p>
                 <input type="checkbox" checked> Epargne<br>
@@ -126,7 +126,7 @@
                 <div class="filter_date">
                     <label>Au</label><input type="text">
                 </div>
-                <button type="submit">Relancer la recherche »</button>
+                <button (click)="SearchAdMyName(name)">Relancer la recherche »</button>
             </form>
             <div class="side_banner">
                 <img src="../images/demo/ads_demo.jpg" alt="">

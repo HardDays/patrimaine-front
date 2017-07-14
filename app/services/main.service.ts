@@ -14,6 +14,15 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/Rx';
 import {Subject} from 'rxjs/Subject';
 
+let Ads = [
+            new AdsModel(1,"Test1","Test1Test1","",25,1,1,null,null,"fintech",[""],[""]),
+            new AdsModel(2,"Test2","Test2Test2","",25,1,1,null,null,"fintech",[""],[""]),
+            new AdsModel(3,"Test3","Test3Test3","",25,1,1,null,null,"fintech",[""],[""]),
+            new AdsModel(4,"Test4","Test4Test4","",25,1,1,null,null,"fintech",[""],[""]),
+            new AdsModel(5,"Test5","Test5Test5","",25,1,1,null,null,"fintech",[""],[""]),
+            new AdsModel(6,"Test6","Test6Test6","",25,1,1,null,null,"fintech",[""],[""]),
+        ];
+let AdsPromise: Promise<AdsModel[]> = Promise.resolve(Ads);
     @Injectable()
     export class MainService{
 
@@ -23,23 +32,47 @@ import {Subject} from 'rxjs/Subject';
         ){
             this.onAuthChange$ = new Subject();
         }
-        GetAllAds(params:string){
-            return this.httpService.GetData('/ads/all',params);
+        public me: UserModel;
+
+        GetAllAds(params:string):Promise<AdsModel[]>{
+            return AdsPromise
+                .then(Ads => Ads.filter(x => x.description.includes(params)));
+            //return this.httpService.GetData('/ads/all',params);
         }
 
-        GetAdsById(id:number){
-            return this.httpService.GetData('/ads/info/'+id,"")
+        GetAdsById(id:number): Promise<AdsModel>{
+            return AdsPromise
+                .then(Ads => Ads.find(x => x.id == id));
+            /*return this.httpService.GetData('/ads/info/'+id,"")
                 .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});
+                .catch((error:any) =>{return Observable.throw(error);});*/
+        }
+
+        GetAllAdByUserId(id:number):Promise<AdsModel[]>{
+                return AdsPromise
+                    .then(Ads => Ads.filter(x => x.user_id == id));
         }
 
         CreateAd(title:string, desc:string){
             let ad = {title:title,description:desc};
-            let params = new URLSearchParams();
-            params.set('ad',JSON.stringify(ad));
-            return this.httpService.PostData('/ads/create',JSON.stringify(params))
+            let id = Ads.length;
+                
+            return AdsPromise
+                .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));
+            //let params = new URLSearchParams();
+            //params.set('ad',JSON.stringify(ad));
+            /*return this.httpService.PostData('/ads/create',JSON.stringify(params))
                 .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});
+                .catch((error:any) =>{return Observable.throw(error);});*/
+        }
+
+        DeleteAd(ad:AdsModel){
+            return AdsPromise
+                .then(Ads => {
+                    let index = Ads.indexOf(ad,0);
+                    if(index > -1)
+                        Ads.splice(index,1);
+                })
         }
 
         UpdateAd(id:number,title:string,desc:string){
@@ -83,7 +116,14 @@ import {Subject} from 'rxjs/Subject';
             
             return this.httpService.Login(email,password)
                 .add((data:TokenModel)=>{
-                        this.onAuthChange$.next(true);
+                    this.GetMe()
+                        .subscribe((user:UserModel)=>{
+                                this.me = user;
+                            });
+                        
+                })
+                .add((data:TokenModel)=>{
+                    this.onAuthChange$.next(true);
                 });
         }
     }

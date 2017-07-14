@@ -35,16 +35,20 @@ var AdsComponent = (function () {
     function AdsComponent(router, mainService) {
         this.router = router;
         this.mainService = mainService;
-        this.log = '';
     }
     AdsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.mainService
             .GetAllAds("")
-            .subscribe(function (data) { _this.Ads = data.ads; });
+            .then(function (result) { return _this.Ads = result; });
     };
     AdsComponent.prototype.OnSelectAd = function (sel) {
         this.router.navigate(["ads", sel.id]);
+    };
+    AdsComponent.prototype.SearchAdMyName = function (name) {
+        var _this = this;
+        this.mainService.GetAllAds(name)
+            .then(function (result) { return _this.Ads = result; });
     };
     return AdsComponent;
 }());

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import {Subscription} from 'rxjs/Subscription';
 import { HttpService} from '../../services/http.service';
 
-import { UserModel} from "./../index";
+import { UserModel, AdsModel} from "./../index";
 
 import {MainService} from "./../../services/main.service";
 
@@ -15,6 +15,8 @@ import {MainService} from "./../../services/main.service";
 
 export class UserDetailComponent{
     User : UserModel = new UserModel(null,"","","","",null,null,null);
+    isMe = false;
+    myAds:AdsModel[];
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -27,12 +29,18 @@ export class UserDetailComponent{
             console.log(userId);
             //TODO: REWRITE THIS HARDCODE
             if(userId == 'me'){
+                this.isMe = true;
                 this.service.GetMe()
                     .subscribe((data:UserModel) => {
-                        this.User = data;
-                        console.log(this.User);
+                        if(data.id){
+                            this.User = data;
+                            console.log(this.User);
+                            this.service.GetAllAdByUserId(data.id)
+                                .then(Ads=>{
+                                    this.myAds = Ads;
+                                });
+                        }
                     });
-                
             }
             else{
                 this.service.GetUserById(userId)
@@ -49,5 +57,24 @@ export class UserDetailComponent{
                 .then(result => this.Ads = result);
         });*/
         
+    }
+    OnCreateAdButtonClick(title:string,description:string){
+        this.service.CreateAd(title,description)
+            .then(result =>{
+                this.service.GetAllAds(description)
+                    .then((result:AdsModel[])=>{
+                        this.router.navigate(["ads",result[0].id]);
+                    });
+            });
+    }
+    OnDeleteAd(ad: AdsModel){
+        console.log(ad);
+        this.service.DeleteAd(ad)
+            .then(result =>{
+                this.service.GetAllAdByUserId(this.User.id)
+                    .then(Ads=>{
+                        this.myAds = Ads;
+                    });
+            });
     }
 }
