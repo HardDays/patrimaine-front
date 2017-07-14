@@ -12,12 +12,17 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/Rx';
+import {Subject} from 'rxjs/Subject';
 
     @Injectable()
     export class MainService{
+
+        public onAuthChange$: Subject<boolean>;
         constructor(
             private httpService : HttpService
-        ){}
+        ){
+            this.onAuthChange$ = new Subject();
+        }
         GetAllAds(params:string){
             return this.httpService.GetData('/ads/all',params);
         }
@@ -56,6 +61,10 @@ import 'rxjs/Rx';
             return this.httpService.GetData('/users/info/'+id,"");
         }
 
+        GetMe(){
+            return this.httpService.GetData('/users/my_info',"");
+        }
+
         CreateUser(user:RegisterUserModel): Promise<UserModel>{
             let params = {
                 user: user,
@@ -71,6 +80,10 @@ import 'rxjs/Rx';
         }
 
         UserLogin(email:string, password:string){
-            return this.httpService.Login(email,password);
+            
+            return this.httpService.Login(email,password)
+                .add((data:TokenModel)=>{
+                        this.onAuthChange$.next(true);
+                });
         }
     }

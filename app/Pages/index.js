@@ -16,4 +16,6 @@ __export(require("./../models/user.model"));
 __export(require("./../models/ads.model"));
 __export(require("./../models/checkbox.model"));
 __export(require("./../models/register.user.model"));
+__export(require("./../models/token.model"));
+__export(require("./../components/logreg.component"));
 //# sourceMappingURL=index.js.map

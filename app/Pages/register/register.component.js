@@ -26,7 +26,6 @@ var RegisterComponent = (function () {
         console.log(JSON.stringify(user));
         this.mainService.CreateUser(user)
             .then(function (x) {
-            console.log(JSON.stringify(x));
             _this.router.navigate(['login']);
         });
     };

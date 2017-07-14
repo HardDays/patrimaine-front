@@ -16,14 +16,23 @@ var LoginComponent = (function () {
     function LoginComponent(router, mainService) {
         this.router = router;
         this.mainService = mainService;
+        this.onLoggedIn = new core_1.EventEmitter();
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.OnLoginButtonClick = function (username, password) {
-        this.mainService.UserLogin(username, password);
+        var _this = this;
+        this.mainService.UserLogin(username, password)
+            .add(function (data) {
+            _this.router.navigate(["users", "me"]);
+        });
     };
     return LoginComponent;
 }());
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], LoginComponent.prototype, "onLoggedIn", void 0);
 LoginComponent = __decorate([
     core_1.Component({
         selector: "ads",

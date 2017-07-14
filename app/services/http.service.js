@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var http_2 = require("@angular/http");
+var token_model_1 = require("./../models/token.model");
 var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
@@ -20,6 +21,7 @@ var HttpService = (function () {
         this.http = http;
         this.serverUrl = "https://patrimoine.herokuapp.com";
         this.headers = new http_2.Headers([]);
+        this.token = new token_model_1.TokenModel('');
     }
     HttpService.prototype.Login = function (email, password) {
         var _this = this;
@@ -38,8 +40,12 @@ var HttpService = (function () {
             if (_this.headers.has('Authorization'))
                 _this.headers.delete('Authorization');
             _this.headers.append('Authorization', data.token);
+            _this.token = data;
             console.log(JSON.stringify(_this.headers));
         });
+    };
+    HttpService.prototype.GetToken = function () {
+        return this.token;
     };
     HttpService.prototype.PostData = function (method, data) {
         if (!this.headers.has('Content-Type'))

@@ -12,3 +12,5 @@ export * from "./../models/user.model";
 export * from "./../models/ads.model";
 export * from "./../models/checkbox.model";
 export * from "./../models/register.user.model";
+export * from "./../models/token.model";
+export * from "./../components/logreg.component";

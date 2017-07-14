@@ -11,22 +11,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
+var index_1 = require("./../index");
 var main_service_1 = require("./../../services/main.service");
 var UserDetailComponent = (function () {
     function UserDetailComponent(router, activatedRoute, service) {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.service = service;
+        this.User = new index_1.UserModel(null, "", "", "", "", null, null, null);
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activatedRoute.params.forEach(function (params) {
-            var adId = params["id"];
-            _this.service.GetUserById(adId)
-                .subscribe(function (data) {
-                _this.User = data;
-                console.log(_this.User);
-            });
+            var userId = params["id"];
+            console.log(userId);
+            //TODO: REWRITE THIS HARDCODE
+            if (userId == 'me') {
+                _this.service.GetMe()
+                    .subscribe(function (data) {
+                    _this.User = data;
+                    console.log(_this.User);
+                });
+            }
+            else {
+                _this.service.GetUserById(userId)
+                    .subscribe(function (data) {
+                    _this.User = data;
+                    console.log(_this.User);
+                });
+            }
         });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];

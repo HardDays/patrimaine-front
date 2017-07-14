@@ -19,8 +19,12 @@
         <li><a class="faicon-rss" href="#"><i class="icon-rss"></i></a></li>
       </ul>
     </div>
-    <div class="fl_center">
-    	<a routerLink="/login">Login</a> | <a routerLink="/register">Register</a>
+    <!--<logreg-comp></logreg-comp>-->
+    <div *ngIf="isLoggedIn" class="fl_center">
+      <a  routerLink="/users/me">{{me.first_name + " " + me.last_name}}</a>
+    </div>
+    <div *ngIf="!isLoggedIn" class="fl_center">
+      <a  routerLink="/login">Login</a> | <a routerLink="/register">Register</a>
     </div>
     <!-- ################################################################################################ --> 
   </div>
@@ -81,9 +85,9 @@
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ -->
-
-<router-outlet></router-outlet>
-
+<div>
+  <router-outlet></router-outlet>
+</div>
 <div class="wrapper row4">
   <footer id="footer" class="clear"> 
     <!-- ################################################################################################ -->

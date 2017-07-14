@@ -14,7 +14,7 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class UserDetailComponent{
-    User : UserModel;
+    User : UserModel = new UserModel(null,"","","","",null,null,null);
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -23,10 +23,24 @@ export class UserDetailComponent{
     }
     ngOnInit() {
         this.activatedRoute.params.forEach((params:Params) => {
-            let adId = params["id"];
-            this.service.GetUserById(adId)
-                .subscribe((data:UserModel) => {this.User = data;
-                console.log(this.User);});
+            let userId = params["id"];
+            console.log(userId);
+            //TODO: REWRITE THIS HARDCODE
+            if(userId == 'me'){
+                this.service.GetMe()
+                    .subscribe((data:UserModel) => {
+                        this.User = data;
+                        console.log(this.User);
+                    });
+                
+            }
+            else{
+                this.service.GetUserById(userId)
+                    .subscribe((data:UserModel) => {
+                        this.User = data;
+                        console.log(this.User);
+                    });
+            }
         });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];

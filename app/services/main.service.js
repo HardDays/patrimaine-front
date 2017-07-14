@@ -15,9 +15,11 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/observable/throw");
 require("rxjs/Rx");
+var Subject_1 = require("rxjs/Subject");
 var MainService = (function () {
     function MainService(httpService) {
         this.httpService = httpService;
+        this.onAuthChange$ = new Subject_1.Subject();
     }
     MainService.prototype.GetAllAds = function (params) {
         return this.httpService.GetData('/ads/all', params);
@@ -50,6 +52,9 @@ var MainService = (function () {
     MainService.prototype.GetUserById = function (id) {
         return this.httpService.GetData('/users/info/' + id, "");
     };
+    MainService.prototype.GetMe = function () {
+        return this.httpService.GetData('/users/my_info', "");
+    };
     MainService.prototype.CreateUser = function (user) {
         var params = {
             user: user,
@@ -63,7 +68,11 @@ var MainService = (function () {
         return this.httpService.PutData('/users/update', JSON.stringify(user)).toPromise();
     };
     MainService.prototype.UserLogin = function (email, password) {
-        return this.httpService.Login(email, password);
+        var _this = this;
+        return this.httpService.Login(email, password)
+            .add(function (data) {
+            _this.onAuthChange$.next(true);
+        });
     };
     return MainService;
 }());

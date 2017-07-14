@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit{
         console.log(JSON.stringify(user));
         this.mainService.CreateUser(user)
             .then(x=>{
-                console.log(JSON.stringify(x));
                 this.router.navigate(['login']);
             });
     }

@@ -3,10 +3,10 @@ import {AdsComponent, UsersComponent, IndexComponent, UserDetailComponent, AdsDe
 export const routs = [
     { path:"ads",component: AdsComponent },
     { path:"users",component: UsersComponent },
-    { path:"users/:id",component: UserDetailComponent },
+    {path:"users/:id",component:UserDetailComponent},
     { path:'ads/:id',component: AdsDetailComponent },
     { path:'login',component: LoginComponent },
-    { path:'register',component: RegisterComponent }
+    { path:'register',component: RegisterComponent },
     { path:"", pathMatch : "full",component:IndexComponent },
     {path: "**", redirectTo: "/"}
 ];
