@@ -3,6 +3,8 @@ import { CommonModule } from "@angular/common";
 import { HttpService} from '../services/http.service';
 import { FormsModule }   from '@angular/forms';
 
+import { RouterModule } from "@angular/router";
+
 import {AdsComponent, IndexComponent, UsersComponent,
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
@@ -10,7 +12,7 @@ import {AdsComponent, IndexComponent, UsersComponent,
 import { PageAccessGuard } from './page.guards';
 
 @NgModule({
-    imports:      [ CommonModule,FormsModule ],
+    imports:      [ CommonModule,FormsModule,RouterModule ],
     declarations: [
         AdsComponent, IndexComponent, UsersComponent, 
         AdsDetailComponent, UserDetailComponent, LoginComponent,

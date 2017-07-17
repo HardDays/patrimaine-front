@@ -21,10 +21,8 @@ var LoginComponent = (function () {
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.OnLoginButtonClick = function (username, password) {
-        var _this = this;
         this.mainService.UserLogin(username, password)
             .add(function (data) {
-            _this.router.navigate(["users", "me"]);
         });
     };
     return LoginComponent;

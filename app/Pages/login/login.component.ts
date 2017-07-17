@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit{
     {
         this.mainService.UserLogin(username,password)
         .add((data:TokenModel)=>{
-            this.router.navigate(["users","me"]);
+            
         });
         
     }

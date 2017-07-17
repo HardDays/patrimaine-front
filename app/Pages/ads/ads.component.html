@@ -26,7 +26,7 @@
             <li *ngFor="let ad of Ads">
                 <article>
                     <header>
-                        <h2 ><a (click)="OnSelectAd(ad)">{{ad.title}}</a></h2>
+                        <h2 ><a [routerLink]="['/ads/' + ad.id]">{{ad.title}}</a></h2>
                         <span class="date">{{ad.created_at | date: dMMy}}</span>
                     </header>
                     <div class="user_block">
