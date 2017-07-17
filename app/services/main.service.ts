@@ -15,12 +15,12 @@ import 'rxjs/Rx';
 import {Subject} from 'rxjs/Subject';
 
 let Ads = [
-            new AdsModel(1,"Test1","Test1Test1","",25,1,1,null,null,"fintech",[""],[""]),
-            new AdsModel(2,"Test2","Test2Test2","",25,1,1,null,null,"fintech",[""],[""]),
-            new AdsModel(3,"Test3","Test3Test3","",25,1,1,null,null,"fintech",[""],[""]),
-            new AdsModel(4,"Test4","Test4Test4","",25,1,1,null,null,"fintech",[""],[""]),
-            new AdsModel(5,"Test5","Test5Test5","",25,1,1,null,null,"fintech",[""],[""]),
-            new AdsModel(6,"Test6","Test6Test6","",25,1,1,null,null,"fintech",[""],[""]),
+            new AdsModel(1,"Test1","Test1Test1","",25,1,1,null,null,"toutes",[""],[""]),
+            new AdsModel(2,"Test2","Test2Test2","",25,1,1,null,null,"toutes",[""],[""]),
+            new AdsModel(3,"Test3","Test3Test3","",25,1,1,null,null,"ecologique",[""],[""]),
+            new AdsModel(4,"Test4","Test4Test4","",25,1,1,null,null,"finance",[""],[""]),
+            new AdsModel(5,"Test5","Test5Test5","",25,1,1,null,null,"immobilier",[""],[""]),
+            new AdsModel(6,"Test6","Test6Test6","",25,1,1,null,null,"plaisir",[""],[""]),
         ];
 let AdsPromise: Promise<AdsModel[]> = Promise.resolve(Ads);
     @Injectable()
@@ -36,9 +36,11 @@ let AdsPromise: Promise<AdsModel[]> = Promise.resolve(Ads);
         }
         public me: UserModel;
 
-        GetAllAds(params:string):Promise<AdsModel[]>{
+        GetAllAds(text:string, category: string):Promise<AdsModel[]>{
             return AdsPromise
-                .then(Ads => Ads.filter(x => x.description.includes(params)));
+                .then(Ads => Ads.filter(x => x.description.includes(text) && 
+                    ((category.length > 0)?(x.sub_category == category):true))
+                );
             //return this.httpService.GetData('/ads/all',params);
         }
 

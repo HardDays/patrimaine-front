@@ -76,13 +76,13 @@
             <li><a routerLink="/users">Professionnels de l'immobilier</a></li>
           </ul>
         </li>
-        <li><a class="drop" routerLink="/ads">Annonces</a>
+        <li><a class="drop" routerLink="/ad_list">Annonces</a>
           <ul>
-            <li><a routerLink="/ads">Toutes</a></li>
-            <li><a routerLink="/ads">Finance / Epargne / Assurance</a></li>
-            <li><a routerLink="/ads">Placement écologique</a></li>
-            <li><a routerLink="/ads">Investissement Immobilier</a></li>
-            <li><a routerLink="/ads">Investissement plaisir</a></li>
+            <li><a [routerLink]="['ad_list',{category:'toutes'}]">Toutes</a></li>
+            <li><a [routerLink]="['ad_list',{category:'finance'}]">Finance / Epargne / Assurance</a></li>
+            <li><a [routerLink]="['ad_list',{category:'ecologique'}]">Placement écologique</a></li>
+            <li><a [routerLink]="['ad_list',{category:'immobilier'}]">Investissement Immobilier</a></li>
+            <li><a [routerLink]="['ad_list',{category:'plaisir'}]">Investissement plaisir</a></li>
           </ul>
         </li>  
         <li><a routerLink="">Forum du Patrimoine</a></li>      

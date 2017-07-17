@@ -14,6 +14,7 @@ import {MainService} from "./../../services/main.service";
 
 export class AdsComponent implements OnInit{
     Ads: AdsModel[];
+    Category: string = "";
     /*ExpertisesCheckboxes: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
         new CheckboxModel("Retraite","retraite",false),
@@ -34,11 +35,18 @@ export class AdsComponent implements OnInit{
         new CheckboxModel("Carte_T","Carte_T",false)
     ];*/
     constructor(private router: Router,
-        private mainService: MainService){}
+        private mainService: MainService,
+        private params: ActivatedRoute){}
     ngOnInit(){
-        this.mainService
-            .GetAllAds("")
-            .then(result => this.Ads = result);
+        let category = this.params.params.forEach((params:Params) => {
+            this.Category = params["category"]?params["category"]:"";
+            this.mainService
+                .GetAllAds("", this.Category)
+                .then(result => this.Ads = result);
+                //.subscribe((data) => {this.Ads = data});
+        });
+
+
     }
     OnSelectAd(sel:AdsModel)
     {
@@ -46,7 +54,7 @@ export class AdsComponent implements OnInit{
     }
     SearchAdMyName(name:string)
     {
-        this.mainService.GetAllAds(name)
+        this.mainService.GetAllAds(name, this.Category)
             .then(result=> this.Ads = result);
     }
 

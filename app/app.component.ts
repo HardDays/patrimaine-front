@@ -27,6 +27,6 @@ export class AppComponent  implements OnInit {
                         this.me = data;
                     });
             }
-        })
+        });
     }
 }

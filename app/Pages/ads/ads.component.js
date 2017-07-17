@@ -32,22 +32,28 @@ var AdsComponent = (function () {
         new CheckboxModel("IOSB","IOSB",false),
         new CheckboxModel("Carte_T","Carte_T",false)
     ];*/
-    function AdsComponent(router, mainService) {
+    function AdsComponent(router, mainService, params) {
         this.router = router;
         this.mainService = mainService;
+        this.params = params;
+        this.Category = "";
     }
     AdsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.mainService
-            .GetAllAds("")
-            .then(function (result) { return _this.Ads = result; });
+        var category = this.params.params.forEach(function (params) {
+            _this.Category = params["category"] ? params["category"] : "";
+            _this.mainService
+                .GetAllAds("", _this.Category)
+                .then(function (result) { return _this.Ads = result; });
+            //.subscribe((data) => {this.Ads = data});
+        });
     };
     AdsComponent.prototype.OnSelectAd = function (sel) {
         this.router.navigate(["ads", sel.id]);
     };
     AdsComponent.prototype.SearchAdMyName = function (name) {
         var _this = this;
-        this.mainService.GetAllAds(name)
+        this.mainService.GetAllAds(name, this.Category)
             .then(function (result) { return _this.Ads = result; });
     };
     return AdsComponent;
@@ -59,7 +65,8 @@ AdsComponent = __decorate([
         providers: [http_service_1.HttpService]
     }),
     __metadata("design:paramtypes", [router_1.Router,
-        main_service_1.MainService])
+        main_service_1.MainService,
+        router_1.ActivatedRoute])
 ], AdsComponent);
 exports.AdsComponent = AdsComponent;
 //# sourceMappingURL=ads.component.js.map

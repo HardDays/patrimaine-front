@@ -6,10 +6,10 @@ import {
 import {PageAccessGuard} from "./page.guards";
 
 export const routs = [
-    { path:"ads",component: AdsComponent, canActivate: [PageAccessGuard] },
+    { path:"ad_list",component: AdsComponent, name: 'ad_list', canActivate: [PageAccessGuard] },
+    { path:'ads/:id',component: AdsDetailComponent, canActivate: [PageAccessGuard] },
     { path:"users",component: UsersComponent, canActivate: [PageAccessGuard] },
     { path:"users/:id",component:UserDetailComponent, canActivate: [PageAccessGuard]},
-    { path:'ads/:id',component: AdsDetailComponent, canActivate: [PageAccessGuard] },
     { path:'login',component: LoginComponent },
     { path:'register',component: RegisterComponent },
     { path:'my_ads', component: MyAdsComponent, canActivate: [PageAccessGuard]},

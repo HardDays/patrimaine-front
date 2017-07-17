@@ -19,12 +19,12 @@ require("rxjs/add/observable/throw");
 require("rxjs/Rx");
 var Subject_1 = require("rxjs/Subject");
 var Ads = [
-    new ads_model_1.AdsModel(1, "Test1", "Test1Test1", "", 25, 1, 1, null, null, "fintech", [""], [""]),
-    new ads_model_1.AdsModel(2, "Test2", "Test2Test2", "", 25, 1, 1, null, null, "fintech", [""], [""]),
-    new ads_model_1.AdsModel(3, "Test3", "Test3Test3", "", 25, 1, 1, null, null, "fintech", [""], [""]),
-    new ads_model_1.AdsModel(4, "Test4", "Test4Test4", "", 25, 1, 1, null, null, "fintech", [""], [""]),
-    new ads_model_1.AdsModel(5, "Test5", "Test5Test5", "", 25, 1, 1, null, null, "fintech", [""], [""]),
-    new ads_model_1.AdsModel(6, "Test6", "Test6Test6", "", 25, 1, 1, null, null, "fintech", [""], [""]),
+    new ads_model_1.AdsModel(1, "Test1", "Test1Test1", "", 25, 1, 1, null, null, "toutes", [""], [""]),
+    new ads_model_1.AdsModel(2, "Test2", "Test2Test2", "", 25, 1, 1, null, null, "toutes", [""], [""]),
+    new ads_model_1.AdsModel(3, "Test3", "Test3Test3", "", 25, 1, 1, null, null, "ecologique", [""], [""]),
+    new ads_model_1.AdsModel(4, "Test4", "Test4Test4", "", 25, 1, 1, null, null, "finance", [""], [""]),
+    new ads_model_1.AdsModel(5, "Test5", "Test5Test5", "", 25, 1, 1, null, null, "immobilier", [""], [""]),
+    new ads_model_1.AdsModel(6, "Test6", "Test6Test6", "", 25, 1, 1, null, null, "plaisir", [""], [""]),
 ];
 var AdsPromise = Promise.resolve(Ads);
 var MainService = (function () {
@@ -34,9 +34,10 @@ var MainService = (function () {
         this.onAuthChange$ = new Subject_1.Subject();
         this.onAuthChange$.next(false);
     }
-    MainService.prototype.GetAllAds = function (params) {
+    MainService.prototype.GetAllAds = function (text, category) {
         return AdsPromise
-            .then(function (Ads) { return Ads.filter(function (x) { return x.description.includes(params); }); });
+            .then(function (Ads) { return Ads.filter(function (x) { return x.description.includes(text) &&
+            ((category.length > 0) ? (x.sub_category == category) : true); }); });
         //return this.httpService.GetData('/ads/all',params);
     };
     MainService.prototype.GetAdsById = function (id) {
