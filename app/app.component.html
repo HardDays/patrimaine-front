@@ -20,9 +20,18 @@
       </ul>
     </div>
     <!--<logreg-comp></logreg-comp>-->
-    <div *ngIf="isLoggedIn" class="fl_center">
-      <a  routerLink="/users/me">{{me.first_name + " " + me.last_name}}</a>
-    </div>
+    <nav *ngIf="isLoggedIn" id="profile" class="fl_center">
+      <ul class="clear">
+        <li>
+          <a class="drop" routerLink="/users/me">{{me.first_name + " " + me.last_name}}</a>
+            <ul>
+              <li><a routerLink="/users/me">My profile</a></li>
+              <li><a routerLink="/my_ads">My ads</a></li>
+              <li><a routerLink="/create_ad">Create ad</a></li>
+            </ul>
+          </li>
+      </ul>
+    </nav>
     <div *ngIf="!isLoggedIn" class="fl_center">
       <a  routerLink="/login">Login</a> | <a routerLink="/register">Register</a>
     </div>

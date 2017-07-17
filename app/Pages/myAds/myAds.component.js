@@ -13,16 +13,15 @@ var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
 var index_1 = require("./../index");
 var main_service_1 = require("./../../services/main.service");
-var UserDetailComponent = (function () {
-    function UserDetailComponent(router, activatedRoute, service) {
+var MyAdsComponent = (function () {
+    function MyAdsComponent(router, activatedRoute, service) {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.service = service;
-        this.isLoggedIn = false;
         this.User = new index_1.UserModel(null, "", "", "", "", null, null, null);
-        this.isMe = false;
+        this.isLoggedIn = false;
     }
-    UserDetailComponent.prototype.ngOnInit = function () {
+    MyAdsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.service.onAuthChange$.subscribe(function (bool) {
             _this.isLoggedIn = bool;
@@ -31,49 +30,20 @@ var UserDetailComponent = (function () {
             this.router.navigate(["401"]);
         else
             this.activatedRoute.params.forEach(function (params) {
-                var userId = params["id"];
-                console.log(userId);
-                //TODO: REWRITE THIS HARDCODE
-                if (userId == 'me') {
-                    _this.isMe = true;
-                    _this.service.GetMe()
-                        .subscribe(function (data) {
-                        if (data.id) {
-                            _this.User = data;
-                            console.log(_this.User);
-                            _this.service.GetAllAdByUserId(data.id)
-                                .then(function (Ads) {
-                                _this.myAds = Ads;
-                            });
-                        }
-                    });
-                }
-                else {
-                    _this.service.GetUserById(userId)
-                        .subscribe(function (data) {
+                _this.service.GetMe()
+                    .subscribe(function (data) {
+                    if (data.id) {
                         _this.User = data;
                         console.log(_this.User);
-                    });
-                }
+                        _this.service.GetAllAdByUserId(data.id)
+                            .then(function (Ads) {
+                            _this.myAds = Ads;
+                        });
+                    }
+                });
             });
-        /*this.activatedRoute.params.forEach((params: Params)=>{
-            let id = params["id"];
-            this.service
-                .getAdsById(id)
-                .then(result => this.Ads = result);
-        });*/
     };
-    UserDetailComponent.prototype.OnCreateAdButtonClick = function (title, description) {
-        var _this = this;
-        this.service.CreateAd(title, description)
-            .then(function (result) {
-            _this.service.GetAllAds(description)
-                .then(function (result) {
-                _this.router.navigate(["ads", result[0].id]);
-            });
-        });
-    };
-    UserDetailComponent.prototype.OnDeleteAd = function (ad) {
+    MyAdsComponent.prototype.OnDeleteAd = function (ad) {
         var _this = this;
         console.log(ad);
         this.service.DeleteAd(ad)
@@ -84,17 +54,17 @@ var UserDetailComponent = (function () {
             });
         });
     };
-    return UserDetailComponent;
+    return MyAdsComponent;
 }());
-UserDetailComponent = __decorate([
+MyAdsComponent = __decorate([
     core_1.Component({
-        selector: "userDetail",
-        templateUrl: "app/Pages/userDetail/userDetail.component.html",
+        selector: "myAds",
+        templateUrl: "app/Pages/myAds/myAds.component.html",
         providers: [http_service_1.HttpService]
     }),
     __metadata("design:paramtypes", [router_1.Router,
         router_1.ActivatedRoute,
         main_service_1.MainService])
-], UserDetailComponent);
-exports.UserDetailComponent = UserDetailComponent;
-//# sourceMappingURL=userDetail.component.js.map
+], MyAdsComponent);
+exports.MyAdsComponent = MyAdsComponent;
+//# sourceMappingURL=myAds.component.js.map

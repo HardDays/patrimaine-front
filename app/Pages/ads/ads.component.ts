@@ -14,6 +14,7 @@ import {MainService} from "./../../services/main.service";
 
 export class AdsComponent implements OnInit{
     Ads: AdsModel[];
+    isLoggedIn:boolean = false;
     /*ExpertisesCheckboxes: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
         new CheckboxModel("Retraite","retraite",false),
@@ -36,9 +37,15 @@ export class AdsComponent implements OnInit{
     constructor(private router: Router,
         private mainService: MainService){}
     ngOnInit(){
-        this.mainService
-            .GetAllAds("")
-            .then(result => this.Ads = result);
+        this.mainService.onAuthChange$.subscribe(bool => {
+            this.isLoggedIn = bool;
+        });
+
+        if(this.isLoggedIn)
+            this.mainService
+                .GetAllAds("")
+                .then(result => this.Ads = result);
+        else this.router.navigate(["401"]);
     }
     OnSelectAd(sel:AdsModel)
     {

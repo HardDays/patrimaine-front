@@ -109,24 +109,26 @@ File: Layout CSS
 nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 #mainav .drop::after, #mainav li li .drop::after, #breadcrumb li a::after, .sidebar nav a::after{position:absolute; font-family:"FontAwesome"; font-size:10px; line-height:10px;}
-
+#profile .drop::after, #profile li li .drop::after{position:absolute; font-family:"FontAwesome"; font-size:10px; line-height:10px;}
 /* Top Navigation */
-#mainav{margin-top:-1px; line-height:normal;}
-#mainav ul{}
-#mainav ul ul{z-index:9999; position:absolute; width:160px;}
-#mainav ul ul ul{left:160px; top:0;}
-#mainav li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0;}
-#mainav li:last-child{margin-right:0;}
-#mainav li li{width:100%; margin:0;}
+#mainav, #profile{margin-top:-1px; line-height:normal;}
+#mainav ul, #profile ul{}
+#mainav ul ul, #profile ul ul{z-index:9999; position:absolute; width:160px;}
+#mainav ul ul ul, #profile ul ul ul{left:160px; top:0;}
+#mainav li, #profile li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0;}
+#mainav li:last-child, #profile li:last-child{margin-right:0;}
+#mainav li li, #profile  li li{width:100%; margin:0;}
 #mainav li a{display:block; padding:30px 5px 20px; border:solid; border-width:1px 0 0 0; font-size: 12px;}
-#mainav li li a{border-width:0 0 1px 0;}
-#mainav .drop{padding-left:15px;}
-#mainav li li a, #mainav li li .drop{display:block; margin:0; padding:10px 15px;}
-#mainav .drop::after, #mainav li li .drop::after{content:"\f0d7";}
-#mainav .drop::after{top:35px; left:5px;}
+#mainav li li a, #profile li li a{border-width:0 0 1px 0;}
+#mainav .drop, #profile .drop{padding-left:15px;}
+#mainav li li a, #mainav li li .drop, #profile li li a, #profile li li .drop{display:block; margin:0; padding:10px 15px;}
+#mainav .drop::after, #mainav li li .drop::after,#profile .drop::after, #profile li li .drop::after{content:"\f0d7";}
+#mainav .drop::after, #profile .drop::after{top:35px; left:5px;}
 #mainav li li .drop::after{top:15px; left:5px;}
-#mainav ul ul{display:none;}
-#mainav ul li:hover > ul{display:block;}
+#mainav ul ul, #profile ul ul{display:none;}
+#mainav ul li:hover > ul, #profile ul li:hover > ul{display:block;}
+#profile li a{display:block; padding: 5px 2px 0px;; border:solid; border-width:1px 0 0 0; font-size: 12px;}
+#profile .drop::after{top:10px; left:5px;}
 
 /* Breadcrumb */
 #breadcrumb{padding:30px 0 10px 0; border-bottom:1px solid;}
@@ -247,6 +249,12 @@ label span{color:#FF0000; background-color:inherit;}
 #mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#56AED4; border-color:#56AED4;}
 #mainav li li a, #mainav .active li a{color:#FFFFFF; background-color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.6);}
 #mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:#56AED4;}
+
+/* Profile menu */
+#profile li a{color:inherit; border-color:#D7D7D7;}
+#profile .active a, #profile a:hover, #profile li:hover > a{color:#56AED4; border-color:#56AED4;}
+#profile li li a, #profile .active li a{color:#FFFFFF; background-color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.6);}
+#profile li li:hover > a, #profile .active .active > a{color:#FFFFFF; background-color:#56AED4;}
 
 #breadcrumb{border-color:#D7D7D7;}
 #breadcrumb li:last-child a{color:#56AED4;}

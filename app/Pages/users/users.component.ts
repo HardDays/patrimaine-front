@@ -15,16 +15,22 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class UsersComponent implements OnInit{
+    isLoggedIn:boolean = false;
     Users : UserModel[];
 
     constructor(private router: Router,
         private mainService: MainService){}
     ngOnInit(){
-        
-        this.mainService.GetAllUsers("").subscribe(
-            (data:AllUsersModel)=>{
-                this.Users = data.users;
-                console.log(this.Users);
+        this.mainService.onAuthChange$.subscribe(bool => {
+            this.isLoggedIn = bool;
+        });
+        if(!this.isLoggedIn)
+            this.router.navigate(["401"]);
+        else
+            this.mainService.GetAllUsers("").subscribe(
+                (data:AllUsersModel)=>{
+                    this.Users = data.users;
+                    console.log(this.Users);
             });
             
     }

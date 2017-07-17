@@ -35,12 +35,19 @@ var AdsComponent = (function () {
     function AdsComponent(router, mainService) {
         this.router = router;
         this.mainService = mainService;
+        this.isLoggedIn = false;
     }
     AdsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.mainService
-            .GetAllAds("")
-            .then(function (result) { return _this.Ads = result; });
+        this.mainService.onAuthChange$.subscribe(function (bool) {
+            _this.isLoggedIn = bool;
+        });
+        if (this.isLoggedIn)
+            this.mainService
+                .GetAllAds("")
+                .then(function (result) { return _this.Ads = result; });
+        else
+            this.router.navigate(["401"]);
     };
     AdsComponent.prototype.OnSelectAd = function (sel) {
         this.router.navigate(["ads", sel.id]);

@@ -18,8 +18,18 @@ var PageModule = (function () {
 PageModule = __decorate([
     core_1.NgModule({
         imports: [common_1.CommonModule, forms_1.FormsModule],
-        declarations: [index_1.AdsComponent, index_1.IndexComponent, index_1.UsersComponent, index_1.AdsDetailComponent, index_1.UserDetailComponent, index_1.LoginComponent, index_1.RegisterComponent],
-        exports: [index_1.AdsComponent, index_1.IndexComponent, index_1.UsersComponent, index_1.AdsDetailComponent, index_1.UserDetailComponent, index_1.LoginComponent, index_1.RegisterComponent],
+        declarations: [
+            index_1.AdsComponent, index_1.IndexComponent, index_1.UsersComponent,
+            index_1.AdsDetailComponent, index_1.UserDetailComponent, index_1.LoginComponent,
+            index_1.RegisterComponent, index_1.CreateAdComponent, index_1.MyAdsComponent,
+            index_1.UnauthorizedComponent, index_1.NotFoundComponent
+        ],
+        exports: [
+            index_1.AdsComponent, index_1.IndexComponent, index_1.UsersComponent,
+            index_1.AdsDetailComponent, index_1.UserDetailComponent, index_1.LoginComponent,
+            index_1.RegisterComponent, index_1.CreateAdComponent, index_1.MyAdsComponent,
+            index_1.UnauthorizedComponent, index_1.NotFoundComponent
+        ],
         providers: [http_service_1.HttpService]
     })
 ], PageModule);

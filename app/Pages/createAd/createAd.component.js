@@ -11,39 +11,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
+var index_1 = require("./../index");
 var main_service_1 = require("./../../services/main.service");
-var UsersComponent = (function () {
-    function UsersComponent(router, mainService) {
+var CreateAdComponent = (function () {
+    function CreateAdComponent(router, activatedRoute, service) {
         this.router = router;
-        this.mainService = mainService;
+        this.activatedRoute = activatedRoute;
+        this.service = service;
+        this.User = new index_1.UserModel(null, "", "", "", "", null, null, null);
         this.isLoggedIn = false;
     }
-    UsersComponent.prototype.ngOnInit = function () {
+    CreateAdComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.mainService.onAuthChange$.subscribe(function (bool) {
+        this.service.onAuthChange$.subscribe(function (bool) {
             _this.isLoggedIn = bool;
         });
         if (!this.isLoggedIn)
             this.router.navigate(["401"]);
-        else
-            this.mainService.GetAllUsers("").subscribe(function (data) {
-                _this.Users = data.users;
-                console.log(_this.Users);
+    };
+    CreateAdComponent.prototype.OnCreateAdButtonClick = function (title, description) {
+        var _this = this;
+        this.service.CreateAd(title, description)
+            .then(function (result) {
+            _this.service.GetAllAds(description)
+                .then(function (result) {
+                _this.router.navigate(["ads", result[0].id]);
             });
+        });
     };
-    UsersComponent.prototype.OnSelectUser = function (sel) {
-        this.router.navigate(["users", sel.id]);
-    };
-    return UsersComponent;
+    return CreateAdComponent;
 }());
-UsersComponent = __decorate([
+CreateAdComponent = __decorate([
     core_1.Component({
-        selector: "users",
-        templateUrl: "app/Pages/users/users.component.html",
+        selector: "createAd",
+        templateUrl: "app/Pages/createAD/createAd.component.html",
         providers: [http_service_1.HttpService]
     }),
     __metadata("design:paramtypes", [router_1.Router,
+        router_1.ActivatedRoute,
         main_service_1.MainService])
-], UsersComponent);
-exports.UsersComponent = UsersComponent;
-//# sourceMappingURL=users.component.js.map
+], CreateAdComponent);
+exports.CreateAdComponent = CreateAdComponent;
+//# sourceMappingURL=createAd.component.js.map

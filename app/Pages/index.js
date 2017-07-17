@@ -10,6 +10,10 @@ __export(require("./userDetail/userDetail.component"));
 __export(require("./adsDetail/adsDetail.component"));
 __export(require("./login/login.component"));
 __export(require("./register/register.component"));
+__export(require("./createAd/createAd.component"));
+__export(require("./myAds/myAds.component"));
+__export(require("./unauthorized/unauthorized.component"));
+__export(require("./notfound/notfound.component"));
 __export(require("./pages.module"));
 __export(require("./pages.route"));
 __export(require("./../models/user.model"));
@@ -17,5 +21,4 @@ __export(require("./../models/ads.model"));
 __export(require("./../models/checkbox.model"));
 __export(require("./../models/register.user.model"));
 __export(require("./../models/token.model"));
-__export(require("./../components/logreg.component"));
 //# sourceMappingURL=index.js.map
