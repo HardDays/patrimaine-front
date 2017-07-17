@@ -6,7 +6,7 @@ import {TokenModel} from "./../models/token.model";
 import {AllUsersModel} from "./../models/allusers.model";
 import {RegisterUserModel} from "./../models/register.user.model";
 import { HttpService } from "./http.service";
-
+import { Router, ActivatedRoute, Params } from "@angular/router";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -28,9 +28,11 @@ let AdsPromise: Promise<AdsModel[]> = Promise.resolve(Ads);
 
         public onAuthChange$: Subject<boolean>;
         constructor(
-            private httpService : HttpService
+            private httpService : HttpService,
+            private router: Router
         ){
             this.onAuthChange$ = new Subject();
+            this.onAuthChange$.next(false);
         }
         public me: UserModel;
 
@@ -119,11 +121,11 @@ let AdsPromise: Promise<AdsModel[]> = Promise.resolve(Ads);
                     this.GetMe()
                         .subscribe((user:UserModel)=>{
                                 this.me = user;
+                                this.onAuthChange$.next(true);
+                                this.router.navigate(["users","me"]);
                             });
                         
-                })
-                .add((data:TokenModel)=>{
-                    this.onAuthChange$.next(true);
                 });
+                
         }
     }

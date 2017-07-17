@@ -19,29 +19,22 @@ var MyAdsComponent = (function () {
         this.activatedRoute = activatedRoute;
         this.service = service;
         this.User = new index_1.UserModel(null, "", "", "", "", null, null, null);
-        this.isLoggedIn = false;
     }
     MyAdsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.service.onAuthChange$.subscribe(function (bool) {
-            _this.isLoggedIn = bool;
-        });
-        if (!this.isLoggedIn)
-            this.router.navigate(["401"]);
-        else
-            this.activatedRoute.params.forEach(function (params) {
-                _this.service.GetMe()
-                    .subscribe(function (data) {
-                    if (data.id) {
-                        _this.User = data;
-                        console.log(_this.User);
-                        _this.service.GetAllAdByUserId(data.id)
-                            .then(function (Ads) {
-                            _this.myAds = Ads;
-                        });
-                    }
-                });
+        this.activatedRoute.params.forEach(function (params) {
+            _this.service.GetMe()
+                .subscribe(function (data) {
+                if (data.id) {
+                    _this.User = data;
+                    console.log(_this.User);
+                    _this.service.GetAllAdByUserId(data.id)
+                        .then(function (Ads) {
+                        _this.myAds = Ads;
+                    });
+                }
             });
+        });
     };
     MyAdsComponent.prototype.OnDeleteAd = function (ad) {
         var _this = this;

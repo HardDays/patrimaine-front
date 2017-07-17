@@ -14,7 +14,6 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class UserDetailComponent implements OnInit{
-    isLoggedIn:boolean = false;
     User : UserModel = new UserModel(null,"","","","",null,null,null);
     isMe = false;
     myAds:AdsModel[];
@@ -25,38 +24,32 @@ export class UserDetailComponent implements OnInit{
     {
     }
     ngOnInit() {
-        this.service.onAuthChange$.subscribe(bool => {
-            this.isLoggedIn = bool;
-        });
-        if(!this.isLoggedIn)
-            this.router.navigate(["401"]);
-        else
-            this.activatedRoute.params.forEach((params:Params) => {
-                let userId = params["id"];
-                console.log(userId);
-                //TODO: REWRITE THIS HARDCODE
-                if(userId == 'me'){
-                    this.isMe = true;
-                    this.service.GetMe()
-                        .subscribe((data:UserModel) => {
-                            if(data.id){
-                                this.User = data;
-                                console.log(this.User);
-                                this.service.GetAllAdByUserId(data.id)
-                                    .then(Ads=>{
-                                        this.myAds = Ads;
-                                    });
-                            }
-                        });
-                }
-                else{
-                    this.service.GetUserById(userId)
-                        .subscribe((data:UserModel) => {
+        this.activatedRoute.params.forEach((params:Params) => {
+            let userId = params["id"];
+            console.log(userId);
+            //TODO: REWRITE THIS HARDCODE
+            if(userId == 'me'){
+                this.isMe = true;
+                this.service.GetMe()
+                    .subscribe((data:UserModel) => {
+                        if(data.id){
                             this.User = data;
                             console.log(this.User);
-                        });
-                }
-            });
+                            this.service.GetAllAdByUserId(data.id)
+                                .then(Ads=>{
+                                    this.myAds = Ads;
+                                });
+                        }
+                    });
+            }
+            else{
+                this.service.GetUserById(userId)
+                    .subscribe((data:UserModel) => {
+                        this.User = data;
+                        console.log(this.User);
+                    });
+            }
+        });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];
             this.service

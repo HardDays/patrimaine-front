@@ -14,9 +14,6 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class CreateAdComponent implements OnInit{
-    User : UserModel = new UserModel(null,"","","","",null,null,null);
-    isLoggedIn:boolean = false;
-    myAds:AdsModel[];
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -25,12 +22,6 @@ export class CreateAdComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.service.onAuthChange$.subscribe(bool => {
-            this.isLoggedIn = bool;
-        });
-        if(!this.isLoggedIn)
-            this.router.navigate(["401"]);
-
     }
 
     OnCreateAdButtonClick(title:string,description:string){

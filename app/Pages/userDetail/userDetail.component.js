@@ -18,44 +18,37 @@ var UserDetailComponent = (function () {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.service = service;
-        this.isLoggedIn = false;
         this.User = new index_1.UserModel(null, "", "", "", "", null, null, null);
         this.isMe = false;
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.service.onAuthChange$.subscribe(function (bool) {
-            _this.isLoggedIn = bool;
-        });
-        if (!this.isLoggedIn)
-            this.router.navigate(["401"]);
-        else
-            this.activatedRoute.params.forEach(function (params) {
-                var userId = params["id"];
-                console.log(userId);
-                //TODO: REWRITE THIS HARDCODE
-                if (userId == 'me') {
-                    _this.isMe = true;
-                    _this.service.GetMe()
-                        .subscribe(function (data) {
-                        if (data.id) {
-                            _this.User = data;
-                            console.log(_this.User);
-                            _this.service.GetAllAdByUserId(data.id)
-                                .then(function (Ads) {
-                                _this.myAds = Ads;
-                            });
-                        }
-                    });
-                }
-                else {
-                    _this.service.GetUserById(userId)
-                        .subscribe(function (data) {
+        this.activatedRoute.params.forEach(function (params) {
+            var userId = params["id"];
+            console.log(userId);
+            //TODO: REWRITE THIS HARDCODE
+            if (userId == 'me') {
+                _this.isMe = true;
+                _this.service.GetMe()
+                    .subscribe(function (data) {
+                    if (data.id) {
                         _this.User = data;
                         console.log(_this.User);
-                    });
-                }
-            });
+                        _this.service.GetAllAdByUserId(data.id)
+                            .then(function (Ads) {
+                            _this.myAds = Ads;
+                        });
+                    }
+                });
+            }
+            else {
+                _this.service.GetUserById(userId)
+                    .subscribe(function (data) {
+                    _this.User = data;
+                    console.log(_this.User);
+                });
+            }
+        });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];
             this.service

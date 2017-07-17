@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var ads_model_1 = require("./../models/ads.model");
 var http_service_1 = require("./http.service");
+var router_1 = require("@angular/router");
 var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
@@ -27,9 +28,11 @@ var Ads = [
 ];
 var AdsPromise = Promise.resolve(Ads);
 var MainService = (function () {
-    function MainService(httpService) {
+    function MainService(httpService, router) {
         this.httpService = httpService;
+        this.router = router;
         this.onAuthChange$ = new Subject_1.Subject();
+        this.onAuthChange$.next(false);
     }
     MainService.prototype.GetAllAds = function (params) {
         return AdsPromise
@@ -104,17 +107,17 @@ var MainService = (function () {
             _this.GetMe()
                 .subscribe(function (user) {
                 _this.me = user;
+                _this.onAuthChange$.next(true);
+                _this.router.navigate(["users", "me"]);
             });
-        })
-            .add(function (data) {
-            _this.onAuthChange$.next(true);
         });
     };
     return MainService;
 }());
 MainService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_service_1.HttpService])
+    __metadata("design:paramtypes", [http_service_1.HttpService,
+        router_1.Router])
 ], MainService);
 exports.MainService = MainService;
 //# sourceMappingURL=main.service.js.map

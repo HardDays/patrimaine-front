@@ -7,6 +7,7 @@ import {AdsComponent, IndexComponent, UsersComponent,
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent} from './index';
+import { PageAccessGuard } from './page.guards';
 
 @NgModule({
     imports:      [ CommonModule,FormsModule ],
@@ -22,7 +23,7 @@ import {AdsComponent, IndexComponent, UsersComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent
     ],
-    providers: [HttpService]
+    providers: [HttpService, PageAccessGuard]
 })
 
 export class PageModule { }

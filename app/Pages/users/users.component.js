@@ -16,20 +16,13 @@ var UsersComponent = (function () {
     function UsersComponent(router, mainService) {
         this.router = router;
         this.mainService = mainService;
-        this.isLoggedIn = false;
     }
     UsersComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.mainService.onAuthChange$.subscribe(function (bool) {
-            _this.isLoggedIn = bool;
+        this.mainService.GetAllUsers("").subscribe(function (data) {
+            _this.Users = data.users;
+            console.log(_this.Users);
         });
-        if (!this.isLoggedIn)
-            this.router.navigate(["401"]);
-        else
-            this.mainService.GetAllUsers("").subscribe(function (data) {
-                _this.Users = data.users;
-                console.log(_this.Users);
-            });
     };
     UsersComponent.prototype.OnSelectUser = function (sel) {
         this.router.navigate(["users", sel.id]);

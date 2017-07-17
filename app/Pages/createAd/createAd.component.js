@@ -11,23 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
-var index_1 = require("./../index");
 var main_service_1 = require("./../../services/main.service");
 var CreateAdComponent = (function () {
     function CreateAdComponent(router, activatedRoute, service) {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.service = service;
-        this.User = new index_1.UserModel(null, "", "", "", "", null, null, null);
-        this.isLoggedIn = false;
     }
     CreateAdComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.service.onAuthChange$.subscribe(function (bool) {
-            _this.isLoggedIn = bool;
-        });
-        if (!this.isLoggedIn)
-            this.router.navigate(["401"]);
     };
     CreateAdComponent.prototype.OnCreateAdButtonClick = function (title, description) {
         var _this = this;

@@ -18,7 +18,6 @@ var AdsDetailComponent = (function () {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.service = service;
-        this.isLoggedIn = false;
         this.Ads = new index_1.AdsModel(null, "", "", "", null, null, null, null, null, "", null, null);
         this.Author = new index_1.UserModel(null, "", "", "", "", null, null, null);
     }
@@ -26,25 +25,20 @@ var AdsDetailComponent = (function () {
         var _this = this;
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
-        this.service.onAuthChange$.subscribe(function (bool) {
-            _this.isLoggedIn = bool;
-        });
-        if (this.isLoggedIn)
-            this.activatedRoute.params.forEach(function (params) {
-                var adId = params["id"];
-                _this.service
-                    .GetAdsById(adId)
-                    .then(function (Ad) {
-                    console.log(Ad);
-                    _this.Ads = Ad;
-                    _this.service.GetUserById(_this.Ads.user_id)
-                        .subscribe(function (user) {
-                        _this.Author = user;
-                    });
+        this.activatedRoute.params.forEach(function (params) {
+            var adId = params["id"];
+            _this.service
+                .GetAdsById(adId)
+                .then(function (Ad) {
+                console.log(Ad);
+                _this.Ads = Ad;
+                _this.service.GetUserById(_this.Ads.user_id)
+                    .subscribe(function (user) {
+                    _this.Author = user;
                 });
             });
-        else
-            this.router.navigate(["401"]);
+            //.subscribe((data) => {this.Ads = data});
+        });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];
             this.service

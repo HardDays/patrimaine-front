@@ -15,7 +15,6 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class AdsDetailComponent implements OnInit{
-    isLoggedIn:boolean = false;
     Ads : AdsModel = new AdsModel(null,"","","",null,null,null,null,null,"",null,null);
     Author: UserModel = new UserModel(null,"","","","",null,null,null);
     constructor(
@@ -30,24 +29,19 @@ export class AdsDetailComponent implements OnInit{
     ngOnInit() {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
-        this.service.onAuthChange$.subscribe(bool => {
-            this.isLoggedIn = bool;
+        this.activatedRoute.params.forEach((params:Params) => {
+            let adId = params["id"];
+            this.service
+                .GetAdsById(adId)
+                .then(Ad => {
+                    console.log(Ad);
+                    this.Ads = Ad;
+                    this.service.GetUserById(this.Ads.user_id)
+                        .subscribe((user:UserModel)=>{
+                            this.Author = user;
+                        })});
+                //.subscribe((data) => {this.Ads = data});
         });
-        if(this.isLoggedIn)
-            this.activatedRoute.params.forEach((params:Params) => {
-                let adId = params["id"];
-                this.service
-                    .GetAdsById(adId)
-                    .then(Ad => {
-                        console.log(Ad);
-                        this.Ads = Ad;
-                        this.service.GetUserById(this.Ads.user_id)
-                            .subscribe((user:UserModel)=>{
-                                this.Author = user;
-                            })
-                    });
-            });
-        else this.router.navigate(["401"]);
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];
             this.service

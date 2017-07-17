@@ -10,6 +10,7 @@ var common_1 = require("@angular/common");
 var http_service_1 = require("../services/http.service");
 var forms_1 = require("@angular/forms");
 var index_1 = require("./index");
+var page_guards_1 = require("./page.guards");
 var PageModule = (function () {
     function PageModule() {
     }
@@ -30,7 +31,7 @@ PageModule = __decorate([
             index_1.RegisterComponent, index_1.CreateAdComponent, index_1.MyAdsComponent,
             index_1.UnauthorizedComponent, index_1.NotFoundComponent
         ],
-        providers: [http_service_1.HttpService]
+        providers: [http_service_1.HttpService, page_guards_1.PageAccessGuard]
     })
 ], PageModule);
 exports.PageModule = PageModule;

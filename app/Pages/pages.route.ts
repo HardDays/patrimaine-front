@@ -3,16 +3,17 @@ import {
     UserDetailComponent, AdsDetailComponent, LoginComponent,
     RegisterComponent, CreateAdComponent, MyAdsComponent,
     UnauthorizedComponent, NotFoundComponent} from "./index";
+import {PageAccessGuard} from "./page.guards";
 
 export const routs = [
-    { path:"ads",component: AdsComponent },
-    { path:"users",component: UsersComponent },
-    { path:"users/:id",component:UserDetailComponent},
-    { path:'ads/:id',component: AdsDetailComponent },
+    { path:"ads",component: AdsComponent, canActivate: [PageAccessGuard] },
+    { path:"users",component: UsersComponent, canActivate: [PageAccessGuard] },
+    { path:"users/:id",component:UserDetailComponent, canActivate: [PageAccessGuard]},
+    { path:'ads/:id',component: AdsDetailComponent, canActivate: [PageAccessGuard] },
     { path:'login',component: LoginComponent },
     { path:'register',component: RegisterComponent },
-    { path:'my_ads', component: MyAdsComponent},
-    { path: 'create_ad', component: CreateAdComponent},
+    { path:'my_ads', component: MyAdsComponent, canActivate: [PageAccessGuard]},
+    { path: 'create_ad', component: CreateAdComponent, canActivate: [PageAccessGuard]},
     { path:"", pathMatch : "full",component:IndexComponent },
     { path: "401", component: UnauthorizedComponent},
     { path: "404", component: NotFoundComponent},
