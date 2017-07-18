@@ -8,8 +8,9 @@ import { UserModel, AdsModel} from "./../index";
 import {MainService} from "./../../services/main.service";
 
 @Component({
+    moduleId: module.id,
     selector: "createAd",
-    templateUrl: "app/Pages/createAD/createAd.component.html",
+    templateUrl: "createAd.component.html",
     providers: [HttpService]
 })
 
