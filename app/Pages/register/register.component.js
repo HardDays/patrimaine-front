@@ -29,6 +29,18 @@ var RegisterComponent = (function () {
             _this.router.navigate(['login']);
         });
     };
+    RegisterComponent.prototype.RegisterUserCompany = function (email, password, fname, lname, phone,
+                                                            cname,caddress,coaddress,cemail,cphone,worktime,description,links) {
+        var _this = this;
+        var user = new index_1.RegisterUserModel(email, password, fname, lname, phone);
+        var company = new index_1.RegisterCompanyModel(cname,caddress,coaddress,cemail,cphone,worktime,description,links);
+
+        console.log(JSON.stringify(user));
+        this.mainService.CreateUserCompany(user, company)
+            .then(function (x) {
+            _this.router.navigate(['login']);
+        });
+    };
     return RegisterComponent;
 }());
 RegisterComponent = __decorate([
