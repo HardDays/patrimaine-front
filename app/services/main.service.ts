@@ -5,6 +5,7 @@ import {UserModel} from "./../models/user.model";
 import {TokenModel} from "./../models/token.model";
 import {AllUsersModel} from "./../models/allusers.model";
 import {RegisterUserModel} from "./../models/register.user.model";
+import {RegisterCompanyModel} from "./../models/register.company.model";
 import { HttpService } from "./http.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import {Observable} from 'rxjs/Observable';
@@ -111,6 +112,18 @@ let AdsPromise: Promise<AdsModel[]> = Promise.resolve(Ads);
             console.log(JSON.stringify(params));
             return this.httpService.PostData('/users/create',JSON.stringify(params)).toPromise<UserModel>();
         }
+
+        CreateUserCompany(user:RegisterUserModel, company:RegisterCompanyModel, expertises:string[], agrements:string[]): Promise<UserModel>{
+            let params = {
+                user: user,
+                company: company,
+                expertises: expertises,
+                agrements: agrements
+            };
+            console.log(JSON.stringify(params));
+            return this.httpService.PostData('/users/create',JSON.stringify(params)).toPromise<UserModel>();
+        }
+
 
         UpdateUser(user:UserModel): Promise<UserModel>{
             return this.httpService.PutData('/users/update',JSON.stringify(user)).toPromise<UserModel>();

@@ -45,6 +45,8 @@
           <input type="text" name="cphone" [(ngModel)]="cphone"><br>
           <label>Worktime</label>
           <input type="text" name="worktime" [(ngModel)]="worktime"><br>
+          <label>Company ID</label>
+          <input type="text" name="companyid" [(ngModel)]="companyid"><br>
           <label>Description</label>
           <textarea name="description" [(ngModel)]="description"></textarea><br>
           <label>Social links</label>
@@ -54,52 +56,52 @@
           <div class="part_reg">
             <div>
               <label>Company type</label>
-              <select>
-                <option>Concepteur</option>
-                <option>Conseiller</option>
-                <option>Both</option>
+              <select name="c_type" [(ngModel)]="c_type" >
+                <option value="concepteur" >Concepteur</option>
+                <option value="conseiller">Conseiller</option>
+                <option value="both">Both</option>
               </select>
             </div>
             <div>
               <label>Subcategory</label>
-              <select>
-                <option>Classique</option>
-                <option>E-brooker</option>
-                <option>Fintech</option>
-                <option>Crowdfunding</option>
-                <option>Lendfunding</option>
-                <option>Institutionnels</option>
+              <select name="subcategory" [(ngModel)]="subcategory">
+                <option value="classique">Classique</option>
+                <option value="e_brooker">E-brooker</option>
+                <option value="fintech">Fintech</option>
+                <option value="crowdfunding">Crowdfunding</option>
+                <option value="lendfunding">Lendfunding</option>
+                <option value="institutionnels">Institutionnels</option>
               </select>
             </div>
           </div><br>
           <div class="part_reg">
             <div>
               <label>Expertises</label>
-              <select>
-                <option>Credit</option>
-                <option>Retraite</option>
-                <option>Placement</option>
-                <option>Allocation</option>
-                <option>Epargne</option>
-                <option>Investissement</option>
-                <option>Defiscalisation</option>
-                <option>Immobilier</option>
-                <option>Assurance</option>
-                <option>Investissement plaisir</option>
+              <select name="expertises" [(ngModel)]="expertises" multiple>
+                <option value="credit">Credit</option>
+                <option value="retraite">Retraite</option>
+                <option value="placement">Placement</option>
+                <option value="allocation">Allocation</option>
+                <option value="epargne">Epargne</option>
+                <option value="investissement">Investissement</option>
+                <option value="defiscalisation">Defiscalisation</option>
+                <option value="immobilier">Immobilier</option>
+                <option value="assurance">Assurance</option>
+                <option value="investissement_plaisir">Investissement plaisir</option>
               </select>
             </div>
             <div>
               <label>Agrements</label>
-              <select>
-                <option>CJA</option>
-                <option>CIF</option>
-                <option>Courtier</option>
-                <option>IOSB</option>
-                <option>Carte-T</option>
+              <select name="agrements" [(ngModel)]="agrements" multiple>
+                <option value="CJA">CJA</option>
+                <option value="CIF">CIF</option>
+                <option value="Courtier">Courtier</option>
+                <option value="IOSB">IOSB</option>
+                <option value="Carte_T">Carte-T</option>
               </select>
             </div>
           </div><br>
-          <button (click)="RegisterUserCompany(email,password,fname,lname,phone,cname,caddress,coaddress,cemail,cphone,worktime,description,links)">Register</button>
+          <button (click)="RegisterUserCompany(email,password,fname,lname,phone,cname,caddress,coaddress,cemail,cphone,worktime,companyid,description,links,c_type,subcategory,expertises,agrements)">Register</button>
         </form>
       </div>
     </div>
