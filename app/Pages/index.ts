@@ -14,13 +14,8 @@ export * from "./pages.module";
 export * from "./pages.route";
 export * from "./../models/user.model";
 export * from "./../models/ads.model";
-<<<<<<< HEAD
-export * from "./../models/checkbox.model";
-export * from "./../models/register.user.model";
-=======
 export * from "./../models/company.model";
 export * from "./../models/checkbox.model";
 export * from "./../models/register.user.model";
 export * from "./../models/register.company.model";
->>>>>>> b7b548deb1b9e0a80b54cde8b454b14e586becd5
 export * from "./../models/token.model";

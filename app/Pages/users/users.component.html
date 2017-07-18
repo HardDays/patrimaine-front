@@ -26,7 +26,7 @@
       <!-- ########################################################################################## -->
       <div id="comments">
         <ul >
-          <li *ngFor="let user of Users">
+          <li *ngFor="let user of UsersObservable">
             <article>
               <div class="user_head">
                 <h2><a  [routerLink]="['/users/' + user.id]" >{{user.first_name + " " + user.last_name}}</a></h2>
@@ -66,20 +66,11 @@
       </div>
       <div class="pagination">
         <ul>
-          <li><a href="#">« Previous</a></li>
-          <li  class="current"><a href="#"><b>1</b></a></li>
-          <li><a href="#">2</a></li>
-          <li><strong>…</strong></li>
-          <li><a href="#">6</a></li>
-          <li><a href="#">7</a></li>
-          <li><a href="#">8</a></li>
-          <li><a href="#">9</a></li>
-          <li><strong>…</strong></li>
-          <li><a href="#">14</a></li>
-          <li><a href="#">15</a></li>
-          <li><a href="#">Next »</a></li>
+            <li><a href="#">« Previous</a></li>
+            <li *ngFor="let ad of Users;let i = index" ><a [routerLink]="[{page:i/10 + 1}]" *ngIf="i%10==0" href="#">{{i/10 + 1}}</a></li>
+            <li><a href="#">Next »</a></li>
         </ul>
-      </div>
+    </div>
     </div>
     <div class="sidebar one_quarter">
       <h6>Advanced Search</h6>

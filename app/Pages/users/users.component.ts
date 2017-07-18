@@ -17,16 +17,28 @@ import {MainService} from "./../../services/main.service";
 
 export class UsersComponent implements OnInit{
     Users : UserModel[];
-
+    UsersObservable: UserModel[];
+    Category: string = "";
+    Page: number;
     constructor(private router: Router,
-        private mainService: MainService){}
+        private mainService: MainService,
+        private params: ActivatedRoute){}
+
     ngOnInit(){
-        
-        this.mainService.GetAllUsers("").subscribe(
-            (data:AllUsersModel)=>{
-                this.Users = data.users;
-                console.log(this.Users);
-            });
+        this.params.params.forEach((params:Params) => {
+            this.Category = params["category"]?params["category"]:"";
+            this.Page = params["page"]?(params["page"]):1;
+            this.mainService.GetAllUsers({}).subscribe(
+                (data:AllUsersModel)=>{
+                    this.Users = data.users;
+                    console.log(this.Users);
+                    this.mainService.GetAllUsers({limit:10,offset:((this.Page - 1)*10)})
+                        .subscribe((res:AllUsersModel)=>{
+                            console.log(res);
+                            this.UsersObservable = res.users;
+                        });
+                });
+        });
             
     }
     OnSelectUser(sel:UserModel)

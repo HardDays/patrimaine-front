@@ -59,8 +59,12 @@ var MainService = (function () {
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
     MainService.prototype.GetAllUsers = function (params) {
+        var options = new http_1.URLSearchParams();
+        for (var key in params) {
+            options.set(key, params[key]);
+        }
         /*return this.httpService.GetData('/users/all',params).toArray<UserModel>();*/
-        return this.httpService.GetData('/users/all', params);
+        return this.httpService.GetData('/users/all', options.toString());
     };
     MainService.prototype.GetUserById = function (id) {
         return this.httpService.GetData('/users/info/' + id, "");

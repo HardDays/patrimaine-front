@@ -70,10 +70,15 @@ import { GetParamsModel } from '../models/getparams.model';
                 .catch((error:any) =>{return Observable.throw(error);});
         }
 
-        GetAllUsers(params:string)
+        GetAllUsers(params:any)
         {
+             let options = new URLSearchParams();
+
+            for(let key in params){
+                options.set(key,params[key]);
+            }
             /*return this.httpService.GetData('/users/all',params).toArray<UserModel>();*/
-            return this.httpService.GetData('/users/all',params);
+            return this.httpService.GetData('/users/all',options.toString());
         }
 
         GetUserById(id:number){
