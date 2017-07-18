@@ -54,13 +54,13 @@
     <nav id="mainav" class="fl_right">
       <ul class="clear">
         <li class="active"><a routerLink="/users">Accueil</a></li>
-        <li><a class="drop" routerLink="/users">Concepteurs de Solutions</a>
+        <li><a class="drop" routerLink="/ad_list">Concepteurs de Solutions</a>
           <ul>
-        <li><a routerLink="/users">Classique</a></li>
-        <li><a routerLink="/users">E-brooker</a></li>
-        <li><a routerLink="/users">Fintech</a></li>
-        <li><a routerLink="/users">Crowdfunding</a></li>
-        <li><a routerLink="/users">Lendfunding</a></li>
+        <li><a [routerLink]="['ad_list',{category:'classique'}]">Classique</a></li>
+        <li><a [routerLink]="['ad_list',{category:'e_brooker'}]">E-brooker</a></li>
+        <li><a [routerLink]="['ad_list',{category:'fintech'}]">Fintech</a></li>
+        <li><a [routerLink]="['ad_list',{category:'crowdfunding'}]">Crowdfunding</a></li>
+        <li><a [routerLink]="['ad_list',{category:'lendfunding'}]">Lendfunding</a></li>
 
       </ul>
         </li>
@@ -76,14 +76,14 @@
             <li><a routerLink="/users">Professionnels de l'immobilier</a></li>
           </ul>
         </li>
-        <li><a class="drop" routerLink="/ad_list">Annonces</a>
+        <li><a class="drop" >Annonces</a>
           <ul>
-            <li><a [routerLink]="['ad_list',{category:'classique'}]">Toutes</a></li>
-            <li><a [routerLink]="['ad_list',{category:'fintech'}]">Finance / Epargne / Assurance</a></li>
-            <li><a [routerLink]="['ad_list',{category:'e_brooker'}]">Placement écologique</a></li>
-            <li><a [routerLink]="['ad_list',{category:'crowdfunding'}]">Investissement Immobilier</a></li>
-            <li><a [routerLink]="['ad_list',{category:'lendfunding'}]">Investissement plaisir</a></li>
-            <li><a [routerLink]="['ad_list',{category:'institutionnels'}]">Institutionnels</a></li>
+            <li><a >Toutes</a></li>
+            <li><a >Finance / Epargne / Assurance</a></li>
+            <li><a >Placement écologique</a></li>
+            <li><a >Investissement Immobilier</a></li>
+            <li><a >Investissement plaisir</a></li>
+            <li><a >Institutionnels</a></li>
           </ul>
         </li>  
         <li><a routerLink="">Forum du Patrimoine</a></li>      
