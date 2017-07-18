@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var ads_model_1 = require("./../models/ads.model");
+var http_1 = require("@angular/http");
 var http_service_1 = require("./http.service");
 var router_1 = require("@angular/router");
 var Observable_1 = require("rxjs/Observable");
@@ -18,15 +18,6 @@ require("rxjs/add/operator/catch");
 require("rxjs/add/observable/throw");
 require("rxjs/Rx");
 var Subject_1 = require("rxjs/Subject");
-var Ads = [
-    new ads_model_1.AdsModel(1, "Test1", "Test1Test1", "", 25, 1, 1, null, null, "toutes", [""], [""]),
-    new ads_model_1.AdsModel(2, "Test2", "Test2Test2", "", 25, 1, 1, null, null, "toutes", [""], [""]),
-    new ads_model_1.AdsModel(3, "Test3", "Test3Test3", "", 25, 1, 1, null, null, "ecologique", [""], [""]),
-    new ads_model_1.AdsModel(4, "Test4", "Test4Test4", "", 25, 1, 1, null, null, "finance", [""], [""]),
-    new ads_model_1.AdsModel(5, "Test5", "Test5Test5", "", 25, 1, 1, null, null, "immobilier", [""], [""]),
-    new ads_model_1.AdsModel(6, "Test6", "Test6Test6", "", 25, 1, 1, null, null, "plaisir", [""], [""]),
-];
-var AdsPromise = Promise.resolve(Ads);
 var MainService = (function () {
     function MainService(httpService, router) {
         this.httpService = httpService;
@@ -34,46 +25,34 @@ var MainService = (function () {
         this.onAuthChange$ = new Subject_1.Subject();
         this.onAuthChange$.next(false);
     }
-    MainService.prototype.GetAllAds = function (text, category) {
-        return AdsPromise
-            .then(function (Ads) { return Ads.filter(function (x) { return x.description.includes(text) &&
-            ((category.length > 0) ? (x.sub_category == category) : true); }); });
-        //return this.httpService.GetData('/ads/all',params);
+    MainService.prototype.GetAllAds = function (params) {
+        /*return AdsPromise
+            .then(Ads => Ads.filter(x => x.description.includes(text) &&
+                ((category.length > 0)?(x.sub_category == category):true))
+            );*/
+        var options = new http_1.URLSearchParams();
+        for (var key in params) {
+            options.set(key, params[key]);
+        }
+        return this.httpService.GetData('/ads/all', options.toString());
     };
     MainService.prototype.GetAdsById = function (id) {
-        return AdsPromise
-            .then(function (Ads) { return Ads.find(function (x) { return x.id == id; }); });
-        /*return this.httpService.GetData('/ads/info/'+id,"")
-            .map((resp:Response)=>resp.json())
-            .catch((error:any) =>{return Observable.throw(error);});*/
-    };
-    MainService.prototype.GetAllAdByUserId = function (id) {
-        return AdsPromise
-            .then(function (Ads) { return Ads.filter(function (x) { return x.user_id == id; }); });
+        /*return AdsPromise
+            .then(Ads => Ads.find(x => x.id == id));*/
+        return this.httpService.GetData('/ads/info/' + id, "");
     };
     MainService.prototype.CreateAd = function (title, desc) {
-        var _this = this;
-        var ad = { title: title, description: desc };
-        var id = Ads.length;
-        return AdsPromise
-            .then(function (Ads) { return Ads.push(new ads_model_1.AdsModel(id + 1, title, desc, "", _this.me.id, 1, 1, null, null, "fintech", [""], [""])); });
-        //let params = new URLSearchParams();
-        //params.set('ad',JSON.stringify(ad));
-        /*return this.httpService.PostData('/ads/create',JSON.stringify(params))
-            .map((resp:Response)=>resp.json())
-            .catch((error:any) =>{return Observable.throw(error);});*/
+        var params = { title: title, description: desc };
+        /*return AdsPromise
+            .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));*/
+        return this.httpService.PostData('/ads/create', JSON.stringify(params));
     };
     MainService.prototype.DeleteAd = function (ad) {
-        return AdsPromise
-            .then(function (Ads) {
-            var index = Ads.indexOf(ad, 0);
-            if (index > -1)
-                Ads.splice(index, 1);
-        });
+        return this.httpService.DeleteData('/ads/delete/' + ad.id);
     };
     MainService.prototype.UpdateAd = function (id, title, desc) {
         var ad = { title: title, description: desc };
-        var params = new URLSearchParams();
+        var params = new http_1.URLSearchParams();
         params.set('ad', JSON.stringify(ad));
         return this.httpService.PutData('/ads/update/' + id, JSON.stringify(params))
             .map(function (resp) { return resp.json(); })

@@ -56,7 +56,7 @@ export class HttpService
     {
         if(!this.headers.has('Content-Type'))
             this.headers.append('Content-Type','application/json');
-        return this.http.get(this.serverUrl + method,{search:params,headers:this.headers})
+        return this.http.get(this.serverUrl + method + "?"+ params,{headers:this.headers})
             .map((resp:Response)=>resp.json())
             .catch((error:any) =>{return Observable.throw(error);});
     }
@@ -65,6 +65,13 @@ export class HttpService
         if(!this.headers.has('Content-Type'))
             this.headers.append('Content-Type','application/json');
         return this.http.put(this.serverUrl + method,data,{headers:this.headers})
+            .map((resp:Response)=>resp.json())
+            .catch((error:any) =>{return Observable.throw(error);});
+    }
+    DeleteData(method:string){
+        if(!this.headers.has('Content-Type'))
+            this.headers.append('Content-Type','application/json');
+        return this.http.delete(this.serverUrl + method,{headers:this.headers})
             .map((resp:Response)=>resp.json())
             .catch((error:any) =>{return Observable.throw(error);});
     }

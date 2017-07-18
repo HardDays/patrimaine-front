@@ -26,12 +26,16 @@ export class CreateAdComponent implements OnInit{
     }
 
     OncreateAdButtonClick(title:string,description:string){
-        this.service.createAd(title,description)
-            .then(result =>{
+        this.service.CreateAd(title,description)
+            .subscribe((result:AdsModel)=>{
+                console.log("Result of creation: " + JSON.stringify(result));
+                this.router.navigate(['ads',result.id]);
+            });
+            /*.then(result =>{
                 this.service.GetAllAds(description,"")
                     .then((result:AdsModel[])=>{
                         this.router.navigate(["ads",result[0].id]);
                     });
-            });
+            });*/
     }
 }

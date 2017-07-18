@@ -5,6 +5,7 @@ import { HttpService} from '../../services/http.service';
 import {AdsModel,CheckboxModel} from './../index';
 import {AllAdsModel} from './../../models/allads.model';
 import {MainService} from "./../../services/main.service";
+import { AllAdsModel } from '../../models/allads.model';
 
 @Component({
     selector: "ads",
@@ -41,9 +42,11 @@ export class AdsComponent implements OnInit{
         let category = this.params.params.forEach((params:Params) => {
             this.Category = params["category"]?params["category"]:"";
             this.mainService
-                .GetAllAds("", this.Category)
-                .then(result => this.Ads = result);
-                //.subscribe((data) => {this.Ads = data});
+                .GetAllAds({sub_category:this.Category})
+                .subscribe((data: AllAdsModel) => {
+                    this.Ads = data.ads;
+                    console.log(this.Ads);
+                });
         });
 
 
@@ -52,10 +55,17 @@ export class AdsComponent implements OnInit{
     {
         this.router.navigate(["ads",sel.id]);
     }
-    SearchAdMyName(name:string)
+    SearchAdMyName(descr:string)
     {
-        this.mainService.GetAllAds(name, this.Category)
-            .then(result=> this.Ads = result);
+        let params = {
+            description:descr,
+            sub_category:this.Category
+        };
+        this.mainService.GetAllAds({description:descr, sub_category:this.Category})
+            .subscribe((data: AllAdsModel) => {
+                this.Ads = data.ads;
+                console.log(this.Ads);
+            });
     }
 
 }

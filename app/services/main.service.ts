@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import {Http} from "@angular/http";
+import { Http, URLSearchParams } from '@angular/http';
 import {AdsModel} from "./../models/ads.model";
 import {UserModel} from "./../models/user.model";
 import {TokenModel} from "./../models/token.model";
@@ -13,16 +13,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/Rx';
 import {Subject} from 'rxjs/Subject';
+import { GetParamsModel } from '../models/getparams.model';
 
-let Ads = [
-            new AdsModel(1,"Test1","Test1Test1","",25,1,1,null,null,"toutes",[""],[""]),
-            new AdsModel(2,"Test2","Test2Test2","",25,1,1,null,null,"toutes",[""],[""]),
-            new AdsModel(3,"Test3","Test3Test3","",25,1,1,null,null,"ecologique",[""],[""]),
-            new AdsModel(4,"Test4","Test4Test4","",25,1,1,null,null,"finance",[""],[""]),
-            new AdsModel(5,"Test5","Test5Test5","",25,1,1,null,null,"immobilier",[""],[""]),
-            new AdsModel(6,"Test6","Test6Test6","",25,1,1,null,null,"plaisir",[""],[""]),
-        ];
-let AdsPromise: Promise<AdsModel[]> = Promise.resolve(Ads);
     @Injectable()
     export class MainService{
 
@@ -36,47 +28,36 @@ let AdsPromise: Promise<AdsModel[]> = Promise.resolve(Ads);
         }
         public me: UserModel;
 
-        GetAllAds(text:string, category: string):Promise<AdsModel[]>{
-            return AdsPromise
+        GetAllAds(params : any){
+            /*return AdsPromise
                 .then(Ads => Ads.filter(x => x.description.includes(text) && 
                     ((category.length > 0)?(x.sub_category == category):true))
-                );
-            //return this.httpService.GetData('/ads/all',params);
+                );*/
+            let options = new URLSearchParams();
+
+            for(let key in params){
+                options.set(key,params[key]);
+            }
+            return this.httpService.GetData('/ads/all',options.toString());
         }
 
-        GetAdsById(id:number): Promise<AdsModel>{
-            return AdsPromise
-                .then(Ads => Ads.find(x => x.id == id));
-            /*return this.httpService.GetData('/ads/info/'+id,"")
-                .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});*/
-        }
 
-        GetAllAdByUserId(id:number):Promise<AdsModel[]>{
-                return AdsPromise
-                    .then(Ads => Ads.filter(x => x.user_id == id));
+        GetAdsById(id:number){
+            /*return AdsPromise
+                .then(Ads => Ads.find(x => x.id == id));*/
+            return this.httpService.GetData('/ads/info/'+id,"");
         }
 
         CreateAd(title:string, desc:string){
-            let ad = {title:title,description:desc};
-            let id = Ads.length;
+            let params = {title:title,description:desc};
                 
-            return AdsPromise
-                .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));
-            //let params = new URLSearchParams();
-            //params.set('ad',JSON.stringify(ad));
-            /*return this.httpService.PostData('/ads/create',JSON.stringify(params))
-                .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});*/
+            /*return AdsPromise
+                .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));*/
+            return this.httpService.PostData('/ads/create',JSON.stringify(params));
         }
 
         DeleteAd(ad:AdsModel){
-            return AdsPromise
-                .then(Ads => {
-                    let index = Ads.indexOf(ad,0);
-                    if(index > -1)
-                        Ads.splice(index,1);
-                })
+            return this.httpService.DeleteData('/ads/delete/'+ad.id);
         }
 
         UpdateAd(id:number,title:string,desc:string){

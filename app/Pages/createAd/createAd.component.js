@@ -22,13 +22,17 @@ var CreateAdComponent = (function () {
     };
     CreateAdComponent.prototype.OncreateAdButtonClick = function (title, description) {
         var _this = this;
-        this.service.createAd(title, description)
-            .then(function (result) {
-            _this.service.GetAllAds(description, "")
-                .then(function (result) {
-                _this.router.navigate(["ads", result[0].id]);
-            });
+        this.service.CreateAd(title, description)
+            .subscribe(function (result) {
+            console.log("Result of creation: " + JSON.stringify(result));
+            _this.router.navigate(['ads', result.id]);
         });
+        /*.then(result =>{
+            this.service.GetAllAds(description,"")
+                .then((result:AdsModel[])=>{
+                    this.router.navigate(["ads",result[0].id]);
+                });
+        });*/
     };
     return CreateAdComponent;
 }());

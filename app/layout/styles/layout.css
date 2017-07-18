@@ -640,6 +640,7 @@ section.profs .prof .desc a.search:before {
     margin-bottom: 0!important;
 }
 .user_block .desc p {
+    width: 390px;
     margin-top: 0;
 }
 .user_head {

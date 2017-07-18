@@ -16,7 +16,6 @@ import {MainService} from "./../../services/main.service";
 export class UserDetailComponent implements OnInit{
     User : UserModel = new UserModel(null,"","","","",null,null,null);
     isMe = false;
-    myAds:AdsModel[];
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -35,10 +34,6 @@ export class UserDetailComponent implements OnInit{
                         if(data.id){
                             this.User = data;
                             console.log(this.User);
-                            this.service.GetAllAdByUserId(data.id)
-                                .then(Ads=>{
-                                    this.myAds = Ads;
-                                });
                         }
                     });
             }

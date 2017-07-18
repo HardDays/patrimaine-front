@@ -57,7 +57,7 @@ var HttpService = (function () {
     HttpService.prototype.GetData = function (method, params) {
         if (!this.headers.has('Content-Type'))
             this.headers.append('Content-Type', 'application/json');
-        return this.http.get(this.serverUrl + method, { search: params, headers: this.headers })
+        return this.http.get(this.serverUrl + method + "?" + params, { headers: this.headers })
             .map(function (resp) { return resp.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
@@ -65,6 +65,13 @@ var HttpService = (function () {
         if (!this.headers.has('Content-Type'))
             this.headers.append('Content-Type', 'application/json');
         return this.http.put(this.serverUrl + method, data, { headers: this.headers })
+            .map(function (resp) { return resp.json(); })
+            .catch(function (error) { return Observable_1.Observable.throw(error); });
+    };
+    HttpService.prototype.DeleteData = function (method) {
+        if (!this.headers.has('Content-Type'))
+            this.headers.append('Content-Type', 'application/json');
+        return this.http.delete(this.serverUrl + method, { headers: this.headers })
             .map(function (resp) { return resp.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };

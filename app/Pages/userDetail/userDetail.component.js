@@ -34,10 +34,6 @@ var UserDetailComponent = (function () {
                     if (data.id) {
                         _this.User = data;
                         console.log(_this.User);
-                        _this.service.GetAllAdByUserId(data.id)
-                            .then(function (Ads) {
-                            _this.myAds = Ads;
-                        });
                     }
                 });
             }

@@ -4,8 +4,9 @@ import {Subscription} from 'rxjs/Subscription';
 import { HttpService} from '../../services/http.service';
 
 
-import {AdsModel, UserModel} from './../index';
+import {AdsModel} from './../index';
 import {MainService} from "./../../services/main.service";
+import { UserModel } from '../../models/user.model';
 
 @Component({
     selector: "ads",
@@ -33,14 +34,15 @@ export class AdsDetailComponent implements OnInit{
             let adId = params["id"];
             this.service
                 .GetAdsById(adId)
-                .then(Ad => {
-                    console.log(Ad);
-                    this.Ads = Ad;
-                    this.service.GetUserById(this.Ads.user_id)
-                        .subscribe((user:UserModel)=>{
-                            this.Author = user;
-                        })});
-                //.subscribe((data) => {this.Ads = data});
+                .subscribe((data:AdsModel) => {
+                    this.Ads = data;
+                    if(this.Ads.user_id){
+                        this.service.GetUserById(this.Ads.user_id)
+                            .subscribe((user:UserModel)=>{
+                                this.Author = user;
+                            });
+                    }
+                });
         });
         /*this.activatedRoute.params.forEach((params: Params)=>{
             let id = params["id"];

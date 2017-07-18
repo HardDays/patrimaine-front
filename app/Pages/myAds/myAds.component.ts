@@ -6,6 +6,7 @@ import { HttpService} from '../../services/http.service';
 import { UserModel, AdsModel} from "./../index";
 
 import {MainService} from "./../../services/main.service";
+import { AllAdsModel } from '../../models/allads.model';
 
 @Component({
     selector: "myAds",
@@ -29,10 +30,8 @@ export class MyAdsComponent implements OnInit{
                     if(data.id){
                         this.User = data;
                         console.log(this.User);
-                        this.service.GetAllAdByUserId(data.id)
-                            .then(Ads=>{
-                                this.myAds = Ads;
-                            });
+                        this.service.GetAllAds({user_id:data.id})
+                            .subscribe((result:AllAdsModel)=>{this.myAds = result.ads;});
                     }
                 });
         });
@@ -41,11 +40,9 @@ export class MyAdsComponent implements OnInit{
     OnDeleteAd(ad: AdsModel){
         console.log(ad);
         this.service.DeleteAd(ad)
-            .then(result =>{
-                this.service.GetAllAdByUserId(this.User.id)
-                    .then(Ads=>{
-                        this.myAds = Ads;
-                    });
+            .subscribe(result =>{
+                this.service.GetAllAds({user_id:this.User.id})
+                    .subscribe((result:AllAdsModel)=>{this.myAds = result.ads;});
             });
     }
 }

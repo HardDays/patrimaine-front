@@ -28,10 +28,8 @@ var MyAdsComponent = (function () {
                 if (data.id) {
                     _this.User = data;
                     console.log(_this.User);
-                    _this.service.GetAllAdByUserId(data.id)
-                        .then(function (Ads) {
-                        _this.myAds = Ads;
-                    });
+                    _this.service.GetAllAds({ user_id: data.id })
+                        .subscribe(function (result) { _this.myAds = result.ads; });
                 }
             });
         });
@@ -40,11 +38,9 @@ var MyAdsComponent = (function () {
         var _this = this;
         console.log(ad);
         this.service.DeleteAd(ad)
-            .then(function (result) {
-            _this.service.GetAllAdByUserId(_this.User.id)
-                .then(function (Ads) {
-                _this.myAds = Ads;
-            });
+            .subscribe(function (result) {
+            _this.service.GetAllAds({ user_id: _this.User.id })
+                .subscribe(function (result) { _this.myAds = result.ads; });
         });
     };
     return MyAdsComponent;

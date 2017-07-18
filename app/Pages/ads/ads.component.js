@@ -43,18 +43,27 @@ var AdsComponent = (function () {
         var category = this.params.params.forEach(function (params) {
             _this.Category = params["category"] ? params["category"] : "";
             _this.mainService
-                .GetAllAds("", _this.Category)
-                .then(function (result) { return _this.Ads = result; });
-            //.subscribe((data) => {this.Ads = data});
+                .GetAllAds({ sub_category: _this.Category })
+                .subscribe(function (data) {
+                _this.Ads = data.ads;
+                console.log(_this.Ads);
+            });
         });
     };
     AdsComponent.prototype.OnSelectAd = function (sel) {
         this.router.navigate(["ads", sel.id]);
     };
-    AdsComponent.prototype.SearchAdMyName = function (name) {
+    AdsComponent.prototype.SearchAdMyName = function (descr) {
         var _this = this;
-        this.mainService.GetAllAds(name, this.Category)
-            .then(function (result) { return _this.Ads = result; });
+        var params = {
+            description: descr,
+            sub_category: this.Category
+        };
+        this.mainService.GetAllAds({ description: descr, sub_category: this.Category })
+            .subscribe(function (data) {
+            _this.Ads = data.ads;
+            console.log(_this.Ads);
+        });
     };
     return AdsComponent;
 }());
