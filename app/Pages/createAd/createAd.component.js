@@ -35,7 +35,7 @@ var CreateAdComponent = (function () {
 CreateAdComponent = __decorate([
     core_1.Component({
         selector: "createAd",
-        templateUrl: "app/Pages/createAD/createAd.component.html",
+        templateUrl: "./app/Pages/createAD/createAd.component.html",
         providers: [http_service_1.HttpService]
     }),
     __metadata("design:paramtypes", [router_1.Router,
