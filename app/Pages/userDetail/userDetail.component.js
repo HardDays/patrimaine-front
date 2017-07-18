@@ -56,27 +56,6 @@ var UserDetailComponent = (function () {
                 .then(result => this.Ads = result);
         });*/
     };
-    UserDetailComponent.prototype.OnCreateAdButtonClick = function (title, description) {
-        var _this = this;
-        this.service.CreateAd(title, description)
-            .then(function (result) {
-            _this.service.GetAllAds(description)
-                .then(function (result) {
-                _this.router.navigate(["ads", result[0].id]);
-            });
-        });
-    };
-    UserDetailComponent.prototype.OnDeleteAd = function (ad) {
-        var _this = this;
-        console.log(ad);
-        this.service.DeleteAd(ad)
-            .then(function (result) {
-            _this.service.GetAllAdByUserId(_this.User.id)
-                .then(function (Ads) {
-                _this.myAds = Ads;
-            });
-        });
-    };
     return UserDetailComponent;
 }());
 UserDetailComponent = __decorate([

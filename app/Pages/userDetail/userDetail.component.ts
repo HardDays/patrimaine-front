@@ -58,23 +58,4 @@ export class UserDetailComponent implements OnInit{
         });*/
         
     }
-    OnCreateAdButtonClick(title:string,description:string){
-        this.service.CreateAd(title,description)
-            .then(result =>{
-                this.service.GetAllAds(description)
-                    .then((result:AdsModel[])=>{
-                        this.router.navigate(["ads",result[0].id]);
-                    });
-            });
-    }
-    OnDeleteAd(ad: AdsModel){
-        console.log(ad);
-        this.service.DeleteAd(ad)
-            .then(result =>{
-                this.service.GetAllAdByUserId(this.User.id)
-                    .then(Ads=>{
-                        this.myAds = Ads;
-                    });
-            });
-    }
 }

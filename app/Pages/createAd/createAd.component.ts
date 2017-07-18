@@ -9,7 +9,7 @@ import {MainService} from "./../../services/main.service";
 
 @Component({
     moduleId: module.id,
-    selector: "createAd",
+    selector: "createad",
     templateUrl: "./createAd.component.html",
     providers: [HttpService]
 })
@@ -25,8 +25,8 @@ export class CreateAdComponent implements OnInit{
     ngOnInit() {
     }
 
-    OnCreateAdButtonClick(title:string,description:string){
-        this.service.CreateAd(title,description)
+    OncreateAdButtonClick(title:string,description:string){
+        this.service.createAd(title,description)
             .then(result =>{
                 this.service.GetAllAds(description,"")
                     .then((result:AdsModel[])=>{

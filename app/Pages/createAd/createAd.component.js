@@ -20,9 +20,9 @@ var CreateAdComponent = (function () {
     }
     CreateAdComponent.prototype.ngOnInit = function () {
     };
-    CreateAdComponent.prototype.OnCreateAdButtonClick = function (title, description) {
+    CreateAdComponent.prototype.OncreateAdButtonClick = function (title, description) {
         var _this = this;
-        this.service.CreateAd(title, description)
+        this.service.createAd(title, description)
             .then(function (result) {
             _this.service.GetAllAds(description, "")
                 .then(function (result) {
@@ -35,7 +35,7 @@ var CreateAdComponent = (function () {
 CreateAdComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        selector: "createAd",
+        selector: "createad",
         templateUrl: "./createAd.component.html",
         providers: [http_service_1.HttpService]
     }),
