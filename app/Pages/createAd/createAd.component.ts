@@ -10,7 +10,7 @@ import {MainService} from "./../../services/main.service";
 @Component({
     moduleId: module.id,
     selector: "createAd",
-    templateUrl: "createAd.component.html",
+    templateUrl: "./createAd.component.html",
     providers: [HttpService]
 })
 

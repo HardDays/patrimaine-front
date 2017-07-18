@@ -36,7 +36,7 @@ CreateAdComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: "createAd",
-        templateUrl: "createAd.component.html",
+        templateUrl: "./createAd.component.html",
         providers: [http_service_1.HttpService]
     }),
     __metadata("design:paramtypes", [router_1.Router,
