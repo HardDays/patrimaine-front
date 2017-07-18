@@ -65,7 +65,7 @@ var AdsComponent = (function () {
         };
         this.mainService.GetAllAds({ description: descr, sub_category: this.Category })
             .subscribe(function (data) {
-            _this.Ads = data.ads;
+            _this.AdsObservable = data.ads;
             console.log(_this.Ads);
         });
     };

@@ -68,7 +68,7 @@ export class AdsComponent implements OnInit{
         };
         this.mainService.GetAllAds({description:descr, sub_category:this.Category})
             .subscribe((data: AllAdsModel) => {
-                this.Ads = data.ads;
+                this.AdsObservable = data.ads;
                 console.log(this.Ads);
             });
     }
