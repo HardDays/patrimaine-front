@@ -6,7 +6,10 @@ import { HttpService} from '../../services/http.service';
 import { UserModel, AdsModel} from "./../index";
 
 import {MainService} from "./../../services/main.service";
+<<<<<<< HEAD
 import { AllAdsModel } from '../../models/allads.model';
+=======
+>>>>>>> b7b548deb1b9e0a80b54cde8b454b14e586becd5
 
 @Component({
     selector: "myAds",

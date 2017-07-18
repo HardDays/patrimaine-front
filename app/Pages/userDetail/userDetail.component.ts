@@ -16,6 +16,10 @@ import {MainService} from "./../../services/main.service";
 export class UserDetailComponent implements OnInit{
     User : UserModel = new UserModel(null,"","","","",null,null,null);
     isMe = false;
+<<<<<<< HEAD
+=======
+    myAds:AdsModel[];
+>>>>>>> b7b548deb1b9e0a80b54cde8b454b14e586becd5
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -34,6 +38,13 @@ export class UserDetailComponent implements OnInit{
                         if(data.id){
                             this.User = data;
                             console.log(this.User);
+<<<<<<< HEAD
+=======
+                            this.service.GetAllAdByUserId(data.id)
+                                .then(Ads=>{
+                                    this.myAds = Ads;
+                                });
+>>>>>>> b7b548deb1b9e0a80b54cde8b454b14e586becd5
                         }
                     });
             }
@@ -53,4 +64,26 @@ export class UserDetailComponent implements OnInit{
         });*/
         
     }
+<<<<<<< HEAD
+=======
+    OnCreateAdButtonClick(title:string,description:string){
+        this.service.CreateAd(title,description)
+            .then(result =>{
+                this.service.GetAllAds(description)
+                    .then((result:AdsModel[])=>{
+                        this.router.navigate(["ads",result[0].id]);
+                    });
+            });
+    }
+    OnDeleteAd(ad: AdsModel){
+        console.log(ad);
+        this.service.DeleteAd(ad)
+            .then(result =>{
+                this.service.GetAllAdByUserId(this.User.id)
+                    .then(Ads=>{
+                        this.myAds = Ads;
+                    });
+            });
+    }
+>>>>>>> b7b548deb1b9e0a80b54cde8b454b14e586becd5
 }

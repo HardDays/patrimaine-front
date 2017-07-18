@@ -4,9 +4,14 @@ import {Subscription} from 'rxjs/Subscription';
 import { HttpService} from '../../services/http.service';
 
 
+<<<<<<< HEAD
 import {AdsModel} from './../index';
 import {MainService} from "./../../services/main.service";
 import { UserModel } from '../../models/user.model';
+=======
+import {AdsModel, UserModel} from './../index';
+import {MainService} from "./../../services/main.service";
+>>>>>>> b7b548deb1b9e0a80b54cde8b454b14e586becd5
 
 @Component({
     selector: "ads",

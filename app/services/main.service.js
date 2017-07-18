@@ -77,6 +77,16 @@ var MainService = (function () {
         console.log(JSON.stringify(params));
         return this.httpService.PostData('/users/create', JSON.stringify(params)).toPromise();
     };
+    MainService.prototype.CreateUserCompany = function (user, company, expertises, agrements) {
+        var params = {
+            user: user,
+            company: company,
+            expertises: expertises,
+            agrements: agrements
+        };
+        console.log(JSON.stringify(params));
+        return this.httpService.PostData('/users/create', JSON.stringify(params)).toPromise();
+    };
     MainService.prototype.UpdateUser = function (user) {
         return this.httpService.PutData('/users/update', JSON.stringify(user)).toPromise();
     };

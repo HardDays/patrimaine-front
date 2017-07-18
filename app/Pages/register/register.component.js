@@ -12,6 +12,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
 var index_1 = require("./../index");
+var index_2 = require("./../index");
 var main_service_1 = require("./../../services/main.service");
 var RegisterComponent = (function () {
     function RegisterComponent(router, mainService) {
@@ -25,6 +26,18 @@ var RegisterComponent = (function () {
         var user = new index_1.RegisterUserModel(email, password, fname, lname, phone);
         console.log(JSON.stringify(user));
         this.mainService.CreateUser(user)
+            .then(function (x) {
+            _this.router.navigate(['login']);
+        });
+    };
+    RegisterComponent.prototype.RegisterUserCompany = function (email, password, fname, lname, phone, cname, caddress, coaddress, cemail, cphone, worktime, companyid, description, links, c_type, subcategory, expertises, agrements) {
+        var _this = this;
+        var user = new index_1.RegisterUserModel(email, password, fname, lname, phone);
+        var company = new index_2.RegisterCompanyModel(cname, caddress, coaddress, cemail, cphone, worktime, companyid, description, links, c_type, subcategory);
+        console.log('AAAAAAAAAAAAAA');
+        console.log(expertises);
+        console.log(JSON.stringify(user));
+        this.mainService.CreateUserCompany(user, company, expertises, agrements)
             .then(function (x) {
             _this.router.navigate(['login']);
         });
