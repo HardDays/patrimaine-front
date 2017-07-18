@@ -5,7 +5,6 @@ import { HttpService} from '../../services/http.service';
 import {AdsModel,CheckboxModel} from './../index';
 import {AllAdsModel} from './../../models/allads.model';
 import {MainService} from "./../../services/main.service";
-import { AllAdsModel } from '../../models/allads.model';
 
 @Component({
     selector: "ads",
@@ -15,7 +14,9 @@ import { AllAdsModel } from '../../models/allads.model';
 
 export class AdsComponent implements OnInit{
     Ads: AdsModel[];
+    AdsObservable: AdsModel[];
     Category: string = "";
+    Page: number;
     /*ExpertisesCheckboxes: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
         new CheckboxModel("Retraite","retraite",false),
@@ -41,19 +42,23 @@ export class AdsComponent implements OnInit{
     ngOnInit(){
         let category = this.params.params.forEach((params:Params) => {
             this.Category = params["category"]?params["category"]:"";
+            this.Page = params["page"]?(params["page"]):1;
             this.mainService
                 .GetAllAds({sub_category:this.Category})
                 .subscribe((data: AllAdsModel) => {
                     this.Ads = data.ads;
-                    console.log(this.Ads);
+                    //this.AdsObservable = this.Ads.slice((this.Page-1)*10,(this.Page-1)*10+10);
+                    this.mainService.GetAllAds({sub_category:this.Category,limit:10,offset:((this.Page - 1)*10)})
+                        .subscribe((data: AllAdsModel) => {
+                            this.AdsObservable = data.ads;
+                            console.log("Page is "+ this.Page + ",offset:"+ ((this.Page - 1)*10));
+                            console.log(this.AdsObservable);
+                        });
+                    
                 });
         });
 
 
-    }
-    OnSelectAd(sel:AdsModel)
-    {
-        this.router.navigate(["ads",sel.id]);
     }
     SearchAdMyName(descr:string)
     {

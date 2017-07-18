@@ -42,16 +42,20 @@ var AdsComponent = (function () {
         var _this = this;
         var category = this.params.params.forEach(function (params) {
             _this.Category = params["category"] ? params["category"] : "";
+            _this.Page = params["page"] ? (params["page"]) : 1;
             _this.mainService
                 .GetAllAds({ sub_category: _this.Category })
                 .subscribe(function (data) {
                 _this.Ads = data.ads;
-                console.log(_this.Ads);
+                //this.AdsObservable = this.Ads.slice((this.Page-1)*10,(this.Page-1)*10+10);
+                _this.mainService.GetAllAds({ sub_category: _this.Category, limit: 10, offset: ((_this.Page - 1) * 10) })
+                    .subscribe(function (data) {
+                    _this.AdsObservable = data.ads;
+                    console.log("Page is " + _this.Page + ",offset:" + ((_this.Page - 1) * 10));
+                    console.log(_this.AdsObservable);
+                });
             });
         });
-    };
-    AdsComponent.prototype.OnSelectAd = function (sel) {
-        this.router.navigate(["ads", sel.id]);
     };
     AdsComponent.prototype.SearchAdMyName = function (descr) {
         var _this = this;

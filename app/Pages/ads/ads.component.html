@@ -23,7 +23,7 @@
         <!-- ########################################################################################## -->
         <div id="comments">
         <ul>
-            <li *ngFor="let ad of Ads">
+            <li *ngFor="let ad of AdsObservable">
                 <article>
                     <header>
                         <h2 ><a [routerLink]="['/ads/' + ad.id]">{{ad.title}}</a></h2>
@@ -61,8 +61,8 @@
     <div class="pagination">
         <ul>
             <li><a href="#">« Previous</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
+            <li *ngFor="let ad of Ads;let i = index" ><a [routerLink]="[{category:Category, page:i/10 + 1}]" *ngIf="i%10==0" href="#">{{i/10 + 1}}</a></li>
+            <!--<li><a href="#">2</a></li>
             <li><strong>…</strong></li>
             <li><a href="#">6</a></li>
             <li class="current"><strong>7</strong></li>
@@ -70,7 +70,7 @@
             <li><a href="#">9</a></li>
             <li><strong>…</strong></li>
             <li><a href="#">14</a></li>
-            <li><a href="#">15</a></li>
+            <li><a href="#">15</a></li>-->
             <li><a href="#">Next »</a></li>
         </ul>
     </div>
