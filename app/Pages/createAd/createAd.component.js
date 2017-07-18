@@ -24,7 +24,7 @@ var CreateAdComponent = (function () {
         var _this = this;
         this.service.CreateAd(title, description)
             .then(function (result) {
-            _this.service.GetAllAds(description)
+            _this.service.GetAllAds(description, "")
                 .then(function (result) {
                 _this.router.navigate(["ads", result[0].id]);
             });

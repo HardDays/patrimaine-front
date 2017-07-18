@@ -27,7 +27,7 @@ export class CreateAdComponent implements OnInit{
     OnCreateAdButtonClick(title:string,description:string){
         this.service.CreateAd(title,description)
             .then(result =>{
-                this.service.GetAllAds(description)
+                this.service.GetAllAds(description,"")
                     .then((result:AdsModel[])=>{
                         this.router.navigate(["ads",result[0].id]);
                     });
