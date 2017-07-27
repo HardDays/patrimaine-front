@@ -14,8 +14,8 @@ export class HttpService
 {
     serverUrl: string = "https://patrimoine.herokuapp.com";
     constructor(private http: Http){}
-    headers:Headers = new Headers([]);
-    private token: TokenModel = new TokenModel('');
+    public headers:Headers = new Headers([]);
+    public token: TokenModel = new TokenModel('');
 
     Login(email:string,password:string){
         /*let params = new URLSearchParams();
@@ -31,13 +31,16 @@ export class HttpService
         return this.http.post(this.serverUrl + '/auth/login',JSON.stringify(params), {headers:this.headers})
             .map((resp:Response)=>resp.json())
             .subscribe((data:TokenModel) => {
+                localStorage.setItem('token',data.token);
+                console.log(data);
                 if(this.headers.has('Authorization'))
                     this.headers.delete('Authorization');
                 this.headers.append('Authorization',data.token);
                 this.token = data;
-                console.log(JSON.stringify(this.headers));
             })
     }
+
+    
 
     GetToken():TokenModel{
         return this.token;

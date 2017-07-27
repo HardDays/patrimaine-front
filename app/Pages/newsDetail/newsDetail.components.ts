@@ -4,19 +4,19 @@ import {Subscription} from 'rxjs/Subscription';
 import { HttpService} from '../../services/http.service';
 
 
-import {AdsModel} from './../index';
+import {NewsModel} from './../index';
 import {MainService} from "./../../services/main.service";
 import { UserModel } from '../../models/user.model';
 
 @Component({
-    selector: "ads",
-    templateUrl: "app/Pages/adsDetail/adsDetail.component.html",
+    selector: "newsDetail",
+    templateUrl: "app/Pages/newsDetail/newsDetail.component.html",
     providers: [HttpService]
 
 })
 
-export class AdsDetailComponent implements OnInit{
-    Ads : AdsModel = new AdsModel(null,"","","",null,null,null,null,null,"",null,null);
+export class NewsDetailComponent implements OnInit{
+    News : NewsModel = new NewsModel(null,"","",null,null,null);
     Author: UserModel = new UserModel(null,"","","","",null,null,null);
     constructor(
         private router: Router,
@@ -31,13 +31,13 @@ export class AdsDetailComponent implements OnInit{
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
         this.activatedRoute.params.forEach((params:Params) => {
-            let adId = params["id"];
+            let newsId = params["id"];
             this.service
-                .GetAdsById(adId)
-                .subscribe((data:AdsModel) => {
-                    this.Ads = data;
-                    if(this.Ads.user_id){
-                        this.service.GetUserById(this.Ads.user_id)
+                .GetNewsById(newsId)
+                .subscribe((data:NewsModel) => {
+                    this.News = data;
+                    if(this.News.user_id){
+                        this.service.GetUserById(this.News.user_id)
                             .subscribe((user:UserModel)=>{
                                 this.Author = user;
                             });

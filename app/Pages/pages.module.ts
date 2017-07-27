@@ -10,6 +10,8 @@ import {AdsComponent, IndexComponent, UsersComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent} from './index';
 import { PageAccessGuard } from './page.guards';
+import { NewsComponent } from './news/news.component';
+import { NewsDetailComponent } from './newsDetail/newsDetail.components';
 
 @NgModule({
     imports:      [ CommonModule,FormsModule,RouterModule ],
@@ -17,13 +19,15 @@ import { PageAccessGuard } from './page.guards';
         AdsComponent, IndexComponent, UsersComponent, 
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
-        UnauthorizedComponent, NotFoundComponent
+        UnauthorizedComponent, NotFoundComponent, NewsComponent,
+        NewsDetailComponent
     ],
     exports: [
         AdsComponent, IndexComponent, UsersComponent,
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
-        UnauthorizedComponent, NotFoundComponent
+        UnauthorizedComponent, NotFoundComponent,NewsComponent,
+        NewsDetailComponent
     ],
     providers: [HttpService, PageAccessGuard]
 })

@@ -4,6 +4,8 @@ import {AdsModel} from "./../models/ads.model";
 import {UserModel} from "./../models/user.model";
 import {TokenModel} from "./../models/token.model";
 import {AllUsersModel} from "./../models/allusers.model";
+import {NewsModel} from "./../models/news.model";
+import {AllNewsModel} from "./../models/allnews.model";
 import {RegisterUserModel} from "./../models/register.user.model";
 import {RegisterCompanyModel} from "./../models/register.company.model";
 import { HttpService } from "./http.service";
@@ -21,7 +23,7 @@ import { GetParamsModel } from '../models/getparams.model';
 
         public onAuthChange$: Subject<boolean>;
         constructor(
-            private httpService : HttpService,
+            public httpService : HttpService,
             private router: Router
         ){
             this.onAuthChange$ = new Subject();
@@ -119,6 +121,8 @@ import { GetParamsModel } from '../models/getparams.model';
             
             return this.httpService.Login(email,password)
                 .add((data:TokenModel)=>{
+                    console.log(data);
+                    
                     this.GetMe()
                         .subscribe((user:UserModel)=>{
                                 this.me = user;
@@ -128,5 +132,58 @@ import { GetParamsModel } from '../models/getparams.model';
                         
                 });
                 
+        }
+
+        TryToLoginWithToken()
+        {
+            let token = localStorage.getItem('token');
+            if(token)
+            {
+                this.httpService.token = new TokenModel(token);
+                this.httpService.headers.append('Authorization',token);
+            }
+            return this.GetMe()
+                .subscribe((user:UserModel)=>{
+                        this.me = user;
+                        this.onAuthChange$.next(true);
+                    });
+
+        }
+
+        Logout(){
+            this.httpService.token = null;
+            this.httpService.headers.delete('Authorization');
+            this.onAuthChange$.next(false);
+            localStorage.removeItem('token');
+        }
+
+        GetAllNews(params : any){
+            let options = new URLSearchParams();
+
+            for(let key in params){
+                options.set(key,params[key]);
+            }
+            return this.httpService.GetData('/news/all',options.toString());
+        }
+
+        GetNewsById(id:number){
+            return this.httpService.GetData('/news/info/'+id,"");
+        }
+
+        CreateNews(title:string, descr:string){
+            let params = {ad:{title:title,description:descr}};
+                
+            /*return AdsPromise
+                .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));*/
+            return this.httpService.PostData('/ads/create',JSON.stringify(params));
+        }
+
+        UpdateNews(id:number, title:string, descr:string){
+            let params = {ad:{title:title,description:descr}};
+            return this.httpService.PutData('/news/update/'+id,JSON.stringify(params));
+        }
+
+        DeleteNews(id:number){
+            return this.httpService.DeleteData('/ads/delete/'+id);
         }
     }

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var token_model_1 = require("./../models/token.model");
 var http_service_1 = require("./http.service");
 var router_1 = require("@angular/router");
 var Observable_1 = require("rxjs/Observable");
@@ -98,6 +99,7 @@ var MainService = (function () {
         var _this = this;
         return this.httpService.Login(email, password)
             .add(function (data) {
+            console.log(data);
             _this.GetMe()
                 .subscribe(function (user) {
                 _this.me = user;
@@ -105,6 +107,48 @@ var MainService = (function () {
                 _this.router.navigate(["users", "me"]);
             });
         });
+    };
+    MainService.prototype.TryToLoginWithToken = function () {
+        var _this = this;
+        var token = localStorage.getItem('token');
+        if (token) {
+            this.httpService.token = new token_model_1.TokenModel(token);
+            this.httpService.headers.append('Authorization', token);
+        }
+        return this.GetMe()
+            .subscribe(function (user) {
+            _this.me = user;
+            _this.onAuthChange$.next(true);
+        });
+    };
+    MainService.prototype.Logout = function () {
+        this.httpService.token = null;
+        this.httpService.headers.delete('Authorization');
+        this.onAuthChange$.next(false);
+        localStorage.removeItem('token');
+    };
+    MainService.prototype.GetAllNews = function (params) {
+        var options = new http_1.URLSearchParams();
+        for (var key in params) {
+            options.set(key, params[key]);
+        }
+        return this.httpService.GetData('/news/all', options.toString());
+    };
+    MainService.prototype.GetNewsById = function (id) {
+        return this.httpService.GetData('/news/info/' + id, "");
+    };
+    MainService.prototype.CreateNews = function (title, descr) {
+        var params = { ad: { title: title, description: descr } };
+        /*return AdsPromise
+            .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));*/
+        return this.httpService.PostData('/ads/create', JSON.stringify(params));
+    };
+    MainService.prototype.UpdateNews = function (id, title, descr) {
+        var params = { ad: { title: title, description: descr } };
+        return this.httpService.PutData('/news/update/' + id, JSON.stringify(params));
+    };
+    MainService.prototype.DeleteNews = function (id) {
+        return this.httpService.DeleteData('/ads/delete/' + id);
     };
     return MainService;
 }());

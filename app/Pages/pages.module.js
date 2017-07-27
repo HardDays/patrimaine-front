@@ -12,6 +12,8 @@ var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
 var index_1 = require("./index");
 var page_guards_1 = require("./page.guards");
+var news_component_1 = require("./news/news.component");
+var newsDetail_components_1 = require("./newsDetail/newsDetail.components");
 var PageModule = (function () {
     function PageModule() {
     }
@@ -24,13 +26,15 @@ PageModule = __decorate([
             index_1.AdsComponent, index_1.IndexComponent, index_1.UsersComponent,
             index_1.AdsDetailComponent, index_1.UserDetailComponent, index_1.LoginComponent,
             index_1.RegisterComponent, index_1.CreateAdComponent, index_1.MyAdsComponent,
-            index_1.UnauthorizedComponent, index_1.NotFoundComponent
+            index_1.UnauthorizedComponent, index_1.NotFoundComponent, news_component_1.NewsComponent,
+            newsDetail_components_1.NewsDetailComponent
         ],
         exports: [
             index_1.AdsComponent, index_1.IndexComponent, index_1.UsersComponent,
             index_1.AdsDetailComponent, index_1.UserDetailComponent, index_1.LoginComponent,
             index_1.RegisterComponent, index_1.CreateAdComponent, index_1.MyAdsComponent,
-            index_1.UnauthorizedComponent, index_1.NotFoundComponent
+            index_1.UnauthorizedComponent, index_1.NotFoundComponent, news_component_1.NewsComponent,
+            newsDetail_components_1.NewsDetailComponent
         ],
         providers: [http_service_1.HttpService, page_guards_1.PageAccessGuard]
     })

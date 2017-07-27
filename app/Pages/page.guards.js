@@ -17,7 +17,7 @@ var PageAccessGuard = (function () {
         this.router = router;
     }
     PageAccessGuard.prototype.canActivate = function (route, state) {
-        if (!this.service.me || !this.service.me.id) {
+        if (!this.service.httpService.headers.has('Authorization')) {
             this.router.navigate(["401"]);
             return false;
         }

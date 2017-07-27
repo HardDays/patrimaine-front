@@ -29,6 +29,7 @@ var AppComponent = (function () {
                 });
             }
         });
+        this.mainService.TryToLoginWithToken();
     };
     return AppComponent;
 }());

@@ -2,24 +2,26 @@
   
 </div>
 <!-- ################################################################################################ -->
+<div class="wrapper">
+  
+</div>
+<!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <div class="wrapper row3">
+    <!-- ########################################################################################## -->
   <main id="container" class="clear">
     <!-- container body -->
-    
-    <div class="login_form">
-      <h1>Login</h1>
-      <form >
-        <label>Email</label>
-        <input type="text" name="email" [(ngModel)]="email">
-        <br>
-        <label>Password</label>
-        <input type="password" name="password" [(ngModel)]="password"><br>
-        <button (click)="OnLoginButtonClick(email,password)">Login</button>
-      </form>
-    </div>
-
+    <!-- ########################################################################################## -->
+    <h1 align="center"><a href="">{{News.title}}</a></h1>
+    <p>
+    </p>
+    <pre>
+      {{News.description}}
+    </pre>
+    <p align="right">
+      <b>Author: <a >{{Author.first_name + " " + Author.last_name}}</a></b>
+    </p>
     <!-- ########################################################################################## -->
     <!-- / container body -->
     <div class="clear"></div>

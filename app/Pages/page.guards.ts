@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class PageAccessGuard implements CanActivate{
     constructor(private service: MainService,private router: Router){}
     canActivate(route:ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean{
-        if(!this.service.me || !this.service.me.id){
+        if(!this.service.httpService.headers.has('Authorization')){
             this.router.navigate(["401"]);
             return false;
         }

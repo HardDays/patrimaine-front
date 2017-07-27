@@ -37,11 +37,12 @@ var HttpService = (function () {
         return this.http.post(this.serverUrl + '/auth/login', JSON.stringify(params), { headers: this.headers })
             .map(function (resp) { return resp.json(); })
             .subscribe(function (data) {
+            localStorage.setItem('token', data.token);
+            console.log(data);
             if (_this.headers.has('Authorization'))
                 _this.headers.delete('Authorization');
             _this.headers.append('Authorization', data.token);
             _this.token = data;
-            console.log(JSON.stringify(_this.headers));
         });
     };
     HttpService.prototype.GetToken = function () {
