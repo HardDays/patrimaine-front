@@ -18,6 +18,7 @@ import { UserModel } from '../../models/user.model';
 export class NewsDetailComponent implements OnInit{
     News : NewsModel = new NewsModel(null,"","",null,null,null);
     Author: UserModel = new UserModel(null,"","","","",null,null,null);
+    IsLoading = true;
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -40,6 +41,7 @@ export class NewsDetailComponent implements OnInit{
                         this.service.GetUserById(this.News.user_id)
                             .subscribe((user:UserModel)=>{
                                 this.Author = user;
+                                this.IsLoading = false;
                             });
                     }
                 });

@@ -18,7 +18,8 @@
 
     <!-- container body -->
     <!-- ########################################################################################## -->
-    <div id="content" class="three_quarter first">
+    <div class="loading" *ngIf="IsLoading"></div>
+    <div id="content" class="three_quarter first" *ngIf="!IsLoading">
         <!-- ########################################################################################## -->
         <div id="comments">
         <ul>

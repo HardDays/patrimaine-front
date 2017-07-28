@@ -21,6 +21,7 @@ var NewsDetailComponent = (function () {
         this.service = service;
         this.News = new index_1.NewsModel(null, "", "", null, null, null);
         this.Author = new user_model_1.UserModel(null, "", "", "", "", null, null, null);
+        this.IsLoading = true;
     }
     NewsDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -36,6 +37,7 @@ var NewsDetailComponent = (function () {
                     _this.service.GetUserById(_this.News.user_id)
                         .subscribe(function (user) {
                         _this.Author = user;
+                        _this.IsLoading = false;
                     });
                 }
             });

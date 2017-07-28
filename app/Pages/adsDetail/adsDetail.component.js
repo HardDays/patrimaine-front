@@ -21,6 +21,7 @@ var AdsDetailComponent = (function () {
         this.service = service;
         this.Ads = new index_1.AdsModel(null, "", "", "", null, null, null, null, null, "", null, null);
         this.Author = new user_model_1.UserModel(null, "", "", "", "", null, null, null);
+        this.IsLoading = true;
     }
     AdsDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -36,6 +37,7 @@ var AdsDetailComponent = (function () {
                     _this.service.GetUserById(_this.Ads.user_id)
                         .subscribe(function (user) {
                         _this.Author = user;
+                        _this.IsLoading = false;
                     });
                 }
             });

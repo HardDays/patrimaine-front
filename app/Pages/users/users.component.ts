@@ -20,6 +20,7 @@ export class UsersComponent implements OnInit{
     UsersObservable: UserModel[];
     Category: string = "";
     Page: number;
+    IsLoading = true;
     constructor(private router: Router,
         private mainService: MainService,
         private params: ActivatedRoute){}
@@ -36,6 +37,7 @@ export class UsersComponent implements OnInit{
                         .subscribe((res:AllUsersModel)=>{
                             console.log(res);
                             this.UsersObservable = res.users;
+                            this.IsLoading = false;
                         });
                 });
         });

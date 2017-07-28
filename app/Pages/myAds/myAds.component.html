@@ -6,10 +6,19 @@
     <!-- ################################################################################################ -->
 <div class="wrapper row3">
     <main id="container" class="clear">
-        <div class="ads_userlist">
+        <div class="loading" *ngIf="IsLoading"></div>
+        <div id="comments" *ngIf="!IsLoading">
         <ul>
-            <li *ngFor="let ad of myAds">
-            <p>{{ad.title}} <button (click)="OnDeleteAd(ad)" ><h5>X</h5></button></p>
+            <li *ngFor="let ad of myAds" class="users_ad">
+                <article>
+                    <div class="delete_button">
+                        <button (click)="OnDeleteAd(ad)" ></button>
+                    </div>
+                    <header class="my_ad_header">
+                        <h2 ><a [routerLink]="['/ads/' + ad.id]">{{ad.title}}</a></h2>
+                    </header>
+                    
+                </article>
             </li>
         </ul>
         </div>

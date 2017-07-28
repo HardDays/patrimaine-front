@@ -13,30 +13,12 @@ var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
 var main_service_1 = require("./../../services/main.service");
 var AdsComponent = (function () {
-    /*ExpertisesCheckboxes: CheckboxModel[] = [
-        new CheckboxModel("Credit","credit",false),
-        new CheckboxModel("Retraite","retraite",false),
-        new CheckboxModel("Placement","placement",false),
-        new CheckboxModel("Allocation","allocation",false),
-        new CheckboxModel("Epargne","epargne",false),
-        new CheckboxModel("Investissement","investissement",false),
-        new CheckboxModel("Defiscalisation","defiscalisation",false),
-        new CheckboxModel("Immobilier","immobilier",false),
-        new CheckboxModel("Assurance","assurance",false),
-        new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
-    ];
-    AgrementsCheckboxes: CheckboxModel[] = [
-        new CheckboxModel("CJA","CJA",false),
-        new CheckboxModel("CIF","CIF",false),
-        new CheckboxModel("Courtier","Courtier",false),
-        new CheckboxModel("IOSB","IOSB",false),
-        new CheckboxModel("Carte_T","Carte_T",false)
-    ];*/
     function AdsComponent(router, mainService, params) {
         this.router = router;
         this.mainService = mainService;
         this.params = params;
         this.Category = "";
+        this.IsLoading = true;
     }
     AdsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -53,6 +35,7 @@ var AdsComponent = (function () {
                     _this.AdsObservable = data.ads;
                     console.log("Page is " + _this.Page + ",offset:" + ((_this.Page - 1) * 10));
                     console.log(_this.AdsObservable);
+                    _this.IsLoading = false;
                 });
             });
         });

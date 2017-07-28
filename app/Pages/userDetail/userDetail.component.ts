@@ -16,6 +16,7 @@ import {MainService} from "./../../services/main.service";
 export class UserDetailComponent implements OnInit{
     User : UserModel = new UserModel(null,"","","","",null,null,null);
     isMe = false;
+    IsLoading = true;
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -34,6 +35,7 @@ export class UserDetailComponent implements OnInit{
                         if(data.id){
                             this.User = data;
                             console.log(this.User);
+                            this.IsLoading = false;
                         }
                     });
             }
@@ -42,6 +44,7 @@ export class UserDetailComponent implements OnInit{
                     .subscribe((data:UserModel) => {
                         this.User = data;
                         console.log(this.User);
+                        this.IsLoading = false;
                     });
             }
         });

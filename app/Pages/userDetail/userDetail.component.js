@@ -20,6 +20,7 @@ var UserDetailComponent = (function () {
         this.service = service;
         this.User = new index_1.UserModel(null, "", "", "", "", null, null, null);
         this.isMe = false;
+        this.IsLoading = true;
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -34,6 +35,7 @@ var UserDetailComponent = (function () {
                     if (data.id) {
                         _this.User = data;
                         console.log(_this.User);
+                        _this.IsLoading = false;
                     }
                 });
             }
@@ -42,6 +44,7 @@ var UserDetailComponent = (function () {
                     .subscribe(function (data) {
                     _this.User = data;
                     console.log(_this.User);
+                    _this.IsLoading = false;
                 });
             }
         });

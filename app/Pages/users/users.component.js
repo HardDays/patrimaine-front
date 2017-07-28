@@ -18,6 +18,7 @@ var UsersComponent = (function () {
         this.mainService = mainService;
         this.params = params;
         this.Category = "";
+        this.IsLoading = true;
     }
     UsersComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -31,6 +32,7 @@ var UsersComponent = (function () {
                     .subscribe(function (res) {
                     console.log(res);
                     _this.UsersObservable = res.users;
+                    _this.IsLoading = false;
                 });
             });
         });

@@ -17,25 +17,7 @@ export class AdsComponent implements OnInit{
     AdsObservable: AdsModel[];
     Category: string = "";
     Page: number;
-    /*ExpertisesCheckboxes: CheckboxModel[] = [
-        new CheckboxModel("Credit","credit",false),
-        new CheckboxModel("Retraite","retraite",false),
-        new CheckboxModel("Placement","placement",false),
-        new CheckboxModel("Allocation","allocation",false),
-        new CheckboxModel("Epargne","epargne",false),
-        new CheckboxModel("Investissement","investissement",false),
-        new CheckboxModel("Defiscalisation","defiscalisation",false),
-        new CheckboxModel("Immobilier","immobilier",false),
-        new CheckboxModel("Assurance","assurance",false),
-        new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
-    ];
-    AgrementsCheckboxes: CheckboxModel[] = [
-        new CheckboxModel("CJA","CJA",false),
-        new CheckboxModel("CIF","CIF",false),
-        new CheckboxModel("Courtier","Courtier",false),
-        new CheckboxModel("IOSB","IOSB",false),
-        new CheckboxModel("Carte_T","Carte_T",false)
-    ];*/
+    IsLoading: boolean = true;
     constructor(private router: Router,
         private mainService: MainService,
         private params: ActivatedRoute){}
@@ -53,6 +35,7 @@ export class AdsComponent implements OnInit{
                             this.AdsObservable = data.ads;
                             console.log("Page is "+ this.Page + ",offset:"+ ((this.Page - 1)*10));
                             console.log(this.AdsObservable);
+                            this.IsLoading = false;
                         });
                     
                 });

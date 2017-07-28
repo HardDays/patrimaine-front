@@ -273,7 +273,67 @@ tr, #comments li, #comments input[type="submit"], #comments input[type="reset"]{
 tr:nth-child(even), #comments li:nth-child(even){color:inherit; background-color:#F7F7F7;}
 table a, #comments a{background-color:inherit;}
 
+/* Loading */
 
+.loading{
+    background-image: url(../../images/loading.gif);
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+/* User's ads */
+.my_ad_header{
+    max-width: 80%;
+}
+.delete_button{
+    float:right;
+}
+
+.delete_button button{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #56AED4;
+    background: white;
+    color: #56AED4;
+    background-image: url(../../images/trash.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 35px;
+}
+
+/* Create Ads/News */
+.ad_create_form{
+    border: 1px solid #56AED4;
+    width: 45%;
+    margin: auto;
+    padding: 25px;
+}
+
+.ad_create_form h1{
+    text-align: center;
+    color: #56AED4;
+}
+
+.ad_create_form form button{
+    width: 74%;
+    background: #56AED4;
+    color: white;
+    margin-left:13%;
+    border: 0;
+    padding: 10px 0;
+}
+.ad_create_form form input{
+    width: 100%;
+}
+
+.ad_create_form form textarea{
+    width:100%;
+    height: 150px;
+}
 
 /* New index sections */
 

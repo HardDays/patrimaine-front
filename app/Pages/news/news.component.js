@@ -18,12 +18,14 @@ var NewsComponent = (function () {
         this.service = service;
         this.params = params;
         this.Category = "";
+        this.IsLoading = true;
     }
     NewsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.service.GetAllNews({})
             .subscribe(function (data) {
             _this.News = data.ads;
+            _this.IsLoading = false;
         });
         /*this.params.params.forEach((params:Params) => {
             this.Category = params["category"]?params["category"]:"";

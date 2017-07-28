@@ -22,7 +22,8 @@
   <main id="container" class="clear">
     <!-- container body -->
     <!-- ########################################################################################## -->
-    <div id="content" class="three_quarter first">
+    <div class="loading" *ngIf="IsLoading"></div>
+    <div id="content" class="three_quarter first" *ngIf="!IsLoading">
       <!-- ########################################################################################## -->
       <div id="comments">
         <ul >
@@ -72,7 +73,7 @@
         </ul>
     </div>
     </div>
-    <div class="sidebar one_quarter">
+    <div class="sidebar one_quarter" *ngIf="!IsLoading">
       <h6>Advanced Search</h6>
       <div class="sdb_holder" id="comments">
         <form class="filter">

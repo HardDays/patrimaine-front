@@ -17,6 +17,7 @@ import { AllAdsModel } from '../../models/allads.model';
 export class MyAdsComponent implements OnInit{
     User : UserModel = new UserModel(null,"","","","",null,null,null);
     myAds:AdsModel[];
+    IsLoading = true;
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -31,7 +32,10 @@ export class MyAdsComponent implements OnInit{
                         this.User = data;
                         console.log(this.User);
                         this.service.GetAllAds({user_id:data.id})
-                            .subscribe((result:AllAdsModel)=>{this.myAds = result.ads;});
+                            .subscribe((result:AllAdsModel)=>{
+                                this.myAds = result.ads;
+                                this.IsLoading = false;
+                            });
                     }
                 });
         });

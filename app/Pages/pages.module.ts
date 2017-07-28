@@ -12,6 +12,7 @@ import {AdsComponent, IndexComponent, UsersComponent,
 import { PageAccessGuard } from './page.guards';
 import { NewsComponent } from './news/news.component';
 import { NewsDetailComponent } from './newsDetail/newsDetail.components';
+import { CreateNewsComponent } from './createNews/createNews.component';
 
 @NgModule({
     imports:      [ CommonModule,FormsModule,RouterModule ],
@@ -20,14 +21,14 @@ import { NewsDetailComponent } from './newsDetail/newsDetail.components';
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent, NewsComponent,
-        NewsDetailComponent
+        NewsDetailComponent, CreateNewsComponent
     ],
     exports: [
         AdsComponent, IndexComponent, UsersComponent,
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent,NewsComponent,
-        NewsDetailComponent
+        NewsDetailComponent, CreateNewsComponent
     ],
     providers: [HttpService, PageAccessGuard]
 })
