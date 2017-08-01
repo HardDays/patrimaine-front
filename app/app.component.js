@@ -22,11 +22,13 @@ var AppComponent = (function () {
         this.mainService.onAuthChange$.subscribe(function (bool) {
             if (bool) {
                 _this.isLoggedIn = bool;
-                _this.mainService.GetMe()
-                    .subscribe(function (data) {
-                    console.log(data);
-                    _this.me = data;
-                });
+                if (_this.isLoggedIn)
+                    _this.mainService.GetMe()
+                        .subscribe(function (data) {
+                        console.log(JSON.stringify(data));
+                        _this.me = data;
+                        //console.log(this.me);
+                    });
             }
         });
         this.mainService.TryToLoginWithToken();

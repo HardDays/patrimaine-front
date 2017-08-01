@@ -27,8 +27,10 @@ export class NewsComponent implements OnInit{
     ngOnInit(){
 
         this.service.GetAllNews({})
-            .subscribe((data:AllNewsModel)=>{
-                this.News = data.ads;
+            .subscribe((data)=>{
+                console.log("All news ctrl");
+                console.log(data);
+                this.News = data;
                 this.IsLoading = false;
             });
         /*this.params.params.forEach((params:Params) => {

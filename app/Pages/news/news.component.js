@@ -24,7 +24,9 @@ var NewsComponent = (function () {
         var _this = this;
         this.service.GetAllNews({})
             .subscribe(function (data) {
-            _this.News = data.ads;
+            console.log("All news ctrl");
+            console.log(data);
+            _this.News = data;
             _this.IsLoading = false;
         });
         /*this.params.params.forEach((params:Params) => {

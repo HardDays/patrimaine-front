@@ -32,9 +32,10 @@ var AdsComponent = (function () {
                 //this.AdsObservable = this.Ads.slice((this.Page-1)*10,(this.Page-1)*10+10);
                 _this.mainService.GetAllAds({ sub_category: _this.Category, limit: 10, offset: ((_this.Page - 1) * 10) })
                     .subscribe(function (data) {
+                    console.log(data);
                     _this.AdsObservable = data.ads;
                     console.log("Page is " + _this.Page + ",offset:" + ((_this.Page - 1) * 10));
-                    console.log(_this.AdsObservable);
+                    ;
                     _this.IsLoading = false;
                 });
             });

@@ -1,7 +1,7 @@
 import { Component,OnInit,NgModule }      from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { HttpService} from './services/http.service';
-import {UserModel} from './models/user.model';
+import { UserModel } from './models/user.model';
 
 import {MainService} from "./services/main.service";
      
@@ -21,11 +21,13 @@ export class AppComponent  implements OnInit {
         this.mainService.onAuthChange$.subscribe(bool => {
             if(bool){
                 this.isLoggedIn = bool;
-                this.mainService.GetMe()
-                    .subscribe((data:UserModel)=>{
-                        console.log(data);
-                        this.me = data;
-                    });
+                if(this.isLoggedIn)
+                    this.mainService.GetMe()
+                        .subscribe((data:UserModel)=>{
+                            console.log(JSON.stringify(data));
+                            this.me = data;
+                            //console.log(this.me);
+                        });
             }
         });
         this.mainService.TryToLoginWithToken();

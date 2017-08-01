@@ -32,9 +32,9 @@ export class AdsComponent implements OnInit{
                     //this.AdsObservable = this.Ads.slice((this.Page-1)*10,(this.Page-1)*10+10);
                     this.mainService.GetAllAds({sub_category:this.Category,limit:10,offset:((this.Page - 1)*10)})
                         .subscribe((data: AllAdsModel) => {
+                            console.log(data);
                             this.AdsObservable = data.ads;
-                            console.log("Page is "+ this.Page + ",offset:"+ ((this.Page - 1)*10));
-                            console.log(this.AdsObservable);
+                            console.log("Page is "+ this.Page + ",offset:"+ ((this.Page - 1)*10));;
                             this.IsLoading = false;
                         });
                     

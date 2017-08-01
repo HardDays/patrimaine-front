@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http, URLSearchParams } from '@angular/http';
 import {AdsModel} from "./../models/ads.model";
-import {UserModel} from "./../models/user.model";
 import {TokenModel} from "./../models/token.model";
 import {AllUsersModel} from "./../models/allusers.model";
 import {NewsModel} from "./../models/news.model";
@@ -17,6 +16,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/Rx';
 import {Subject} from 'rxjs/Subject';
 import { GetParamsModel } from '../models/getparams.model';
+import { UserModel } from '../models/user.model';
 
     @Injectable()
     export class MainService{

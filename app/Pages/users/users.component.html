@@ -67,9 +67,9 @@
       </div>
       <div class="pagination">
         <ul>
-            <li><a href="#">« Previous</a></li>
-            <li *ngFor="let ad of Users;let i = index" ><a [routerLink]="[{page:i/10 + 1}]" *ngIf="i%10==0" href="#">{{i/10 + 1}}</a></li>
-            <li><a href="#">Next »</a></li>
+            <li *ngIf="Page > 1"><a [routerLink]="[{page:Page-1}]">« Previous</a></li>
+            <li *ngFor="let i of Pages" ><a [routerLink]="[{page:i}]">{{i}}</a></li>
+            <li *ngIf="Page < Pages.length"><a [routerLink]="[{page:Page*1+1}]">Next »</a></li>
         </ul>
     </div>
     </div>

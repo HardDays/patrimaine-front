@@ -20,6 +20,7 @@ export class UsersComponent implements OnInit{
     UsersObservable: UserModel[];
     Category: string = "";
     Page: number;
+    Pages: number[] = [];
     IsLoading = true;
     constructor(private router: Router,
         private mainService: MainService,
@@ -29,22 +30,19 @@ export class UsersComponent implements OnInit{
         this.params.params.forEach((params:Params) => {
             this.Category = params["category"]?params["category"]:"";
             this.Page = params["page"]?(params["page"]):1;
-            this.mainService.GetAllUsers({}).subscribe(
-                (data:AllUsersModel)=>{
-                    this.Users = data.users;
-                    console.log(this.Users);
                     this.mainService.GetAllUsers({limit:10,offset:((this.Page - 1)*10)})
                         .subscribe((res:AllUsersModel)=>{
-                            console.log(res);
                             this.UsersObservable = res.users;
+                            let i = 0;
+                            this.Pages = [];
+                            while(i<res.total_count){
+                                this.Pages.push(i/10+1);
+                                i+=10;
+                            }
+                            //this.Pages = Array(res.total_count/10 + 1);
                             this.IsLoading = false;
                         });
-                });
         });
             
-    }
-    OnSelectUser(sel:UserModel)
-    {
-        this.router.navigate(["users",sel.id]);
     }
 }

@@ -9,6 +9,17 @@ export class UserModel{
         public created_at: Date,
         public updated_at: Date,
         public company: CompanyModel
-    ){}
+    ){
+        /*if(first_name == null)
+            this.first_name = "";
+        if(last_name  == null)
+            this.last_name = "";
+        if(phone == null)
+            this.phone = "";
+        if(email == null)
+            this.email = "";*/
+        
+
+    }
 
 }

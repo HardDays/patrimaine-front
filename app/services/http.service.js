@@ -58,7 +58,6 @@ var HttpService = (function () {
     HttpService.prototype.GetData = function (method, params) {
         if (!this.headers.has('Content-Type'))
             this.headers.append('Content-Type', 'application/json');
-        console.log(this.serverUrl + method + "?" + params);
         return this.http.get(this.serverUrl + method + "?" + params, { headers: this.headers })
             .map(function (resp) { return resp.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error); });

@@ -18,6 +18,7 @@ var UsersComponent = (function () {
         this.mainService = mainService;
         this.params = params;
         this.Category = "";
+        this.Pages = [];
         this.IsLoading = true;
     }
     UsersComponent.prototype.ngOnInit = function () {
@@ -25,20 +26,19 @@ var UsersComponent = (function () {
         this.params.params.forEach(function (params) {
             _this.Category = params["category"] ? params["category"] : "";
             _this.Page = params["page"] ? (params["page"]) : 1;
-            _this.mainService.GetAllUsers({}).subscribe(function (data) {
-                _this.Users = data.users;
-                console.log(_this.Users);
-                _this.mainService.GetAllUsers({ limit: 10, offset: ((_this.Page - 1) * 10) })
-                    .subscribe(function (res) {
-                    console.log(res);
-                    _this.UsersObservable = res.users;
-                    _this.IsLoading = false;
-                });
+            _this.mainService.GetAllUsers({ limit: 10, offset: ((_this.Page - 1) * 10) })
+                .subscribe(function (res) {
+                _this.UsersObservable = res.users;
+                var i = 0;
+                _this.Pages = [];
+                while (i < res.total_count) {
+                    _this.Pages.push(i / 10 + 1);
+                    i += 10;
+                }
+                //this.Pages = Array(res.total_count/10 + 1);
+                _this.IsLoading = false;
             });
         });
-    };
-    UsersComponent.prototype.OnSelectUser = function (sel) {
-        this.router.navigate(["users", sel.id]);
     };
     return UsersComponent;
 }());
