@@ -171,11 +171,11 @@ import { UserModel } from '../models/user.model';
         }
 
         CreateNews(title:string, descr:string){
-            let params = {ad:{title:title,description:descr}};
+            let params = {title:title,description:descr};
                 
             /*return AdsPromise
                 .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));*/
-            return this.httpService.PostData('/ads/create',JSON.stringify(params));
+            return this.httpService.PostData('/news/create',JSON.stringify(params));
         }
 
         UpdateNews(id:number, title:string, descr:string){
@@ -184,6 +184,6 @@ import { UserModel } from '../models/user.model';
         }
 
         DeleteNews(id:number){
-            return this.httpService.DeleteData('/ads/delete/'+id);
+            return this.httpService.DeleteData('/news/delete/'+id);
         }
     }

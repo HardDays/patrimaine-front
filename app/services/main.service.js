@@ -138,17 +138,17 @@ var MainService = (function () {
         return this.httpService.GetData('/news/info/' + id, "");
     };
     MainService.prototype.CreateNews = function (title, descr) {
-        var params = { ad: { title: title, description: descr } };
+        var params = { title: title, description: descr };
         /*return AdsPromise
             .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));*/
-        return this.httpService.PostData('/ads/create', JSON.stringify(params));
+        return this.httpService.PostData('/news/create', JSON.stringify(params));
     };
     MainService.prototype.UpdateNews = function (id, title, descr) {
         var params = { ad: { title: title, description: descr } };
         return this.httpService.PutData('/news/update/' + id, JSON.stringify(params));
     };
     MainService.prototype.DeleteNews = function (id) {
-        return this.httpService.DeleteData('/ads/delete/' + id);
+        return this.httpService.DeleteData('/news/delete/' + id);
     };
     return MainService;
 }());
