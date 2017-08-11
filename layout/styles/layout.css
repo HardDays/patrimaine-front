@@ -41,9 +41,9 @@ File: Layout CSS
 ---------------------------------------------------------------------------------------------------------------*/
 #header{}
 
-#logo {position: absolute; margin-top: 5px; margin-left: 35px;}
+#logo {position: absolute; margin-top: 15px;}
 #logo a {background: none!important;}
-#logo img {height: 85px;}
+#logo img {height: 130px;}
 #logo h1{margin:0; padding:0; text-transform:uppercase; font-size:36px;}
 
 #logo.index_logo {margin-top: 15px; margin-left: 0;}

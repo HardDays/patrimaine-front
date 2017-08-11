@@ -1,0 +1,53 @@
+<div class="wrapper row2">
+      <!--<div id="breadcrumb">
+        ########################################################################################## 
+        <ul>
+          <li><a href="#">User</a></li>
+          <li><a href="#">Details</a></li>
+
+
+        </ul>
+        ########################################################################################## 
+      </div>-->
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <div class="loading" *ngIf="IsLoading"></div>
+  <main id="container" class="clear" *ngIf="!IsLoading">
+    <!-- container body -->
+    <!-- ########################################################################################## -->
+    <h1 align="center"><a href="">{{User.first_name + " " + User.last_name}}</a></h1>
+    <img *ngIf="ImageBase64" class="imgr borderedbox" [src]="ImageBase64" alt="" style="width:240px;">
+    <h3 *ngIf="User.phone || User.email">Contacts</h3>
+        <p *ngIf="User.phone">
+            <span class="icon-phone"></span> {{User.phone}}
+        </p>
+        <p *ngIf="User.email">
+            <span class="icon-envelope"></span> {{User.email}}
+        </p>
+    <h3 *ngIf="User.company && User.company.sub_category">Categories</h3>
+    <p *ngIf="User.company && User.company.sub_category">{{User?.company?.sub_category}}</p>
+    <!--<div *ngFor="let cat of User.Categories">
+        <p>{{cat}}</p>
+    </div>-->
+    <h3 *ngIf="User.company && User.company.description">About</h3>
+    <p *ngIf="User.company && User.company.description">
+      {{User?.company?.description}} </p>
+    
+    
+    <h3>Rating</h3> <!-- TODO {{User.company.rate}}
+      
+    <h4>
+      <span class="icon-star"></span>
+      <span class="icon-star"></span>
+      <span class="icon-star"></span>
+      <span class="icon-star"></span>
+      <span class="icon-star"></span>
+    </h4>
+    <!-- ########################################################################################## -->
+    <!-- / container body -->
+    <div class="clear"></div>
+  </main>
+</div>

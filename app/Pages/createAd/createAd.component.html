@@ -1,0 +1,23 @@
+<div class="wrapper row2">
+      
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+<div class="wrapper row3">
+    <main id="container" class="clear">
+        <div class="ads_creation reg_block">
+            <div class="ad_create_form">
+                <h1>Create Ad</h1>
+                <form >
+                    <label>Title</label>
+                    <input type="text" name="title" [(ngModel)]="title">
+                    <br>
+                    <label>Description</label>
+                    <textarea name="description" [(ngModel)]="description" ></textarea><br>
+                    <button (click)="OncreateAdButtonClick(title,description)">Create ad</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>

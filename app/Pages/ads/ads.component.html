@@ -1,0 +1,134 @@
+
+<div class="wrapper row2">
+    <!--<div id="breadcrumb">
+    ########################################################################################## 
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Lorem</a></li>
+        <li><a href="#">Ipsum</a></li>
+        <li><a href="#">Dolor</a></li>
+    </ul>
+     ########################################################################################## 
+    </div>-->
+</div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+<div class="wrapper row3">
+    
+    <main id="container" class="clear" >
+    <!-- container body -->
+    <!-- ########################################################################################## -->
+    
+    <div id="content" class="three_quarter first" >
+        <!-- ########################################################################################## -->
+        <div class="loading" *ngIf="IsLoading"></div>
+        <div id="comments" *ngIf="!IsLoading">
+        <ul>
+            <li *ngFor="let ad of AdsObservable">
+                <article>
+                    <header>
+                        <h2 ><a [routerLink]="['/ads/' + ad.id]">{{ad.title}}</a></h2>
+                        <span class="date">{{ad.created_at | date: dMMy}}</span>
+                    </header>
+                    <div class="user_block">
+                        <div class="img"><img class="borderedbox" src="../images/demo/imgl.gif" alt=""></div>
+                        <div class="desc">
+                            <p>{{ad.description}}</p>
+                            <address>
+                                <a href="./user_details">Author</a>
+                            </address>
+                        </div>
+                        <div class="rating_wrap">
+                            <div class="stars_wrap">
+                                <div class="stars_empty"><div class="stars" style="width: 40%;"></div></div>
+                                <span>Concepteur</span>
+                            </div>
+                            <div class="stars_wrap">
+                                <div class="stars_empty"><div class="stars" style="width: 40%;"></div></div>
+                                <span>Conseiller</span>
+                            </div>
+                            <span class="like"><img src="../images/demo/like.png" alt=""> Like</span>
+                        </div>
+                    </div>
+                </article>
+            </li>
+
+            <li class="post_banner">
+            <img src="../images/demo/ads_demo_hor.jpg" alt="">
+            </li>
+        </ul>
+    </div>
+        <!-- ########################################################################################## -->
+    <div class="pagination" *ngIf="!IsLoading">
+        <ul>
+            <li><a href="#">« Previous</a></li>
+            <li *ngFor="let ad of Ads;let i = index" ><a [routerLink]="[{category:Category, page:i/10 + 1}]" *ngIf="i%10==0" href="#">{{i/10 + 1}}</a></li>
+            <li><a href="#">Next »</a></li>
+        </ul>
+    </div>
+    </div>
+    <!-- ########################################################################################## -->
+    <!-- ########################################################################################## -->
+    <div class="sidebar one_quarter" *ngIf="!IsLoading">
+        <!-- ########################################################################################## -->
+
+        <div class="sdb_holder" id="comments">
+            <form class="filter">
+                <h6>Mot clé</h6>
+                <input type="text" name="name" [(ngModel)]="name" id="name" value="" size="22" placeholder="Name" class="push50">
+                <h6>Type d'investissement</h6>
+                <p>Finance / Epargne / Assurance</p>
+                <input type="checkbox" checked> Epargne<br>
+                <input type="checkbox"> Epargne salariale<br>
+                <input type="checkbox"> SICAV<br>
+                <input type="checkbox"> Private Equity - Fonds<br>
+                <input type="checkbox"> Private Equity - Direct<br>
+                <input type="checkbox"> Crowdfounding<br>
+                <input type="checkbox"> Corporate<br>
+                <input type="checkbox"> Assurance Vie<br>
+                <input type="checkbox"> Assurance IARD<br>
+                <input type="checkbox"> Prévoyance / Retraite<br>
+                <input type="checkbox"> Crédit<br>
+                <p>Investissement Immobilier</p>
+                <input type="checkbox"> Physique (neuf et rénovation)<br>
+                <input type="checkbox"> Papier<br>
+                <p>Investissement plaisir</p>
+                <input type="checkbox"> Vin<br>
+                <input type="checkbox"> Vignobles<br>
+                <input type="checkbox"> Terres agricoles / Forêts<br>
+                <input type="checkbox"> Voitures<br>
+                <input type="checkbox"> Marché de l'Art<br>
+                <input type="checkbox"> Autres (montres, or...)<br>
+                <p>Placement écologique</p>
+                <input type="checkbox"> Investissement durable stratégique<br>
+                <input type="checkbox"> Épargne sociale et solidaire<br><br>
+                <h6>Situation géographique</h6>
+                <p>En France</p>
+                <input type="checkbox" checked>
+                <select>
+                    <option>France entiére</option>
+                </select>
+                <p>Dans le monde</p>
+                <input type="checkbox"> Europe hors France<br>
+                <input type="checkbox"> Monde hors Europe<br><br>
+                <h6>Date de publication</h6>
+                <div class="filter_date">
+                    <label>Du</label><input type="text">
+                </div>
+                <div class="filter_date">
+                    <label>Au</label><input type="text">
+                </div>
+                <button (click)="SearchAdMyName(name)">Relancer la recherche »</button>
+            </form>
+            <div class="side_banner">
+                <img src="../images/demo/ads_demo.jpg" alt="">
+            </div>
+        </div>
+        <!-- ########################################################################################## -->
+    </div>
+    <!-- ########################################################################################## -->
+    <!-- / container body -->
+    <div class="clear"></div>
+    </main>
+</div>
