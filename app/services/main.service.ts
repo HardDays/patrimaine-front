@@ -112,6 +112,21 @@ import { CheckboxModel } from '../models/checkbox.model';
         GetMe(){
             return this.httpService.GetData('/users/my_info',"");
         }
+        RateUser(user:number,rate:number){
+            return this.httpService.PostData("/users/rate",JSON.stringify({user_id:user,rate:rate}));
+        }
+        UnrateUser(user:number)
+        {
+            return this.httpService.PostData("/users/unrate",JSON.stringify({user_id:user}));
+        }
+        LikeUser(user:number)
+        {
+            return this.httpService.PostData("/users/like",JSON.stringify({user_id:user}));
+        }
+        UnlikeUser(user:number)
+        {
+            return this.httpService.PostData("/users/unlike",JSON.stringify({user_id:user}));
+        }
 
         CreateUser(user:RegisterUserModel): Promise<UserModel>{
             let params = {

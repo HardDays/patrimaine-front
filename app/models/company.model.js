@@ -1,6 +1,6 @@
 "use strict";
 var CompanyModel = (function () {
-    function CompanyModel(id, name, address, other_address, email, phone, opening_times, company_id, description, links, created_at, updated_at, image_id, user_id, sub_category_id, c_type_id, c_type, sub_category, agrements, expertises) {
+    function CompanyModel(id, name, address, other_address, email, phone, opening_times, company_id, description, links, created_at, updated_at, image_id, user_id, sub_category_id, c_type_id, c_type, sub_category, agrements, expertises, rate, likes) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -21,6 +21,8 @@ var CompanyModel = (function () {
         this.sub_category = sub_category;
         this.agrements = agrements;
         this.expertises = expertises;
+        this.rate = rate;
+        this.likes = likes;
     }
     return CompanyModel;
 }());

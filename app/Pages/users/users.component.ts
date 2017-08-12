@@ -4,13 +4,13 @@ import { RouterModule } from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import { HttpService} from '../../services/http.service';
 
-import { UserModel} from "./../index";
 
 import {MainService} from "./../../services/main.service";
 import { Base64ImageModel } from '../../models/base64image.model';
 import { SearchUserParamsModel } from '../../models/searchUserParams.model';
 import { AllUsersModel } from '../../models/allusers.model';
 import { CheckboxModel } from '../../models/checkbox.model';
+import { UserModel } from '../../models/user.model';
 
 @Component({
     selector: "users",
@@ -53,6 +53,7 @@ export class UsersComponent implements OnInit{
         new CheckboxModel("Lendfunding","lendfunding",false),
         new CheckboxModel("Institutionnels","institutionnels",false)
     ];
+    ErrorMesages:string[] = [];
 
     constructor(private router: Router,
         private mainService: MainService,
@@ -71,6 +72,7 @@ export class UsersComponent implements OnInit{
         window.scrollTo(0,0);
         this.Params.limit = 10;
         this.Params.offset = (this.Page - 1)*10;
+        this.ErrorMesages = [];
         this.mainService.GetAllUsers(this.Params)
             .subscribe((res:AllUsersModel)=>{
                 this.UsersObservable = res.users;
@@ -94,7 +96,7 @@ export class UsersComponent implements OnInit{
                             });
                     }
                     else {
-                        this.Images[item.id]="";
+                        this.Images[item.id]="images/demo/patrimoineLogo.png";
                         current+=1;
                         if(total == current)this.IsLoading = false;
                     }
@@ -123,5 +125,77 @@ export class UsersComponent implements OnInit{
         this.IsLoading = true;
         this.Page += next?1:-1;
         this.GetUsers();
+    }
+    RateUser(id:number,conc:any,event:any)
+    {
+        this.ErrorMesages = [];
+        let fullWidth:number = event.toElement.clientWidth;
+        let posX:number = event.offsetX;
+        let rate =  5 * posX / fullWidth;
+        this.mainService.RateUser(id,rate)
+            .subscribe(
+                (result: UserModel)=>{
+                    this.RefreshUserData(result);
+                },
+                (err)=>{
+                    if(err.status == 409){
+                        this.ErrorMesages[id] = "Already voted";
+                    }
+                    console.log(this.ErrorMesages);
+                    //this.DisplayError(err);
+                },
+                ()=>{
+                    //console.log("finished");
+                }
+            );
+    }
+    LikeUser(id:number){
+        this.mainService.LikeUser(id)
+            .subscribe(
+                (result: UserModel)=>{
+                    this.RefreshUserData(result);
+                },
+                (err)=>{
+                    if(err.status == 409){
+                        this.mainService.UnlikeUser(id)
+                            .subscribe((result: UserModel)=>{
+                                this.RefreshUserData(result);
+                            });
+                    }
+                },
+                ()=>{
+                    //console.log("finished");
+                }
+            );
+    }
+    UnrateUser(id:number){
+        this.ErrorMesages = [];
+        this.mainService.UnrateUser(id)
+            .subscribe(
+                (result: UserModel)=>{
+                    this.RefreshUserData(result);
+                },
+                (err)=>{
+                    if(err.status == 404){
+                        this.ErrorMesages[id] = "Cant cancel vote";
+                    }
+                },
+                ()=>{
+                    //console.log("finished");
+                }
+            );
+    }
+    
+    DisplayError(err:any){
+        if(err.status == 409){
+
+        }
+    }
+
+    RefreshUserData(user:UserModel)
+    {
+        let findUser = this.UsersObservable.find(x=>x.id == user.id);
+        let index = this.UsersObservable.indexOf(findUser);
+        this.UsersObservable[index] = user;
     }
 }

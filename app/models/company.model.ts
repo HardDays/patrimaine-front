@@ -19,6 +19,8 @@ export class CompanyModel{
             public c_type: string,
             public sub_category: string,
             public agrements: string[],
-            public expertises: string[]
+            public expertises: string[],
+            public rate: number,
+            public likes :number
     ){}
 }

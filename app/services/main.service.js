@@ -95,6 +95,18 @@ var MainService = (function () {
     MainService.prototype.GetMe = function () {
         return this.httpService.GetData('/users/my_info', "");
     };
+    MainService.prototype.RateUser = function (user, rate) {
+        return this.httpService.PostData("/users/rate", JSON.stringify({ user_id: user, rate: rate }));
+    };
+    MainService.prototype.UnrateUser = function (user) {
+        return this.httpService.PostData("/users/unrate", JSON.stringify({ user_id: user }));
+    };
+    MainService.prototype.LikeUser = function (user) {
+        return this.httpService.PostData("/users/like", JSON.stringify({ user_id: user }));
+    };
+    MainService.prototype.UnlikeUser = function (user) {
+        return this.httpService.PostData("/users/unlike", JSON.stringify({ user_id: user }));
+    };
     MainService.prototype.CreateUser = function (user) {
         var params = {
             user: user,

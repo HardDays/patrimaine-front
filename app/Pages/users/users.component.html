@@ -31,7 +31,7 @@
             <article>
               <div class="user_head">
                 <h2><a  [routerLink]="['/users/' + user.id]" >{{user.first_name + " " + user.last_name}}</a></h2>
-                <div class="like"><img src="../images/demo/like.png" alt=""> Like</div>
+                <div *ngIf="user.company" class="like" (click)="LikeUser(user.id*1)"><img src="../images/demo/like.png" alt=""> Like {{user.company.likes}}</div>
               </div>
               <div class="user_block">
                 <div *ngIf="user.company" class="img"><img class="borderedbox" [src]="Images[user.id]" alt=""></div>
@@ -46,15 +46,16 @@
                      <strong>About:</strong> {{user.company.description}}
                   </div>
                 </div>
-                <div class="rating_wrap">
+                <div class="rating_wrap" *ngIf="user.company">
                   <div class="stars_wrap">
-                    <div class="stars_empty"><div class="stars" style="width: 40%;"></div></div>
+                    <div class="stars_empty"  #concepteur (click)="RateUser(user.id,concepteur,$event)"><div class="stars" [ngStyle]="{'width': 100*user.company.rate/5. + '%'}"></div></div>
                     <span>Concepteur</span>
                   </div>
                   <div class="stars_wrap">
-                    <div class="stars_empty"><div class="stars" style="width: 40%;"></div></div>
+                    <div class="stars_empty" (click)="UnrateUser(user.id)"><div class="stars" [ngStyle]="{'width': 100*user.company.rate/5. + '%'}"></div></div>
                     <span>Conseiller</span>
                   </div>
+                  <div class="error-msg" *ngIf="ErrorMesages[user.id]">{{ErrorMesages[user.id]}}</div>
                 </div>
               </div>
               

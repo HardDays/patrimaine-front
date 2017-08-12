@@ -52,6 +52,7 @@ var UsersComponent = (function () {
             new checkbox_model_1.CheckboxModel("Lendfunding", "lendfunding", false),
             new checkbox_model_1.CheckboxModel("Institutionnels", "institutionnels", false)
         ];
+        this.ErrorMesages = [];
     }
     UsersComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -66,6 +67,7 @@ var UsersComponent = (function () {
         window.scrollTo(0, 0);
         this.Params.limit = 10;
         this.Params.offset = (this.Page - 1) * 10;
+        this.ErrorMesages = [];
         this.mainService.GetAllUsers(this.Params)
             .subscribe(function (res) {
             _this.UsersObservable = res.users;
@@ -91,7 +93,7 @@ var UsersComponent = (function () {
                     });
                 }
                 else {
-                    _this.Images[item.id] = "";
+                    _this.Images[item.id] = "images/demo/patrimoineLogo.png";
                     current += 1;
                     if (total == current)
                         _this.IsLoading = false;
@@ -122,6 +124,64 @@ var UsersComponent = (function () {
         this.IsLoading = true;
         this.Page += next ? 1 : -1;
         this.GetUsers();
+    };
+    UsersComponent.prototype.RateUser = function (id, conc, event) {
+        var _this = this;
+        this.ErrorMesages = [];
+        var fullWidth = event.toElement.clientWidth;
+        var posX = event.offsetX;
+        var rate = 5 * posX / fullWidth;
+        this.mainService.RateUser(id, rate)
+            .subscribe(function (result) {
+            _this.RefreshUserData(result);
+        }, function (err) {
+            if (err.status == 409) {
+                _this.ErrorMesages[id] = "Already voted";
+            }
+            console.log(_this.ErrorMesages);
+            //this.DisplayError(err);
+        }, function () {
+            //console.log("finished");
+        });
+    };
+    UsersComponent.prototype.LikeUser = function (id) {
+        var _this = this;
+        this.mainService.LikeUser(id)
+            .subscribe(function (result) {
+            _this.RefreshUserData(result);
+        }, function (err) {
+            if (err.status == 409) {
+                _this.mainService.UnlikeUser(id)
+                    .subscribe(function (result) {
+                    _this.RefreshUserData(result);
+                });
+            }
+        }, function () {
+            //console.log("finished");
+        });
+    };
+    UsersComponent.prototype.UnrateUser = function (id) {
+        var _this = this;
+        this.ErrorMesages = [];
+        this.mainService.UnrateUser(id)
+            .subscribe(function (result) {
+            _this.RefreshUserData(result);
+        }, function (err) {
+            if (err.status == 404) {
+                _this.ErrorMesages[id] = "Cant cancel vote";
+            }
+        }, function () {
+            //console.log("finished");
+        });
+    };
+    UsersComponent.prototype.DisplayError = function (err) {
+        if (err.status == 409) {
+        }
+    };
+    UsersComponent.prototype.RefreshUserData = function (user) {
+        var findUser = this.UsersObservable.find(function (x) { return x.id == user.id; });
+        var index = this.UsersObservable.indexOf(findUser);
+        this.UsersObservable[index] = user;
     };
     return UsersComponent;
 }());

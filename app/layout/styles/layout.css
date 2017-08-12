@@ -665,6 +665,7 @@ section.profs .prof .desc a.search:before {
     height: 11px;
     margin: 0 auto!important;
     background-image: url(../../images/demo/stars_empty.png);
+    cursor: pointer;
 }
 .rating_wrap .stars {
     height: 11px!important;
@@ -899,4 +900,7 @@ a{
     border-color: #56AED4 !important;
     border-width: 2px !important;
     background: rgba(157, 191, 206, 0.18);
+}
+.error-msg{
+    color:red;
 }
