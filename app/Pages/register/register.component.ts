@@ -17,6 +17,7 @@ import { CheckboxModel } from '../../models/checkbox.model';
 
 export class RegisterComponent implements OnInit{
     isOkEnabled = true;
+    isPro = false;
     image:string = "";
     isLoading = false;
     regOk = false;
@@ -101,5 +102,8 @@ export class RegisterComponent implements OnInit{
                 result.push(i.value);
             console.log(result);
             return result;
+        }
+        ChangeUserType(){
+            this.isPro = !this.isPro;
         }
 }

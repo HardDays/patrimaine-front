@@ -20,6 +20,7 @@ var RegisterComponent = (function () {
         this.router = router;
         this.mainService = mainService;
         this.isOkEnabled = true;
+        this.isPro = false;
         this.image = "";
         this.isLoading = false;
         this.regOk = false;
@@ -100,6 +101,9 @@ var RegisterComponent = (function () {
         }
         console.log(result);
         return result;
+    };
+    RegisterComponent.prototype.ChangeUserType = function () {
+        this.isPro = !this.isPro;
     };
     return RegisterComponent;
 }());

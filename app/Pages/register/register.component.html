@@ -7,8 +7,8 @@
     </div>
     <div class="register_block" *ngIf="!isLoading && !regOk">
       <div class="reg_block reg_left">
-        <h2>Professionnels du chiffre et du droit</h2>
-        <form action="" >
+        <h2 *ngIf="!isPro">Professionnels du chiffre et du droit</h2>
+        <form action="" *ngIf="!isPro">
           <label>Email</label>
           <input type="text" name="email_user" [(ngModel)]="email_user"><br>
           <label>Password</label>
@@ -21,10 +21,9 @@
           <input type="text" name="phone_user" [(ngModel)]="phone_user"><br>
           <button (click)="RegisterUser(email_user,password_user,fname_user,lname_user,phone_user)">Register</button>
         </form>
-      </div>
-      <div class="reg_block reg_right">
-        <h2>Concepteurs de Solutions</h2>
-        <form >
+
+        <h2 *ngIf="isPro">Concepteurs de Solutions</h2>
+        <form *ngIf="isPro">
           <label>Email</label>
           <input type="text" name="email" [(ngModel)]="email"><br>
           <label>Password</label>
@@ -99,6 +98,9 @@
           </div><br>
           <button [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">Register</button>
         </form>
+      </div>
+      <div class="reg_block reg_right">
+          <button (click)="ChangeUserType()"> Change user type</button>
       </div>
     </div>
 
