@@ -20,6 +20,8 @@ export class UserDetailComponent implements OnInit{
     ImageBase64:string = null;
     isMe = false;
     IsLoading = true;
+    ErrorMesage:string = "";
+
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -51,7 +53,7 @@ export class UserDetailComponent implements OnInit{
     AfterGettingOfUserInfo(user: UserModel){
         this.User = user;
         console.log(this.User);
-        if(this.User.company){
+        if(this.User.company && this.User.company.image_id){
             this.service.GetImageById(this.User.company.image_id)
                 .subscribe((result:Base64ImageModel)=>{
                     this.ImageBase64 = result.base64;
@@ -59,7 +61,78 @@ export class UserDetailComponent implements OnInit{
                 });
         }
         else{
+            this.ImageBase64="images/demo/patrimoineLogo.png";
             this.IsLoading = false;
         }
+    }
+    RateUser(id:number,conc:any,event:any)
+    {
+        this.ErrorMesage = "";
+        let fullWidth:number = event.toElement.clientWidth;
+        let posX:number = event.offsetX;
+        let rate =  5 * posX / fullWidth;
+        this.service.RateUser(id,rate)
+            .subscribe(
+                (result: UserModel)=>{
+                    this.RefreshUserData(result);
+                },
+                (err)=>{
+                    if(err.status == 409){
+                        this.ErrorMesage = "Already voted";
+                    }
+                    console.log(this.ErrorMesage);
+                    //this.DisplayError(err);
+                },
+                ()=>{
+                    //console.log("finished");
+                }
+            );
+    }
+    LikeUser(id:number){
+        this.service.LikeUser(id)
+            .subscribe(
+                (result: UserModel)=>{
+                    this.RefreshUserData(result);
+                },
+                (err)=>{
+                    if(err.status == 409){
+                        this.service.UnlikeUser(id)
+                            .subscribe((result: UserModel)=>{
+                                this.RefreshUserData(result);
+                            });
+                    }
+                },
+                ()=>{
+                    //console.log("finished");
+                }
+            );
+    }
+    UnrateUser(id:number){
+        this.ErrorMesage = "";
+        this.service.UnrateUser(id)
+            .subscribe(
+                (result: UserModel)=>{
+                    this.RefreshUserData(result);
+                },
+                (err)=>{
+                    if(err.status == 404){
+                        this.ErrorMesage = "Cant cancel vote";
+                    }
+                },
+                ()=>{
+                    //console.log("finished");
+                }
+            );
+    }
+    
+    DisplayError(err:any){
+        if(err.status == 409){
+
+        }
+    }
+
+    RefreshUserData(user:UserModel)
+    {
+        this.User = user;
     }
 }

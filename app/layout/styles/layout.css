@@ -904,3 +904,15 @@ a{
 .error-msg{
     color:red;
 }
+.inside-profile-rates
+{
+    display: inherit;
+}
+.in-profile{
+    float:left;
+}
+.error-msg-profile{
+    margin-top: 75px;
+    font-size: 20px;
+    color: red;
+}

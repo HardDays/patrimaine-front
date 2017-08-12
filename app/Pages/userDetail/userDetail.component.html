@@ -19,7 +19,8 @@
     <!-- container body -->
     <!-- ########################################################################################## -->
     <h1 align="center"><a href="">{{User.first_name + " " + User.last_name}}</a></h1>
-    <img *ngIf="ImageBase64" class="imgr borderedbox" [src]="ImageBase64" alt="" style="width:240px;">
+    <img *ngIf="ImageBase64" class="imgr borderedbox" [src]="ImageBase64" alt="" style="width:240px;"><br>
+    
     <h3 *ngIf="User.phone || User.email">Contacts</h3>
         <p *ngIf="User.phone">
             <span class="icon-phone"></span> {{User.phone}}
@@ -36,16 +37,22 @@
     <p *ngIf="User.company && User.company.description">
       {{User?.company?.description}} </p>
     
-    
-    <h3>Rating</h3> <!-- TODO {{User.company.rate}}
-      
-    <h4>
-      <span class="icon-star"></span>
-      <span class="icon-star"></span>
-      <span class="icon-star"></span>
-      <span class="icon-star"></span>
-      <span class="icon-star"></span>
-    </h4>
+    <div class="rate-div borderbox" *ngIf="User.company">
+      <h3>Rating</h3>
+      <div *ngIf="User.company" class="like in-profile" style="margin-right: 10px;" (click)="LikeUser(User.id*1)"><img src="../images/demo/like.png" alt=""> Like {{User.company.likes}}</div> 
+      <div class="rating_wrap inside-profile-rates" >
+        <div class="stars_wrap in-profile" style="margin-right: 10px;">
+          <div class="stars_empty"  #concepteur (click)="RateUser(User.id,concepteur,$event)"><div class="stars" [ngStyle]="{'width': 100*User.company.rate/5. + '%'}"></div></div>
+          <span>Concepteur</span>
+        </div>
+        <div class="stars_wrap in-profile">
+          <div class="stars_empty" (click)="UnrateUser(User.id)"><div class="stars" [ngStyle]="{'width': 100*User.company.rate/5. + '%'}"></div></div>
+          <span>Conseiller</span>
+        </div>
+        
+      </div>  
+      <div class="error-msg-profile" *ngIf="ErrorMesage">{{ErrorMesage}}</div>
+    </div>
     <!-- ########################################################################################## -->
     <!-- / container body -->
     <div class="clear"></div>

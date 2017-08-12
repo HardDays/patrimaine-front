@@ -22,6 +22,7 @@ var UserDetailComponent = (function () {
         this.ImageBase64 = null;
         this.isMe = false;
         this.IsLoading = true;
+        this.ErrorMesage = "";
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -50,7 +51,7 @@ var UserDetailComponent = (function () {
         var _this = this;
         this.User = user;
         console.log(this.User);
-        if (this.User.company) {
+        if (this.User.company && this.User.company.image_id) {
             this.service.GetImageById(this.User.company.image_id)
                 .subscribe(function (result) {
                 _this.ImageBase64 = result.base64;
@@ -58,8 +59,65 @@ var UserDetailComponent = (function () {
             });
         }
         else {
+            this.ImageBase64 = "images/demo/patrimoineLogo.png";
             this.IsLoading = false;
         }
+    };
+    UserDetailComponent.prototype.RateUser = function (id, conc, event) {
+        var _this = this;
+        this.ErrorMesage = "";
+        var fullWidth = event.toElement.clientWidth;
+        var posX = event.offsetX;
+        var rate = 5 * posX / fullWidth;
+        this.service.RateUser(id, rate)
+            .subscribe(function (result) {
+            _this.RefreshUserData(result);
+        }, function (err) {
+            if (err.status == 409) {
+                _this.ErrorMesage = "Already voted";
+            }
+            console.log(_this.ErrorMesage);
+            //this.DisplayError(err);
+        }, function () {
+            //console.log("finished");
+        });
+    };
+    UserDetailComponent.prototype.LikeUser = function (id) {
+        var _this = this;
+        this.service.LikeUser(id)
+            .subscribe(function (result) {
+            _this.RefreshUserData(result);
+        }, function (err) {
+            if (err.status == 409) {
+                _this.service.UnlikeUser(id)
+                    .subscribe(function (result) {
+                    _this.RefreshUserData(result);
+                });
+            }
+        }, function () {
+            //console.log("finished");
+        });
+    };
+    UserDetailComponent.prototype.UnrateUser = function (id) {
+        var _this = this;
+        this.ErrorMesage = "";
+        this.service.UnrateUser(id)
+            .subscribe(function (result) {
+            _this.RefreshUserData(result);
+        }, function (err) {
+            if (err.status == 404) {
+                _this.ErrorMesage = "Cant cancel vote";
+            }
+        }, function () {
+            //console.log("finished");
+        });
+    };
+    UserDetailComponent.prototype.DisplayError = function (err) {
+        if (err.status == 409) {
+        }
+    };
+    UserDetailComponent.prototype.RefreshUserData = function (user) {
+        this.User = user;
     };
     return UserDetailComponent;
 }());
