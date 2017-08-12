@@ -17,6 +17,7 @@ import 'rxjs/Rx';
 import {Subject} from 'rxjs/Subject';
 import { GetParamsModel } from '../models/getparams.model';
 import { UserModel } from '../models/user.model';
+import { CheckboxModel } from '../models/checkbox.model';
 
     @Injectable()
     export class MainService{
@@ -31,17 +32,42 @@ import { UserModel } from '../models/user.model';
         }
         public me: UserModel;
 
-        GetAllAds(params : any){
-            /*return AdsPromise
-                .then(Ads => Ads.filter(x => x.description.includes(text) && 
-                    ((category.length > 0)?(x.sub_category == category):true))
-                );*/
+        ParamsToUrlSearchParams(params:any):string{
             let options = new URLSearchParams();
 
             for(let key in params){
-                options.set(key,params[key]);
+                let prop:any = params[key];
+                if( prop instanceof Array){
+                    for(let i in prop){
+                        options.append(key+"[]",prop[i]);
+                    }
+                }
+                else
+                    options.set(key,params[key]);
             }
-            return this.httpService.GetData('/ads/all',options.toString());
+            console.log(options.toString());
+            return options.toString();
+        }
+
+        GetCheckedCheckboxes(input:CheckboxModel[]): string[]
+        {
+            let result: string[]= [];
+            let checked:CheckboxModel[]=input.filter(x=>x.checked);
+            for(let i of checked)
+                result.push(i.value);
+            console.log(result);
+            return result;
+        }
+        GetCheckboxesFromChecked(input:string[],output:CheckboxModel[]):CheckboxModel[]
+        {
+            for(let i of input){
+                output.find(x=> x.value == i).checked = true;
+            }
+            return output;
+        }
+
+        GetAllAds(params : any){
+            return this.httpService.GetData('/ads/all',this.ParamsToUrlSearchParams(params));
         }
 
 
@@ -72,24 +98,11 @@ import { UserModel } from '../models/user.model';
                 .catch((error:any) =>{return Observable.throw(error);});
         }
 
+
+
         GetAllUsers(params:any)
         {
-             let options = new URLSearchParams();
-
-            for(let key in params){
-                let prop:any = params[key];
-                if( prop instanceof Array){
-                    for(let i in prop){
-                        options.append(key+"[]",prop[i]);
-                    }
-                }
-                else
-                    options.set(key,params[key]);
-            }
-                    //options.set(key,params[key]);
-            console.log(options.toString());
-            /*return this.httpService.GetData('/users/all',params).toArray<UserModel>();*/
-            return this.httpService.GetData('/users/all',options.toString());
+            return this.httpService.GetData('/users/all',this.ParamsToUrlSearchParams(params));
         }
 
         GetUserById(id:number){
@@ -170,12 +183,7 @@ import { UserModel } from '../models/user.model';
         }
 
         GetAllNews(params : any){
-            let options = new URLSearchParams();
-
-            for(let key in params){
-                options.set(key,params[key]);
-            }
-            return this.httpService.GetData('/news/all',options.toString());
+            return this.httpService.GetData('/news/all',this.ParamsToUrlSearchParams(params));
         }
 
         GetNewsById(id:number){

@@ -22,48 +22,88 @@
     <div id="content" class="three_quarter first" *ngIf="!IsLoading">
         <!-- ########################################################################################## -->
         <div id="comments">
-        <ul>
-            <li *ngFor="let news of News">
-                <article>
-                    <header>
-                        <h2 ><a [routerLink]="['/news/' + news.id]">{{news.title}}</a></h2>
-                        <span class="date">{{news.created_at | date: dMMy}}</span>
-                    </header>
-                    <div class="user_block">
-                        <div class="img"><img class="borderedbox" src="../images/demo/imgl.gif" alt=""></div>
-                        <div class="desc">
-                            <p>{{news.description}}</p>
-                            <address>
-                                <a href="./user_details">Author</a>
-                            </address>
-                        </div>
-                        <div class="rating_wrap">
-                            <div class="stars_wrap">
-                                <div class="stars_empty"><div class="stars" style="width: 40%;"></div></div>
-                                <span>Concepteur</span>
+            <ul>
+                <li *ngFor="let news of News">
+                    <article>
+                        <header>
+                            <h2 ><a [routerLink]="['/news/' + news.id]">{{news.title}}</a></h2>
+                            <span class="date">{{news.created_at | date: dMMy}}</span>
+                        </header>
+                        <div class="user_block">
+                            <div class="img"><img class="borderedbox" src="../images/demo/imgl.gif" alt=""></div>
+                            <div class="desc">
+                                <p>{{news.description}}</p>
+                                <address>
+                                    <a [routerLink]="['/users/' + news.user_id]">Author</a>
+                                </address>
                             </div>
-                            <div class="stars_wrap">
-                                <div class="stars_empty"><div class="stars" style="width: 40%;"></div></div>
-                                <span>Conseiller</span>
+                            <div class="rating_wrap">
+                                <div class="stars_wrap">
+                                    <div class="stars_empty"><div class="stars" style="width: 40%;"></div></div>
+                                    <span>Concepteur</span>
+                                </div>
+                                <div class="stars_wrap">
+                                    <div class="stars_empty"><div class="stars" style="width: 40%;"></div></div>
+                                    <span>Conseiller</span>
+                                </div>
+                                <span class="like"><img src="../images/demo/like.png" alt=""> Like</span>
                             </div>
-                            <span class="like"><img src="../images/demo/like.png" alt=""> Like</span>
                         </div>
-                    </div>
-                </article>
-            </li>
+                    </article>
+                </li>
 
-            <li class="post_banner">
-            <img src="../images/demo/ads_demo_hor.jpg" alt="">
-            </li>
-        </ul>
+                <li class="post_banner">
+                <img src="../images/demo/ads_demo_hor.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+        <div class="pagination">
+            <ul>
+                <li *ngIf="Page > 1"><a (click)="PrevOrNextPage(false)" >« Previous</a></li>
+                <li *ngFor="let i of Pages" ><a (click)="ChangePageNumber(i*1)" [ngClass]="Page*1 == i*1 ? 'active-page':''" >{{i}}</a></li>
+                <li *ngIf="Page < Pages.length"><a (click)="PrevOrNextPage(true)" >Next »</a></li>
+            </ul>
+        </div>
     </div>
-    <!--<div class="pagination">
-        <ul>
-            <li *ngIf="Page > 1"><a [routerLink]="[{page:Page-1}]">« Previous</a></li>
-            <li *ngFor="let i of Pages" ><a [routerLink]="[{page:i}]">{{i}}</a></li>
-            <li *ngIf="Page < Pages.length"><a [routerLink]="[{page:Page*1+1}]">Next »</a></li>
-        </ul>
-      </div>-->
+    <div class="sidebar one_quarter">
+        <!-- ########################################################################################## -->
+
+        <div class="sdb_holder" id="comments">
+            <form class="filter">
+                <h6 class="search-heared">Mot clé</h6>
+                <input type="text" name="title" id="title" value="" size="22" [ngModel]="Params.title" (ngModelChange)="Params.title = $event"  placeholder="Title">
+                <input type="text" name="description" id="description" value="" size="22" [ngModel]="Params.description" (ngModelChange)="Params.description = $event"  placeholder="description">
+                
+                <h6 class="search-heared">Company type</h6>
+                <select name="c_type" [ngModel]="Params.c_type" (ngModelChange)="Params.c_type = $event" >
+                    <option value="concepteur">Concepteur</option>
+                    <option value="conseiller">Conseiller</option>
+                    <option value="both">Both</option>
+                </select>
+                
+                    
+                <h6 class="search-heared">Subcategories</h6>
+                <div class="search_checkbox" *ngFor="let item of Subcategory">
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                </div>
+                <h6 class="search-heared">Expertises</h6>
+                <div class="search_checkbox" *ngFor="let item of Expertises">
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                </div>
+                <h6 class="search-heared">Agrements</h6>
+                <div class="search_checkbox" *ngFor="let item of Agreements">
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                </div>
+                <button type="submit" (click)="OnSearchSubmit()">Relancer la recherche »</button>
+            </form>
+            <div class="side_banner">
+                <img src="../images/demo/ads_demo.jpg" alt="">
+            </div>
+        </div>
+        <!-- ########################################################################################## -->
     </div>
     <!-- ########################################################################################## -->
     <!-- / container body -->

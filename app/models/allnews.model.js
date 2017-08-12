@@ -1,7 +1,8 @@
 "use strict";
 var AllNewsModel = (function () {
-    function AllNewsModel(ads) {
-        this.ads = ads;
+    function AllNewsModel(news, total_count) {
+        this.news = news;
+        this.total_count = total_count;
     }
     return AllNewsModel;
 }());

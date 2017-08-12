@@ -106,21 +106,13 @@ export class UsersComponent implements OnInit{
         window.scrollTo(0,0);
         this.IsLoading = true;
         this.Page = 1;
-        this.Params.expertises = this.GetCheckedCheckboxes(this.Expertises);
-        this.Params.agrements = this.GetCheckedCheckboxes(this.Agreements);
-        this.Params.sub_categories = this.GetCheckedCheckboxes(this.Subcategory);
+        this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
+        this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
+        this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
         console.log(this.Params);
         this.GetUsers();
     }
-    GetCheckedCheckboxes(input:CheckboxModel[]): string[]
-    {
-        let result: string[]= [];
-        let checked:CheckboxModel[]=input.filter(x=>x.checked);
-        for(let i of checked)
-            result.push(i.value);
-        console.log(result);
-        return result;
-    }
+    
     ChangePageNumber(page:number){
         this.IsLoading = true;
         this.Page = page;

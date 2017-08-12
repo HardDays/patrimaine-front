@@ -26,16 +26,43 @@ var MainService = (function () {
         this.onAuthChange$ = new Subject_1.Subject();
         this.onAuthChange$.next(false);
     }
-    MainService.prototype.GetAllAds = function (params) {
-        /*return AdsPromise
-            .then(Ads => Ads.filter(x => x.description.includes(text) &&
-                ((category.length > 0)?(x.sub_category == category):true))
-            );*/
+    MainService.prototype.ParamsToUrlSearchParams = function (params) {
         var options = new http_1.URLSearchParams();
         for (var key in params) {
-            options.set(key, params[key]);
+            var prop = params[key];
+            if (prop instanceof Array) {
+                for (var i in prop) {
+                    options.append(key + "[]", prop[i]);
+                }
+            }
+            else
+                options.set(key, params[key]);
         }
-        return this.httpService.GetData('/ads/all', options.toString());
+        console.log(options.toString());
+        return options.toString();
+    };
+    MainService.prototype.GetCheckedCheckboxes = function (input) {
+        var result = [];
+        var checked = input.filter(function (x) { return x.checked; });
+        for (var _i = 0, checked_1 = checked; _i < checked_1.length; _i++) {
+            var i = checked_1[_i];
+            result.push(i.value);
+        }
+        console.log(result);
+        return result;
+    };
+    MainService.prototype.GetCheckboxesFromChecked = function (input, output) {
+        var _loop_1 = function (i) {
+            output.find(function (x) { return x.value == i; }).checked = true;
+        };
+        for (var _i = 0, input_1 = input; _i < input_1.length; _i++) {
+            var i = input_1[_i];
+            _loop_1(i);
+        }
+        return output;
+    };
+    MainService.prototype.GetAllAds = function (params) {
+        return this.httpService.GetData('/ads/all', this.ParamsToUrlSearchParams(params));
     };
     MainService.prototype.GetAdsById = function (id) {
         /*return AdsPromise
@@ -60,21 +87,7 @@ var MainService = (function () {
             .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
     MainService.prototype.GetAllUsers = function (params) {
-        var options = new http_1.URLSearchParams();
-        for (var key in params) {
-            var prop = params[key];
-            if (prop instanceof Array) {
-                for (var i in prop) {
-                    options.append(key + "[]", prop[i]);
-                }
-            }
-            else
-                options.set(key, params[key]);
-        }
-        //options.set(key,params[key]);
-        console.log(options.toString());
-        /*return this.httpService.GetData('/users/all',params).toArray<UserModel>();*/
-        return this.httpService.GetData('/users/all', options.toString());
+        return this.httpService.GetData('/users/all', this.ParamsToUrlSearchParams(params));
     };
     MainService.prototype.GetUserById = function (id) {
         return this.httpService.GetData('/users/info/' + id, "");
@@ -138,11 +151,7 @@ var MainService = (function () {
         return this.httpService.PostData("/auth/logout", null);
     };
     MainService.prototype.GetAllNews = function (params) {
-        var options = new http_1.URLSearchParams();
-        for (var key in params) {
-            options.set(key, params[key]);
-        }
-        return this.httpService.GetData('/news/all', options.toString());
+        return this.httpService.GetData('/news/all', this.ParamsToUrlSearchParams(params));
     };
     MainService.prototype.GetNewsById = function (id) {
         return this.httpService.GetData('/news/info/' + id, "");

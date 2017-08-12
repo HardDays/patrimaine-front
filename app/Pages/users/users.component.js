@@ -107,21 +107,11 @@ var UsersComponent = (function () {
         window.scrollTo(0, 0);
         this.IsLoading = true;
         this.Page = 1;
-        this.Params.expertises = this.GetCheckedCheckboxes(this.Expertises);
-        this.Params.agrements = this.GetCheckedCheckboxes(this.Agreements);
-        this.Params.sub_categories = this.GetCheckedCheckboxes(this.Subcategory);
+        this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
+        this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
+        this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
         console.log(this.Params);
         this.GetUsers();
-    };
-    UsersComponent.prototype.GetCheckedCheckboxes = function (input) {
-        var result = [];
-        var checked = input.filter(function (x) { return x.checked; });
-        for (var _i = 0, checked_1 = checked; _i < checked_1.length; _i++) {
-            var i = checked_1[_i];
-            result.push(i.value);
-        }
-        console.log(result);
-        return result;
     };
     UsersComponent.prototype.ChangePageNumber = function (page) {
         this.IsLoading = true;

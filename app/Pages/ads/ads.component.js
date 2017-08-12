@@ -11,47 +11,98 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
+var index_1 = require("./../index");
 var main_service_1 = require("./../../services/main.service");
+var searchAdsParams_model_1 = require("../../models/searchAdsParams.model");
 var AdsComponent = (function () {
     function AdsComponent(router, mainService, params) {
         this.router = router;
         this.mainService = mainService;
         this.params = params;
         this.Category = "";
+        this.Page = 1;
+        this.Pages = [];
+        this.Images = [];
         this.IsLoading = true;
+        this.Params = new searchAdsParams_model_1.SearchAdsParamsModel(0, null, null, null, null, null, null, null, null);
+        this.Expertises = [
+            new index_1.CheckboxModel("Credit", "credit", false),
+            new index_1.CheckboxModel("Retraite", "retraite", false),
+            new index_1.CheckboxModel("Placement", "placement", false),
+            new index_1.CheckboxModel("Allocation", "allocation", false),
+            new index_1.CheckboxModel("Epargne", "epargne", false),
+            new index_1.CheckboxModel("Investissement", "investissement", false),
+            new index_1.CheckboxModel("Defiscalisation", "defiscalisation", false),
+            new index_1.CheckboxModel("Immobilier", "immobilier", false),
+            new index_1.CheckboxModel("Assurance", "assurance", false),
+            new index_1.CheckboxModel("Investissement plaisir", "investissement_plaisir", false)
+        ];
+        this.Agreements = [
+            new index_1.CheckboxModel("CJA", "CJA", false),
+            new index_1.CheckboxModel("CIF", "CIF", false),
+            new index_1.CheckboxModel("Courtier", "Courtier", false),
+            new index_1.CheckboxModel("IOSB", "IOSB", false),
+            new index_1.CheckboxModel("Carte-T", "Carte_T", false)
+        ];
+        this.Subcategory = [
+            new index_1.CheckboxModel("Classique", "classique", false),
+            new index_1.CheckboxModel("E-brooker", "e_brooker", false),
+            new index_1.CheckboxModel("Fintech", "fintech", false),
+            new index_1.CheckboxModel("Crowdfunding", "crowdfunding", false),
+            new index_1.CheckboxModel("Lendfunding", "lendfunding", false),
+            new index_1.CheckboxModel("Institutionnels", "institutionnels", false)
+        ];
     }
     AdsComponent.prototype.ngOnInit = function () {
         var _this = this;
         var category = this.params.params.forEach(function (params) {
-            _this.Category = params["category"] ? params["category"] : "";
-            _this.Page = params["page"] ? (params["page"]) : 1;
-            _this.mainService
-                .GetAllAds({ sub_category: _this.Category })
-                .subscribe(function (data) {
-                _this.Ads = data.ads;
-                //this.AdsObservable = this.Ads.slice((this.Page-1)*10,(this.Page-1)*10+10);
-                _this.mainService.GetAllAds({ sub_category: _this.Category, limit: 10, offset: ((_this.Page - 1) * 10) })
-                    .subscribe(function (data) {
-                    console.log(data);
-                    _this.AdsObservable = data.ads;
-                    console.log("Page is " + _this.Page + ",offset:" + ((_this.Page - 1) * 10));
-                    ;
-                    _this.IsLoading = false;
-                });
-            });
+            if (params["category"]) {
+                _this.Params.sub_categories = [];
+                _this.Params.sub_categories.push(params["category"]);
+                _this.Subcategory = _this.mainService.GetCheckboxesFromChecked(_this.Params.sub_categories, _this.Subcategory);
+            }
+            _this.GetAllAds();
         });
     };
-    AdsComponent.prototype.SearchAdMyName = function (descr) {
+    AdsComponent.prototype.GetAllAds = function () {
         var _this = this;
-        var params = {
-            description: descr,
-            sub_category: this.Category
-        };
-        this.mainService.GetAllAds({ description: descr, sub_category: this.Category })
-            .subscribe(function (data) {
-            _this.AdsObservable = data.ads;
-            console.log(_this.Ads);
+        window.scrollTo(0, 0);
+        this.Params.limit = 10;
+        this.Params.offset = (this.Page - 1) * 10;
+        this.mainService.GetAllAds(this.Params)
+            .subscribe(function (res) {
+            console.log(res);
+            _this.AdsObservable = res.ads;
+            var i = 0;
+            _this.Pages = [];
+            while (i < res.total_count) {
+                _this.Pages.push(i / 10 + 1);
+                i += 10;
+            }
+            if (_this.Pages.length == 1)
+                _this.Pages = [];
+            _this.IsLoading = false;
         });
+    };
+    AdsComponent.prototype.OnSearchSubmit = function () {
+        window.scrollTo(0, 0);
+        this.IsLoading = true;
+        this.Page = 1;
+        this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
+        this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
+        this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
+        console.log(this.Params);
+        this.GetAllAds();
+    };
+    AdsComponent.prototype.ChangePageNumber = function (page) {
+        this.IsLoading = true;
+        this.Page = page;
+        this.GetAllAds();
+    };
+    AdsComponent.prototype.PrevOrNextPage = function (next) {
+        this.IsLoading = true;
+        this.Page += next ? 1 : -1;
+        this.GetAllAds();
     };
     return AdsComponent;
 }());

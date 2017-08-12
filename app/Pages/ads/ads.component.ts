@@ -5,6 +5,8 @@ import { HttpService} from '../../services/http.service';
 import {AdsModel,CheckboxModel} from './../index';
 import {AllAdsModel} from './../../models/allads.model';
 import {MainService} from "./../../services/main.service";
+import { SearchUserParamsModel } from '../../models/searchUserParams.model';
+import { SearchAdsParamsModel } from '../../models/searchAdsParams.model';
 
 @Component({
     selector: "ads",
@@ -13,47 +15,97 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class AdsComponent implements OnInit{
-    Ads: AdsModel[];
     AdsObservable: AdsModel[];
     Category: string = "";
-    Page: number;
-    IsLoading: boolean = true;
+    Page: number=1;
+    Pages: number[] = [];
+    Images: string[] = [];
+    IsLoading = true;
+    Params: SearchAdsParamsModel = new SearchAdsParamsModel(0,null,null,null,null,null,null,null,null);
+    Expertises: CheckboxModel[] = [
+        new CheckboxModel("Credit","credit",false),
+        new CheckboxModel("Retraite","retraite",false),
+        new CheckboxModel("Placement","placement",false),
+        new CheckboxModel("Allocation","allocation",false),
+        new CheckboxModel("Epargne","epargne",false),
+        new CheckboxModel("Investissement","investissement",false),
+        new CheckboxModel("Defiscalisation","defiscalisation",false),
+        new CheckboxModel("Immobilier","immobilier",false),
+        new CheckboxModel("Assurance","assurance",false),
+        new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
+    ];
+    Agreements:CheckboxModel[]=[
+        new CheckboxModel("CJA","CJA",false),
+        new CheckboxModel("CIF","CIF",false),
+        new CheckboxModel("Courtier","Courtier",false),
+        new CheckboxModel("IOSB","IOSB",false),
+        new CheckboxModel("Carte-T","Carte_T",false)
+    ];
+    Subcategory:CheckboxModel[]=[
+        new CheckboxModel("Classique","classique",false),
+        new CheckboxModel("E-brooker","e_brooker",false),
+        new CheckboxModel("Fintech","fintech",false),
+        new CheckboxModel("Crowdfunding","crowdfunding",false),
+        new CheckboxModel("Lendfunding","lendfunding",false),
+        new CheckboxModel("Institutionnels","institutionnels",false)
+    ];
+
     constructor(private router: Router,
         private mainService: MainService,
         private params: ActivatedRoute){}
     ngOnInit(){
         let category = this.params.params.forEach((params:Params) => {
-            this.Category = params["category"]?params["category"]:"";
-            this.Page = params["page"]?(params["page"]):1;
-            this.mainService
-                .GetAllAds({sub_category:this.Category})
-                .subscribe((data: AllAdsModel) => {
-                    this.Ads = data.ads;
-                    //this.AdsObservable = this.Ads.slice((this.Page-1)*10,(this.Page-1)*10+10);
-                    this.mainService.GetAllAds({sub_category:this.Category,limit:10,offset:((this.Page - 1)*10)})
-                        .subscribe((data: AllAdsModel) => {
-                            console.log(data);
-                            this.AdsObservable = data.ads;
-                            console.log("Page is "+ this.Page + ",offset:"+ ((this.Page - 1)*10));;
-                            this.IsLoading = false;
-                        });
-                    
-                });
+            if(params["category"]){
+                this.Params.sub_categories = [];
+                this.Params.sub_categories.push(params["category"]);
+                this.Subcategory = this.mainService.GetCheckboxesFromChecked(this.Params.sub_categories,this.Subcategory);
+            }
+            this.GetAllAds();
         });
 
 
     }
-    SearchAdMyName(descr:string)
-    {
-        let params = {
-            description:descr,
-            sub_category:this.Category
-        };
-        this.mainService.GetAllAds({description:descr, sub_category:this.Category})
-            .subscribe((data: AllAdsModel) => {
-                this.AdsObservable = data.ads;
-                console.log(this.Ads);
+
+    GetAllAds(){
+        window.scrollTo(0,0);
+        this.Params.limit = 10;
+        this.Params.offset = (this.Page - 1)*10;
+        this.mainService.GetAllAds(this.Params)
+            .subscribe((res:AllAdsModel)=>{
+                console.log(res);
+                this.AdsObservable = res.ads;
+                let i = 0;
+                this.Pages = [];
+                while(i<res.total_count){
+                    this.Pages.push(i/10+1);
+                    i+=10;
+                }
+                if(this.Pages.length == 1)this.Pages = [];
+                this.IsLoading = false;
             });
+    }
+
+    
+    OnSearchSubmit(){
+        window.scrollTo(0,0);
+        this.IsLoading = true;
+        this.Page = 1;
+        this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
+        this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
+        this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
+        console.log(this.Params);
+        this.GetAllAds();
+    }
+    ChangePageNumber(page:number){
+        this.IsLoading = true;
+        this.Page = page;
+        this.GetAllAds();
+    }
+    PrevOrNextPage(next:boolean)
+    {
+        this.IsLoading = true;
+        this.Page += next?1:-1;
+        this.GetAllAds();
     }
 
 }
