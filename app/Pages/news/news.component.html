@@ -57,6 +57,13 @@
             </li>
         </ul>
     </div>
+    <!--<div class="pagination">
+        <ul>
+            <li *ngIf="Page > 1"><a [routerLink]="[{page:Page-1}]">« Previous</a></li>
+            <li *ngFor="let i of Pages" ><a [routerLink]="[{page:i}]">{{i}}</a></li>
+            <li *ngIf="Page < Pages.length"><a [routerLink]="[{page:Page*1+1}]">Next »</a></li>
+        </ul>
+      </div>-->
     </div>
     <!-- ########################################################################################## -->
     <!-- / container body -->

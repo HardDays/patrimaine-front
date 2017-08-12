@@ -78,33 +78,26 @@
             </div>
           </div><br>
           <div class="part_reg">
-            <div>
+            <div class="expertises-div">
               <label>Expertises</label>
-              <select name="expertises" [(ngModel)]="expertises" multiple>
-                <option value="credit">Credit</option>
-                <option value="retraite">Retraite</option>
-                <option value="placement">Placement</option>
-                <option value="allocation">Allocation</option>
-                <option value="epargne">Epargne</option>
-                <option value="investissement">Investissement</option>
-                <option value="defiscalisation">Defiscalisation</option>
-                <option value="immobilier">Immobilier</option>
-                <option value="assurance">Assurance</option>
-                <option value="investissement_plaisir">Investissement plaisir</option>
-              </select>
+              <div class="form-group" *ngFor="let item of Expertises">
+                  <label>
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                  </label>
+              </div>
             </div>
-            <div>
+            <div class="expertises-div">
               <label>Agrements</label>
-              <select name="agrements" [(ngModel)]="agrements" multiple>
-                <option value="CJA">CJA</option>
-                <option value="CIF">CIF</option>
-                <option value="Courtier">Courtier</option>
-                <option value="IOSB">IOSB</option>
-                <option value="Carte_T">Carte-T</option>
-              </select>
+              <div class="form-group" *ngFor="let item of Agreements">
+                  <label>
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                  </label>
+              </div>
             </div>
           </div><br>
-          <button [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory,expertises,agrements)">Register</button>
+          <button [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">Register</button>
         </form>
       </div>
     </div>

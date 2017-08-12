@@ -62,8 +62,17 @@ var MainService = (function () {
     MainService.prototype.GetAllUsers = function (params) {
         var options = new http_1.URLSearchParams();
         for (var key in params) {
-            options.set(key, params[key]);
+            var prop = params[key];
+            if (prop instanceof Array) {
+                for (var i in prop) {
+                    options.append(key + "[]", prop[i]);
+                }
+            }
+            else
+                options.set(key, params[key]);
         }
+        //options.set(key,params[key]);
+        console.log(options.toString());
         /*return this.httpService.GetData('/users/all',params).toArray<UserModel>();*/
         return this.httpService.GetData('/users/all', options.toString());
     };

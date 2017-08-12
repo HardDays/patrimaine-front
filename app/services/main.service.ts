@@ -77,8 +77,17 @@ import { UserModel } from '../models/user.model';
              let options = new URLSearchParams();
 
             for(let key in params){
-                options.set(key,params[key]);
+                let prop:any = params[key];
+                if( prop instanceof Array){
+                    for(let i in prop){
+                        options.append(key+"[]",prop[i]);
+                    }
+                }
+                else
+                    options.set(key,params[key]);
             }
+                    //options.set(key,params[key]);
+            console.log(options.toString());
             /*return this.httpService.GetData('/users/all',params).toArray<UserModel>();*/
             return this.httpService.GetData('/users/all',options.toString());
         }

@@ -19,6 +19,7 @@ export class NewsComponent implements OnInit{
     News: NewsModel[];
     Category: string = "";
     Page: number;
+    Pages: number[] = [];
     IsLoading = true;
     constructor(private router: Router,
         private service: MainService,
@@ -33,12 +34,6 @@ export class NewsComponent implements OnInit{
                 this.News = data;
                 this.IsLoading = false;
             });
-        /*this.params.params.forEach((params:Params) => {
-            this.Category = params["category"]?params["category"]:"";
-            this.Page = params["page"]?(params["page"]):1;
-           
-        });
-        */
             
     }
 }

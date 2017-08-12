@@ -22,7 +22,7 @@
   <main id="container" class="clear">
     <!-- container body -->
     <!-- ########################################################################################## -->
-    <div class="loading" *ngIf="IsLoading"></div>
+    <div class="loading three_quarter first" *ngIf="IsLoading"></div>
     <div id="content" class="three_quarter first" *ngIf="!IsLoading">
       <!-- ########################################################################################## -->
       <div id="comments">
@@ -42,7 +42,9 @@
                       <a href="#">{{user.company.sub_category}}</a>
                     </span> 
                   </p>
-                  <p *ngIf="user.company"><strong>About:</strong></p>
+                  <div class="user_block_text" *ngIf="user.company && user.company.description">
+                     <strong>About:</strong> {{user.company.description}}
+                  </div>
                 </div>
                 <div class="rating_wrap">
                   <div class="stars_wrap">
@@ -55,9 +57,7 @@
                   </div>
                 </div>
               </div>
-              <div class="user_block_text" *ngIf="user.company">
-                {{user.company.description}}
-              </div>
+              
             </article>
           </li>
           <li class="post_banner">
@@ -67,61 +67,46 @@
       </div>
       <div class="pagination">
         <ul>
-            <li *ngIf="Page > 1"><a [routerLink]="[{page:Page-1}]">« Previous</a></li>
-            <li *ngFor="let i of Pages" ><a [routerLink]="[{page:i}]">{{i}}</a></li>
-            <li *ngIf="Page < Pages.length"><a [routerLink]="[{page:Page*1+1}]">Next »</a></li>
+            <li *ngIf="Page > 1"><a (click)="PrevOrNextPage(false)" >« Previous</a></li>
+            <li *ngFor="let i of Pages" ><a (click)="ChangePageNumber(i*1)" [ngClass]="Page*1 == i*1 ? 'active-page':''" >{{i}}</a></li>
+            <li *ngIf="Page < Pages.length"><a (click)="PrevOrNextPage(true)" >Next »</a></li>
         </ul>
+      </div>
     </div>
-    </div>
-    <div class="sidebar one_quarter" *ngIf="!IsLoading">
+    <div class="sidebar one_quarter">
       <h6>Advanced Search</h6>
       <div class="sdb_holder" id="comments">
         <form class="filter">
-          <h6>Mot clé</h6>
-          <input type="text" name="name" id="name" value="" size="22" placeholder="Name" class="push50">
-          <h6>Type d'investissement</h6>
-          <p>Finance / Epargne / Assurance</p>
-          <input type="checkbox" checked> Epargne<br>
-          <input type="checkbox"> Epargne salariale<br>
-          <input type="checkbox"> SICAV<br>
-          <input type="checkbox"> Private Equity - Fonds<br>
-          <input type="checkbox"> Private Equity - Direct<br>
-          <input type="checkbox"> Crowdfounding<br>
-          <input type="checkbox"> Corporate<br>
-          <input type="checkbox"> Assurance Vie<br>
-          <input type="checkbox"> Assurance IARD<br>
-          <input type="checkbox"> Prévoyance / Retraite<br>
-          <input type="checkbox"> Crédit<br>
-          <p>Investissement Immobilier</p>
-          <input type="checkbox"> Physique (neuf et rénovation)<br>
-          <input type="checkbox"> Papier<br>
-          <p>Investissement plaisir</p>
-          <input type="checkbox"> Vin<br>
-          <input type="checkbox"> Vignobles<br>
-          <input type="checkbox"> Terres agricoles / Forêts<br>
-          <input type="checkbox"> Voitures<br>
-          <input type="checkbox"> Marché de l'Art<br>
-          <input type="checkbox"> Autres (montres, or...)<br>
-          <p>Placement écologique</p>
-          <input type="checkbox"> Investissement durable stratégique<br>
-          <input type="checkbox"> Épargne sociale et solidaire<br><br>
-          <h6>Situation géographique</h6>
-          <p>En France</p>
-          <input type="checkbox" checked>
-          <select>
-            <option>France entiére</option>
-          </select>
-          <p>Dans le monde</p>
-          <input type="checkbox"> Europe hors France<br>
-          <input type="checkbox"> Monde hors Europe<br><br>
-          <h6>Date de publication</h6>
-          <div class="filter_date">
-            <label>Du</label><input type="text">
-          </div>
-          <div class="filter_date">
-            <label>Au</label><input type="text">
-          </div>
-          <button type="submit">Relancer la recherche »</button>
+          <h6 class="search-heared">Mot clé</h6>
+          <input type="text" name="name" id="name" value="" size="22" [ngModel]="Params.name" (ngModelChange)="Params.name = $event"  placeholder="Name">
+          <h6 class="search-heared">Address</h6>
+          <input type="text" name="address" id="address" value="" size="22" [ngModel]="Params.address" (ngModelChange)="Params.address = $event"  placeholder="Address">
+          <input type="text" name="other_address" id="other_address" value="" size="22" [ngModel]="Params.other_address" (ngModelChange)="Params.other_address = $event"  placeholder="Other address">
+
+          <h6 class="search-heared">Company type</h6>
+              <select name="c_type" [ngModel]="Params.c_type" (ngModelChange)="Params.c_type = $event" >
+                <option value="concepteur">Concepteur</option>
+                <option value="conseiller">Conseiller</option>
+                <option value="both">Both</option>
+            </select>
+          
+            
+          <h6 class="search-heared">Subcategories</h6>
+            <div class="search_checkbox" *ngFor="let item of Subcategory">
+                  <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                  {{item.name}}
+            </div>
+          <h6 class="search-heared">Expertises</h6>
+            <div class="search_checkbox" *ngFor="let item of Expertises">
+                  <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                  {{item.name}}
+            </div>
+            <h6 class="search-heared">Agrements</h6>
+            <div class="search_checkbox" *ngFor="let item of Agreements">
+                  <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                  {{item.name}}
+            </div>
+          <button type="submit" (click)="OnSearchSubmit()">Relancer la recherche »</button>
         </form>
         <div class="side_banner">
           <img src="../images/demo/ads_demo.jpg" alt="">

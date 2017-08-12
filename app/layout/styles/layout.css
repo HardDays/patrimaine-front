@@ -868,3 +868,35 @@ address {
 .register_block .reg_block .part_reg div {
     width: 45%;
 }
+.expertises-div div:nth-child(2n){
+    background: rgba(215, 215, 215, 0.2);
+}
+.form-group{
+    width:100% !important;
+}
+.form-group label{
+    font-size: 16px;
+}
+.form-group input{
+    float: right;
+    padding-top: 0px;
+    width: 20px !important;
+}
+
+.search_checkbox {
+    margin-bottom: 0px !important;
+}
+.search-heared{
+    margin-top:10px;
+    margin-bottom:5px;
+}
+a{
+    cursor: pointer !important;
+}
+.active-page
+{
+    font-weight: bold;
+    border-color: #56AED4 !important;
+    border-width: 2px !important;
+    background: rgba(157, 191, 206, 0.18);
+}

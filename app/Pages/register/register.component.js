@@ -14,6 +14,7 @@ var http_service_1 = require("../../services/http.service");
 var index_1 = require("./../index");
 var index_2 = require("./../index");
 var main_service_1 = require("./../../services/main.service");
+var checkbox_model_1 = require("../../models/checkbox.model");
 var RegisterComponent = (function () {
     function RegisterComponent(router, mainService) {
         this.router = router;
@@ -22,6 +23,25 @@ var RegisterComponent = (function () {
         this.image = "";
         this.isLoading = false;
         this.regOk = false;
+        this.Expertises = [
+            new checkbox_model_1.CheckboxModel("Credit", "credit", false),
+            new checkbox_model_1.CheckboxModel("Retraite", "retraite", false),
+            new checkbox_model_1.CheckboxModel("Placement", "placement", false),
+            new checkbox_model_1.CheckboxModel("Allocation", "allocation", false),
+            new checkbox_model_1.CheckboxModel("Epargne", "epargne", false),
+            new checkbox_model_1.CheckboxModel("Investissement", "investissement", false),
+            new checkbox_model_1.CheckboxModel("Defiscalisation", "defiscalisation", false),
+            new checkbox_model_1.CheckboxModel("Immobilier", "immobilier", false),
+            new checkbox_model_1.CheckboxModel("Assurance", "assurance", false),
+            new checkbox_model_1.CheckboxModel("Investissement plaisir", "investissement_plaisir", false)
+        ];
+        this.Agreements = [
+            new checkbox_model_1.CheckboxModel("CJA", "CJA", false),
+            new checkbox_model_1.CheckboxModel("CIF", "CIF", false),
+            new checkbox_model_1.CheckboxModel("Courtier", "Courtier", false),
+            new checkbox_model_1.CheckboxModel("IOSB", "IOSB", false),
+            new checkbox_model_1.CheckboxModel("Carte-T", "Carte_T", false)
+        ];
     }
     RegisterComponent.prototype.ngOnInit = function () {
     };
@@ -36,16 +56,16 @@ var RegisterComponent = (function () {
             _this.AfterRegistration(x);
         });
     };
-    RegisterComponent.prototype.RegisterUserCompany = function (email, password, fname, lname, phone, cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory, expertises, agrements) {
+    RegisterComponent.prototype.RegisterUserCompany = function (email, password, fname, lname, phone, cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory) {
         var _this = this;
         window.scrollTo(0, 0);
         this.isLoading = true;
         var user = new index_1.RegisterUserModel(email, password, fname, lname, phone);
         var company = new index_2.RegisterCompanyModel(cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory, this.image);
         console.log('AAAAAAAAAAAAAA');
-        console.log(expertises);
+        console.log(this.Expertises);
         console.log(JSON.stringify(user));
-        this.mainService.CreateUserCompany(user, company, expertises, agrements)
+        this.mainService.CreateUserCompany(user, company, this.GetCheckedCheckboxes(this.Expertises), this.GetCheckedCheckboxes(this.Agreements))
             .then(function (x) {
             _this.AfterRegistration(x);
         });
@@ -70,6 +90,16 @@ var RegisterComponent = (function () {
             this.isLoading = false;
             this.regOk = true;
         }
+    };
+    RegisterComponent.prototype.GetCheckedCheckboxes = function (input) {
+        var result = [];
+        var checked = input.filter(function (x) { return x.checked; });
+        for (var _i = 0, checked_1 = checked; _i < checked_1.length; _i++) {
+            var i = checked_1[_i];
+            result.push(i.value);
+        }
+        console.log(result);
+        return result;
     };
     return RegisterComponent;
 }());

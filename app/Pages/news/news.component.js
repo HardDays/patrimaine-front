@@ -18,6 +18,7 @@ var NewsComponent = (function () {
         this.service = service;
         this.params = params;
         this.Category = "";
+        this.Pages = [];
         this.IsLoading = true;
     }
     NewsComponent.prototype.ngOnInit = function () {
@@ -29,12 +30,6 @@ var NewsComponent = (function () {
             _this.News = data;
             _this.IsLoading = false;
         });
-        /*this.params.params.forEach((params:Params) => {
-            this.Category = params["category"]?params["category"]:"";
-            this.Page = params["page"]?(params["page"]):1;
-           
-        });
-        */
     };
     return NewsComponent;
 }());
