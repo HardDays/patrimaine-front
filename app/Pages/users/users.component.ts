@@ -78,6 +78,7 @@ export class UsersComponent implements OnInit{
                 this.UsersObservable = res.users;
                 let i = 0;
                 this.Pages = [];
+                console.log(res);
                 while(i<res.total_count){
                     this.Pages.push(i/10+1);
                     i+=10;

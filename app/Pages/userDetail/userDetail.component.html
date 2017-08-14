@@ -37,6 +37,28 @@
     </p>
 
     <p *ngIf="User.company">
+
+      <span *ngIf="User.company.name">
+        <strong class="strong-profile">Company name:</strong>
+        {{User.company.name}}
+        <br />
+      </span>
+      <span *ngIf="(User.company.phone || User.company.email) && (User.company.phone != User.phone || User.company.email != User.email)">
+        <strong class="strong-profile">Company contacts:</strong>
+        <span *ngIf="User.company.phone && User.company.phone != User.phone">
+          <span class="icon-phone"></span>
+          {{User.company.phone}}
+        </span>
+        <span *ngIf="User.company.phone && User.company.phone != User.phone" >
+          <br />
+        </span>
+        <span [ngClass]="{'company-contact-margin-profile':User.company.phone && User.company.phone != User.phone}" *ngIf="User.company.email && User.company.email != User.email">
+          <span class="icon-envelope"></span>
+          {{User.company.email}}
+          <br />
+        </span>
+      </span>
+
       <span *ngIf="User.company.sub_category">
         <strong class="strong-profile">Category:</strong> 
         <span >

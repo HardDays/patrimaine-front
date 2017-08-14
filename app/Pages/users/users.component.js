@@ -73,6 +73,7 @@ var UsersComponent = (function () {
             _this.UsersObservable = res.users;
             var i = 0;
             _this.Pages = [];
+            console.log(res);
             while (i < res.total_count) {
                 _this.Pages.push(i / 10 + 1);
                 i += 10;

@@ -931,6 +931,13 @@ a{
     line-height: normal;
     font-weight: normal;
 }
+.company-contact-margin{
+    margin-left:154px;
+}
+.company-contact-margin-profile
+{
+    margin-left:190px;
+}
 .date-profile{
-    
+
 }
