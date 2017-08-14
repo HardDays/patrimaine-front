@@ -88,7 +88,6 @@
       {{User?.company?.description}} </p>
     
     <div class="rate-div borderbox" *ngIf="User.company">
-      <h3>Rating</h3>
       <div *ngIf="User.company" class="like in-profile" style="margin-right: 10px;" (click)="LikeUser(User.id*1)"><img src="../images/demo/like.png" alt=""> Like {{User.company.likes}}</div> 
       <div class="rating_wrap inside-profile-rates" >
         <div class="stars_wrap in-profile" style="margin-right: 10px;">
