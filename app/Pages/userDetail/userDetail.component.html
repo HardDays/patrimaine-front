@@ -20,19 +20,47 @@
     <!-- ########################################################################################## -->
     <h1 align="center"><a href="">{{User.first_name + " " + User.last_name}}</a></h1>
     <img *ngIf="ImageBase64" class="imgr borderedbox" [src]="ImageBase64" alt="" style="width:240px;"><br>
-    
-    <h3 *ngIf="User.phone || User.email">Contacts</h3>
-        <p *ngIf="User.phone">
-            <span class="icon-phone"></span> {{User.phone}}
-        </p>
-        <p *ngIf="User.email">
-            <span class="icon-envelope"></span> {{User.email}}
-        </p>
-    <h3 *ngIf="User.company && User.company.sub_category">Categories</h3>
-    <p *ngIf="User.company && User.company.sub_category">{{User?.company?.sub_category}}</p>
-    <!--<div *ngFor="let cat of User.Categories">
-        <p>{{cat}}</p>
-    </div>-->
+    <span class="date-profile">Last update: {{User.updated_at | date: "HH:mm d MMMM, y"}}</span>
+    <p *ngIf="User.phone || User.email">
+      <strong class="strong-profile">Contacts:</strong>
+      <span *ngIf="User.phone">
+        <span class="icon-phone"></span>
+        {{User.phone}}
+      </span>
+      <span *ngIf="User.phone" >
+        <br />
+      </span>
+      <span [ngClass]="{'contact-margin-profile':User.phone}" *ngIf="User.email">
+        <span class="icon-envelope"></span>
+        {{User.email}}
+      </span>
+    </p>
+
+    <p *ngIf="User.company">
+      <span *ngIf="User.company.sub_category">
+        <strong class="strong-profile">Category:</strong> 
+        <span >
+          <span >{{User.company.sub_category}}</span>
+        </span>
+        <br />
+        <!--<hr *ngIf="User.company.agrements && User.company.agrements.length != 0 && User.company.expertises && User.company.expertises.length != 0">-->
+      </span>
+      <span *ngIf="User.company.expertises && User.company.expertises.length != 0">
+        <strong class="strong-profile">Expertises:</strong> 
+        <span *ngFor="let item of User.company.expertises; let last = last" >
+          <span >{{item}}</span><span *ngIf="!last">,</span>
+        </span>
+        <br />
+        <!--<hr *ngIf="User.company.agrements && User.company.agrements.length != 0">-->
+      </span> 
+      <span *ngIf="User.company.agrements && User.company.agrements.length != 0">
+        <strong class="strong-profile">Agreements:</strong> 
+        <span *ngFor="let item of User.company.agrements; let last = last" >
+          <span >{{item}}</span><span *ngIf="!last">,</span>
+        </span>
+        <br />
+      </span>  
+    </p>
     <h3 *ngIf="User.company && User.company.description">About</h3>
     <p *ngIf="User.company && User.company.description">
       {{User?.company?.description}} </p>

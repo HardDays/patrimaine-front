@@ -31,16 +31,50 @@
             <article>
               <div class="user_head">
                 <h2><a  [routerLink]="['/users/' + user.id]" >{{user.first_name + " " + user.last_name}}</a></h2>
+                <span class="date">Last update: {{user.updated_at | date: " HH:mm d MMMM, y"}}</span>
                 <div *ngIf="user.company" class="like" (click)="LikeUser(user.id*1)"><img src="../images/demo/like.png" alt=""> Like {{user.company.likes}}</div>
               </div>
               <div class="user_block">
                 <div *ngIf="user.company" class="img"><img class="borderedbox" [src]="Images[user.id]" alt=""></div>
                 <div class="desc">
-                  <p *ngIf="user.phone || user.email"><strong>Contacts:</strong> <br /><span *ngIf="user.phone"><span class="icon-phone"></span>{{user.phone}}</span><br /><span *ngIf="user.email"><span class="icon-envelope"></span>{{user.email}}</span></p>
-                  <p *ngIf="user.company"><strong>Category:</strong> 
-                    <span >
-                      <a href="#">{{user.company.sub_category}}</a>
+                  <p *ngIf="user.phone || user.email">
+                    <strong>Contacts:</strong>
+                    <span *ngIf="user.phone">
+                      <span class="icon-phone"></span>
+                      {{user.phone}}
+                    </span>
+                    <span *ngIf="user.phone" >
+                      <br />
+                    </span>
+                    <span [ngClass]="{'contact-margin':user.phone}" *ngIf="user.email">
+                      <span class="icon-envelope"></span>
+                      {{user.email}}
+                    </span>
+                  </p>
+                  <p *ngIf="user.company">
+                    <span *ngIf="user.company.sub_category">
+                      <strong>Category:</strong> 
+                      <span >
+                        <a href="#">{{user.company.sub_category}}</a>
+                      </span>
+                      <br />
+                      <hr *ngIf="user.company.agrements && user.company.agrements.length != 0 && user.company.expertises && user.company.expertises.length != 0">
+                    </span>
+                    <span *ngIf="user.company.expertises && user.company.expertises.length != 0">
+                      <strong>Expertises:</strong> 
+                      <span *ngFor="let item of user.company.expertises; let last = last" >
+                        <a href="#">{{item}}</a><span *ngIf="!last">,</span>
+                      </span>
+                      <br />
+                      <hr *ngIf="user.company.agrements && user.company.agrements.length != 0">
                     </span> 
+                    <span *ngIf="user.company.agrements && user.company.agrements.length != 0">
+                      <strong>Agreements:</strong> 
+                      <span *ngFor="let item of user.company.agrements; let last = last" >
+                        <a href="#">{{item}}</a><span *ngIf="!last">,</span>
+                      </span>
+                      <br />
+                    </span>  
                   </p>
                   <div class="user_block_text" *ngIf="user.company && user.company.description">
                      <strong>About:</strong> {{user.company.description}}

@@ -29,7 +29,7 @@
                     <article>
                         <header>
                             <h2 ><a [routerLink]="['/ads/' + ad.id]">{{ad.title}}</a></h2>
-                            <span class="date">{{ad.created_at | date: dMMy}}</span>
+                            <span class="date">Last update: {{ad.updated_at | date: "d MMMM, y"}}</span>
                         </header>
                         <div class="user_block">
                             <div class="img"><img class="borderedbox" src="../images/demo/imgl.gif" alt=""></div>

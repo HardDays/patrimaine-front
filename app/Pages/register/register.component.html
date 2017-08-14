@@ -8,22 +8,8 @@
     <div class="register_block" *ngIf="!isLoading && !regOk">
       <div class="reg_block reg_left">
         <h2 *ngIf="!isPro">Professionnels du chiffre et du droit</h2>
-        <form action="" *ngIf="!isPro">
-          <label>Email</label>
-          <input type="text" name="email_user" [(ngModel)]="email_user"><br>
-          <label>Password</label>
-          <input type="password" name="password_user" [(ngModel)]="password_user"><br>
-          <label>First Name</label>
-          <input type="text" name="fname_user" [(ngModel)]="fname_user"><br>
-          <label>Last Name</label>
-          <input type="text" name="lname_user" [(ngModel)]="lname_user"><br>
-          <label>Phone</label>
-          <input type="text" name="phone_user" [(ngModel)]="phone_user"><br>
-          <button (click)="RegisterUser(email_user,password_user,fname_user,lname_user,phone_user)">Register</button>
-        </form>
-
         <h2 *ngIf="isPro">Concepteurs de Solutions</h2>
-        <form *ngIf="isPro">
+        <form action="">
           <label>Email</label>
           <input type="text" name="email" [(ngModel)]="email"><br>
           <label>Password</label>
@@ -34,6 +20,21 @@
           <input type="text" name="lname" [(ngModel)]="lname"><br>
           <label>Phone</label>
           <input type="text" name="phone" [(ngModel)]="phone"><br>
+          <button *ngIf="!isPro" (click)="RegisterUser(email,password,fname,lname,phone)">Register</button>
+        </form>
+
+        
+        <form *ngIf="isPro">
+          <!--<label>Email</label>
+          <input type="text" name="email" [(ngModel)]="email"><br>
+          <label>Password</label>
+          <input type="password" name="password" [(ngModel)]="password"><br>
+          <label>First Name</label>
+          <input type="text" name="fname" [(ngModel)]="fname"><br>
+          <label>Last Name</label>
+          <input type="text" name="lname" [(ngModel)]="lname"><br>
+          <label>Phone</label>
+          <input type="text" name="phone" [(ngModel)]="phone"><br>-->
           <h3>Company</h3>
           <label>Name</label>
           <input type="text" name="cname" [(ngModel)]="cname"><br>
