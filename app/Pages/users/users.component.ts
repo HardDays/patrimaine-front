@@ -84,6 +84,7 @@ export class UsersComponent implements OnInit{
                     i+=10;
                 }
                 if(this.Pages.length == 1)this.Pages = [];
+                else if(this.Pages.length == 0)this.IsLoading = false;
                 let total:number = 0;
                 let current:number = 0;
                 for(let item of this.UsersObservable){
@@ -112,6 +113,14 @@ export class UsersComponent implements OnInit{
         this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
         this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
         this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
+
+        if(this.Params.address)
+            this.Params.address = this.Params.address.toLowerCase();
+        if(this.Params.email)
+            this.Params.email = this.Params.email.toLowerCase();
+        if(this.Params.name)
+            this.Params.name = this.Params.name.toLowerCase();
+
         console.log(this.Params);
         this.GetUsers();
     }

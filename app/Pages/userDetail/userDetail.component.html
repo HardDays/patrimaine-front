@@ -18,76 +18,81 @@
   <main id="container" class="clear" *ngIf="!IsLoading">
     <!-- container body -->
     <!-- ########################################################################################## -->
-    <h1 align="center"><a href="">{{User.first_name + " " + User.last_name}}</a></h1>
-    <img *ngIf="ImageBase64" class="imgr borderedbox" [src]="ImageBase64" alt="" style="width:240px;"><br>
-    <span class="date-profile">Last update: {{User.updated_at | date: "HH:mm d MMMM, y"}}</span>
-    <p *ngIf="User.phone || User.email">
-      <strong class="strong-profile">Contacts:</strong>
-      <span *ngIf="User.phone">
-        <span class="icon-phone"></span>
-        {{User.phone}}
-      </span>
-      <span *ngIf="User.phone" >
-        <br />
-      </span>
-      <span [ngClass]="{'contact-margin-profile':User.phone}" *ngIf="User.email">
-        <span class="icon-envelope"></span>
-        {{User.email}}
-      </span>
-    </p>
-
-    <p *ngIf="User.company">
-
-      <span *ngIf="User.company.name">
-        <strong class="strong-profile">Company name:</strong>
-        {{User.company.name}}
-        <br />
-      </span>
-      <span *ngIf="(User.company.phone || User.company.email) && (User.company.phone != User.phone || User.company.email != User.email)">
-        <strong class="strong-profile">Company contacts:</strong>
-        <span *ngIf="User.company.phone && User.company.phone != User.phone">
+    <h1 align="center"><a>{{User.first_name + " " + User.last_name}}</a></h1>
+    <div >
+        <span class="date-profile">Last update: {{User.updated_at | date: " MMMM d, y HH:mm"}}</span>
+        <img  *ngIf="ImageBase64" class="borderedbox profile-logo" [src]="ImageBase64" alt="" style="width:240px;">
+    </div>
+    <div class="profile-info" *ngIf="User.phone || User.email">
+      <div class="profile-info-header"><strong class="strong-profile">Contacts</strong></div>
+      <div class="profile-info-content">
+        <span *ngIf="User.phone">
           <span class="icon-phone"></span>
-          {{User.company.phone}}
+          {{User.phone}}
         </span>
-        <span *ngIf="User.company.phone && User.company.phone != User.phone" >
+        <span *ngIf="User.phone" >
           <br />
         </span>
-        <span [ngClass]="{'company-contact-margin-profile':User.company.phone && User.company.phone != User.phone}" *ngIf="User.company.email && User.company.email != User.email">
+        <span  *ngIf="User.email">
           <span class="icon-envelope"></span>
-          {{User.company.email}}
-          <br />
+          {{User.email}}
         </span>
-      </span>
-
-      <span *ngIf="User.company.sub_category">
-        <strong class="strong-profile">Category:</strong> 
-        <span >
+      </div>
+    </div>
+    <div *ngIf="User.company">
+      <div class="profile-info" *ngIf="User.company.name">
+        <div class="profile-info-header"><strong class="strong-profile">Company name</strong></div>
+        <div class="profile-info-content">
+          {{User.company.name}}
+        </div>
+      </div>
+      <div class="profile-info" *ngIf="User.company.phone || User.company.email">
+        <div class="profile-info-header">
+          <strong class="strong-profile">Company contacts</strong>
+        </div>
+        <div class="profile-info-content">
+          <span *ngIf="User.company.phone">
+            <span class="icon-phone"></span>
+            {{User.company.phone}}
+          </span>
+          <span *ngIf="User.company.phone" >
+            <br />
+          </span>
+          <span *ngIf="User.company.email">
+            <span class="icon-envelope"></span>
+            {{User.company.email}}
+          </span>
+        </div>
+      </div>
+      <div class="profile-info" *ngIf="User.company.sub_category">
+        <div class="profile-info-header"><strong class="strong-profile">Category</strong></div>
+        <div class="profile-info-content">
           <span >{{User.company.sub_category}}</span>
-        </span>
-        <br />
-        <!--<hr *ngIf="User.company.agrements && User.company.agrements.length != 0 && User.company.expertises && User.company.expertises.length != 0">-->
-      </span>
-      <span *ngIf="User.company.expertises && User.company.expertises.length != 0">
-        <strong class="strong-profile">Expertises:</strong> 
-        <span *ngFor="let item of User.company.expertises; let last = last" >
-          <span >{{item}}</span><span *ngIf="!last">,</span>
-        </span>
-        <br />
-        <!--<hr *ngIf="User.company.agrements && User.company.agrements.length != 0">-->
-      </span> 
-      <span *ngIf="User.company.agrements && User.company.agrements.length != 0">
-        <strong class="strong-profile">Agreements:</strong> 
-        <span *ngFor="let item of User.company.agrements; let last = last" >
-          <span >{{item}}</span><span *ngIf="!last">,</span>
-        </span>
-        <br />
-      </span>  
-    </p>
-    <h3 *ngIf="User.company && User.company.description">About</h3>
-    <p *ngIf="User.company && User.company.description">
-      {{User?.company?.description}} </p>
-    
-    <div class="rate-div borderbox" *ngIf="User.company">
+        </div>
+      </div>
+      <div class="profile-info" *ngIf="User.company.expertises && User.company.expertises.length != 0">
+        <div class="profile-info-header"><strong class="strong-profile">Expertises</strong></div>
+        <div class="profile-info-content">
+          <span *ngFor="let item of User.company.expertises; let last = last" >
+            <span >{{item}}</span><span *ngIf="!last">,</span>
+          </span>
+        </div>
+      </div>
+      <div class="profile-info" *ngIf="User.company.agrements && User.company.agrements.length != 0">
+        <div class="profile-info-header"><strong class="strong-profile">Agreements</strong></div>
+        <div class="profile-info-content">
+          <span *ngFor="let item of User.company.agrements; let last = last" >
+            <span >{{item}}</span><span *ngIf="!last">,</span>
+          </span>
+        </div>
+      </div>
+      <div class="profile-info" *ngIf="User.company.description">
+        <div class="profile-info-header"><strong class="strong-profile">About</strong></div>
+        <div class="profile-info-content">
+          {{User.company.description}}
+        </div>
+      </div>
+      <div class="rate-div borderbox">
       <div *ngIf="User.company" class="like in-profile" style="margin-right: 10px;" (click)="LikeUser(User.id*1)"><img src="../images/demo/like.png" alt=""> Like {{User.company.likes}}</div> 
       <div class="rating_wrap inside-profile-rates" >
         <div class="stars_wrap in-profile" style="margin-right: 10px;">
@@ -102,6 +107,11 @@
       </div>  
       <div class="error-msg-profile" *ngIf="ErrorMesage">{{ErrorMesage}}</div>
     </div>
+    </div>
+    
+    
+    
+    
     <!-- ########################################################################################## -->
     <!-- / container body -->
     <div class="clear"></div>

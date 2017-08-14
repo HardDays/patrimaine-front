@@ -31,7 +31,7 @@
             <article>
               <div class="user_head">
                 <h2><a  [routerLink]="['/users/' + user.id]" >{{user.first_name + " " + user.last_name}}</a></h2>
-                <span class="date">Last update: {{user.updated_at | date: " HH:mm d MMMM, y"}}</span>
+                <span class="date">Last update: {{user.updated_at | date: " MMMM d, y HH:mm"}}</span>
                 <div *ngIf="user.company" class="like" (click)="LikeUser(user.id*1)"><img src="../images/demo/like.png" alt=""> Like {{user.company.likes}}</div>
               </div>
               <div class="user_block">
@@ -143,8 +143,13 @@
           <input type="text" name="address" id="address" value="" size="22" [ngModel]="Params.address" (ngModelChange)="Params.address = $event"  placeholder="Address">
           <input type="text" name="other_address" id="other_address" value="" size="22" [ngModel]="Params.other_address" (ngModelChange)="Params.other_address = $event"  placeholder="Other address">
 
+          <h6 class="search-heared">Email</h6>
+          <input type="text" name="email" id="email" value="" size="22" [ngModel]="Params.email" (ngModelChange)="Params.email = $event"  placeholder="Email">
+          
+          
           <h6 class="search-heared">Company type</h6>
               <select name="c_type" [ngModel]="Params.c_type" (ngModelChange)="Params.c_type = $event" >
+                <option value=""></option>
                 <option value="concepteur">Concepteur</option>
                 <option value="conseiller">Conseiller</option>
                 <option value="both">Both</option>

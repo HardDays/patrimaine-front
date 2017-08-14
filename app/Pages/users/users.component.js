@@ -80,6 +80,8 @@ var UsersComponent = (function () {
             }
             if (_this.Pages.length == 1)
                 _this.Pages = [];
+            else if (_this.Pages.length == 0)
+                _this.IsLoading = false;
             var total = 0;
             var current = 0;
             var _loop_1 = function (item) {
@@ -113,6 +115,12 @@ var UsersComponent = (function () {
         this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
         this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
         this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
+        if (this.Params.address)
+            this.Params.address = this.Params.address.toLowerCase();
+        if (this.Params.email)
+            this.Params.email = this.Params.email.toLowerCase();
+        if (this.Params.name)
+            this.Params.name = this.Params.name.toLowerCase();
         console.log(this.Params);
         this.GetUsers();
     };

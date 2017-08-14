@@ -72,6 +72,7 @@
                 
                 <h6 class="search-heared">Company type</h6>
                 <select name="c_type" [ngModel]="Params.c_type" (ngModelChange)="Params.c_type = $event" >
+                    <option value=""></option>
                     <option value="concepteur">Concepteur</option>
                     <option value="conseiller">Conseiller</option>
                     <option value="both">Both</option>

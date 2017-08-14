@@ -91,6 +91,12 @@ var AdsComponent = (function () {
         this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
         this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
         this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
+        if (this.Params.address)
+            this.Params.address = this.Params.address.toLowerCase();
+        if (this.Params.description)
+            this.Params.description = this.Params.description.toLowerCase();
+        if (this.Params.title)
+            this.Params.title = this.Params.title.toLowerCase();
         console.log(this.Params);
         this.GetAllAds();
     };

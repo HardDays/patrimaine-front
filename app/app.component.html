@@ -59,6 +59,7 @@
         <li class="active"><a routerLink="/users">Accueil</a></li>
         <li><a class="drop" routerLink="/ad_list">Concepteurs de Solutions</a>
           <ul>
+        <li><a routerLink="/ad_list">Toutes</a></li>
         <li><a [routerLink]="['ad_list',{category:'classique'}]">Classique</a></li>
         <li><a [routerLink]="['ad_list',{category:'e_brooker'}]">E-brooker</a></li>
         <li><a [routerLink]="['ad_list',{category:'fintech'}]">Fintech</a></li>
@@ -81,7 +82,7 @@
         </li>
         <li><a class="drop" routerLink="/news_list">Annonces</a>
           <ul>
-            <li><a routerLink="">Toutes</a></li>
+            <li><a routerLink="/news_list">Toutes</a></li>
             <li><a routerLink="">Finance / Epargne / Assurance</a></li>
             <li><a routerLink="">Placement écologique</a></li>
             <li><a routerLink="">Investissement Immobilier</a></li>
