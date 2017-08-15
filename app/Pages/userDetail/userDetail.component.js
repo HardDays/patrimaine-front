@@ -13,6 +13,7 @@ var router_1 = require("@angular/router");
 var http_service_1 = require("../../services/http.service");
 var main_service_1 = require("./../../services/main.service");
 var user_model_1 = require("../../models/user.model");
+var checkbox_model_1 = require("../../models/checkbox.model");
 var UserDetailComponent = (function () {
     function UserDetailComponent(router, activatedRoute, service) {
         this.router = router;
@@ -23,6 +24,38 @@ var UserDetailComponent = (function () {
         this.isMe = false;
         this.IsLoading = true;
         this.ErrorMesage = "";
+        this.IsLiked = false;
+        this.IsRated = 0;
+        this.ExpertisesCB = [
+            new checkbox_model_1.CheckboxModel("Credit", "credit", false),
+            new checkbox_model_1.CheckboxModel("Retraite", "retraite", false),
+            new checkbox_model_1.CheckboxModel("Placement", "placement", false),
+            new checkbox_model_1.CheckboxModel("Allocation", "allocation", false),
+            new checkbox_model_1.CheckboxModel("Epargne", "epargne", false),
+            new checkbox_model_1.CheckboxModel("Investissement", "investissement", false),
+            new checkbox_model_1.CheckboxModel("Defiscalisation", "defiscalisation", false),
+            new checkbox_model_1.CheckboxModel("Immobilier", "immobilier", false),
+            new checkbox_model_1.CheckboxModel("Assurance", "assurance", false),
+            new checkbox_model_1.CheckboxModel("Investissement plaisir", "investissement_plaisir", false)
+        ];
+        this.AgreementsCB = [
+            new checkbox_model_1.CheckboxModel("CJA", "CJA", false),
+            new checkbox_model_1.CheckboxModel("CIF", "CIF", false),
+            new checkbox_model_1.CheckboxModel("Courtier", "Courtier", false),
+            new checkbox_model_1.CheckboxModel("IOSB", "IOSB", false),
+            new checkbox_model_1.CheckboxModel("Carte-T", "Carte_T", false)
+        ];
+        this.SubcategoryCB = [
+            new checkbox_model_1.CheckboxModel("Classique", "classique", false),
+            new checkbox_model_1.CheckboxModel("E-brooker", "e_brooker", false),
+            new checkbox_model_1.CheckboxModel("Fintech", "fintech", false),
+            new checkbox_model_1.CheckboxModel("Crowdfunding", "crowdfunding", false),
+            new checkbox_model_1.CheckboxModel("Lendfunding", "lendfunding", false),
+            new checkbox_model_1.CheckboxModel("Institutionnels", "institutionnels", false)
+        ];
+        this.Agreements = [];
+        this.Expertises = [];
+        this.SubCategory = [];
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -50,66 +83,100 @@ var UserDetailComponent = (function () {
     UserDetailComponent.prototype.AfterGettingOfUserInfo = function (user) {
         var _this = this;
         this.User = user;
-        console.log(this.User);
-        if (this.User.company && this.User.company.image_id) {
-            this.service.GetImageById(this.User.company.image_id)
-                .subscribe(function (result) {
-                _this.ImageBase64 = result.base64;
-                _this.IsLoading = false;
+        if (this.User.company) {
+            this.Agreements = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.agrements, this.AgreementsCB);
+            this.Expertises = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.expertises, this.ExpertisesCB);
+            this.SubCategory = this.service.GetCheckboxNamesFromCheckboxModel([this.User.company.sub_category], this.SubcategoryCB);
+            this.service.GetMyLikes()
+                .subscribe(function (like_result) {
+                var like = like_result.find(function (x) { return x.user_id == _this.User.id; });
+                _this.IsLiked = like ? true : false;
+                _this.service.GetMyRates()
+                    .subscribe(function (rate_result) {
+                    var rate = rate_result.find(function (x) { return x.user_id == _this.User.id; });
+                    _this.IsRated = (rate) ? rate.rate : 0;
+                });
             });
+            if (this.User.company.image_id) {
+                this.service.GetImageById(this.User.company.image_id)
+                    .subscribe(function (result) {
+                    _this.ImageBase64 = result.base64;
+                    _this.IsLoading = false;
+                });
+            }
+            else {
+                this.ImageBase64 = "images/demo/patrimoineLogo.png";
+                this.IsLoading = false;
+            }
         }
         else {
             this.ImageBase64 = "images/demo/patrimoineLogo.png";
             this.IsLoading = false;
         }
     };
-    UserDetailComponent.prototype.RateUser = function (id, conc, event) {
+    UserDetailComponent.prototype.LikeOrUnlikeUser = function () {
+        if (!this.IsLiked)
+            this.LikeUser();
+        else
+            this.UnlikeUser();
+    };
+    UserDetailComponent.prototype.LikeUser = function () {
         var _this = this;
-        this.ErrorMesage = "";
+        this.service.LikeUser(this.User.id)
+            .subscribe(function (result) {
+            _this.RefreshUserData(result);
+            _this.IsLiked = true;
+        }, function (err) {
+            if (err.status == 409) {
+                _this.UnlikeUser();
+            }
+        }, function () {
+        });
+    };
+    UserDetailComponent.prototype.UnlikeUser = function () {
+        var _this = this;
+        this.service.UnlikeUser(this.User.id)
+            .subscribe(function (result) {
+            _this.RefreshUserData(result);
+            _this.IsLiked = false;
+        }, function (err) {
+            if (err.status == 409) {
+                _this.LikeUser();
+            }
+        });
+    };
+    UserDetailComponent.prototype.RateOrUnrateUser = function (event) {
+        if (this.IsRated < 1) {
+            this.RateUser(event);
+        }
+        else
+            this.UnrateUser();
+    };
+    UserDetailComponent.prototype.RateUser = function (event) {
+        var _this = this;
         var fullWidth = event.toElement.clientWidth;
         var posX = event.offsetX;
-        var rate = 5 * posX / fullWidth;
-        this.service.RateUser(id, rate)
+        var rate = 4 * posX / fullWidth + 1;
+        this.service.RateUser(this.User.id, rate)
             .subscribe(function (result) {
+            _this.IsRated = rate;
             _this.RefreshUserData(result);
         }, function (err) {
             if (err.status == 409) {
-                _this.ErrorMesage = "Already voted";
-            }
-            console.log(_this.ErrorMesage);
-            //this.DisplayError(err);
-        }, function () {
-            //console.log("finished");
-        });
-    };
-    UserDetailComponent.prototype.LikeUser = function (id) {
-        var _this = this;
-        this.service.LikeUser(id)
-            .subscribe(function (result) {
-            _this.RefreshUserData(result);
-        }, function (err) {
-            if (err.status == 409) {
-                _this.service.UnlikeUser(id)
-                    .subscribe(function (result) {
-                    _this.RefreshUserData(result);
-                });
             }
         }, function () {
-            //console.log("finished");
         });
     };
-    UserDetailComponent.prototype.UnrateUser = function (id) {
+    UserDetailComponent.prototype.UnrateUser = function () {
         var _this = this;
-        this.ErrorMesage = "";
-        this.service.UnrateUser(id)
+        this.service.UnrateUser(this.User.id)
             .subscribe(function (result) {
+            _this.IsRated = 0;
             _this.RefreshUserData(result);
         }, function (err) {
             if (err.status == 404) {
-                _this.ErrorMesage = "Cant cancel vote";
             }
         }, function () {
-            //console.log("finished");
         });
     };
     UserDetailComponent.prototype.DisplayError = function (err) {

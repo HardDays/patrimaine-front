@@ -11,6 +11,8 @@ import { SearchUserParamsModel } from '../../models/searchUserParams.model';
 import { AllUsersModel } from '../../models/allusers.model';
 import { CheckboxModel } from '../../models/checkbox.model';
 import { UserModel } from '../../models/user.model';
+import { AllLikesModel } from '../../models/alllikes.model';
+import { AllRatesModel } from '../../models/allrates.model';
 
 @Component({
     selector: "users",
@@ -25,6 +27,8 @@ export class UsersComponent implements OnInit{
     Pages: number[] = [];
     Images: string[] = [];
     IsLoading = true;
+    MyRates:number[] = [];
+    MyLikes:boolean[]=[];
     Params: SearchUserParamsModel = new SearchUserParamsModel(0,null,null,null,null,null,null,null,null,null,null,null);
     Expertises: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
@@ -68,6 +72,27 @@ export class UsersComponent implements OnInit{
             
     }
 
+    RefreshMyLikesAndRates(){
+        this.RefreshMyLikes();
+        this.RefreshMyRates();
+    }
+    RefreshMyRates(){
+        this.MyRates = [];
+        this.mainService.GetMyRates()
+            .subscribe((result:AllRatesModel[])=>{
+                for(let i of result)
+                    this.MyRates[i.user_id] = i.rate;
+            });
+
+    }
+    RefreshMyLikes(){
+        this.MyLikes = [];
+        this.mainService.GetMyLikes()
+            .subscribe((result:AllLikesModel[])=>{
+                for(let i of result)
+                    this.MyLikes[i.user_id] = true; 
+            });
+    }
     GetUsers(){
         window.scrollTo(0,0);
         this.Params.limit = 10;
@@ -78,7 +103,8 @@ export class UsersComponent implements OnInit{
                 this.UsersObservable = res.users;
                 let i = 0;
                 this.Pages = [];
-                console.log(res);
+                
+                this.RefreshMyLikesAndRates();
                 while(i<res.total_count){
                     this.Pages.push(i/10+1);
                     i+=10;
@@ -87,9 +113,21 @@ export class UsersComponent implements OnInit{
                 else if(this.Pages.length == 0)this.IsLoading = false;
                 let total:number = 0;
                 let current:number = 0;
+
+                for(let i in this.UsersObservable){
+                    if(this.UsersObservable[i].company){
+                        this.UsersObservable[i].company.agrements = this.mainService.GetCheckboxNamesFromCheckboxModel(this.UsersObservable[i].company.agrements,this.Agreements);
+                        this.UsersObservable[i].company.expertises = this.mainService.GetCheckboxNamesFromCheckboxModel(this.UsersObservable[i].company.expertises,this.Expertises);
+                        let sub = this.mainService.GetCheckboxNamesFromCheckboxModel([this.UsersObservable[i].company.sub_category],this.Subcategory);
+                        if(sub.length > 0)
+                            this.UsersObservable[i].company.sub_category = sub[0];
+                    }
+                }
+
                 for(let item of this.UsersObservable){
                     total+=1;
                     if(item.company && item.company.image_id){
+                        
                         this.mainService.GetImageById(item.company.image_id)
                             .subscribe((result:Base64ImageModel)=>{
                                 this.Images[item.id] = result.base64;
@@ -121,7 +159,6 @@ export class UsersComponent implements OnInit{
         if(this.Params.name)
             this.Params.name = this.Params.name.toLowerCase();
 
-        console.log(this.Params);
         this.GetUsers();
     }
     
@@ -136,45 +173,70 @@ export class UsersComponent implements OnInit{
         this.Page += next?1:-1;
         this.GetUsers();
     }
-    RateUser(id:number,conc:any,event:any)
+    
+    LikeOrUnlikeUser(id:number){
+        if(!this.MyLikes[id])
+            this.LikeUser(id);
+        else 
+            this.UnlikeUser(id);
+    }
+
+    LikeUser(id:number){
+        
+        this.mainService.LikeUser(id)
+            .subscribe(
+                (result: UserModel)=>{
+                    this.RefreshUserData(result);
+                    this.MyLikes[id] = true;
+                },
+                (err)=>{
+                    if(err.status == 409){
+                        this.UnlikeUser(id);
+                    }
+                },
+                ()=>{
+                }
+            );
+    }
+    UnlikeUser(id:number){
+        
+        this.mainService.UnlikeUser(id)
+            .subscribe((result: UserModel)=>{
+                this.RefreshUserData(result);
+                this.MyLikes[id] = false;
+            },
+        (err)=>{
+            if(err.status == 409){
+                this.LikeUser(id);
+            }
+        });
+    }
+
+    RateOrUnrateUser(id:number,event:any){
+        if(!this.MyRates[id]){
+            this.RateUser(id,event);
+        }
+        else
+            this.UnrateUser(id);
+    }
+    RateUser(id:number,event:any)
     {
         this.ErrorMesages = [];
         let fullWidth:number = event.toElement.clientWidth;
         let posX:number = event.offsetX;
-        let rate =  5 * posX / fullWidth;
+        let rate =  4 * posX / fullWidth + 1;
         this.mainService.RateUser(id,rate)
             .subscribe(
                 (result: UserModel)=>{
+                    this.MyRates[result.id] = rate;
                     this.RefreshUserData(result);
                 },
                 (err)=>{
                     if(err.status == 409){
                         this.ErrorMesages[id] = "Already voted";
                     }
-                    console.log(this.ErrorMesages);
-                    //this.DisplayError(err);
                 },
                 ()=>{
-                    //console.log("finished");
-                }
-            );
-    }
-    LikeUser(id:number){
-        this.mainService.LikeUser(id)
-            .subscribe(
-                (result: UserModel)=>{
-                    this.RefreshUserData(result);
-                },
-                (err)=>{
-                    if(err.status == 409){
-                        this.mainService.UnlikeUser(id)
-                            .subscribe((result: UserModel)=>{
-                                this.RefreshUserData(result);
-                            });
-                    }
-                },
-                ()=>{
-                    //console.log("finished");
                 }
             );
     }
@@ -183,6 +245,7 @@ export class UsersComponent implements OnInit{
         this.mainService.UnrateUser(id)
             .subscribe(
                 (result: UserModel)=>{
+                    this.MyRates[id] = 0;
                     this.RefreshUserData(result);
                 },
                 (err)=>{
@@ -191,7 +254,6 @@ export class UsersComponent implements OnInit{
                     }
                 },
                 ()=>{
-                    //console.log("finished");
                 }
             );
     }
@@ -206,6 +268,13 @@ export class UsersComponent implements OnInit{
     {
         let findUser = this.UsersObservable.find(x=>x.id == user.id);
         let index = this.UsersObservable.indexOf(findUser);
+        if(user.company){
+            user.company.agrements = this.mainService.GetCheckboxNamesFromCheckboxModel(user.company.agrements,this.Agreements);
+            user.company.expertises = this.mainService.GetCheckboxNamesFromCheckboxModel(user.company.expertises,this.Expertises);
+            let sub = this.mainService.GetCheckboxNamesFromCheckboxModel([user.company.sub_category],this.Subcategory);
+            if(sub.length > 0)
+                user.company.sub_category = sub[0];
+        }
         this.UsersObservable[index] = user;
     }
 }

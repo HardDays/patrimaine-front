@@ -61,6 +61,19 @@ var MainService = (function () {
         }
         return output;
     };
+    MainService.prototype.GetCheckboxNamesFromCheckboxModel = function (input, cb) {
+        var result = [];
+        var _loop_2 = function (i) {
+            var res = cb.find(function (x) { return x.value == i; });
+            if (res && res.name)
+                result.push(res.name);
+        };
+        for (var _i = 0, input_2 = input; _i < input_2.length; _i++) {
+            var i = input_2[_i];
+            _loop_2(i);
+        }
+        return result;
+    };
     MainService.prototype.GetAllAds = function (params) {
         return this.httpService.GetData('/ads/all', this.ParamsToUrlSearchParams(params));
     };
@@ -101,11 +114,17 @@ var MainService = (function () {
     MainService.prototype.UnrateUser = function (user) {
         return this.httpService.PostData("/users/unrate", JSON.stringify({ user_id: user }));
     };
+    MainService.prototype.GetMyRates = function () {
+        return this.httpService.GetData("/users/get_my_rates", null);
+    };
     MainService.prototype.LikeUser = function (user) {
         return this.httpService.PostData("/users/like", JSON.stringify({ user_id: user }));
     };
     MainService.prototype.UnlikeUser = function (user) {
         return this.httpService.PostData("/users/unlike", JSON.stringify({ user_id: user }));
+    };
+    MainService.prototype.GetMyLikes = function () {
+        return this.httpService.GetData("/users/get_my_likes", null);
     };
     MainService.prototype.CreateUser = function (user) {
         var params = {

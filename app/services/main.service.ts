@@ -66,6 +66,16 @@ import { CheckboxModel } from '../models/checkbox.model';
             return output;
         }
 
+        GetCheckboxNamesFromCheckboxModel(input:string[],cb:CheckboxModel[]){
+            let result:string[]= [];
+            for(let i of input){
+                let res = cb.find(x=> x.value == i);
+                if(res && res.name)
+                    result.push(res.name);
+            }
+            return result;
+        }
+
         GetAllAds(params : any){
             return this.httpService.GetData('/ads/all',this.ParamsToUrlSearchParams(params));
         }
@@ -119,6 +129,10 @@ import { CheckboxModel } from '../models/checkbox.model';
         {
             return this.httpService.PostData("/users/unrate",JSON.stringify({user_id:user}));
         }
+
+        GetMyRates(){
+            return this.httpService.GetData("/users/get_my_rates",null);
+        }
         LikeUser(user:number)
         {
             return this.httpService.PostData("/users/like",JSON.stringify({user_id:user}));
@@ -126,6 +140,9 @@ import { CheckboxModel } from '../models/checkbox.model';
         UnlikeUser(user:number)
         {
             return this.httpService.PostData("/users/unlike",JSON.stringify({user_id:user}));
+        }
+        GetMyLikes(){
+            return this.httpService.GetData("/users/get_my_likes",null);
         }
 
         CreateUser(user:RegisterUserModel){

@@ -82,24 +82,26 @@
           </span>
         </div>
       </div>
-      <div class="profile-info" *ngIf="User.company.sub_category">
+      <div class="profile-info" *ngIf="SubCategory && SubCategory.length != 0">
         <div class="profile-info-header"><strong class="strong-profile">Category</strong></div>
         <div class="profile-info-content">
-          <span >{{User.company.sub_category}}</span>
-        </div>
-      </div>
-      <div class="profile-info" *ngIf="User.company.expertises && User.company.expertises.length != 0">
-        <div class="profile-info-header"><strong class="strong-profile">Expertises</strong></div>
-        <div class="profile-info-content">
-          <span *ngFor="let item of User.company.expertises; let last = last" >
+          <span *ngFor="let item of SubCategory; let last = last" >
             <span >{{item}}</span><span *ngIf="!last">,</span>
           </span>
         </div>
       </div>
-      <div class="profile-info" *ngIf="User.company.agrements && User.company.agrements.length != 0">
+      <div class="profile-info" *ngIf="Expertises && Expertises.length != 0">
+        <div class="profile-info-header"><strong class="strong-profile">Expertises</strong></div>
+        <div class="profile-info-content">
+          <span *ngFor="let item of Expertises; let last = last" >
+            <span >{{item}}</span><span *ngIf="!last">,</span>
+          </span>
+        </div>
+      </div>
+      <div class="profile-info" *ngIf="Agreements && Agreements.length != 0">
         <div class="profile-info-header"><strong class="strong-profile">Agreements</strong></div>
         <div class="profile-info-content">
-          <span *ngFor="let item of User.company.agrements; let last = last" >
+          <span *ngFor="let item of Agreements; let last = last" >
             <span >{{item}}</span><span *ngIf="!last">,</span>
           </span>
         </div>
@@ -111,15 +113,15 @@
         </div>
       </div>
       <div class="rate-div borderbox">
-      <div *ngIf="User.company" class="like in-profile" style="margin-right: 10px;" (click)="LikeUser(User.id*1)"><img src="../images/demo/like.png" alt=""> Like {{User.company.likes}}</div> 
+      <div *ngIf="User.company" class="like in-profile" style="margin-right: 10px;" [ngClass]="{'like-active': IsLiked}" (click)="LikeOrUnlikeUser()"><img src="../images/demo/like.png" alt=""> Like {{User.company.likes}}</div> 
       <div class="rating_wrap inside-profile-rates" >
-        <div class="stars_wrap in-profile" style="margin-right: 10px;">
-          <div class="stars_empty"  #concepteur (click)="RateUser(User.id,concepteur,$event)"><div class="stars" [ngStyle]="{'width': 100*User.company.rate/5. + '%'}"></div></div>
-          <span>Concepteur</span>
+        <div class="stars_wrap">
+          <div class="stars_empty" ><div class="stars" [ngStyle]="{'width': 100*(User.company.rate>0?(User.company.rate-1):0)/4. + '%'}"></div></div>
+          <span> Average rate of this user</span>
         </div>
         <div class="stars_wrap in-profile">
-          <div class="stars_empty" (click)="UnrateUser(User.id)"><div class="stars" [ngStyle]="{'width': 100*User.company.rate/5. + '%'}"></div></div>
-          <span>Conseiller</span>
+          <div class="stars_empty" (click)="RateOrUnrateUser($event)"><div class="stars" [ngStyle]="{'width': 100*(IsRated > 0?(IsRated-1):0)/4. + '%'}"></div></div>
+          <span>Your rate for this user</span>
         </div>
         
       </div>  
