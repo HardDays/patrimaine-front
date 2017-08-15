@@ -24,6 +24,8 @@ var RegisterComponent = (function () {
         this.image = "";
         this.isLoading = false;
         this.regOk = false;
+        this.regError = false;
+        this.regErrorMsg = "";
         this.Expertises = [
             new checkbox_model_1.CheckboxModel("Credit", "credit", false),
             new checkbox_model_1.CheckboxModel("Retraite", "retraite", false),
@@ -53,8 +55,10 @@ var RegisterComponent = (function () {
         var user = new index_1.RegisterUserModel(email, password, fname, lname, phone);
         console.log(JSON.stringify(user));
         this.mainService.CreateUser(user)
-            .then(function (x) {
+            .subscribe(function (x) {
             _this.AfterRegistration(x);
+        }, function (err) {
+            _this.OnRegError(err);
         });
     };
     RegisterComponent.prototype.RegisterUserCompany = function (email, password, fname, lname, phone, cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory) {
@@ -67,9 +71,25 @@ var RegisterComponent = (function () {
         console.log(this.Expertises);
         console.log(JSON.stringify(user));
         this.mainService.CreateUserCompany(user, company, this.GetCheckedCheckboxes(this.Expertises), this.GetCheckedCheckboxes(this.Agreements))
-            .then(function (x) {
+            .subscribe(function (x) {
             _this.AfterRegistration(x);
+        }, function (err) {
+            _this.OnRegError(err);
         });
+    };
+    RegisterComponent.prototype.OnRegError = function (err) {
+        console.log(err);
+        if (err.status == 400) {
+            this.regErrorMsg = "Something went wrong! Input correct data!";
+        }
+        else if (err.status == 422) {
+            this.regErrorMsg = "Wrondg data: " + err._body;
+        }
+        else {
+            this.regErrorMsg = "Something went wrong! Try again!";
+        }
+        this.regError = true;
+        this.isLoading = false;
     };
     RegisterComponent.prototype.changeListener = function ($event) {
         this.isOkEnabled = false;

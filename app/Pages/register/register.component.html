@@ -3,7 +3,10 @@
     <!-- container body -->
     <div class="loading" *ngIf="IsLoading"></div>
     <div *ngIf="regOk">
-      <h1> Your account was created! Plese <a routerLink="/login">sign in</a>! </h1>
+      <h1> Your account was created! Please <a routerLink="/login">sign in</a>! </h1>
+    </div>
+    <div *ngIf="regError">
+      <h1 class="error-msg">{{regErrorMsg}}</h1>
     </div>
     <div class="register_block" *ngIf="!isLoading && !regOk">
       <div class="reg_block reg_left">
@@ -11,15 +14,15 @@
         <h2 *ngIf="isPro">Concepteurs de Solutions</h2>
         <form action="">
           <label>Email</label>
-          <input type="text" name="email" [(ngModel)]="email"><br>
+          <input type="email" name="email" [(ngModel)]="email" required><br>
           <label>Password</label>
-          <input type="password" name="password" [(ngModel)]="password"><br>
+          <input type="password" name="password" [(ngModel)]="password" required><br>
           <label>First Name</label>
-          <input type="text" name="fname" [(ngModel)]="fname"><br>
+          <input type="text" name="fname" [(ngModel)]="fname" required><br>
           <label>Last Name</label>
-          <input type="text" name="lname" [(ngModel)]="lname"><br>
+          <input type="text" name="lname" [(ngModel)]="lname" required><br>
           <label>Phone</label>
-          <input type="text" name="phone" [(ngModel)]="phone"><br>
+          <input type="tel" name="phone" [(ngModel)]="phone" required><br>
           <button *ngIf="!isPro" (click)="RegisterUser(email,password,fname,lname,phone)">Register</button>
         </form>
 

@@ -15,6 +15,9 @@ import { NewsModel } from '../../models/news.model';
 })
 
 export class CreateNewsComponent implements OnInit{
+    createError = false;
+    isLoading = true;
+    errorMsg:string = "";
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -23,13 +26,25 @@ export class CreateNewsComponent implements OnInit{
     }
 
     ngOnInit() {
+        this.isLoading = false;
     }
 
     OncreateNewsButtonClick(title:string,description:string){
+        this.isLoading = true;
         this.service.CreateNews(title,description)
             .subscribe((result:NewsModel)=>{
                 console.log("Result of creation: " + JSON.stringify(result));
                 this.router.navigate(['news',result.id]);
+            },
+            (err)=>{
+                if(err.status == 401){
+                    this.errorMsg = "You have to be logged in! We will reddirect you to login page soon!";
+                    setTimeout(()=> this.router.navigate(["/login"]),3000);
+                }
+                else{
+                    this.errorMsg = "Something went wrong! Try again!";
+                }
+                this.createError = true;
             });
     }
 }

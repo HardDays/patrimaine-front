@@ -17,6 +17,7 @@ var AppComponent = (function () {
         this.router = router;
         this.mainService = mainService;
         this.isLoggedIn = false;
+        this.IsDropped = true;
         this.me = new user_model_1.UserModel(null, "", "", "", "", null, null, null);
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -35,8 +36,15 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.Logout = function () {
         var _this = this;
+        this.onMenuItemClick();
         this.mainService.Logout()
             .subscribe(function () { return _this.router.navigate(["/"]); }, function (err) { return _this.router.navigate(["/"]); }, function () { return _this.router.navigate(["/"]); });
+    };
+    //KASTIL', spasibo angularu za eto
+    AppComponent.prototype.onMenuItemClick = function () {
+        var _this = this;
+        this.IsDropped = false;
+        setTimeout(function () { return _this.IsDropped = true; }, 250);
     };
     return AppComponent;
 }());

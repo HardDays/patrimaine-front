@@ -14,6 +14,7 @@ export class AppComponent  implements OnInit {
 
     
     isLoggedIn:boolean = false;
+    IsDropped = true;
     me: UserModel = new UserModel(null,"","","","",null,null,null); 
     constructor(private router: Router,
         private mainService: MainService){}
@@ -32,9 +33,16 @@ export class AppComponent  implements OnInit {
     }
 
     Logout(){
+        this.onMenuItemClick();
         this.mainService.Logout()
             .subscribe(()=>this.router.navigate(["/"]),
             (err)=>this.router.navigate(["/"]),
             ()=>this.router.navigate(["/"]));
+    }
+
+    //KASTIL', spasibo angularu za eto
+    onMenuItemClick(){
+        this.IsDropped = false;
+        setTimeout(()=> this.IsDropped = true,250);
     }
 }

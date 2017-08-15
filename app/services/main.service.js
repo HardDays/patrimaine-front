@@ -114,7 +114,7 @@ var MainService = (function () {
             agrements: ["CJA"]
         };
         console.log(JSON.stringify(params));
-        return this.httpService.PostData('/users/create', JSON.stringify(params)).toPromise();
+        return this.httpService.PostData('/users/create', JSON.stringify(params));
     };
     MainService.prototype.CreateUserCompany = function (user, company, expertises, agrements) {
         var params = {
@@ -124,7 +124,7 @@ var MainService = (function () {
             agrements: agrements
         };
         console.log(JSON.stringify(params));
-        return this.httpService.PostData('/users/create', JSON.stringify(params)).toPromise();
+        return this.httpService.PostData('/users/create', JSON.stringify(params));
     };
     MainService.prototype.UpdateUser = function (user) {
         return this.httpService.PutData('/users/update', JSON.stringify(user)).toPromise();

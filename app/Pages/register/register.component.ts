@@ -21,6 +21,8 @@ export class RegisterComponent implements OnInit{
     image:string = "";
     isLoading = false;
     regOk = false;
+    regError = false;
+    regErrorMsg:string = "";
     Expertises: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
         new CheckboxModel("Retraite","retraite",false),
@@ -51,9 +53,12 @@ export class RegisterComponent implements OnInit{
         let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone);
         console.log(JSON.stringify(user));
         this.mainService.CreateUser(user)
-            .then(x=>{
+            .subscribe(x=>{
                 this.AfterRegistration(x);
-            });
+            },
+        (err)=>{
+            this.OnRegError(err);
+        });
     }
 
     RegisterUserCompany(email:string,password:string,fname:string,lname:string,phone:string,
@@ -68,9 +73,29 @@ export class RegisterComponent implements OnInit{
         console.log(this.Expertises);
         console.log(JSON.stringify(user));
         this.mainService.CreateUserCompany(user, company, this.GetCheckedCheckboxes(this.Expertises), this.GetCheckedCheckboxes(this.Agreements))
-            .then(x=>{
+            .subscribe(x=>{
                 this.AfterRegistration(x);
-            });
+            },
+        (err)=>{
+            this.OnRegError(err);
+        });
+    }
+
+    OnRegError(err:any){
+        console.log(err);
+        if(err.status == 400)
+        {
+            this.regErrorMsg = "Something went wrong! Input correct data!";
+        }
+        else if(err.status == 422){
+            this.regErrorMsg = "Wrondg data: " + err._body;
+        }
+        else{
+            this.regErrorMsg = "Something went wrong! Try again!";
+        }
+
+        this.regError = true;
+        this.isLoading = false;
     }
         changeListener($event: any) : void {
             this.isOkEnabled = false;

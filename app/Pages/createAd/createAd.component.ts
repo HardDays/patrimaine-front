@@ -15,6 +15,9 @@ import {MainService} from "./../../services/main.service";
 })
 
 export class CreateAdComponent implements OnInit{
+    createError = false;
+    isLoading = true;
+    errorMsg:string = "";
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -23,19 +26,26 @@ export class CreateAdComponent implements OnInit{
     }
 
     ngOnInit() {
+        this.isLoading = false;
     }
 
     OncreateAdButtonClick(title:string,description:string){
+        this.isLoading = true;
         this.service.CreateAd(title,description)
             .subscribe((result:AdsModel)=>{
                 console.log("Result of creation: " + JSON.stringify(result));
                 this.router.navigate(['ads',result.id]);
+            },
+            (err)=>{
+                if(err.status == 401){
+                    this.errorMsg = "You have to be logged in! We will reddirect you to login page soon!";
+                    setTimeout(()=> this.router.navigate(["/login"]),3000);
+                }
+                else{
+                    this.errorMsg = "Something went wrong! Try again!";
+                }
+                this.createError = true;
             });
-            /*.then(result =>{
-                this.service.GetAllAds(description,"")
-                    .then((result:AdsModel[])=>{
-                        this.router.navigate(["ads",result[0].id]);
-                    });
-            });*/
+            
     }
 }

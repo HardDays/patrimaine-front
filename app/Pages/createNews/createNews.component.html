@@ -7,14 +7,19 @@
 <div class="wrapper row3">
     <main id="container" class="clear">
         <div class="ads_creation reg_block">
-            <div class="ad_create_form">
+            <div *ngIf="createError">
+                <h1 class="error-msg">{{errorMsg}}</h1>
+            </div>
+            <div class="loading" *ngIf="isLoading"></div>
+             
+            <div class="ad_create_form" *ngIf="!isLoading && !createError">
                 <h1>Create annonce</h1>
                 <form >
                     <label>Title</label>
-                    <input type="text" name="title" [(ngModel)]="title">
+                    <input type="text" name="title" [(ngModel)]="title" required>
                     <br>
                     <label>Description</label>
-                    <textarea name="description" [(ngModel)]="description" ></textarea><br>
+                    <textarea name="description" [(ngModel)]="description" required></textarea><br>
                     <button (click)="OncreateNewsButtonClick(title,description)">Create annonce</button>
                 </form>
             </div>

@@ -17,22 +17,30 @@ var CreateAdComponent = (function () {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.service = service;
+        this.createError = false;
+        this.isLoading = true;
+        this.errorMsg = "";
     }
     CreateAdComponent.prototype.ngOnInit = function () {
+        this.isLoading = false;
     };
     CreateAdComponent.prototype.OncreateAdButtonClick = function (title, description) {
         var _this = this;
+        this.isLoading = true;
         this.service.CreateAd(title, description)
             .subscribe(function (result) {
             console.log("Result of creation: " + JSON.stringify(result));
             _this.router.navigate(['ads', result.id]);
+        }, function (err) {
+            if (err.status == 401) {
+                _this.errorMsg = "You have to be logged in! We will reddirect you to login page soon!";
+                setTimeout(function () { return _this.router.navigate(["/login"]); }, 3000);
+            }
+            else {
+                _this.errorMsg = "Something went wrong! Try again!";
+            }
+            _this.createError = true;
         });
-        /*.then(result =>{
-            this.service.GetAllAds(description,"")
-                .then((result:AdsModel[])=>{
-                    this.router.navigate(["ads",result[0].id]);
-                });
-        });*/
     };
     return CreateAdComponent;
 }());

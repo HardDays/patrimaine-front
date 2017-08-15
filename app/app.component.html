@@ -24,12 +24,12 @@
       <ul class="clear">
         <li>
           <a class="drop" routerLink="/users/me">{{me.first_name + " " + me.last_name}}</a>
-            <ul>
-              <li><a routerLink="/users/me">My profile</a></li>
-              <li><a routerLink="/my_ads">My ads</a></li>
-              <li><a routerLink="/create_ad">Create ad</a></li>
+            <ul *ngIf="IsDropped">
+              <li><a (click)="onMenuItemClick()" routerLink="/users/me">My profile</a></li>
+              <li><a (click)="onMenuItemClick()" routerLink="/my_ads">My ads</a></li>
+              <li><a (click)="onMenuItemClick()" routerLink="/create_ad">Create ad</a></li>
               <!--<li><a routerLink="/my_annonces">My annonces</a></li>-->
-              <li><a routerLink="/create_news">Create annonce</a></li>
+              <li><a (click)="onMenuItemClick()" routerLink="/create_news">Create annonce</a></li>
               <li style="cursor:pointer;"><a (click)="Logout()" >Logout</a></li>
             </ul>
           </li>
@@ -56,38 +56,39 @@
     </div>
     <nav id="mainav" class="fl_right">
       <ul class="clear">
-        <li class="active"><a routerLink="/users">Accueil</a></li>
+        <li class="active">
+          <a routerLink="/users">Accueil</a>
+        </li>
         <li><a class="drop" routerLink="/ad_list">Concepteurs de Solutions</a>
-          <ul>
-        <li><a routerLink="/ad_list">Toutes</a></li>
-        <li><a [routerLink]="['ad_list',{category:'classique'}]">Classique</a></li>
-        <li><a [routerLink]="['ad_list',{category:'e_brooker'}]">E-brooker</a></li>
-        <li><a [routerLink]="['ad_list',{category:'fintech'}]">Fintech</a></li>
-        <li><a [routerLink]="['ad_list',{category:'crowdfunding'}]">Crowdfunding</a></li>
-        <li><a [routerLink]="['ad_list',{category:'lendfunding'}]">Lendfunding</a></li>
-
-      </ul>
+          <ul *ngIf="IsDropped">
+            <li><a (click)="onMenuItemClick()" routerLink="/ad_list">Toutes</a></li>
+            <li><a (click)="onMenuItemClick()" [routerLink]="['ad_list',{category:'classique'}]">Classique</a></li>
+            <li><a (click)="onMenuItemClick()" [routerLink]="['ad_list',{category:'e_brooker'}]">E-brooker</a></li>
+            <li><a (click)="onMenuItemClick()" [routerLink]="['ad_list',{category:'fintech'}]">Fintech</a></li>
+            <li><a (click)="onMenuItemClick()" [routerLink]="['ad_list',{category:'crowdfunding'}]">Crowdfunding</a></li>
+            <li><a (click)="onMenuItemClick()" [routerLink]="['ad_list',{category:'lendfunding'}]">Lendfunding</a></li>
+          </ul>
         </li>
         <li><a class="drop" routerLink="/users">Professionnels du Chiffre et du Droit </a>
-          <ul>
-            <li><a routerLink="/users">Tous</a></li>
-            <li><a routerLink="/users">Assureurs</a></li>
-            <li><a routerLink="/users">Avocats</a></li>
-            <li><a routerLink="/users">Conseillers en gestion de patrimoine</a></li>
-            <li><a routerLink="/users">Courtiers de prêts</a></li>
-            <li><a routerLink="/users">Experts-comptables</a></li>
-            <li><a routerLink="/users">Notaires</a></li>
-            <li><a routerLink="/users">Professionnels de l'immobilier</a></li>
+          <ul *ngIf="IsDropped">
+            <li><a (click)="onMenuItemClick()" routerLink="/users">Tous</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/users">Assureurs</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/users">Avocats</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/users">Conseillers en gestion de patrimoine</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/users">Courtiers de prêts</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/users">Experts-comptables</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/users">Notaires</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/users">Professionnels de l'immobilier</a></li>
           </ul>
         </li>
         <li><a class="drop" routerLink="/news_list">Annonces</a>
-          <ul>
-            <li><a routerLink="/news_list">Toutes</a></li>
-            <li><a routerLink="">Finance / Epargne / Assurance</a></li>
-            <li><a routerLink="">Placement écologique</a></li>
-            <li><a routerLink="">Investissement Immobilier</a></li>
-            <li><a routerLink="">Investissement plaisir</a></li>
-            <li><a routerLink="">Institutionnels</a></li>
+          <ul *ngIf="IsDropped">
+            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Toutes</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Finance / Epargne / Assurance</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Placement écologique</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Investissement Immobilier</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Investissement plaisir</a></li>
+            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Institutionnels</a></li>
           </ul>
         </li>  
         <li><a href="http://patrimoine-forum.herokuapp.com">Forum du Patrimoine</a></li>      

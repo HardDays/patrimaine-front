@@ -8,7 +8,7 @@
   <main id="container" class="clear">
     <!-- container body -->
     <div class="loading" *ngIf="isLoading"></div>
-    <div class="login_form" *ngIf="!IsLoading">
+    <div class="login_form" *ngIf="!isLoading">
       <div style="color:red;align:ceter" *ngIf="isLoginErr && !IsLoading"><h2>Invalid login or password!</h2></div>
       <h1>Login</h1>
       <form >

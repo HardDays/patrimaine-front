@@ -17,15 +17,29 @@ var CreateNewsComponent = (function () {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.service = service;
+        this.createError = false;
+        this.isLoading = true;
+        this.errorMsg = "";
     }
     CreateNewsComponent.prototype.ngOnInit = function () {
+        this.isLoading = false;
     };
     CreateNewsComponent.prototype.OncreateNewsButtonClick = function (title, description) {
         var _this = this;
+        this.isLoading = true;
         this.service.CreateNews(title, description)
             .subscribe(function (result) {
             console.log("Result of creation: " + JSON.stringify(result));
             _this.router.navigate(['news', result.id]);
+        }, function (err) {
+            if (err.status == 401) {
+                _this.errorMsg = "You have to be logged in! We will reddirect you to login page soon!";
+                setTimeout(function () { return _this.router.navigate(["/login"]); }, 3000);
+            }
+            else {
+                _this.errorMsg = "Something went wrong! Try again!";
+            }
+            _this.createError = true;
         });
     };
     return CreateNewsComponent;

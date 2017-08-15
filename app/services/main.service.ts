@@ -128,17 +128,17 @@ import { CheckboxModel } from '../models/checkbox.model';
             return this.httpService.PostData("/users/unlike",JSON.stringify({user_id:user}));
         }
 
-        CreateUser(user:RegisterUserModel): Promise<UserModel>{
+        CreateUser(user:RegisterUserModel){
             let params = {
                 user: user,
                 expertises: ["placement"],
                 agrements: ["CJA"]
             };
             console.log(JSON.stringify(params));
-            return this.httpService.PostData('/users/create',JSON.stringify(params)).toPromise<UserModel>();
+            return this.httpService.PostData('/users/create',JSON.stringify(params));
         }
 
-        CreateUserCompany(user:RegisterUserModel, company:RegisterCompanyModel, expertises:string[], agrements:string[]): Promise<UserModel>{
+        CreateUserCompany(user:RegisterUserModel, company:RegisterCompanyModel, expertises:string[], agrements:string[]){
             let params = {
                 user: user,
                 company: company,
@@ -146,7 +146,7 @@ import { CheckboxModel } from '../models/checkbox.model';
                 agrements: agrements
             };
             console.log(JSON.stringify(params));
-            return this.httpService.PostData('/users/create',JSON.stringify(params)).toPromise<UserModel>();
+            return this.httpService.PostData('/users/create',JSON.stringify(params));
         }
 
 

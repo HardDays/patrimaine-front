@@ -64,6 +64,24 @@
           </span>
         </div>
       </div>
+      <div class="profile-info" *ngIf="User.company.address || User.company.other_address">
+        <div class="profile-info-header">
+          <strong class="strong-profile">Adress</strong>
+        </div>
+        <div class="profile-info-content">
+          <span *ngIf="User.company.address">
+            <span class="icon-phone"></span>
+            {{User.company.address}}
+          </span>
+          <span *ngIf="User.company.address" >
+            <br />
+          </span>
+          <span *ngIf="User.company.other_address">
+            <span class="icon-envelope"></span>
+            {{User.company.other_address}}
+          </span>
+        </div>
+      </div>
       <div class="profile-info" *ngIf="User.company.sub_category">
         <div class="profile-info-header"><strong class="strong-profile">Category</strong></div>
         <div class="profile-info-content">
