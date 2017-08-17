@@ -31,6 +31,12 @@ export class CreateAdComponent implements OnInit{
 
     OncreateAdButtonClick(title:string,description:string){
         this.isLoading = true;
+        if(!title || !description){
+            this.errorMsg = "Input valid data!";
+            this.createError = true;
+            this.isLoading = false;
+            return;
+        }
         this.service.CreateAd(title,description)
             .subscribe((result:AdsModel)=>{
                 console.log("Result of creation: " + JSON.stringify(result));
@@ -45,6 +51,7 @@ export class CreateAdComponent implements OnInit{
                     this.errorMsg = "Something went wrong! Try again!";
                 }
                 this.createError = true;
+                this.isLoading = false;
             });
             
     }

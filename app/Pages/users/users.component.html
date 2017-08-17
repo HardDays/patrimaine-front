@@ -138,10 +138,21 @@
       </div>
     </div>
     <div class="sidebar one_quarter">
-      <h6>Advanced Search</h6>
+      
       <div class="sdb_holder" id="comments">
         <form class="filter">
-          <h6 class="search-heared">Mot clé</h6>
+          <h6>User inforation</h6>
+          <input type="text" name="user_name" value="" size="22" placeholder="First- Lastname">
+          <input type="text" name="user_email" value="" size="22" placeholder="Email">
+          <button (click)="isAdvancedSearch=!isAdvancedSearch">
+            <span size="5">{{isAdvancedSearch?"&uArr;":"&dArr;"}}</span> 
+            Advanced Search 
+            <span size="5">{{isAdvancedSearch?"&uArr;":"&dArr;"}}</span>
+          </button>
+          <div *ngIf="isAdvancedSearch">
+          <br />
+          <h5>Advanced Search</h5>
+          <h6 class="search-heared">Company</h6>
           <input type="text" name="name" id="name" value="" size="22" [ngModel]="Params.name" (ngModelChange)="Params.name = $event"  placeholder="Name">
           <h6 class="search-heared">Address</h6>
           <input type="text" name="address" id="address" value="" size="22" [ngModel]="Params.address" (ngModelChange)="Params.address = $event"  placeholder="Address">
@@ -175,6 +186,7 @@
                   <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
                   {{item.name}}
             </div>
+          </div>
           <button type="submit" (click)="OnSearchSubmit()">Relancer la recherche »</button>
         </form>
         <div class="side_banner">

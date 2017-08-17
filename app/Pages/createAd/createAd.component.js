@@ -27,6 +27,12 @@ var CreateAdComponent = (function () {
     CreateAdComponent.prototype.OncreateAdButtonClick = function (title, description) {
         var _this = this;
         this.isLoading = true;
+        if (!title || !description) {
+            this.errorMsg = "Input valid data!";
+            this.createError = true;
+            this.isLoading = false;
+            return;
+        }
         this.service.CreateAd(title, description)
             .subscribe(function (result) {
             console.log("Result of creation: " + JSON.stringify(result));
@@ -40,6 +46,7 @@ var CreateAdComponent = (function () {
                 _this.errorMsg = "Something went wrong! Try again!";
             }
             _this.createError = true;
+            _this.isLoading = false;
         });
     };
     return CreateAdComponent;

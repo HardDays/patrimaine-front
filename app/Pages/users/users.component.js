@@ -26,6 +26,7 @@ var UsersComponent = (function () {
         this.IsLoading = true;
         this.MyRates = [];
         this.MyLikes = [];
+        this.isAdvancedSearch = false;
         this.Params = new searchUserParams_model_1.SearchUserParamsModel(0, null, null, null, null, null, null, null, null, null, null, null);
         this.Expertises = [
             new checkbox_model_1.CheckboxModel("Credit", "credit", false),

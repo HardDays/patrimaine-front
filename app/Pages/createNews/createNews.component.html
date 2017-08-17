@@ -12,11 +12,11 @@
             </div>
             <div class="loading" *ngIf="isLoading"></div>
              
-            <div class="ad_create_form" *ngIf="!isLoading && !createError">
+            <div class="ad_create_form" *ngIf="!isLoading">
                 <h1>Create annonce</h1>
                 <form >
                     <label>Title</label>
-                    <input type="text" name="title" [(ngModel)]="title" required>
+                    <input type="text" name="title" [(ngModel)]="title" required value="">
                     <br>
                     <label>Description</label>
                     <textarea name="description" [(ngModel)]="description" required></textarea><br>

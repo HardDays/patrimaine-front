@@ -29,6 +29,7 @@ export class UsersComponent implements OnInit{
     IsLoading = true;
     MyRates:number[] = [];
     MyLikes:boolean[]=[];
+    isAdvancedSearch = false;
     Params: SearchUserParamsModel = new SearchUserParamsModel(0,null,null,null,null,null,null,null,null,null,null,null);
     Expertises: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),

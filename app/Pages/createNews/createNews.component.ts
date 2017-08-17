@@ -31,6 +31,14 @@ export class CreateNewsComponent implements OnInit{
 
     OncreateNewsButtonClick(title:string,description:string){
         this.isLoading = true;
+        console.log(title);
+        console.log(description);
+        if(!title || !description){
+            this.errorMsg = "Input valid data!";
+            this.createError = true;
+            this.isLoading = false;
+            return;
+        }
         this.service.CreateNews(title,description)
             .subscribe((result:NewsModel)=>{
                 console.log("Result of creation: " + JSON.stringify(result));
@@ -45,6 +53,8 @@ export class CreateNewsComponent implements OnInit{
                     this.errorMsg = "Something went wrong! Try again!";
                 }
                 this.createError = true;
-            });
+                this.isLoading = false;
+            },
+        ()=>this.isLoading = false);
     }
 }

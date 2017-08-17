@@ -27,6 +27,14 @@ var CreateNewsComponent = (function () {
     CreateNewsComponent.prototype.OncreateNewsButtonClick = function (title, description) {
         var _this = this;
         this.isLoading = true;
+        console.log(title);
+        console.log(description);
+        if (!title || !description) {
+            this.errorMsg = "Input valid data!";
+            this.createError = true;
+            this.isLoading = false;
+            return;
+        }
         this.service.CreateNews(title, description)
             .subscribe(function (result) {
             console.log("Result of creation: " + JSON.stringify(result));
@@ -40,7 +48,8 @@ var CreateNewsComponent = (function () {
                 _this.errorMsg = "Something went wrong! Try again!";
             }
             _this.createError = true;
-        });
+            _this.isLoading = false;
+        }, function () { return _this.isLoading = false; });
     };
     return CreateNewsComponent;
 }());
