@@ -25,12 +25,21 @@ export class LoginComponent implements OnInit{
         this.isLoading = true;
         this.isLoginErr = false;
         this.mainService.UserLogin(username,password)
-            .add((data:TokenModel)=>{
-                if(!data && !data.token){
-                    this.isLoginErr = true;
+            .subscribe((data:TokenModel)=>{
+                if(data && data.token){
+                    this.mainService.BaseInitAfterLogin(data);
+                    this.router.navigate(["/"]);
                 }
-                this.isLoading = false;
-            });
+            },
+        (err)=>{
+            if(err.status == 401){
+                this.isLoginErr = true;
+            }
+            this.isLoading = false;
+        },
+        ()=>{
+            this.isLoading = false;
+        });
         
         
     }

@@ -27,10 +27,17 @@ var LoginComponent = (function () {
         this.isLoading = true;
         this.isLoginErr = false;
         this.mainService.UserLogin(username, password)
-            .add(function (data) {
-            if (!data && !data.token) {
+            .subscribe(function (data) {
+            if (data && data.token) {
+                _this.mainService.BaseInitAfterLogin(data);
+                _this.router.navigate(["/"]);
+            }
+        }, function (err) {
+            if (err.status == 401) {
                 _this.isLoginErr = true;
             }
+            _this.isLoading = false;
+        }, function () {
             _this.isLoading = false;
         });
     };

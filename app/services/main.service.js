@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var token_model_1 = require("./../models/token.model");
 var http_service_1 = require("./http.service");
 var router_1 = require("@angular/router");
 var Observable_1 = require("rxjs/Observable");
@@ -19,6 +18,7 @@ require("rxjs/add/operator/catch");
 require("rxjs/add/observable/throw");
 require("rxjs/Rx");
 var Subject_1 = require("rxjs/Subject");
+var token_model_1 = require("../models/token.model");
 var MainService = (function () {
     function MainService(httpService, router) {
         this.httpService = httpService;
@@ -146,33 +146,29 @@ var MainService = (function () {
         return this.httpService.PostData('/users/create', JSON.stringify(params));
     };
     MainService.prototype.UpdateUser = function (user) {
-        return this.httpService.PutData('/users/update', JSON.stringify(user)).toPromise();
+        return this.httpService.PutData('/users/update', JSON.stringify(user));
     };
     MainService.prototype.UserLogin = function (email, password) {
-        var _this = this;
-        return this.httpService.Login(email, password)
-            .add(function (data) {
-            console.log(data);
-            _this.GetMe()
-                .subscribe(function (user) {
-                _this.me = user;
-                _this.onAuthChange$.next(true);
-                _this.router.navigate(["users", "me"]);
-            });
-        });
+        var params = {
+            email: email,
+            password: password
+        };
+        return this.httpService.PostData('/auth/login', JSON.stringify(params));
     };
-    MainService.prototype.TryToLoginWithToken = function () {
+    MainService.prototype.BaseInitAfterLogin = function (data) {
         var _this = this;
-        var token = localStorage.getItem('token');
-        if (token) {
-            this.httpService.token = new token_model_1.TokenModel(token);
-            this.httpService.headers.append('Authorization', token);
-        }
-        return this.GetMe()
+        this.httpService.BaseInitByToken(data.token);
+        this.GetMe()
             .subscribe(function (user) {
             _this.me = user;
             _this.onAuthChange$.next(true);
         });
+    };
+    MainService.prototype.TryToLoginWithToken = function () {
+        var token = localStorage.getItem('token');
+        if (token) {
+            this.BaseInitAfterLogin(new token_model_1.TokenModel(token));
+        }
     };
     MainService.prototype.Logout = function () {
         this.httpService.token = null;

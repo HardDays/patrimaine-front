@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http, URLSearchParams } from '@angular/http';
 import {AdsModel} from "./../models/ads.model";
-import {TokenModel} from "./../models/token.model";
 import {AllUsersModel} from "./../models/allusers.model";
 import {NewsModel} from "./../models/news.model";
 import {AllNewsModel} from "./../models/allnews.model";
@@ -18,6 +17,7 @@ import {Subject} from 'rxjs/Subject';
 import { GetParamsModel } from '../models/getparams.model';
 import { UserModel } from '../models/user.model';
 import { CheckboxModel } from '../models/checkbox.model';
+import { TokenModel } from '../models/token.model';
 
     @Injectable()
     export class MainService{
@@ -167,25 +167,26 @@ import { CheckboxModel } from '../models/checkbox.model';
         }
 
 
-        UpdateUser(user:UserModel): Promise<UserModel>{
-            return this.httpService.PutData('/users/update',JSON.stringify(user)).toPromise<UserModel>();
+        UpdateUser(user:UserModel){
+            return this.httpService.PutData('/users/update',JSON.stringify(user));
         }
 
         UserLogin(email:string, password:string){
-            
-            return this.httpService.Login(email,password)
-                .add((data:TokenModel)=>{
-                    console.log(data);
-                    
-                    this.GetMe()
-                        .subscribe((user:UserModel)=>{
-                                this.me = user;
-                                this.onAuthChange$.next(true);
-                                this.router.navigate(["users","me"]);
-                            });
-                        
+            let params = {
+                email: email,
+                password: password
+            };
+    
+            return this.httpService.PostData('/auth/login',JSON.stringify(params));
+        }
+
+        BaseInitAfterLogin(data:TokenModel){
+            this.httpService.BaseInitByToken(data.token);
+            this.GetMe()
+            .subscribe((user:UserModel)=>{
+                    this.me = user;
+                    this.onAuthChange$.next(true);
                 });
-                
         }
 
         TryToLoginWithToken()
@@ -193,14 +194,8 @@ import { CheckboxModel } from '../models/checkbox.model';
             let token = localStorage.getItem('token');
             if(token)
             {
-                this.httpService.token = new TokenModel(token);
-                this.httpService.headers.append('Authorization',token);
+                this.BaseInitAfterLogin(new TokenModel(token));
             }
-            return this.GetMe()
-                .subscribe((user:UserModel)=>{
-                        this.me = user;
-                        this.onAuthChange$.next(true);
-                    });
 
         }
 
