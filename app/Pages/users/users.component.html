@@ -142,8 +142,8 @@
       <div class="sdb_holder" id="comments">
         <form class="filter">
           <h6>User inforation</h6>
-          <input type="text" name="user_name" value="" size="22" placeholder="First- Lastname">
-          <input type="text" name="user_email" value="" size="22" placeholder="Email">
+          <input type="text" name="user_name" value="" size="22" [ngModel]="Params.user_name" (ngModelChange)="Params.user_name=$event" placeholder="First- Lastname">
+          <input type="text" name="user_email" value="" size="22" [ngModel]="Params.user_email" (ngModelChange)="Params.user_email=$event" placeholder="Email">
           <button (click)="isAdvancedSearch=!isAdvancedSearch">
             <span size="5">{{isAdvancedSearch?"&uArr;":"&dArr;"}}</span> 
             Advanced Search 

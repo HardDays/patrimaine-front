@@ -1,6 +1,6 @@
 "use strict";
 var SearchUserParamsModel = (function () {
-    function SearchUserParamsModel(offset, limit, name, address, other_address, email, opening_times, company_id, c_type, sub_categories, expertises, agrements) {
+    function SearchUserParamsModel(offset, limit, name, address, other_address, email, opening_times, company_id, c_type, sub_categories, expertises, agrements, user_email, user_name) {
         this.offset = offset;
         this.limit = limit;
         this.name = name;
@@ -13,6 +13,8 @@ var SearchUserParamsModel = (function () {
         this.sub_categories = sub_categories;
         this.expertises = expertises;
         this.agrements = agrements;
+        this.user_email = user_email;
+        this.user_name = user_name;
     }
     return SearchUserParamsModel;
 }());

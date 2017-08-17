@@ -11,6 +11,8 @@ export class SearchUserParamsModel{
         public c_type: string,
         public sub_categories: string[],
         public expertises: string[],
-        public agrements: string[]
+        public agrements: string[],
+        public user_email:string,
+        public user_name:string
     ){}
 }

@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit{
     MyRates:number[] = [];
     MyLikes:boolean[]=[];
     isAdvancedSearch = false;
-    Params: SearchUserParamsModel = new SearchUserParamsModel(0,null,null,null,null,null,null,null,null,null,null,null);
+    Params: SearchUserParamsModel = new SearchUserParamsModel(0,null,null,null,null,null,null,null,null,null,null,null,null,null);
     Expertises: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
         new CheckboxModel("Retraite","retraite",false),
@@ -159,6 +159,10 @@ export class UsersComponent implements OnInit{
             this.Params.email = this.Params.email.toLowerCase();
         if(this.Params.name)
             this.Params.name = this.Params.name.toLowerCase();
+        if(this.Params.user_name)
+            this.Params.user_name = this.Params.user_name.toLowerCase();
+        if(this.Params.user_email)
+            this.Params.user_email = this.Params.user_email.toLowerCase();
 
         this.GetUsers();
     }

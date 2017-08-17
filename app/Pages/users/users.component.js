@@ -27,7 +27,7 @@ var UsersComponent = (function () {
         this.MyRates = [];
         this.MyLikes = [];
         this.isAdvancedSearch = false;
-        this.Params = new searchUserParams_model_1.SearchUserParamsModel(0, null, null, null, null, null, null, null, null, null, null, null);
+        this.Params = new searchUserParams_model_1.SearchUserParamsModel(0, null, null, null, null, null, null, null, null, null, null, null, null, null);
         this.Expertises = [
             new checkbox_model_1.CheckboxModel("Credit", "credit", false),
             new checkbox_model_1.CheckboxModel("Retraite", "retraite", false),
@@ -159,6 +159,10 @@ var UsersComponent = (function () {
             this.Params.email = this.Params.email.toLowerCase();
         if (this.Params.name)
             this.Params.name = this.Params.name.toLowerCase();
+        if (this.Params.user_name)
+            this.Params.user_name = this.Params.user_name.toLowerCase();
+        if (this.Params.user_email)
+            this.Params.user_email = this.Params.user_email.toLowerCase();
         this.GetUsers();
     };
     UsersComponent.prototype.ChangePageNumber = function (page) {
