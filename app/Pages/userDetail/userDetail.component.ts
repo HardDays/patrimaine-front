@@ -168,6 +168,7 @@ export class UserDetailComponent implements OnInit{
         let fullWidth:number = event.toElement.clientWidth;
         let posX:number = event.offsetX;
         let rate =  4 * posX / fullWidth + 1;
+        console.log(rate);
         this.service.RateUser(this.User.id,rate)
             .subscribe(
                 (result: UserModel)=>{
@@ -183,6 +184,7 @@ export class UserDetailComponent implements OnInit{
             );
     }
     UnrateUser(){
+        console.log('unrate');
         this.service.UnrateUser(this.User.id)
             .subscribe(
                 (result: UserModel)=>{

@@ -646,7 +646,7 @@ section.profs .prof .desc a.search:before {
 }
 
 .rating_wrap {
-    margin: 5px 0 0 auto!important;
+    margin: 0px 0 0 auto!important;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
@@ -674,7 +674,7 @@ section.profs .prof .desc a.search:before {
     background-image: url(../../images/demo/stars_full.png);
 }
 .like {
-    margin: 0!important;
+    /*margin: 0!important;*/
     padding: 10px 0;
     width: 122px;
     text-align: center;
@@ -964,6 +964,7 @@ a{
 }
 .profile-info-content{
     margin-left:195px;
+    padding-top: 1px;
 }
 .error-msg{
     color: red;
@@ -987,4 +988,20 @@ box-shadow: 0px 0px 3px 2px rgba(0,255,0,1);
 
 .like-active{
     background: #316479 !important;
+}
+.profile-info-content .stars_empty{
+    width: 102px;
+    height: 22px;
+    margin: 0 10px!important;
+    background-image: url(../../images/demo/stars_empty.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    cursor: pointer;
+}
+.profile-info-content .stars{
+    height: 22px!important;
+    margin: 0!important;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-image: url(../../images/demo/stars_full.png);
 }

@@ -157,6 +157,7 @@ var UserDetailComponent = (function () {
         var fullWidth = event.toElement.clientWidth;
         var posX = event.offsetX;
         var rate = 4 * posX / fullWidth + 1;
+        console.log(rate);
         this.service.RateUser(this.User.id, rate)
             .subscribe(function (result) {
             _this.IsRated = rate;
@@ -169,6 +170,7 @@ var UserDetailComponent = (function () {
     };
     UserDetailComponent.prototype.UnrateUser = function () {
         var _this = this;
+        console.log('unrate');
         this.service.UnrateUser(this.User.id)
             .subscribe(function (result) {
             _this.IsRated = 0;

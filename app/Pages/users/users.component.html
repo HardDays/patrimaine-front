@@ -32,7 +32,7 @@
               <div class="user_head">
                 <h2><a  [routerLink]="['/users/' + user.id]" >{{user.first_name + " " + user.last_name}}</a></h2>
                 <span class="date">Last update: {{user.updated_at | date: " MMMM d, y HH:mm"}}</span>
-                <div *ngIf="user.company" class="like" [ngClass]="{'like-active': MyLikes[user.id]}" (click)="LikeOrUnlikeUser(user.id*1)"><img src="../images/demo/like.png" alt=""> Like {{user.company.likes}}</div>
+                
               </div>
               <div class="user_block">
                 <div *ngIf="user.company" class="img">
@@ -40,7 +40,7 @@
                   <div class="rating_wrap" *ngIf="user.company">
                     <div class="stars_wrap">
                       <div class="stars_empty" ><div class="stars" [ngStyle]="{'width': 100*(user.company.rate?(user.company.rate-1):0)/4. + '%'}"></div></div>
-                      <span> Average rate of this user</span>
+                      <span> Average rate of<br />this user</span>
                     </div>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
                       {{user.company.name}}
                       <br />
                     </span>
-                    <span *ngIf="(user.company.phone || user.company.email) && (user.company.phone != user.phone || user.company.email != user.email)">
+                    <!--<span *ngIf="(user.company.phone || user.company.email) && (user.company.phone != user.phone || user.company.email != user.email)">
                       <hr>
                       <strong>Company contacts:</strong>
                       <span *ngIf="user.company.phone && user.company.phone != user.phone">
@@ -81,7 +81,7 @@
                         {{user.company.email}}
                         <br />
                       </span>
-                    </span>
+                    </span>-->
                     <span *ngIf="user.company.sub_category">
                       <hr>
                       <strong>Category:</strong> 
@@ -108,15 +108,16 @@
                       <br />
                     </span>  
                   </p>
-                  <div class="user_block_text" *ngIf="user.company && user.company.description">
+                  <!--<div class="user_block_text" *ngIf="user.company && user.company.description">
                     <hr>
                      <strong>About:</strong> {{user.company.description}}
-                  </div>
+                  </div>-->
                 </div>
                 <div class="rating_wrap" *ngIf="user.company">
+                    <div *ngIf="user.company" class="like" [ngClass]="{'like-active': MyLikes[user.id]}" (click)="LikeOrUnlikeUser(user.id*1)"><img src="../images/demo/like.png" alt=""> Like {{user.company.likes}}</div>
                   <div class="stars_wrap">
                     <div class="stars_empty" (click)="RateOrUnrateUser(user.id,$event)"><div class="stars" [ngStyle]="{'width': 100*(MyRates[user.id]?(MyRates[user.id]-1):0)/4. + '%'}"></div></div>
-                    <span>Your rate for this user</span>
+                    <span>Your rate for<br /> this user</span>
                   </div>
                 </div>
               </div>
