@@ -30,13 +30,16 @@ var MainService = (function () {
         var options = new http_1.URLSearchParams();
         for (var key in params) {
             var prop = params[key];
-            if (prop instanceof Array) {
-                for (var i in prop) {
-                    options.append(key + "[]", prop[i]);
+            console.log(key + ":" + params[key]);
+            if (prop) {
+                if (prop instanceof Array) {
+                    for (var i in prop) {
+                        options.append(key + "[]", prop[i]);
+                    }
                 }
+                else
+                    options.set(key, params[key]);
             }
-            else
-                options.set(key, params[key]);
         }
         console.log(options.toString());
         return options.toString();

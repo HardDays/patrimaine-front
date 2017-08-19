@@ -144,7 +144,7 @@
           <h6>User inforation</h6>
           <input type="text" name="user_name" value="" size="22" [ngModel]="Params.user_name" (ngModelChange)="Params.user_name=$event" placeholder="First- Lastname">
           <input type="text" name="user_email" value="" size="22" [ngModel]="Params.user_email" (ngModelChange)="Params.user_email=$event" placeholder="Email">
-          <button (click)="isAdvancedSearch=!isAdvancedSearch">
+          <button type="button" (click)="isAdvancedSearch=!isAdvancedSearch">
             <span size="5">{{isAdvancedSearch?"&uArr;":"&dArr;"}}</span> 
             Advanced Search 
             <span size="5">{{isAdvancedSearch?"&uArr;":"&dArr;"}}</span>

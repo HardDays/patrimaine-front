@@ -69,27 +69,9 @@
             <li><a (click)="onMenuItemClick()" [routerLink]="['ad_list',{category:'lendfunding'}]">Lendfunding</a></li>
           </ul>
         </li>
-        <li><a class="drop" routerLink="/users">Professionnels du Chiffre et du Droit </a>
-          <ul *ngIf="IsDropped">
-            <li><a (click)="onMenuItemClick()" routerLink="/users">Tous</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/users">Assureurs</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/users">Avocats</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/users">Conseillers en gestion de patrimoine</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/users">Courtiers de prêts</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/users">Experts-comptables</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/users">Notaires</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/users">Professionnels de l'immobilier</a></li>
-          </ul>
+        <li><a routerLink="/users">Professionnels du Chiffre et du Droit </a>
         </li>
-        <li><a class="drop" routerLink="/news_list">Annonces</a>
-          <ul *ngIf="IsDropped">
-            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Toutes</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Finance / Epargne / Assurance</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Placement écologique</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Investissement Immobilier</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Investissement plaisir</a></li>
-            <li><a (click)="onMenuItemClick()" routerLink="/news_list">Institutionnels</a></li>
-          </ul>
+        <li><a routerLink="/news_list">Annonces</a>
         </li>  
         <li><a href="http://patrimoine-forum.herokuapp.com">Forum du Patrimoine</a></li>      
       </ul>

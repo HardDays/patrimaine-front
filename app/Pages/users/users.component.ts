@@ -155,14 +155,19 @@ export class UsersComponent implements OnInit{
 
         if(this.Params.address)
             this.Params.address = this.Params.address.toLowerCase();
+        //else this.Params.address = null;
         if(this.Params.email)
             this.Params.email = this.Params.email.toLowerCase();
+        //else this.Params.email = null;
         if(this.Params.name)
             this.Params.name = this.Params.name.toLowerCase();
+        //else this.Params.name = null;
         if(this.Params.user_name)
             this.Params.user_name = this.Params.user_name.toLowerCase();
+        //else this.Params.user_name = null;
         if(this.Params.user_email)
             this.Params.user_email = this.Params.user_email.toLowerCase();
+        //else this.Params.user_email = null;
 
         this.GetUsers();
     }

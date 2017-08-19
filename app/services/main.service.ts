@@ -37,13 +37,16 @@ import { TokenModel } from '../models/token.model';
 
             for(let key in params){
                 let prop:any = params[key];
-                if( prop instanceof Array){
-                    for(let i in prop){
-                        options.append(key+"[]",prop[i]);
+                console.log (key+":" + params[key]);
+                if(prop){
+                    if( prop instanceof Array){
+                        for(let i in prop){
+                            options.append(key+"[]",prop[i]);
+                        }
                     }
+                    else
+                        options.set(key,params[key]);
                 }
-                else
-                    options.set(key,params[key]);
             }
             console.log(options.toString());
             return options.toString();
