@@ -71,8 +71,12 @@ var NewsComponent = (function () {
         this.Params.offset = (this.Page - 1) * 10;
         this.mainService.GetAllNews(this.Params)
             .subscribe(function (res) {
-            console.log(res);
             _this.News = res.news;
+            for (var k in _this.News) {
+                if (_this.News[k].title && _this.News[k].title.length > 40) {
+                    _this.News[k].title = _this.News[k].title.slice(0, 40) + "...";
+                }
+            }
             var i = 0;
             _this.Pages = [];
             while (i < res.total_count) {

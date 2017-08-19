@@ -41,12 +41,12 @@ export class MyNewsComponent implements OnInit{
         });
         
     }
-    OnDeleteAd(ad: AdsModel){
+    OnDeleteAd(ad: NewsModel){
         console.log(ad);
-        this.service.DeleteAd(ad)
+        this.service.DeleteNews(ad.id)
             .subscribe(result =>{
-                this.service.GetAllAds({user_id:this.User.id})
-                    .subscribe((result:AllAdsModel)=>{this.myAds = result.ads;});
+                this.service.GetAllNews({user_id:this.User.id})
+                    .subscribe((result:AllNewsModel)=>{this.myNews = result.news;});
             });
     }
 }

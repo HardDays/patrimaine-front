@@ -27,9 +27,7 @@ var AppComponent = (function () {
             if (_this.isLoggedIn)
                 _this.mainService.GetMe()
                     .subscribe(function (data) {
-                    console.log(JSON.stringify(data));
                     _this.me = data;
-                    //console.log(this.me);
                 });
         });
         this.mainService.TryToLoginWithToken();

@@ -24,9 +24,7 @@ export class AppComponent  implements OnInit {
                 if(this.isLoggedIn)
                     this.mainService.GetMe()
                         .subscribe((data:UserModel)=>{
-                            console.log(JSON.stringify(data));
                             this.me = data;
-                            //console.log(this.me);
                         });
         });
         this.mainService.TryToLoginWithToken();

@@ -72,8 +72,12 @@ export class AdsComponent implements OnInit{
         this.Params.offset = (this.Page - 1)*10;
         this.mainService.GetAllAds(this.Params)
             .subscribe((res:AllAdsModel)=>{
-                console.log(res);
                 this.AdsObservable = res.ads;
+                for(let k in this.AdsObservable){
+                    if(this.AdsObservable[k].title && this.AdsObservable[k].title.length > 40){
+                        this.AdsObservable[k].title = this.AdsObservable[k].title.slice(0,40) +"...";
+                    }
+                }
                 let i = 0;
                 this.Pages = [];
                 while(i<res.total_count){

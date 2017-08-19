@@ -42,10 +42,10 @@ var MyNewsComponent = (function () {
     MyNewsComponent.prototype.OnDeleteAd = function (ad) {
         var _this = this;
         console.log(ad);
-        this.service.DeleteAd(ad)
+        this.service.DeleteNews(ad.id)
             .subscribe(function (result) {
-            _this.service.GetAllAds({ user_id: _this.User.id })
-                .subscribe(function (result) { _this.myAds = result.ads; });
+            _this.service.GetAllNews({ user_id: _this.User.id })
+                .subscribe(function (result) { _this.myNews = result.news; });
         });
     };
     return MyNewsComponent;

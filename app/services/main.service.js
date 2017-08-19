@@ -30,7 +30,6 @@ var MainService = (function () {
         var options = new http_1.URLSearchParams();
         for (var key in params) {
             var prop = params[key];
-            console.log(key + ":" + params[key]);
             if (prop) {
                 if (prop instanceof Array) {
                     for (var i in prop) {
@@ -41,7 +40,6 @@ var MainService = (function () {
                     options.set(key, params[key]);
             }
         }
-        console.log(options.toString());
         return options.toString();
     };
     MainService.prototype.GetCheckedCheckboxes = function (input) {
@@ -51,7 +49,6 @@ var MainService = (function () {
             var i = checked_1[_i];
             result.push(i.value);
         }
-        console.log(result);
         return result;
     };
     MainService.prototype.GetCheckboxesFromChecked = function (input, output) {
@@ -135,7 +132,6 @@ var MainService = (function () {
             expertises: ["placement"],
             agrements: ["CJA"]
         };
-        console.log(JSON.stringify(params));
         return this.httpService.PostData('/users/create', JSON.stringify(params));
     };
     MainService.prototype.CreateUserCompany = function (user, company, expertises, agrements) {
@@ -145,7 +141,6 @@ var MainService = (function () {
             expertises: expertises,
             agrements: agrements
         };
-        console.log(JSON.stringify(params));
         return this.httpService.PostData('/users/create', JSON.stringify(params));
     };
     MainService.prototype.UpdateUser = function (user) {

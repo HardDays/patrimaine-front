@@ -75,8 +75,12 @@ export class NewsComponent implements OnInit{
         this.Params.offset = (this.Page - 1)*10;
         this.mainService.GetAllNews(this.Params)
             .subscribe((res:AllNewsModel)=>{
-                console.log(res);
                 this.News = res.news;
+                for(let k in this.News){
+                    if(this.News[k].title && this.News[k].title.length > 40){
+                        this.News[k].title = this.News[k].title.slice(0,40) +"...";
+                    }
+                }
                 let i = 0;
                 this.Pages = [];
                 while(i<res.total_count){

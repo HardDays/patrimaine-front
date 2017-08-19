@@ -37,7 +37,6 @@ import { TokenModel } from '../models/token.model';
 
             for(let key in params){
                 let prop:any = params[key];
-                console.log (key+":" + params[key]);
                 if(prop){
                     if( prop instanceof Array){
                         for(let i in prop){
@@ -48,7 +47,6 @@ import { TokenModel } from '../models/token.model';
                         options.set(key,params[key]);
                 }
             }
-            console.log(options.toString());
             return options.toString();
         }
 
@@ -58,7 +56,6 @@ import { TokenModel } from '../models/token.model';
             let checked:CheckboxModel[]=input.filter(x=>x.checked);
             for(let i of checked)
                 result.push(i.value);
-            console.log(result);
             return result;
         }
         GetCheckboxesFromChecked(input:string[],output:CheckboxModel[]):CheckboxModel[]
@@ -154,7 +151,6 @@ import { TokenModel } from '../models/token.model';
                 expertises: ["placement"],
                 agrements: ["CJA"]
             };
-            console.log(JSON.stringify(params));
             return this.httpService.PostData('/users/create',JSON.stringify(params));
         }
 
@@ -165,7 +161,6 @@ import { TokenModel } from '../models/token.model';
                 expertises: expertises,
                 agrements: agrements
             };
-            console.log(JSON.stringify(params));
             return this.httpService.PostData('/users/create',JSON.stringify(params));
         }
 
@@ -204,10 +199,10 @@ import { TokenModel } from '../models/token.model';
 
         Logout(){
             
-                        this.httpService.token = null;
-                        this.httpService.headers.delete('Authorization');
-                        this.onAuthChange$.next(false);
-                        localStorage.removeItem('token');
+            this.httpService.token = null;
+            this.httpService.headers.delete('Authorization');
+            this.onAuthChange$.next(false);
+            localStorage.removeItem('token');
             return this.httpService.PostData("/auth/logout",null);
             
         }
