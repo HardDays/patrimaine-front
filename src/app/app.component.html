@@ -7,7 +7,7 @@
         <li><span class="icon-envelope-alt"></span> info@patrimoine.com</li>
       </ul>
     </div>
-    <div class="fl_right">
+    <!--<div class="fl_right">
       <ul class="faico clear">
         <li><a class="faicon-facebook" href="#"><i class="icon-facebook"></i></a></li>
         <li><a class="faicon-pinterest" href="#"><i class="icon-pinterest"></i></a></li>
@@ -18,7 +18,7 @@
         <li><a class="faicon-skype" href="#"><i class="icon-skype"></i></a></li>
         <li><a class="faicon-rss" href="#"><i class="icon-rss"></i></a></li>
       </ul>
-    </div>
+    </div>-->
     <!--<logreg-comp></logreg-comp>-->
     <nav *ngIf="isLoggedIn" id="profile" class="fl_center">
       <ul class="clear">
@@ -57,7 +57,7 @@
     <nav id="mainav" class="fl_right">
       <ul class="clear">
         <li class="active">
-          <a routerLink="/users">Accueil</a>
+          <a routerLink="/">Accueil</a>
         </li>
         <li><a class="drop" routerLink="/ad_list">Concepteurs de Solutions</a>
           <ul *ngIf="IsDropped">

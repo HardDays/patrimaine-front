@@ -1,9 +1,35 @@
 <div class="wrapper">
-  <div id="slider"> 
+  <div id="slider" style="background-color:rgba(255,255,255,255);z-index: -1;"> 
     <!-- ############################################################################################################# -->
-    <div id="slidewrap">
-      <div class="heading"><span id="slidecaption"></span></div>
+      <img src='/images/demo/slider/11.png' style="display: block;margin: 0 auto;">
+    			
+    <div id="slidewrap" style="background-color:transparent">
+      <div class="heading"><span id="slidecaption">Portail pour Professionnels du chiffre et du droit</span></div>
+    		
     </div>
+
+    
+    <!--<div class="owl-carousel">
+    	<div class="one-new" >
+    			<img src='/images/demo/slider/1.png'>
+    			<h4>Portail pour Professionnels du chiffre et du droit</h4>
+    		</div>
+    		<div class="one-new">
+    			<h4>The title of news_list</h4>
+    			<h6>The subtitle of news_list</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a routerLink="/news_list">En savoir plus »</a>
+    			<img src="images/demo/sec_3.jpg" align="">
+    		</div>
+    		<div class="one-new">
+    			<img src="images/demo/sec_3.jpg" align="">
+    			<h4>The title of news_list</h4>
+    			<h6>The subtitle of news_list</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a routerLink="/news_list">En savoir plus »</a>
+    		</div>
+    	</div>-->
+    
     <!-- ############################################################################################################# --> 
   </div>
 </div>
@@ -18,22 +44,22 @@
       <li class="one_quarter first">
         <div class="push30"><span class="circle icon-flag"></span></div>
         <p class="nospace push10">Vous êtes un professionnel du chiffre et du droit</p>
-        <p class="nospace"><a href="./pages/post_details.html">Read more &raquo;</a></p>
+        <p class="nospace"><a routerLink="/register">Read more &raquo;</a></p>
       </li>
       <li class="one_quarter">
         <div class="push30"><span class="circle icon-book"></span></div>
         <p class="nospace push10">Vous êtes un concepteur de solutions patrimoniales</p>
-        <p class="nospace"><a href="./pages/post_details.html">Read more &raquo;</a></p>
+        <p class="nospace"><a routerLink="/register">Read more &raquo;</a></p>
       </li>
       <li class="one_quarter">
         <div class="push30"><span class="circle icon-trophy"></span></div>
         <p class="nospace push10">Vous êtes un chef d'entreprise ou professionnel</p>
-        <p class="nospace"><a href="./pages/post_details.html">Read more &raquo;</a></p>
+        <p class="nospace"><a routerLink="/register">Read more &raquo;</a></p>
       </li>
       <li class="one_quarter">
         <div class="push30"><span class="circle icon-group"></span></div>
         <p class="nospace push10">Vous êtes un particulier</p>
-        <p class="nospace"><a href="./pages/post_details.html">Read more &raquo;</a></p>
+        <p class="nospace"><a routerLink="/register">Read more &raquo;</a></p>
       </li>
     </ul>
     <hr class="nospace push50">
@@ -46,7 +72,7 @@
             <p class="c">Immobilier</p>
             <h6>Aenean euismod bibendum laoreet.</h6>
             <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
-            <a href="#">Voir l'offre »</a>
+            <a routerLink="/news_list">Voir l'offre »</a>
             <p class="d">20 Août 2016</p>
             <div class="clear"></div>
           </div>
@@ -54,7 +80,7 @@
             <p class="c">Immobilier</p>
             <h6>Aenean euismod bibendum laoreet.</h6>
             <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
-            <a href="#">Voir l'offre »</a>
+            <a routerLink="/news_list">Voir l'offre »</a>
             <p class="d">20 Août 2016</p>
             <div class="clear"></div>
           </div>
@@ -62,11 +88,11 @@
             <p class="c">Immobilier</p>
             <h6>Aenean euismod bibendum laoreet.</h6>
             <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
-            <a href="#">Voir l'offre »</a>
+            <a routerLink="/news_list">Voir l'offre »</a>
             <p class="d">20 Août 2016</p>
             <div class="clear"></div>
           </div>
-          <a href="#" class="all_annonces">Voir toutes les annonces »</a>
+          <a routerLink="/news_list" class="all_annonces">Voir toutes les annonces »</a>
         </div>
       </div>
       <div class="lasts_ads premium_ads">
@@ -76,7 +102,7 @@
             <p class="c">Immobilier</p>
             <h6>Aenean euismod bibendum laoreet.</h6>
             <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
-            <a href="#">Voir l'offre »</a>
+            <a routerLink="/news_list">Voir l'offre »</a>
             <p class="d">20 Août 2016</p>
             <div class="clear"></div>
           </div>
@@ -84,7 +110,7 @@
             <p class="c">Immobilier</p>
             <h6>Aenean euismod bibendum laoreet.</h6>
             <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
-            <a href="#">Voir l'offre »</a>
+            <a routerLink="/news_list">Voir l'offre »</a>
             <p class="d">20 Août 2016</p>
             <div class="clear"></div>
           </div>
@@ -92,11 +118,11 @@
             <p class="c">Immobilier</p>
             <h6>Aenean euismod bibendum laoreet.</h6>
             <p>Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. ...</p>
-            <a href="#">Voir l'offre »</a>
+            <a routerLink="/news_list">Voir l'offre »</a>
             <p class="d">20 Août 2016</p>
             <div class="clear"></div>
           </div>
-          <a href="#" class="all_annonces">Voir toutes les annonces premiums »</a>
+          <a routerLink="/news_list" class="all_annonces">Voir toutes les annonces premiums »</a>
         </div>
       </div>
       <div class="clear push50"></div>
@@ -136,12 +162,12 @@
           </div>
           <div class="clear"></div>
         </form>
-        <a href="#" class="add_olx push50"><img src="images/demo/add_olx_icon.png" alt="">&nbsp;&nbsp;Déposer une annonce</a>
+        <a routerLink="/create_ad" class="add_olx push50"><img src="images/demo/add_olx_icon.png" alt="">&nbsp;&nbsp;Déposer une annonce</a>
       </div>
       <h5 class="blue_zag text-center">Offres exclusives</h5>
       	<div class="nospace push50 clear offres_carousel owl-carousel">
 	      <ul class="nospace push50 clear">
-      <li class="one_quarter first"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+      <li class="one_quarter first"><a routerLink="/users"><img src="images/demo/gallery/gallery.gif" alt=""></a>
         <div class="borderedbox pad15">
           <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
           <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
@@ -149,10 +175,10 @@
             <span class="cat">Immobilier</span>
             <span class="date">20 Août 2016</span>
           </div>
-          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+          <p class="nospace clear"><a routerLink="/ads">Voir l'offre &raquo;</a></p>
         </div>
       </li>
-      <li class="one_quarter"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+      <li class="one_quarter"><a routerLink="/users"><img src="images/demo/gallery/gallery.gif" alt=""></a>
         <div class="borderedbox pad15">
           <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
           <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
@@ -160,10 +186,10 @@
             <span class="cat">Immobilier</span>
             <span class="date">20 Août 2016</span>
           </div>
-          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+          <p class="nospace clear"><a routerLink="/ads">Voir l'offre &raquo;</a></p>
         </div>
       </li>
-      <li class="one_quarter"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+      <li class="one_quarter"><a routerLink="/users"><img src="images/demo/gallery/gallery.gif" alt=""></a>
         <div class="borderedbox pad15">
           <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
           <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
@@ -171,10 +197,10 @@
             <span class="cat">Immobilier</span>
             <span class="date">20 Août 2016</span>
           </div>
-          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+          <p class="nospace clear"><a routerLink="/ads">Voir l'offre &raquo;</a></p>
         </div>
       </li>
-      <li class="one_quarter"><a href="#"><img src="images/demo/gallery/gallery.gif" alt=""></a>
+      <li class="one_quarter"><a routerLink="/users"><img src="images/demo/gallery/gallery.gif" alt=""></a>
         <div class="borderedbox pad15">
           <h6 class="push10">Aenean euismod bibendum laoreet.</h6>
           <p class="nospace push10">Proin gravida dolor sit amet lacus accumsan et viverra justo commodo...</p>
@@ -182,12 +208,12 @@
             <span class="cat">Immobilier</span>
             <span class="date">20 Août 2016</span>
           </div>
-          <p class="nospace clear"><a href="./pages/user_details.html">Voir l'offre &raquo;</a></p>
+          <p class="nospace clear"><a routerLink="/ads">Voir l'offre &raquo;</a></p>
         </div>
       </li>
     	</ul>
       	</div>
-      <p class="text-center">Vous voulez nous soumettre une solution patrimoniale différentiante ou nous solliciter pour une solution sur mesure, <a href="">contactez-nous</a></p>
+      <p class="text-center">Vous voulez nous soumettre une solution patrimoniale différentiante ou nous solliciter pour une solution sur mesure, <a routerLink="">contactez-nous</a></p>
     </section>
     <!-- ########################################################################################## --> 
     <!-- / container body -->
@@ -201,8 +227,8 @@
         <div class="desc">
           <h4>Professionnels du chiffre et du droit</h4>
           <p>Un professionnel de la gestion du patrimoine affilié, c'est consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Aenean euismod bibendum laoreet proin gravida dolor sit amet lacus ...</p>
-          <a href="#">En savoir plus »</a><br>
-          <a href="#" class="search">Trouver un professionnel</a><a href="#" class="search">Devenir priofessionnel affilié</a>
+          <!--<a routerLink="#">En savoir plus »</a><br>-->
+          <a routerLink="/users" class="search">Trouver un professionnel</a><a routerLink="/register" class="search">Devenir priofessionnel affilié</a>
         </div>
       </div>
       <hr class="divide_line">
@@ -210,8 +236,8 @@
         <div class="desc">
           <h4>Concepteurs de solutions patrimoniales</h4>
           <p>Un concepteur de produits financiers affilié, c'est consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Aenean euismod bibendum laoreet proin gravida dolor sit amet lacus ...</p>
-          <a href="#">En savoir plus »</a><br>
-          <a href="#" class="search">Trouver un concepteur</a><a href="#" class="search">Devenir concepteur affilié</a>
+          <!--<a routerLink="#">En savoir plus »</a><br>-->
+          <a routerLink="/users" class="search">Trouver un concepteur</a><a routerLink="/register" class="search">Devenir concepteur affilié</a>
         </div>
         <div class="img" style="background-image: url(images/demo/business-people2.jpg)"></div>
       </div>
@@ -231,7 +257,7 @@
         </ul>
         <h5>Forum de la gestion de Patrimoine</h5>
         <p>Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-        <a href="#" class="big_and_nice_link">Aller sur le forum</a>
+        <a href="http://patrimoine-forum.herokuapp.com" class="big_and_nice_link">Aller sur le forum</a>
       </div>
       <div class="clear"></div>
     </section>
@@ -241,8 +267,8 @@
     <section class="last_sec push50">
       <div class="text_block">
         <h4>Titre du témoignage</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-        <a href="#">En savoir plus »</a>
+        <p>Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+        <a routerLink="/ad_list">En savoir plus »</a>
       </div>
       <div class="img"><img src="images/demo/sec_3.jpg" alt=""></div>
       <div class="clear"></div>
@@ -254,30 +280,27 @@
     </section>
     <hr class="nospace push50">
     <h3 class="section_zag blue_zag">Presse</h3>
-    <!-- news -->
-    <section class="news push50">
-    	<div class="owl-carousel news_carousel">
-    		<div class="one-new">
+    <!-- news_list -->
+    <section class="news_list push50">
+    	<div class="owl-carousel news_list_carousel">
+    	<div class="one-new">
     			<img src="images/demo/sec_3.jpg" align="">
-    			<h4>The title of news</h4>
-    			<h6>The subtitle of news</h6>
-    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-    			<a href="#">En savoir plus »</a>
+    			<a routerLink="/news_list">En savoir plus »</a>
     		</div>
-    		<div class="one-new">
-    			<h4>The title of news</h4>
-    			<h6>The subtitle of news</h6>
+    		<!--<div class="one-new">
+    			<h4>The title of news_list</h4>
+    			<h6>The subtitle of news_list</h6>
     			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-    			<a href="#">En savoir plus »</a>
+    			<a routerLink="/news_list">En savoir plus »</a>
     			<img src="images/demo/sec_3.jpg" align="">
     		</div>
     		<div class="one-new">
     			<img src="images/demo/sec_3.jpg" align="">
-    			<h4>The title of news</h4>
-    			<h6>The subtitle of news</h6>
+    			<h4>The title of news_list</h4>
+    			<h6>The subtitle of news_list</h6>
     			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-    			<a href="#">En savoir plus »</a>
-    		</div>
+    			<a routerLink="/news_list">En savoir plus »</a>
+    		</div>-->
     	</div>
     </section>
     <hr class="nospace push50">
@@ -302,19 +325,20 @@
 jQuery(function ($) {
     $.supersized({
         slides: [{
-            image: '../images/demo/slider/1.png',
+           // image: '../images/demo/slider/1.png',
             title: 'Portail pour Professionnels du chiffre et du droit'
         }, {
-            image: '../images/demo/slider/2.png',
+            //image: '../images/demo/slider/2.png',
             title: "Solutions patrimoniales pour Particuliers et Chefs d'entreprises"
         }, {
-            image: '../images/demo/slider/3.png',
+            //image: '../images/demo/slider/3.png',
             title: ''
         }]
     });
 });
 
 $(document).ready(function(){
+   $('.owl-carousel').owlCarousel();
 	  $(".offres_carousel").owlCarousel({
 	  	items: 4,
 	  	margin: 10,
@@ -322,7 +346,7 @@ $(document).ready(function(){
 	  	navText: ['« Voir le précédent', 'Voir la prochaine »']
 	  });
 
-	  $(".news_carousel").owlCarousel({
+	  $(".news_list_carousel").owlCarousel({
 	  	items: 2,
 	  	margin: 50,
 	  	nav: true,
