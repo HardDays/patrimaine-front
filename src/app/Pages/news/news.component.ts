@@ -64,6 +64,12 @@ export class NewsComponent implements OnInit{
                 this.Params.sub_categories.push(params["category"]);
                 this.Subcategory = this.mainService.GetCheckboxesFromChecked(this.Params.sub_categories,this.Subcategory);
             }
+            if(params["title"])
+                this.Params.title = params["title"];
+            if(params["description"])
+                this.Params.description = params["description"];
+            if(params["c_type"])
+                this.Params.c_type = params["c_type"];
             this.GetAllNews();
         });
 
@@ -106,7 +112,9 @@ export class NewsComponent implements OnInit{
             this.Params.description = this.Params.description.toLowerCase();
         if(this.Params.title)
             this.Params.title = this.Params.title.toLowerCase();
-        console.log(this.Params);
+        let url:string = this.router.url.substring(0,this.router.url.indexOf(";"));
+        if(url)
+            this.router.navigateByUrl(url);
         this.GetAllNews();
     }
     ChangePageNumber(page:number){

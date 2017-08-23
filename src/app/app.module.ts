@@ -6,6 +6,8 @@ import { FormsModule }   from '@angular/forms';
 
 import { AppComponent }   from './app.component';
 //TODO import another components
+import { OwlModule } from 'angular-owl-carousel';
+
 import {MainService} from "./services/main.service";
 import { PageModule } from './Pages/pages.module';
 import { routs } from './Pages/pages.route';
