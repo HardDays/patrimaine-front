@@ -57,7 +57,16 @@ export class AdsComponent implements OnInit{
         private params: ActivatedRoute){}
     ngOnInit(){
         let category = this.params.params.forEach((params:Params) => {
+            this.Subcategory=[
+                new CheckboxModel("Classique","classique",false),
+                new CheckboxModel("E-brooker","e_brooker",false),
+                new CheckboxModel("Fintech","fintech",false),
+                new CheckboxModel("Crowdfunding","crowdfunding",false),
+                new CheckboxModel("Lendfunding","lendfunding",false),
+                new CheckboxModel("Institutionnels","institutionnels",false)
+            ];
             if(params["category"]){
+                
                 this.Params.sub_categories = [];
                 this.Params.sub_categories.push(params["category"]);
                 this.Subcategory = this.mainService.GetCheckboxesFromChecked(this.Params.sub_categories,this.Subcategory);

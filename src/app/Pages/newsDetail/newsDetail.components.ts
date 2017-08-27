@@ -16,7 +16,7 @@ import { NewsModel } from '../../models/news.model';
 })
 
 export class NewsDetailComponent implements OnInit{
-    News : NewsModel = new NewsModel(null,"","",null,null,null);
+    News : NewsModel = new NewsModel(null,"","",null,null,null,null,null,null,null,null);
     Author: UserModel = new UserModel(null,"","","","",null,null,null);
     IsLoading = true;
     constructor(

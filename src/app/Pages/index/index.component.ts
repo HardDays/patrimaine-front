@@ -15,7 +15,8 @@ export class IndexComponent implements OnInit{
         title:"",
         description:"",
         c_type:"",
-        subcategory:""
+        subcategory:"",
+        ntype:""
     }
     constructor(private router: Router,
         private mainService: MainService,

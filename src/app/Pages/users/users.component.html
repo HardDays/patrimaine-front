@@ -144,6 +144,12 @@
           <h6>User inforation</h6>
           <input type="text" name="user_name" value="" size="22" [ngModel]="Params.user_name" (ngModelChange)="Params.user_name=$event" placeholder="First- Lastname">
           <input type="text" name="user_email" value="" size="22" [ngModel]="Params.user_email" (ngModelChange)="Params.user_email=$event" placeholder="Email">
+
+          <h6 class="search-heared">User category</h6>
+          <div class="search_checkbox" *ngFor="let item of Pcategory">
+                <input style="float:left;" type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                <div style="margin-left:18px;margin-bottom:3px!important;">{{item.name}}</div>
+          </div>
           <button type="button" (click)="isAdvancedSearch=!isAdvancedSearch">
             <span size="5">{{isAdvancedSearch?"&uArr;":"&dArr;"}}</span> 
             Advanced Search 

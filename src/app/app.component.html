@@ -59,6 +59,27 @@
         <li class="active">
           <a routerLink="/">Accueil</a>
         </li>
+        <li><a class="drop" routerLink="/news_list">Annonces</a>
+          <ul *ngIf="IsDropped">
+              <li><a (click)="onMenuItemClick()" [routerLink]="['news_list']">Toutes</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['news_list',{ncategory:'finance'}]">Finance / Epargne / Assurance</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['news_list',{ncategory:'ecologique'}]">Placement écologique</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['news_list',{ncategory:'immobilier'}]">Investissement Immobilier</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['news_list',{ncategory:'plaisir'}]">Investissement plaisir</a></li>
+            </ul>
+        </li>
+        <li><a class="drop" routerLink="/users">Professionnels du Chiffre et du Droit </a>
+          <ul *ngIf="IsDropped">
+              <li><a (click)="onMenuItemClick()" [routerLink]="['users',{pcategory:'tous'}]">Tous</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['users',{pcategory:'assureurs'}]">Assureurs</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['users',{pcategory:'avocats'}]">Avocats</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['users',{pcategory:'patrimoine'}]">Conseillers en gestion de patrimoine</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['users',{pcategory:'prets'}]">Courtiers de prêts</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['users',{pcategory:'comptables'}]">Experts-comptables</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['users',{pcategory:'notaires'}]">Notaires</a></li>
+              <li><a (click)="onMenuItemClick()" [routerLink]="['users',{pcategory:'immobilier'}]">Professionnels de l'immobilier</a></li>
+            </ul>
+        </li> 
         <li><a class="drop" routerLink="/ad_list">Concepteurs de Solutions</a>
           <ul *ngIf="IsDropped">
             <li><a (click)="onMenuItemClick()" routerLink="/ad_list">Toutes</a></li>
@@ -69,10 +90,8 @@
             <li><a (click)="onMenuItemClick()" [routerLink]="['ad_list',{category:'lendfunding'}]">Lendfunding</a></li>
           </ul>
         </li>
-        <li><a routerLink="/users">Professionnels du Chiffre et du Droit </a>
-        </li>
-        <li><a routerLink="/news_list">Annonces</a>
-        </li>  
+        
+         
         <li><a href="http://patrimoine-forum.herokuapp.com">Forum du Patrimoine</a></li>      
       </ul>
     </nav>

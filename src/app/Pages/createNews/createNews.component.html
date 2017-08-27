@@ -18,9 +18,34 @@
                     <label>Title</label>
                     <input type="text" name="title" [(ngModel)]="title" required value="">
                     <br>
+                    <label>Subtitle</label>
+                    <input type="text" name="subtitle" [(ngModel)]="subtitle" required value="">
+                    <br>
+                    <label>Logo image</label>
+                    <input type="file" accept="image/*" name="logo_img" [(ngModel)]="logo_img" (change)="changeListener($event)">
+                    <br>
+                    <label>Category</label>
+                    <select name="ncategory" [(ngModel)]="ncategory" >
+                      <option value="toutes">Toutes</option>
+                      <option value="finance">Finance</option>
+                      <option value="ecologique">Ecologique</option>
+                      <option value="immobilier">Immobilier</option>
+                      <option value="plaisir">Plaisir</option>
+                    </select>
+                    <br>
+                    <label>Type</label>
+                    <select name="ntype" [(ngModel)]="ntype">
+                        <option value="standart" selected>Standart</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                    <br>
+                    <label>Links</label>
+                    <input type="text" name="links" [(ngModel)]="links" required value="">
+                    <br>
                     <label>Description</label>
-                    <textarea name="description" [(ngModel)]="description" required></textarea><br>
-                    <button (click)="OncreateNewsButtonClick(title,description)">Create annonce</button>
+                    <textarea name="description" [(ngModel)]="description" required></textarea>
+                    <br>
+                    <button [disabled]="!isOkEnabled" (click)="OncreateNewsButtonClick(title,subtitle,description,ncategory,ntype,links)">Create annonce</button>
                 </form>
             </div>
         </div>

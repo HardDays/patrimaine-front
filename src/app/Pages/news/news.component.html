@@ -30,7 +30,7 @@
                             <span class="date">{{news.created_at | date: dMMy}}</span>
                         </header>
                         <div class="user_block">
-                            <div class="img"><img class="borderedbox" src="../images/demo/imgl.gif" alt=""></div>
+                            <div class="img"><img class="borderedbox" [src]="Images[news.id]" alt=""></div>
                             <div class="desc">
                                 <p>{{news.description}}</p>
                                 <address>
@@ -61,8 +61,22 @@
             <form class="filter">
                 <h6 class="search-heared">Mot clé</h6>
                 <input type="text" name="title" id="title" value="" size="22" [ngModel]="Params.title" (ngModelChange)="Params.title = $event"  placeholder="Title">
-                <input type="text" name="description" id="description" value="" size="22" [ngModel]="Params.description" (ngModelChange)="Params.description = $event"  placeholder="description">
+                <input type="text" name="subtitle" id="subtitle" value="" size="22" [ngModel]="Params.subtitle" (ngModelChange)="Params.subtitle = $event"  placeholder="Subtitle">
+                <input type="text" name="description" id="description" value="" size="22" [ngModel]="Params.description" (ngModelChange)="Params.description = $event"  placeholder="Description">
                 
+                <h6 class="search-heared">Annonce type</h6>
+                <select name="ntype" [ngModel]="Params.ntype" (ngModelChange)="Params.ntype = $event" >
+                    <option value=""></option>
+                    <option value="standart">Standart</option>
+                    <option value="premium">Premium</option>
+                </select>
+
+                <h6 class="search-heared">Annonce categories</h6>
+                <div class="search_checkbox" *ngFor="let item of Ncategory">
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                </div>
+
                 <h6 class="search-heared">Company type</h6>
                 <select name="c_type" [ngModel]="Params.c_type" (ngModelChange)="Params.c_type = $event" >
                     <option value=""></option>

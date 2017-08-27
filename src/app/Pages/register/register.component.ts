@@ -46,11 +46,11 @@ export class RegisterComponent implements OnInit{
     }
     constructor(private router: Router,
         private mainService: MainService){}
-    RegisterUser(email:string,password:string,fname:string,lname:string,phone:string)
+    RegisterUser(email:string,password:string,fname:string,lname:string,phone:string,pcategory:string)
     {
         window.scrollTo(0,0);
         this.isLoading = true;
-        let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone);
+        let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
         console.log(JSON.stringify(user));
         this.mainService.CreateUser(user)
             .subscribe(x=>{
@@ -61,13 +61,13 @@ export class RegisterComponent implements OnInit{
         });
     }
 
-    RegisterUserCompany(email:string,password:string,fname:string,lname:string,phone:string,
+    RegisterUserCompany(email:string,password:string,fname:string,lname:string,phone:string,pcategory:string,
                         cname:string, caddress:string, coaddress:string, cemail:string, cphone:string, 
                         worktime:string, description:string, links:string, c_type:string, subcategory:string)
     {
         window.scrollTo(0,0);
         this.isLoading = true;
-        let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone);
+        let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
         let company : RegisterCompanyModel = new RegisterCompanyModel(cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory,this.image);
         console.log('AAAAAAAAAAAAAA');
         console.log(this.Expertises);

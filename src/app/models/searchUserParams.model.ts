@@ -13,6 +13,7 @@ export class SearchUserParamsModel{
         public expertises: string[],
         public agrements: string[],
         public user_email:string,
-        public user_name:string
+        public user_name:string,
+        public pcategory:string[]
     ){}
 }

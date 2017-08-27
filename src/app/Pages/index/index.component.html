@@ -130,9 +130,7 @@
         <h5 class="blue_zag">Rechercher une annonce</h5>
         <form action="">
           <div class="left_form_part">
-          	<label>Title</label>
-            <input type="text" value="" name="search.title" size="22" [ngModel]="search.title" (ngModelChange)="search.title = $event" placeholder="Title">
-            <br>
+          	
             <label>Comany type</label>
             <select name="search.c_type" [ngModel]="search.c_type" (ngModelChange)="search.c_type = $event">
               <option value=""></option>
@@ -140,11 +138,13 @@
               <option value="conseiller">Conseiller</option>
               <option value="both">Both</option>
             </select>
+            <br>
+            <label>Title</label>
+            <input type="text" value="" name="search.title" size="22" [ngModel]="search.title" (ngModelChange)="search.title = $event" placeholder="Title">
+            
           </div>
           <div class="center_form_part">
-              <label>Description</label>
-              <input type="text" name="search.description"  value="" size="22" [ngModel]="search.description" (ngModelChange)="search.description = $event" placeholder="Description">
-              <br>
+              
               <label>Subcategory</label>
               <select name="search.subcategory" [ngModel]="search.subcategory" (ngModelChange)="search.subcategory = $event">
                   <option value=""></option>
@@ -155,13 +155,21 @@
                   <option value="lendfunding">Lendfunding</option>
                   <option value="institutionnels">Institutionnels</option>
               </select>
+              <br>
+              <label>Description</label>
+              <input type="text" name="search.description"  value="" size="22" [ngModel]="search.description" (ngModelChange)="search.description = $event" placeholder="Description">
+              
           </div>
           <div class="right_form_part">
+            <label>Annonce type</label>
+            <select name="ntype" [ngModel]="search.ntype" (ngModelChange)="search.ntype = $event" >
+                <option value=""></option>
+                <option value="standart">Standart</option>
+                <option value="premium">Premium</option>
+            </select>
             <br>
             <br>
-            <br>
-            <br>
-            <button type="submit" (click)="SearchAnnonces()">Lancer la recherche »</button>
+            <button type="submit" (click)="SearchAnnonces()" style="margin-top: 10px;">Lancer la recherche »</button>
           </div>
           <div class="clear"></div>
         </form>

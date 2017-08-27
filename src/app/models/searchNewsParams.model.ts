@@ -7,6 +7,9 @@ export class SearchNewsParamsModel{
         public c_type: string,
         public sub_categories: string[],
         public expertises: string[],
-        public agrements: string[]
+        public agrements: string[],
+        public ncategory:string[],
+        public ntype:string,
+        public subtitle:string
     ){}
 }

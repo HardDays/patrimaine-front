@@ -23,7 +23,21 @@
           <input type="text" name="lname" [(ngModel)]="lname" required><br>
           <label>Phone</label>
           <input type="number" name="phone" [(ngModel)]="phone" required><br>
-          <button *ngIf="!isPro" (click)="RegisterUser(email,password,fname,lname,phone)">Register</button>
+
+          <label>Category</label>
+          <select name="pcategory" [(ngModel)]="pcategory" >
+            <option value=""></option>
+            <option value="tous">Tous</option>
+            <option value="assureurs">Assureurs</option>
+            <option value="avocats">Avocats</option>
+            <option value="patrimoine">Patrimoine</option>
+            <option value="prets">Prets</option>
+            <option value="comptables">Comptables</option>
+            <option value="notaires">Notaires</option>
+            <option value="immobilier">Immobilier</option>
+          </select>
+          <br>
+          <button *ngIf="!isPro" (click)="RegisterUser(email,password,fname,lname,phone,pcategory)">Register</button>
         </form>
 
         
@@ -100,7 +114,7 @@
               </div>
             </div>
           </div><br>
-          <button [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">Register</button>
+          <button [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,pcategory,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">Register</button>
         </form>
       </div>
       <div class="reg_block reg_right">

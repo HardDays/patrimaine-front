@@ -10,6 +10,7 @@ import { AllNewsModel} from "./../../models/allnews.model";
 import {MainService} from "./../../services/main.service";
 import { CheckboxModel } from '../../models/checkbox.model';
 import { SearchNewsParamsModel } from '../../models/searchNewsParams.model';
+import { Base64ImageModel } from '../../models/base64image.model';
 
 @Component({
     moduleId:module.id,
@@ -25,7 +26,7 @@ export class NewsComponent implements OnInit{
     Pages: number[] = [];
     Images: string[] = [];
     IsLoading = true;
-    Params: SearchNewsParamsModel = new SearchNewsParamsModel(0,null,null,null,null,null,null,null);
+    Params: SearchNewsParamsModel = new SearchNewsParamsModel(0,null,null,null,null,null,null,null,null,null,null);
     Expertises: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
         new CheckboxModel("Retraite","retraite",false),
@@ -53,13 +54,29 @@ export class NewsComponent implements OnInit{
         new CheckboxModel("Lendfunding","lendfunding",false),
         new CheckboxModel("Institutionnels","institutionnels",false)
     ];
+    Ncategory:CheckboxModel[]=[
+        new CheckboxModel("Toutes","toutes",false),
+        new CheckboxModel("Finance","finance",false),
+        new CheckboxModel("Ecologique","ecologique",false),
+        new CheckboxModel("Immobilier","immobilier",false),
+        new CheckboxModel("Plaisir","plaisir",false)
+    ]
 
     constructor(private router: Router,
         private mainService: MainService,
         private params: ActivatedRoute){}
     ngOnInit(){
         let category = this.params.params.forEach((params:Params) => {
+            this.Subcategory=[
+                new CheckboxModel("Classique","classique",false),
+                new CheckboxModel("E-brooker","e_brooker",false),
+                new CheckboxModel("Fintech","fintech",false),
+                new CheckboxModel("Crowdfunding","crowdfunding",false),
+                new CheckboxModel("Lendfunding","lendfunding",false),
+                new CheckboxModel("Institutionnels","institutionnels",false)
+            ];
             if(params["category"]){
+                
                 this.Params.sub_categories = [];
                 this.Params.sub_categories.push(params["category"]);
                 this.Subcategory = this.mainService.GetCheckboxesFromChecked(this.Params.sub_categories,this.Subcategory);
@@ -70,6 +87,10 @@ export class NewsComponent implements OnInit{
                 this.Params.description = params["description"];
             if(params["c_type"])
                 this.Params.c_type = params["c_type"];
+            if(params["ntype"])
+                this.Params.ntype = params["ntype"];
+            if(params["ncategory"])
+                this.Params.ncategory = params["ncategory"];
             this.GetAllNews();
         });
 
@@ -95,7 +116,25 @@ export class NewsComponent implements OnInit{
                     i+=10;
                 }
                 if(this.Pages.length == 1)this.Pages = [];
-                this.IsLoading = false;
+                let total=0;
+                let current = 0;
+                for(let item of this.News){
+                    total+=1;
+                    if(item && item.image_id){
+                        
+                        this.mainService.GetImageById(item.image_id)
+                            .subscribe((result:Base64ImageModel)=>{
+                                this.Images[item.id] = result.base64;
+                                current+=1;
+                                if(total == current)this.IsLoading = false;
+                            });
+                    }
+                    else {
+                        this.Images[item.id]="images/demo/patrimoineLogo.png";
+                        current+=1;
+                        if(total == current)this.IsLoading = false;
+                    }
+                }
             });
     }
 
@@ -107,14 +146,19 @@ export class NewsComponent implements OnInit{
         this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
         this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
         this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
+        this.Params.ncategory = this.mainService.GetCheckedCheckboxes(this.Ncategory);
 
         if(this.Params.description)
             this.Params.description = this.Params.description.toLowerCase();
         if(this.Params.title)
             this.Params.title = this.Params.title.toLowerCase();
+        if(this.Params.subtitle)
+            this.Params.subtitle = this.Params.subtitle.toLowerCase();
+
         let url:string = this.router.url.substring(0,this.router.url.indexOf(";"));
         if(url)
             this.router.navigateByUrl(url);
+        console.log(this.Params);
         this.GetAllNews();
     }
     ChangePageNumber(page:number){

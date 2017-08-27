@@ -215,8 +215,7 @@ import { TokenModel } from '../models/token.model';
             return this.httpService.GetData('/news/info/'+id,"");
         }
 
-        CreateNews(title:string, descr:string){
-            let params = {title:title,description:descr};
+        CreateNews(params:any){
                 
             /*return AdsPromise
                 .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));*/

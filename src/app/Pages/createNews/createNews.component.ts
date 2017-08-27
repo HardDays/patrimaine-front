@@ -18,6 +18,8 @@ export class CreateNewsComponent implements OnInit{
     createError = false;
     isLoading = true;
     errorMsg:string = "";
+    isOkEnabled = false;
+    image:string = "";
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -29,17 +31,41 @@ export class CreateNewsComponent implements OnInit{
         this.isLoading = false;
     }
 
-    OncreateNewsButtonClick(title:string,description:string){
+    changeListener($event: any) : void {
+        this.isOkEnabled = false;
+        this.readThis($event.target);
+    }
+
+    readThis(inputValue: any): void {
+        var file:File = inputValue.files[0];
+        var myReader:FileReader = new FileReader();
+
+        myReader.onloadend = (e) => {
+            this.image = myReader.result;
+            this.isOkEnabled = true;
+            console.log(this.image);
+        }
+        myReader.readAsDataURL(file);
+    }
+
+    OncreateNewsButtonClick(title:string,subtitle:string,description:string,ncategory:string,ntype:string,links:string){
         this.isLoading = true;
-        console.log(title);
-        console.log(description);
         if(!title || !description){
             this.errorMsg = "Input valid data!";
             this.createError = true;
             this.isLoading = false;
             return;
         }
-        this.service.CreateNews(title,description)
+        let annonce = {
+            title:title,
+            subtitle:subtitle,
+            base64:this.image,
+            links:links,
+            ncategory:ncategory,
+            ntype:ntype,
+            description:description
+        };
+        this.service.CreateNews(annonce)
             .subscribe((result:NewsModel)=>{
                 console.log("Result of creation: " + JSON.stringify(result));
                 this.router.navigate(['news',result.id]);

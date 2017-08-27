@@ -31,7 +31,7 @@ export class UsersComponent implements OnInit{
     MyRates:number[] = [];
     MyLikes:boolean[]=[];
     isAdvancedSearch = false;
-    Params: SearchUserParamsModel = new SearchUserParamsModel(0,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    Params: SearchUserParamsModel = new SearchUserParamsModel(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     Expertises: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
         new CheckboxModel("Retraite","retraite",false),
@@ -59,6 +59,16 @@ export class UsersComponent implements OnInit{
         new CheckboxModel("Lendfunding","lendfunding",false),
         new CheckboxModel("Institutionnels","institutionnels",false)
     ];
+    Pcategory:CheckboxModel[]=[
+        new CheckboxModel("Tous","tous",false),
+        new CheckboxModel("Assureurs","assureurs",false),
+        new CheckboxModel("Avocats","avocats",false),
+        new CheckboxModel("Conseillers en gestion de patrimoine","patrimoine",false),
+        new CheckboxModel("Courtiers de prêts","prets",false),
+        new CheckboxModel("Experts-comptables","comptables",false),
+        new CheckboxModel("Notaires","notaires",false),
+        new CheckboxModel("Professionnels de l'immobilier","immobilier",false)
+    ];
     ErrorMesages:string[] = [];
 
     constructor(private router: Router,
@@ -69,6 +79,22 @@ export class UsersComponent implements OnInit{
         this.params.params.forEach((params:Params) => {
             this.Category = params["category"]?params["category"]:"";
             this.Page = params["page"]?(params["page"]):1;
+            this.Pcategory=[
+                new CheckboxModel("Tous","tous",false),
+                new CheckboxModel("Assureurs","assureurs",false),
+                new CheckboxModel("Avocats","avocats",false),
+                new CheckboxModel("Conseillers en gestion de patrimoine","patrimoine",false),
+                new CheckboxModel("Courtiers de prêts","prets",false),
+                new CheckboxModel("Experts-comptables","comptables",false),
+                new CheckboxModel("Notaires","notaires",false),
+                new CheckboxModel("Professionnels de l'immobilier","immobilier",false)
+            ];
+            if(params["pcategory"]){
+                
+                this.Params.pcategory = [];
+                this.Params.pcategory.push(params["pcategory"]);
+                this.Pcategory = this.mainService.GetCheckboxesFromChecked(this.Params.pcategory,this.Pcategory);
+            }
             this.GetUsers();
         });
             
@@ -153,6 +179,7 @@ export class UsersComponent implements OnInit{
         this.Params.expertises = this.mainService.GetCheckedCheckboxes(this.Expertises);
         this.Params.agrements = this.mainService.GetCheckedCheckboxes(this.Agreements);
         this.Params.sub_categories = this.mainService.GetCheckedCheckboxes(this.Subcategory);
+        this.Params.pcategory = this.mainService.GetCheckedCheckboxes(this.Pcategory);
 
         if(this.Params.address)
             this.Params.address = this.Params.address.toLowerCase();
