@@ -571,7 +571,7 @@ var LoginComponent = (function () {
             .subscribe(function (data) {
             if (data && data.token) {
                 _this.mainService.BaseInitAfterLogin(data);
-                // this.router.navigate(["/"]);
+                _this.router.navigate(["/"]);
             }
         }, function (err) {
             if (err.status == 401) {

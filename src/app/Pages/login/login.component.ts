@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
             .subscribe((data:TokenModel)=>{
                 if(data && data.token){
                     this.mainService.BaseInitAfterLogin(data);
-                   // this.router.navigate(["/"]);
+                    this.router.navigate(["/"]);
                 }
             },
         (err)=>{
