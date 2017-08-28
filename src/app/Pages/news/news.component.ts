@@ -11,6 +11,7 @@ import {MainService} from "./../../services/main.service";
 import { CheckboxModel } from '../../models/checkbox.model';
 import { SearchNewsParamsModel } from '../../models/searchNewsParams.model';
 import { Base64ImageModel } from '../../models/base64image.model';
+import { UserModel } from '../../models/user.model';
 
 @Component({
     moduleId:module.id,
@@ -25,6 +26,7 @@ export class NewsComponent implements OnInit{
     Page: number=1;
     Pages: number[] = [];
     Images: string[] = [];
+    Users:string[]=[];
     IsLoading = true;
     Params: SearchNewsParamsModel = new SearchNewsParamsModel(0,null,null,null,null,null,null,null,null,null,null);
     Expertises: CheckboxModel[] = [
@@ -104,10 +106,15 @@ export class NewsComponent implements OnInit{
         this.mainService.GetAllNews(this.Params)
             .subscribe((res:AllNewsModel)=>{
                 this.News = res.news;
+                this.Users = [];
                 for(let k in this.News){
                     if(this.News[k].title && this.News[k].title.length > 40){
                         this.News[k].title = this.News[k].title.slice(0,40) +"...";
                     }
+                    this.mainService.GetUserById(this.News[k].user_id)
+                    .subscribe((user:UserModel)=>{
+                        this.Users[this.News[k].id] = user.first_name + " " + user.last_name;
+                    });
                 }
                 let i = 0;
                 this.Pages = [];
@@ -116,6 +123,7 @@ export class NewsComponent implements OnInit{
                     i+=10;
                 }
                 if(this.Pages.length == 1)this.Pages = [];
+                
                 let total=0;
                 let current = 0;
                 for(let item of this.News){

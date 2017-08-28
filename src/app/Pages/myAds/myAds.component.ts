@@ -16,7 +16,7 @@ import { AdsModel } from '../../models/ads.model';
 })
 
 export class MyAdsComponent implements OnInit{
-    User : UserModel = new UserModel(null,"","","","",null,null,null);
+    User : UserModel = new UserModel(null,"","","","",null,null,null,null,null);
     myAds:AdsModel[];
     IsLoading = true;
     constructor(

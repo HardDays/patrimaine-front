@@ -16,7 +16,7 @@ import { NewsModel } from '../../models/news.model';
 })
 
 export class MyNewsComponent implements OnInit{
-    User : UserModel = new UserModel(null,"","","","",null,null,null);
+    User : UserModel = new UserModel(null,"","","","",null,null,null,null,null);
     myNews:NewsModel[];
     IsLoading = true;
     constructor(

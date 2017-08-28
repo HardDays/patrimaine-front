@@ -34,7 +34,7 @@
                             <div class="desc">
                                 <p>{{news.description}}</p>
                                 <address>
-                                    <a [routerLink]="['/users/' + news.user_id]">Author</a>
+                                    <a [routerLink]="['/users/' + news.user_id]">{{Users[news.id]}}</a>
                                 </address>
                             </div>
                         </div>

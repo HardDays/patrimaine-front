@@ -8,6 +8,7 @@ import { SearchUserParamsModel } from '../../models/searchUserParams.model';
 import { SearchAdsParamsModel } from '../../models/searchAdsParams.model';
 import { AdsModel } from '../../models/ads.model';
 import { CheckboxModel } from '../../models/checkbox.model';
+import { UserModel } from '../../models/user.model';
 
 @Component({
     moduleId:module.id,
@@ -22,6 +23,7 @@ export class AdsComponent implements OnInit{
     Page: number=1;
     Pages: number[] = [];
     Images: string[] = [];
+    Users:string[] = [];
     IsLoading = true;
     Params: SearchAdsParamsModel = new SearchAdsParamsModel(0,null,null,null,null,null,null,null,null);
     Expertises: CheckboxModel[] = [
@@ -92,10 +94,16 @@ export class AdsComponent implements OnInit{
         this.mainService.GetAllAds(this.Params)
             .subscribe((res:AllAdsModel)=>{
                 this.AdsObservable = res.ads;
+                this.Users = [];
                 for(let k in this.AdsObservable){
                     if(this.AdsObservable[k].title && this.AdsObservable[k].title.length > 40){
                         this.AdsObservable[k].title = this.AdsObservable[k].title.slice(0,40) +"...";
                     }
+
+                    this.mainService.GetUserById(this.AdsObservable[k].user_id)
+                        .subscribe((user:UserModel)=>{
+                            this.Users[this.AdsObservable[k].id] = user.first_name + " " + user.last_name;
+                        });
                 }
                 let i = 0;
                 this.Pages = [];

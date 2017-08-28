@@ -165,8 +165,13 @@ import { TokenModel } from '../models/token.model';
         }
 
 
-        UpdateUser(user:UserModel){
-            return this.httpService.PutData('/users/update',JSON.stringify(user));
+        UpdateUser(id:number, user:any){
+            return this.httpService.PutData('/users/update/'+id,JSON.stringify(user));
+        }
+
+        UpdateMe(params:any){
+            console.log(JSON.stringify(params));
+            return this.httpService.PutData('/users/update_me',JSON.stringify(params));
         }
 
         UserLogin(email:string, password:string){

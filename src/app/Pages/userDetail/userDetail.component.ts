@@ -18,7 +18,7 @@ import { CheckboxModel } from '../../models/checkbox.model';
 })
 
 export class UserDetailComponent implements OnInit{
-    User : UserModel = new UserModel(null,"","","","",null,null,null);
+    User : UserModel = new UserModel(null,"","","","",null,null,null,null,null);
     ImageBase64:string = null;
     isMe = false;
     IsLoading = true;
@@ -64,7 +64,6 @@ export class UserDetailComponent implements OnInit{
     ngOnInit() {
         this.activatedRoute.params.forEach((params:Params) => {
             let userId = params["id"];
-            console.log(userId);
             //TODO: REWRITE THIS HARDCODE
             if(userId == 'me'){
                 this.isMe = true;
@@ -83,9 +82,18 @@ export class UserDetailComponent implements OnInit{
             }
         });
     }
+
+    EmailSubscription(){
+        let hasNotify:boolean = this.User.has_email_notifications;
+        this.service.UpdateMe({user:{has_email_notifications: !hasNotify}})
+            .subscribe((result:UserModel)=>{
+                this.User = result;
+            });
+    }
+
     AfterGettingOfUserInfo(user: UserModel){
         this.User = user;
-        
+        console.log(this.User);
         if(this.User.company){
             this.Agreements = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.agrements,this.AgreementsCB);
             this.Expertises = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.expertises,this.ExpertisesCB);

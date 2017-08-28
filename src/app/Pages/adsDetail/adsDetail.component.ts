@@ -17,7 +17,7 @@ import { AdsModel } from '../../models/ads.model';
 
 export class AdsDetailComponent implements OnInit{
     Ads : AdsModel = new AdsModel(null,"","","",null,null,null,null,null,"",null,null);
-    Author: UserModel = new UserModel(null,"","","","",null,null,null);
+    Author: UserModel = new UserModel(null,"","","","",null,null,null,null,null);
     IsLoading = true;
     constructor(
         private router: Router,

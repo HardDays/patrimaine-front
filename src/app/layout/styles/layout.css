@@ -1018,4 +1018,35 @@ input::-webkit-inner-spin-button {
     height: 100px;
     width: 141px;
 }
-
+.news-description{
+    text-align: justify;
+}
+.left{
+    float:left;
+}
+.image-news-info{
+    width:200px;
+}
+.news-info-right{
+    margin-left:250px;
+}
+a.upper-first::first-letter{
+    text-transform: uppercase;
+}
+.subscribe-button{
+    position: relative;
+    top: 160px;
+    left: 250px;
+    width: 250px;
+    height: 40px;
+    background: #56AED4;
+    color: white;
+    border: 0;
+    padding: 10px 0;
+}
+.right{
+    float: right;
+} 
+.height200{
+    min-height: 200px;
+}

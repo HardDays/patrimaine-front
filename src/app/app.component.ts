@@ -16,7 +16,7 @@ export class AppComponent  implements OnInit {
     
     isLoggedIn:boolean = false;
     IsDropped = true;
-    me: UserModel = new UserModel(null,"","","","",null,null,null); 
+    me: UserModel = new UserModel(null,"","","","",null,null,null,null,null); 
     constructor(private router: Router,
         private mainService: MainService){}
     ngOnInit(){

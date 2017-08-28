@@ -17,12 +17,33 @@
     <h1 align="center"><a href="">{{News.title}}</a></h1>
     <p>
     </p>
-    <pre>
+    <div class="news-description">
       {{News.description}}
-    </pre>
-    <p align="right">
-      <b>Author: <a >{{Author.first_name + " " + Author.last_name}}</a></b>
-    </p>
+      <hr>
+    </div>
+    <div>
+      <div class="left img image-news-info">
+          <img class="borderedbox" [src]="Image" alt="">
+      </div>
+      <div class="news-info-right">
+          <p *ngIf="News.subtitle">
+            <b>Subtitle: <a >{{News.subtitle}}</a></b>
+          </p>
+          <p >
+            <b>Author: <a >{{Author.first_name + " " + Author.last_name}}</a></b>
+          </p>
+          <p *ngIf="News.ncategory">
+            <b>Category: <a class="upper-first" >{{News.ncategory}}</a></b>
+          </p>
+          <p *ngIf="News.ntype">
+            <b>Type: <a class="upper-first" >{{News.ntype}}</a></b>
+          </p>
+          <p *ngIf="News.links">
+            <b>Links: <a >{{News.links}}</a></b>
+          </p>
+      </div>
+    </div>
+    
     <!-- ########################################################################################## -->
     <!-- / container body -->
     <div class="clear"></div>

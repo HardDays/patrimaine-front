@@ -8,6 +8,8 @@ export class UserModel{
         public phone: string,
         public created_at: Date,
         public updated_at: Date,
+        public has_email_notifications:boolean,
+        public pcategory:string,
         public company: CompanyModel
     ){
         /*if(first_name == null)
