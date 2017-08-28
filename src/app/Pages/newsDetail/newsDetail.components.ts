@@ -37,7 +37,7 @@ export class NewsDetailComponent implements OnInit{
             let newsId = params["id"];
             this.service
                 .GetNewsById(newsId)
-                .subscribe((data:NewsModel) => {
+                .subscribe((data) => {
                     this.News = data;
                     let isAuthorLoaded = false;
                     let isImageLoaded = false;
