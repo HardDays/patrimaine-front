@@ -63,7 +63,7 @@ File: Layout CSS
 
 /* Content Area
 ---------------------------------------------------------------------------------------------------------------*/
-#container{padding:50px 0;}
+#container{padding:0px 0px 0px 0px;}
 
 /* Content */
 #container #content{}
@@ -1049,4 +1049,10 @@ a.upper-first::first-letter{
 } 
 .height200{
     min-height: 200px;
+}
+.push25{
+    margin-bottom: 25px;
+}
+#slider{
+    height: 450px!important;
 }
