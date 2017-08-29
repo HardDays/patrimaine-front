@@ -12,7 +12,7 @@
       <div class="reg_block reg_left">
         <h2 *ngIf="!isPro">Professionnels du chiffre et du droit</h2>
         <h2 *ngIf="isPro">Concepteurs de Solutions</h2>
-        <form action="">
+        <form (ngSubmit)="RegisterUser(email,password,fname,lname,phone,pcategory)">
           <label>Email</label>
           <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
           <label>Password</label>
@@ -37,7 +37,7 @@
             <option value="immobilier">Immobilier</option>
           </select>
           <br>
-          <button *ngIf="!isPro" (click)="RegisterUser(email,password,fname,lname,phone,pcategory)">Register</button>
+          <button *ngIf="!isPro" type="submit">Register</button>
         </form>
 
         
