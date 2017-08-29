@@ -566,7 +566,10 @@ var LoginComponent = (function () {
             .subscribe(function (data) {
             if (data && data.token) {
                 _this.mainService.BaseInitAfterLogin(data);
-                _this.router.navigate(["/"]);
+                setTimeout(function () {
+                    _this.router.navigate(['/']);
+                }, 5000);
+                //this.router.navigate(["/"]);
             }
         }, function (err) {
             if (err.status == 401) {
