@@ -187,7 +187,13 @@ import { TokenModel } from '../models/token.model';
 
         BaseInitAfterLogin(data:TokenModel){
             this.cookiesService.set('token',data.token);
-            this.httpService.BaseInitByToken(data.token);
+
+            setTimeout(() => 
+            {
+               this.httpService.BaseInitByToken(data.token);
+            },
+            5000);
+            //this.httpService.BaseInitByToken(data.token);
             this.GetMe()
             .subscribe((user:UserModel)=>{
                     this.me = user;
