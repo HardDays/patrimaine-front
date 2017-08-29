@@ -5,7 +5,7 @@ const app = express();
 // in the dist directory
 const root = __dirname + '/dist';
 app.use(express.static(root));
-app.use(fallback('index.html', { root }))
+//app.use(fallback('index.html', { root }))
 
 // Start the app by listening on the default
 // Heroku port
