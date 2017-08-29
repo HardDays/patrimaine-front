@@ -14,7 +14,11 @@ import { TokenModel } from '../../models/token.model';
 export class LoginComponent implements OnInit{
     isLoading  = false;
     isLoginErr = false;
+    _username = "";
+    _password = "";
+    
     ngOnInit(): void {
+
     }
     constructor(private router: Router,
         private mainService: MainService){}
@@ -24,11 +28,11 @@ export class LoginComponent implements OnInit{
     {
         this.isLoading = true;
         this.isLoginErr = false;
-        this.mainService.UserLogin(username,password)
+        this.mainService.UserLogin(this._username, this._password)
             .subscribe((data:TokenModel)=>{
                 if(data && data.token){
-                    this.router.navigate(["/"]);
                     this.mainService.BaseInitAfterLogin(data);
+                    this.router.navigate(["/"]);
                 }
             },
         (err)=>{

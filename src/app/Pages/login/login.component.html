@@ -13,11 +13,11 @@
       <h1>Login</h1>
       <form >
         <label>Email</label>
-        <input type="text" name="email" [(ngModel)]="email">
+        <input type="text" name="_email" [(ngModel)]="email">
         <br>
         <label>Password</label>
-        <input type="password" name="password" [(ngModel)]="password"><br>
-        <button (click)="OnLoginButtonClick(email,password)">Login</button>
+        <input type="password" name="_password" [(ngModel)]="password"><br>
+        <button (click)="OnLoginButtonClick()">Login</button>
       </form>
     </div>
 
