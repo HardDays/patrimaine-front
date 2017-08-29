@@ -3,12 +3,14 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { HttpService} from './services/http.service';
 import { UserModel } from './models/user.model';
 
+
 import {MainService} from "./services/main.service";
+
      
 @Component({
     moduleId:module.id,
     selector: 'patrimoine',
-    templateUrl: './app.component.html',
+    templateUrl: './app.component.html'
     
 })
 export class AppComponent  implements OnInit {
@@ -16,6 +18,7 @@ export class AppComponent  implements OnInit {
     
     isLoggedIn:boolean = false;
     IsDropped = true;
+    cookies:Object;
     me: UserModel = new UserModel(null,"","","","",null,null,null,null,null); 
     constructor(private router: Router,
         private mainService: MainService){}
@@ -38,6 +41,8 @@ export class AppComponent  implements OnInit {
             (err)=>this.router.navigate(["/"]),
             ()=>this.router.navigate(["/"]));
     }
+
+
 
     //KASTIL', spasibo angularu za eto
     onMenuItemClick(){

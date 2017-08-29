@@ -31,7 +31,6 @@ export class MyNewsComponent implements OnInit{
                 .subscribe((data:UserModel) => {
                     if(data.id){
                         this.User = data;
-                        console.log(this.User);
                         // TODO: create getting my news
                         this.service.GetAllNews({user_id:data.id})
                             .subscribe((result:NewsModel[])=>{
@@ -44,7 +43,6 @@ export class MyNewsComponent implements OnInit{
         
     }
     OnDeleteAd(ad: NewsModel){
-        console.log(ad);
         this.service.DeleteNews(ad.id)
             .subscribe(result =>{
                 this.service.GetAllNews({user_id:this.User.id})

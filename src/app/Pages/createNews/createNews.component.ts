@@ -43,7 +43,6 @@ export class CreateNewsComponent implements OnInit{
         myReader.onloadend = (e) => {
             this.image = myReader.result;
             this.isOkEnabled = true;
-            console.log(this.image);
         }
         myReader.readAsDataURL(file);
     }
@@ -67,7 +66,6 @@ export class CreateNewsComponent implements OnInit{
         };
         this.service.CreateNews(annonce)
             .subscribe((result:NewsModel)=>{
-                console.log("Result of creation: " + JSON.stringify(result));
                 this.router.navigate(['news',result.id]);
             },
             (err)=>{

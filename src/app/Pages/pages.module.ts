@@ -22,6 +22,7 @@ import { MyAdsComponent } from './myAds/myAds.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 import { MyNewsComponent } from './myNews/myNews.component';
+import { CookieService } from 'ng2-cookies';
 
 @NgModule({
     imports:      [ CommonModule,FormsModule,RouterModule ],
@@ -39,7 +40,7 @@ import { MyNewsComponent } from './myNews/myNews.component';
         UnauthorizedComponent, NotFoundComponent,NewsComponent,
         NewsDetailComponent, CreateNewsComponent, MyNewsComponent
     ],
-    providers: [HttpService, PageAccessGuard]
+    providers: [HttpService, PageAccessGuard,CookieService]
 })
 
 export class PageModule { }

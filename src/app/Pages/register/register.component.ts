@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit{
         window.scrollTo(0,0);
         this.isLoading = true;
         let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
-        console.log(JSON.stringify(user));
         this.mainService.CreateUser(user)
             .subscribe(x=>{
                 this.AfterRegistration(x);
@@ -69,9 +68,7 @@ export class RegisterComponent implements OnInit{
         this.isLoading = true;
         let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
         let company : RegisterCompanyModel = new RegisterCompanyModel(cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory,this.image);
-        console.log('AAAAAAAAAAAAAA');
-        console.log(this.Expertises);
-        console.log(JSON.stringify(user));
+        
         this.mainService.CreateUserCompany(user, company, this.GetCheckedCheckboxes(this.Expertises), this.GetCheckedCheckboxes(this.Agreements))
             .subscribe(x=>{
                 this.AfterRegistration(x);
@@ -82,7 +79,6 @@ export class RegisterComponent implements OnInit{
     }
 
     OnRegError(err:any){
-        console.log(err);
         if(err.status == 400)
         {
             this.regErrorMsg = "Something went wrong! Input correct data!";
@@ -113,7 +109,6 @@ export class RegisterComponent implements OnInit{
             myReader.readAsDataURL(file);
         }
         AfterRegistration(user: UserModel){
-            console.log(user);
             if(user && user.id){
                 this.isLoading = false;
                 this.regOk = true;
@@ -125,7 +120,6 @@ export class RegisterComponent implements OnInit{
             let checked:CheckboxModel[]=input.filter(x=>x.checked);
             for(let i of checked)
                 result.push(i.value);
-            console.log(result);
             return result;
         }
         ChangeUserType(){

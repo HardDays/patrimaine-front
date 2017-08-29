@@ -93,7 +93,6 @@ export class UserDetailComponent implements OnInit{
 
     AfterGettingOfUserInfo(user: UserModel){
         this.User = user;
-        console.log(this.User);
         if(this.User.company){
             this.Agreements = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.agrements,this.AgreementsCB);
             this.Expertises = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.expertises,this.ExpertisesCB);
@@ -175,7 +174,6 @@ export class UserDetailComponent implements OnInit{
         let fullWidth:number = event.toElement.clientWidth;
         let posX:number = event.offsetX;
         let rate =  4 * posX / fullWidth + 1;
-        console.log(rate);
         this.service.RateUser(this.User.id,rate)
             .subscribe(
                 (result: UserModel)=>{
@@ -191,7 +189,6 @@ export class UserDetailComponent implements OnInit{
             );
     }
     UnrateUser(){
-        console.log('unrate');
         this.service.UnrateUser(this.User.id)
             .subscribe(
                 (result: UserModel)=>{

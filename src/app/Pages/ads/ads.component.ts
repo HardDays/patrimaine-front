@@ -131,7 +131,6 @@ export class AdsComponent implements OnInit{
         if(this.Params.title)
             this.Params.title = this.Params.title.toLowerCase();
         let url:string = this.router.url.substring(0,this.router.url.indexOf(";"));
-        console.log(url);
         if(url)
             this.router.navigateByUrl(url);
         this.GetAllAds();

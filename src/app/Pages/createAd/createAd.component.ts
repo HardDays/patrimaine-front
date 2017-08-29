@@ -38,7 +38,6 @@ export class CreateAdComponent implements OnInit{
         }
         this.service.CreateAd(title,description)
             .subscribe((result:AdsModel)=>{
-                console.log("Result of creation: " + JSON.stringify(result));
                 this.router.navigate(['ads',result.id]);
             },
             (err)=>{

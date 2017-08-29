@@ -31,7 +31,6 @@ export class MyAdsComponent implements OnInit{
                 .subscribe((data:UserModel) => {
                     if(data.id){
                         this.User = data;
-                        console.log(this.User);
                         this.service.GetAllAds({user_id:data.id})
                             .subscribe((result:AllAdsModel)=>{
                                 this.myAds = result.ads;
@@ -43,7 +42,6 @@ export class MyAdsComponent implements OnInit{
         
     }
     OnDeleteAd(ad: AdsModel){
-        console.log(ad);
         this.service.DeleteAd(ad)
             .subscribe(result =>{
                 this.service.GetAllAds({user_id:this.User.id})

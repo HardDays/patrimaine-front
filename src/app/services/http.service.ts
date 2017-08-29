@@ -23,7 +23,6 @@ export class HttpService
     BaseInitByToken(data:string)
     {
         if(data){
-            localStorage.setItem('token',data);
             if(this.headers.has('Authorization'))
                 this.headers.delete('Authorization');
             this.headers.append('Authorization',data);

@@ -14,6 +14,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/Rx';
 import {Subject} from 'rxjs/Subject';
+import { CookieService } from 'ng2-cookies';
 import { GetParamsModel } from '../models/getparams.model';
 import { UserModel } from '../models/user.model';
 import { CheckboxModel } from '../models/checkbox.model';
@@ -25,7 +26,8 @@ import { TokenModel } from '../models/token.model';
         public onAuthChange$: Subject<boolean>;
         constructor(
             public httpService : HttpService,
-            private router: Router
+            private router: Router,
+            private cookiesService:CookieService
         ){
             this.onAuthChange$ = new Subject();
             this.onAuthChange$.next(false);
@@ -161,16 +163,16 @@ import { TokenModel } from '../models/token.model';
                 expertises: expertises,
                 agrements: agrements
             };
+            
             return this.httpService.PostData('/users/create',JSON.stringify(params));
         }
-
+        
 
         UpdateUser(id:number, user:any){
             return this.httpService.PutData('/users/update/'+id,JSON.stringify(user));
         }
 
         UpdateMe(params:any){
-            console.log(JSON.stringify(params));
             return this.httpService.PutData('/users/update_me',JSON.stringify(params));
         }
 
@@ -184,6 +186,7 @@ import { TokenModel } from '../models/token.model';
         }
 
         BaseInitAfterLogin(data:TokenModel){
+            this.cookiesService.set('token',data.token);
             this.httpService.BaseInitByToken(data.token);
             this.GetMe()
             .subscribe((user:UserModel)=>{
@@ -194,7 +197,8 @@ import { TokenModel } from '../models/token.model';
 
         TryToLoginWithToken()
         {
-            let token = localStorage.getItem('token');
+            let token = this.cookiesService.get('token');
+            //let token = window.localStorage.getItem('token');
             if(token)
             {
                 this.BaseInitAfterLogin(new TokenModel(token));
@@ -207,7 +211,8 @@ import { TokenModel } from '../models/token.model';
             this.httpService.token = null;
             this.httpService.headers.delete('Authorization');
             this.onAuthChange$.next(false);
-            localStorage.removeItem('token');
+            this.cookiesService.delete('token');
+            //window.localStorage.removeItem('token');
             return this.httpService.PostData("/auth/logout",null);
             
         }

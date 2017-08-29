@@ -24,7 +24,6 @@ export class IndexComponent implements OnInit{
     ngOnInit(){ }
     SearchAnnonces()
     {
-        console.log(this.search);
         this.router.navigate(['news_list',this.search]);
     }
 }
