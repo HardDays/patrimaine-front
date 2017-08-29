@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpService} from '../../services/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MainService } from '../../services/main.service';
@@ -24,6 +24,7 @@ export class IndexComponent implements OnInit{
     ngOnInit(){ }
     SearchAnnonces()
     {
+        this.mainService.ChangePage('news');
         this.router.navigate(['news_list',this.search]);
     }
 }

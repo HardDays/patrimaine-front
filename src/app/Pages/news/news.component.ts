@@ -106,6 +106,10 @@ export class NewsComponent implements OnInit{
         this.mainService.GetAllNews(this.Params)
             .subscribe((res:AllNewsModel)=>{
                 this.News = res.news;
+                if(this.News.length == 0){
+                    this.IsLoading = false;
+                    return;
+                }
                 this.Users = [];
                 for(let k in this.News){
                     if(this.News[k].title && this.News[k].title.length > 40){
@@ -166,7 +170,6 @@ export class NewsComponent implements OnInit{
         let url:string = this.router.url.substring(0,this.router.url.indexOf(";"));
         if(url)
             this.router.navigateByUrl(url);
-        console.log(this.Params);
         this.GetAllNews();
     }
     ChangePageNumber(page:number){

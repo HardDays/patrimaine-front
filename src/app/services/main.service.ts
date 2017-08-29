@@ -24,6 +24,7 @@ import { TokenModel } from '../models/token.model';
     export class MainService{
 
         public onAuthChange$: Subject<boolean>;
+        public onPageChange$: Subject<string>;
         constructor(
             public httpService : HttpService,
             private router: Router,
@@ -32,6 +33,8 @@ import { TokenModel } from '../models/token.model';
             
             this.onAuthChange$ = new Subject();
             this.onAuthChange$.next(false);
+            this.onPageChange$ = new Subject();
+            this.onPageChange$.next('index');
             
         }
         public me: UserModel;
@@ -78,6 +81,10 @@ import { TokenModel } from '../models/token.model';
                     result.push(res.name);
             }
             return result;
+        }
+
+        ChangePage(page:string){
+            this.onPageChange$.next(page);
         }
 
         GetAllAds(params : any){

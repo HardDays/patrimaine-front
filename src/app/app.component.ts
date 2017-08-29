@@ -19,6 +19,7 @@ export class AppComponent  implements OnInit {
     isLoggedIn:boolean = false;
     IsDropped = true;
     cookies:Object;
+    currentMenu = "index";
     me: UserModel = new UserModel(null,"","","","",null,null,null,null,null); 
     constructor(private router: Router,
         private mainService: MainService){}
@@ -31,11 +32,15 @@ export class AppComponent  implements OnInit {
                             this.me = data;
                         });
         });
+        this.mainService.onPageChange$
+            .subscribe(page=>{
+                this.currentMenu = page;
+            })
         this.mainService.TryToLoginWithToken();
     }
 
     Logout(){
-        this.onMenuItemClick();
+        this.onMenuItemClick('index');
         this.mainService.Logout()
             .subscribe(()=>this.router.navigate(["/"]),
             (err)=>this.router.navigate(["/"]),
@@ -45,7 +50,8 @@ export class AppComponent  implements OnInit {
 
 
     //KASTIL', spasibo angularu za eto
-    onMenuItemClick(){
+    onMenuItemClick(item:string){
+        this.mainService.ChangePage(item);
         this.IsDropped = false;
         setTimeout(()=> this.IsDropped = true,250);
     }
