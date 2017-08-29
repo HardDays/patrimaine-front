@@ -565,11 +565,8 @@ var LoginComponent = (function () {
         this.mainService.UserLogin(username, password)
             .subscribe(function (data) {
             if (data && data.token) {
+                _this.router.navigate(["/"]);
                 _this.mainService.BaseInitAfterLogin(data);
-                setTimeout(function () {
-                    _this.router.navigate(['/']);
-                }, 5000);
-                //this.router.navigate(["/"]);
             }
         }, function (err) {
             if (err.status == 401) {

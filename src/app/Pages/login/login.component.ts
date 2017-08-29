@@ -27,13 +27,8 @@ export class LoginComponent implements OnInit{
         this.mainService.UserLogin(username,password)
             .subscribe((data:TokenModel)=>{
                 if(data && data.token){
+                    this.router.navigate(["/"]);
                     this.mainService.BaseInitAfterLogin(data);
-                    setTimeout(() => 
-                    {
-                        this.router.navigate(['/']);
-                    },
-                    5000);
-                    //this.router.navigate(["/"]);
                 }
             },
         (err)=>{
