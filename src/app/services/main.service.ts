@@ -29,8 +29,10 @@ import { TokenModel } from '../models/token.model';
             private router: Router,
             private cookiesService:CookieService
         ){
+            
             this.onAuthChange$ = new Subject();
             this.onAuthChange$.next(false);
+            
         }
         public me: UserModel;
 

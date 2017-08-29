@@ -11,6 +11,7 @@ import { OwlModule } from 'angular-owl-carousel';
 import {MainService} from "./services/main.service";
 import { PageModule } from './Pages/pages.module';
 import { routs } from './Pages/pages.route';
+import { CookieService } from 'ng2-cookies';
 
 @NgModule({
     imports:      [ 
@@ -21,7 +22,7 @@ import { routs } from './Pages/pages.route';
         FormsModule
     ],
     declarations: [ AppComponent],
-    providers: [ MainService, HttpModule],
+    providers: [ MainService, HttpModule, CookieService],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
