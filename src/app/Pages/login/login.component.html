@@ -11,13 +11,13 @@
     <div class="login_form" *ngIf="!isLoading">
       <div class="error-msg" *ngIf="isLoginErr"><h2>Invalid login or password!</h2></div>
       <h1>Login</h1>
-      <form >
+      <form (ngSubmit)="OnLoginButtonClick(email,password)">
         <label>Email</label>
-        <input type="text" name="_email" [(ngModel)]="email">
+        <input type="text" name="email" [(ngModel)]="email">
         <br>
         <label>Password</label>
-        <input type="password" name="_password" [(ngModel)]="password"><br>
-        <button (click)="OnLoginButtonClick()">Login</button>
+        <input type="password" name="password" [(ngModel)]="password"><br>
+        <button type="submit">Login</button>
       </form>
     </div>
 
