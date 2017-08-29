@@ -522,7 +522,7 @@ var _a, _b, _c;
 /***/ "../../../../../src/app/Pages/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper row2\">\r\n  \r\n</div>\r\n<!-- ################################################################################################ -->\r\n<!-- ################################################################################################ -->\r\n<!-- ################################################################################################ -->\r\n<div class=\"wrapper row3\">\r\n  <main id=\"container\" class=\"clear\">\r\n    <!-- container body -->\r\n    <div class=\"loading\" *ngIf=\"isLoading\"></div>\r\n    <div class=\"login_form\" *ngIf=\"!isLoading\">\r\n      <div class=\"error-msg\" *ngIf=\"isLoginErr\"><h2>Invalid login or password!</h2></div>\r\n      <h1>Login</h1>\r\n      <form >\r\n        <label>Email</label>\r\n        <input type=\"text\" name=\"_email\" [(ngModel)]=\"email\">\r\n        <br>\r\n        <label>Password</label>\r\n        <input type=\"password\" name=\"_password\" [(ngModel)]=\"password\"><br>\r\n        <button (click)=\"OnLoginButtonClick()\">Login</button>\r\n      </form>\r\n    </div>\r\n\r\n    <!-- ########################################################################################## -->\r\n    <!-- / container body -->\r\n    <div class=\"clear\"></div>\r\n  </main>\r\n</div>"
+module.exports = "<div class=\"wrapper row2\">\r\n  \r\n</div>\r\n<!-- ################################################################################################ -->\r\n<!-- ################################################################################################ -->\r\n<!-- ################################################################################################ -->\r\n<div class=\"wrapper row3\">\r\n  <main id=\"container\" class=\"clear\">\r\n    <!-- container body -->\r\n    <div class=\"loading\" *ngIf=\"isLoading\"></div>\r\n    <div class=\"login_form\" *ngIf=\"!isLoading\">\r\n      <div class=\"error-msg\" *ngIf=\"isLoginErr\"><h2>Invalid login or password!</h2></div>\r\n      <h1>Login</h1>\r\n      <form (ngSubmit)=\"OnLoginButtonClick(email,password)\">\r\n        <label>Email</label>\r\n        <input type=\"text\" name=\"email\" [(ngModel)]=\"email\">\r\n        <br>\r\n        <label>Password</label>\r\n        <input type=\"password\" name=\"password\" [(ngModel)]=\"password\"><br>\r\n        <button type=\"submit\">Login</button>\r\n      </form>\r\n    </div>\r\n\r\n    <!-- ########################################################################################## -->\r\n    <!-- / container body -->\r\n    <div class=\"clear\"></div>\r\n  </main>\r\n</div>"
 
 /***/ }),
 
@@ -554,8 +554,6 @@ var LoginComponent = (function () {
         this.mainService = mainService;
         this.isLoading = false;
         this.isLoginErr = false;
-        this._username = "";
-        this._password = "";
         this.onLoggedIn = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -564,7 +562,7 @@ var LoginComponent = (function () {
         var _this = this;
         this.isLoading = true;
         this.isLoginErr = false;
-        this.mainService.UserLogin(this._username, this._password)
+        this.mainService.UserLogin(username, password)
             .subscribe(function (data) {
             if (data && data.token) {
                 _this.mainService.BaseInitAfterLogin(data);
