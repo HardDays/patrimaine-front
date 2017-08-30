@@ -23,7 +23,7 @@
         <span class="date-profile">Last update: {{User.updated_at | date: " MMMM d, y HH:mm"}}</span>
         <div class="right height200">
         <img  *ngIf="ImageBase64" class="borderedbox profile-logo" [src]="ImageBase64" alt="" style="width:240px;">
-        <button class="subscribe-button" (click)="EmailSubscription()">{{User.has_email_notifications?"Uns":"S"}}ubscribe</button>
+        <button *ngIf="isMe" class="subscribe-button" (click)="EmailSubscription()">{{User.has_email_notifications?"Uns":"S"}}ubscribe</button>
         </div>
     </div>
     <div class="profile-info" *ngIf="User.phone || User.email">

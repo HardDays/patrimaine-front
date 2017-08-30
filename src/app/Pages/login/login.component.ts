@@ -17,7 +17,9 @@ export class LoginComponent implements OnInit{
     ngOnInit(): void {
     }
     constructor(private router: Router,
-        private mainService: MainService){}
+        private mainService: MainService){
+            this.mainService.ChangePage('login');
+        }
 
     @Output() onLoggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
     OnLoginButtonClick(username: string, password:string)

@@ -24,6 +24,7 @@ export class MyNewsComponent implements OnInit{
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
+        this.service.ChangePage('my_news');
     }
     ngOnInit() {
         this.activatedRoute.params.forEach((params:Params) => {

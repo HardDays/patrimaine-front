@@ -22,6 +22,9 @@
     <div id="content" class="three_quarter first" *ngIf="!IsLoading">
         <!-- ########################################################################################## -->
         <div id="comments">
+            <div *ngIf="News.length == 0">
+                <h1 class="error-msg">Can't find news</h1>
+            </div>
             <ul>
                 <li *ngFor="let news of News">
                     <article>

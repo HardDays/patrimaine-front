@@ -22,6 +22,7 @@ export class CreateAdComponent implements OnInit{
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
+        this.service.ChangePage('create_ad');
     }
 
     ngOnInit() {

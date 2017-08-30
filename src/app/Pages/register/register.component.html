@@ -13,28 +13,26 @@
         <h2 *ngIf="!isPro">Professionnels du chiffre et du droit</h2>
         <h2 *ngIf="isPro">Concepteurs de Solutions</h2>
         <form (ngSubmit)="RegisterUser(email,password,fname,lname,phone,pcategory)">
-          <label>Email</label>
+          <label>Email *</label>
           <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
-          <label>Password</label>
+          <label>Password *</label>
           <input type="password" name="password" [(ngModel)]="password" required><br>
-          <label>First Name</label>
+          <label>First Name *</label>
           <input type="text" name="fname" [(ngModel)]="fname" required><br>
-          <label>Last Name</label>
+          <label>Last Name *</label>
           <input type="text" name="lname" [(ngModel)]="lname" required><br>
-          <label>Phone</label>
+          <label>Phone *</label>
           <input type="number" name="phone" [(ngModel)]="phone" required><br>
 
-          <label>Category</label>
-          <select name="pcategory" [(ngModel)]="pcategory" >
-            <option value=""></option>
-            <option value="tous">Tous</option>
+          <label>Category *</label>
+          <select name="pcategory" [(ngModel)]="pcategory" required>
             <option value="assureurs">Assureurs</option>
             <option value="avocats">Avocats</option>
-            <option value="patrimoine">Patrimoine</option>
-            <option value="prets">Prets</option>
-            <option value="comptables">Comptables</option>
+            <option value="patrimoine">Conseillers en gestion de patrimoine</option>
+            <option value="prets">Courtiers de prêts</option>
+            <option value="comptables">Experts-comptables</option>
             <option value="notaires">Notaires</option>
-            <option value="immobilier">Immobilier</option>
+            <option value="immobilier">Professionnels de l'immobilier</option>
           </select>
           <br>
           <button *ngIf="!isPro" type="submit">Register</button>
@@ -53,16 +51,16 @@
           <label>Phone</label>
           <input type="text" name="phone" [(ngModel)]="phone"><br>-->
           <h3>Company</h3>
-          <label>Name</label>
-          <input type="text" name="cname" [(ngModel)]="cname"><br>
-          <label>Address</label>
-          <input type="text" name="caddress" [(ngModel)]="caddress"><br>
-          <label>Other Address</label>
-          <input type="text" name="coaddress" [(ngModel)]="coaddress"><br>
-          <label>Email</label>
-          <input type="text" name="cemail" [(ngModel)]="cemail"><br>
-          <label>Phone</label>
-          <input type="text" name="cphone" [(ngModel)]="cphone"><br>
+          <label>Name *</label>
+          <input type="text" name="cname" [(ngModel)]="cname" required><br>
+          <label>Address *</label>
+          <input type="text" name="caddress" [(ngModel)]="caddress" required><br>
+          <label>Other Address *</label>
+          <input type="text" name="coaddress" [(ngModel)]="coaddress" required><br>
+          <label>Email *</label>
+          <input type="text" name="cemail" [(ngModel)]="cemail" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+          <label>Phone *</label>
+          <input type="number" name="cphone" [(ngModel)]="cphone" required><br>
           <label>Worktime</label>
           <input type="text" name="worktime" [(ngModel)]="worktime"><br>
           <!--<label>Company ID</label>

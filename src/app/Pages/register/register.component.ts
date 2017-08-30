@@ -45,10 +45,16 @@ export class RegisterComponent implements OnInit{
     ngOnInit(): void {
     }
     constructor(private router: Router,
-        private mainService: MainService){}
+        private mainService: MainService){
+            this.mainService.ChangePage('register');
+        }
     RegisterUser(email:string,password:string,fname:string,lname:string,phone:string,pcategory:string)
     {
         window.scrollTo(0,0);
+        if(!email || !password || !fname || !lname || !phone || !pcategory){
+            this.OnRegError({status:400});
+            return;
+        }
         this.isLoading = true;
         let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
         this.mainService.CreateUser(user)
@@ -65,6 +71,11 @@ export class RegisterComponent implements OnInit{
                         worktime:string, description:string, links:string, c_type:string, subcategory:string)
     {
         window.scrollTo(0,0);
+        if(!email || !password || !fname || !lname || !phone || !pcategory ||
+            !cname || !caddress || !coaddress || !cemail || !cphone){
+            this.OnRegError({status:400});
+            return;
+        }
         this.isLoading = true;
         let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
         let company : RegisterCompanyModel = new RegisterCompanyModel(cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory,this.image);
@@ -99,9 +110,9 @@ export class RegisterComponent implements OnInit{
         }
 
         readThis(inputValue: any): void {
-            var file:File = inputValue.files[0];
-            var myReader:FileReader = new FileReader();
-
+            let file:File = inputValue.files[0];
+            if(!file) return;
+            let myReader:FileReader = new FileReader();
             myReader.onloadend = (e) => {
                 this.image = myReader.result;
                 this.isOkEnabled = true;

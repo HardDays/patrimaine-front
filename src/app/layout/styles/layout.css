@@ -846,6 +846,7 @@ address {
 }
 .register_block .reg_block {
     width: 40%;
+    margin-bottom: 20px;
 }
 .register_block .reg_block form input, .register_block .reg_block form select {
     width: 100%;
@@ -911,6 +912,7 @@ a{
 }
 .in-profile{
     float:left;
+    margin: 20px 0;
 }
 .error-msg-profile{
     margin-top: 75px;
@@ -1046,6 +1048,7 @@ a.upper-first::first-letter{
 }
 .right{
     float: right;
+    margin-bottom: 20px;
 } 
 .height200{
     min-height: 200px;

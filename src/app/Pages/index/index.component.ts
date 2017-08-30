@@ -20,7 +20,9 @@ export class IndexComponent implements OnInit{
     }
     constructor(private router: Router,
         private mainService: MainService,
-        private params: ActivatedRoute){}
+        private params: ActivatedRoute){
+            this.mainService.ChangePage('index');
+        }
     ngOnInit(){ }
     SearchAnnonces()
     {

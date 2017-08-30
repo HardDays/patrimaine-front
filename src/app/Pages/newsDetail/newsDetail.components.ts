@@ -26,6 +26,7 @@ export class NewsDetailComponent implements OnInit{
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
+        this.service.ChangePage('news_detail');
     }
 
 

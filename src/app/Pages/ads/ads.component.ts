@@ -25,40 +25,20 @@ export class AdsComponent implements OnInit{
     Images: string[] = [];
     Users:string[] = [];
     IsLoading = true;
-    Params: SearchAdsParamsModel = new SearchAdsParamsModel(0,null,null,null,null,null,null,null,null);
-    Expertises: CheckboxModel[] = [
-        new CheckboxModel("Credit","credit",false),
-        new CheckboxModel("Retraite","retraite",false),
-        new CheckboxModel("Placement","placement",false),
-        new CheckboxModel("Allocation","allocation",false),
-        new CheckboxModel("Epargne","epargne",false),
-        new CheckboxModel("Investissement","investissement",false),
-        new CheckboxModel("Defiscalisation","defiscalisation",false),
-        new CheckboxModel("Immobilier","immobilier",false),
-        new CheckboxModel("Assurance","assurance",false),
-        new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
-    ];
-    Agreements:CheckboxModel[]=[
-        new CheckboxModel("CJA","CJA",false),
-        new CheckboxModel("CIF","CIF",false),
-        new CheckboxModel("Courtier","Courtier",false),
-        new CheckboxModel("IOSB","IOSB",false),
-        new CheckboxModel("Carte-T","Carte_T",false)
-    ];
-    Subcategory:CheckboxModel[]=[
-        new CheckboxModel("Classique","classique",false),
-        new CheckboxModel("E-brooker","e_brooker",false),
-        new CheckboxModel("Fintech","fintech",false),
-        new CheckboxModel("Crowdfunding","crowdfunding",false),
-        new CheckboxModel("Lendfunding","lendfunding",false),
-        new CheckboxModel("Institutionnels","institutionnels",false)
-    ];
+    Params: SearchAdsParamsModel;
+    Expertises: CheckboxModel[] = [];
+    Agreements:CheckboxModel[]=[];
+    Subcategory:CheckboxModel[]=[];
 
     constructor(private router: Router,
         private mainService: MainService,
-        private params: ActivatedRoute){}
+        private params: ActivatedRoute){
+            this.mainService.ChangePage('ads');
+        }
     ngOnInit(){
         let category = this.params.params.forEach((params:Params) => {
+            this.mainService.ChangePage('ads');
+            this.IsLoading=true;
             this.Subcategory=[
                 new CheckboxModel("Classique","classique",false),
                 new CheckboxModel("E-brooker","e_brooker",false),
@@ -67,6 +47,26 @@ export class AdsComponent implements OnInit{
                 new CheckboxModel("Lendfunding","lendfunding",false),
                 new CheckboxModel("Institutionnels","institutionnels",false)
             ];
+            this.Agreements=[
+                new CheckboxModel("CJA","CJA",false),
+                new CheckboxModel("CIF","CIF",false),
+                new CheckboxModel("Courtier","Courtier",false),
+                new CheckboxModel("IOSB","IOSB",false),
+                new CheckboxModel("Carte-T","Carte_T",false)
+            ];
+            this.Expertises = [
+                new CheckboxModel("Credit","credit",false),
+                new CheckboxModel("Retraite","retraite",false),
+                new CheckboxModel("Placement","placement",false),
+                new CheckboxModel("Allocation","allocation",false),
+                new CheckboxModel("Epargne","epargne",false),
+                new CheckboxModel("Investissement","investissement",false),
+                new CheckboxModel("Defiscalisation","defiscalisation",false),
+                new CheckboxModel("Immobilier","immobilier",false),
+                new CheckboxModel("Assurance","assurance",false),
+                new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
+            ];
+            this.Params = new SearchAdsParamsModel(0,null,null,null,null,null,null,null,null);
             if(params["category"]){
                 
                 this.Params.sub_categories = [];

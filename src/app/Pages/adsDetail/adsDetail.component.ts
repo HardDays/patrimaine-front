@@ -24,7 +24,7 @@ export class AdsDetailComponent implements OnInit{
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
-        
+        this.service.ChangePage('ads_detail');
     }
 
 

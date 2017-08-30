@@ -24,6 +24,7 @@ export class MyAdsComponent implements OnInit{
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
+        this.service.ChangePage('my_ads');
     }
     ngOnInit() {
         this.activatedRoute.params.forEach((params:Params) => {

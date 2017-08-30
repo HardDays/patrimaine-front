@@ -24,6 +24,9 @@
         <!-- ########################################################################################## -->
         
         <div id="comments" >
+            <div *ngIf="AdsObservable.length == 0">
+                <h1 class="error-msg">Can't find ads</h1>
+            </div>
             <ul>
                 <li *ngFor="let ad of AdsObservable">
                     <article>
@@ -66,7 +69,7 @@
             <form class="filter">
                 <h6 class="search-heared">Mot clé</h6>
                 <input type="text" name="title" id="title" value="" size="22" [ngModel]="Params.title" (ngModelChange)="Params.title = $event"  placeholder="Title">
-                <input type="text" name="description" id="description" value="" size="22" [ngModel]="Params.description" (ngModelChange)="Params.description = $event"  placeholder="description">
+                <input type="text" name="description" id="description" value="" size="22" [ngModel]="Params.description" (ngModelChange)="Params.description = $event"  placeholder="Description">
                 <h6 class="search-heared">Address</h6>
                 <input type="text" name="address" id="address" value="" size="22" [ngModel]="Params.address" (ngModelChange)="Params.address = $event"  placeholder="Address">
                 

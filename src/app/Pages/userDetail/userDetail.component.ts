@@ -60,6 +60,7 @@ export class UserDetailComponent implements OnInit{
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
+        this.service.ChangePage('user_detail');
     }
     ngOnInit() {
         this.activatedRoute.params.forEach((params:Params) => {
@@ -110,7 +111,8 @@ export class UserDetailComponent implements OnInit{
             if(this.User.company.image_id){
                 this.service.GetImageById(this.User.company.image_id)
                     .subscribe((result:Base64ImageModel)=>{
-                        this.ImageBase64 = result.base64;
+                        
+                        this.ImageBase64 = result.base64?result.base64:"images/demo/patrimoineLogo.png";
                         this.IsLoading = false;
                     });
             }

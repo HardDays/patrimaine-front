@@ -28,47 +28,47 @@ export class NewsComponent implements OnInit{
     Images: string[] = [];
     Users:string[]=[];
     IsLoading = true;
-    Params: SearchNewsParamsModel = new SearchNewsParamsModel(0,null,null,null,null,null,null,null,null,null,null);
-    Expertises: CheckboxModel[] = [
-        new CheckboxModel("Credit","credit",false),
-        new CheckboxModel("Retraite","retraite",false),
-        new CheckboxModel("Placement","placement",false),
-        new CheckboxModel("Allocation","allocation",false),
-        new CheckboxModel("Epargne","epargne",false),
-        new CheckboxModel("Investissement","investissement",false),
-        new CheckboxModel("Defiscalisation","defiscalisation",false),
-        new CheckboxModel("Immobilier","immobilier",false),
-        new CheckboxModel("Assurance","assurance",false),
-        new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
-    ];
-    Agreements:CheckboxModel[]=[
-        new CheckboxModel("CJA","CJA",false),
-        new CheckboxModel("CIF","CIF",false),
-        new CheckboxModel("Courtier","Courtier",false),
-        new CheckboxModel("IOSB","IOSB",false),
-        new CheckboxModel("Carte-T","Carte_T",false)
-    ];
-    Subcategory:CheckboxModel[]=[
-        new CheckboxModel("Classique","classique",false),
-        new CheckboxModel("E-brooker","e_brooker",false),
-        new CheckboxModel("Fintech","fintech",false),
-        new CheckboxModel("Crowdfunding","crowdfunding",false),
-        new CheckboxModel("Lendfunding","lendfunding",false),
-        new CheckboxModel("Institutionnels","institutionnels",false)
-    ];
-    Ncategory:CheckboxModel[]=[
-        new CheckboxModel("Toutes","toutes",false),
-        new CheckboxModel("Finance","finance",false),
-        new CheckboxModel("Ecologique","ecologique",false),
-        new CheckboxModel("Immobilier","immobilier",false),
-        new CheckboxModel("Plaisir","plaisir",false)
-    ]
+    Params: SearchNewsParamsModel; 
+    Expertises: CheckboxModel[] = [];
+    Agreements:CheckboxModel[]=[];
+    Subcategory:CheckboxModel[]=[];
+    Ncategory:CheckboxModel[]=[];
 
     constructor(private router: Router,
         private mainService: MainService,
-        private params: ActivatedRoute){}
+        private params: ActivatedRoute){
+            
+        }
     ngOnInit(){
+        
         let category = this.params.params.forEach((params:Params) => {
+            this.IsLoading=true;
+            this.mainService.ChangePage('news');
+            this.Expertises = [
+                new CheckboxModel("Credit","credit",false),
+                new CheckboxModel("Retraite","retraite",false),
+                new CheckboxModel("Placement","placement",false),
+                new CheckboxModel("Allocation","allocation",false),
+                new CheckboxModel("Epargne","epargne",false),
+                new CheckboxModel("Investissement","investissement",false),
+                new CheckboxModel("Defiscalisation","defiscalisation",false),
+                new CheckboxModel("Immobilier","immobilier",false),
+                new CheckboxModel("Assurance","assurance",false),
+                new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
+            ];
+            this.Agreements=[
+                new CheckboxModel("CJA","CJA",false),
+                new CheckboxModel("CIF","CIF",false),
+                new CheckboxModel("Courtier","Courtier",false),
+                new CheckboxModel("IOSB","IOSB",false),
+                new CheckboxModel("Carte-T","Carte_T",false)
+            ];
+            this.Ncategory=[
+                new CheckboxModel("Finance","finance",false),
+                new CheckboxModel("Ecologique","ecologique",false),
+                new CheckboxModel("Immobilier","immobilier",false),
+                new CheckboxModel("Plaisir","plaisir",false)
+            ]
             this.Subcategory=[
                 new CheckboxModel("Classique","classique",false),
                 new CheckboxModel("E-brooker","e_brooker",false),
@@ -77,6 +77,7 @@ export class NewsComponent implements OnInit{
                 new CheckboxModel("Lendfunding","lendfunding",false),
                 new CheckboxModel("Institutionnels","institutionnels",false)
             ];
+            this.Params = new SearchNewsParamsModel(0,null,null,null,null,null,null,null,null,null,null);
             if(params["category"]){
                 
                 this.Params.sub_categories = [];

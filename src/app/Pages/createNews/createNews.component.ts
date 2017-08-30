@@ -25,6 +25,7 @@ export class CreateNewsComponent implements OnInit{
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
+        this.service.ChangePage('create_news');
     }
 
     ngOnInit() {

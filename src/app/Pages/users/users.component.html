@@ -26,6 +26,9 @@
     <div id="content" class="three_quarter first" *ngIf="!IsLoading">
       <!-- ########################################################################################## -->
       <div id="comments">
+        <div *ngIf="UsersObservable.length == 0">
+            <h1 class="error-msg">Can't find users</h1>
+        </div>
         <ul >
           <li *ngFor="let user of UsersObservable">
             <article>

@@ -235,7 +235,6 @@ import { TokenModel } from '../models/token.model';
         }
 
         CreateNews(params:any){
-                
             /*return AdsPromise
                 .then(Ads => Ads.push(new AdsModel(id+1,title,desc,"",this.me.id,1,1,null,null,"fintech",[""],[""])));*/
             return this.httpService.PostData('/news/create',JSON.stringify(params));

@@ -31,56 +31,25 @@ export class UsersComponent implements OnInit{
     MyRates:number[] = [];
     MyLikes:boolean[]=[];
     isAdvancedSearch = false;
-    Params: SearchUserParamsModel = new SearchUserParamsModel(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    Expertises: CheckboxModel[] = [
-        new CheckboxModel("Credit","credit",false),
-        new CheckboxModel("Retraite","retraite",false),
-        new CheckboxModel("Placement","placement",false),
-        new CheckboxModel("Allocation","allocation",false),
-        new CheckboxModel("Epargne","epargne",false),
-        new CheckboxModel("Investissement","investissement",false),
-        new CheckboxModel("Defiscalisation","defiscalisation",false),
-        new CheckboxModel("Immobilier","immobilier",false),
-        new CheckboxModel("Assurance","assurance",false),
-        new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
-    ];
-    Agreements:CheckboxModel[]=[
-        new CheckboxModel("CJA","CJA",false),
-        new CheckboxModel("CIF","CIF",false),
-        new CheckboxModel("Courtier","Courtier",false),
-        new CheckboxModel("IOSB","IOSB",false),
-        new CheckboxModel("Carte-T","Carte_T",false)
-    ];
-    Subcategory:CheckboxModel[]=[
-        new CheckboxModel("Classique","classique",false),
-        new CheckboxModel("E-brooker","e_brooker",false),
-        new CheckboxModel("Fintech","fintech",false),
-        new CheckboxModel("Crowdfunding","crowdfunding",false),
-        new CheckboxModel("Lendfunding","lendfunding",false),
-        new CheckboxModel("Institutionnels","institutionnels",false)
-    ];
-    Pcategory:CheckboxModel[]=[
-        new CheckboxModel("Tous","tous",false),
-        new CheckboxModel("Assureurs","assureurs",false),
-        new CheckboxModel("Avocats","avocats",false),
-        new CheckboxModel("Conseillers en gestion de patrimoine","patrimoine",false),
-        new CheckboxModel("Courtiers de prêts","prets",false),
-        new CheckboxModel("Experts-comptables","comptables",false),
-        new CheckboxModel("Notaires","notaires",false),
-        new CheckboxModel("Professionnels de l'immobilier","immobilier",false)
-    ];
+    Params: SearchUserParamsModel;
+    Expertises: CheckboxModel[] = [];
+    Agreements:CheckboxModel[]=[];
+    Subcategory:CheckboxModel[]=[];
+    Pcategory:CheckboxModel[]=[];
     ErrorMesages:string[] = [];
 
     constructor(private router: Router,
         private mainService: MainService,
-        private params: ActivatedRoute){}
+        private params: ActivatedRoute){
+            
+        }
 
     ngOnInit(){
         this.params.params.forEach((params:Params) => {
+            this.mainService.ChangePage('users');
+            this.IsLoading = true;
             this.Category = params["category"]?params["category"]:"";
-            this.Page = params["page"]?(params["page"]):1;
             this.Pcategory=[
-                new CheckboxModel("Tous","tous",false),
                 new CheckboxModel("Assureurs","assureurs",false),
                 new CheckboxModel("Avocats","avocats",false),
                 new CheckboxModel("Conseillers en gestion de patrimoine","patrimoine",false),
@@ -89,6 +58,34 @@ export class UsersComponent implements OnInit{
                 new CheckboxModel("Notaires","notaires",false),
                 new CheckboxModel("Professionnels de l'immobilier","immobilier",false)
             ];
+            this.Subcategory=[
+                new CheckboxModel("Classique","classique",false),
+                new CheckboxModel("E-brooker","e_brooker",false),
+                new CheckboxModel("Fintech","fintech",false),
+                new CheckboxModel("Crowdfunding","crowdfunding",false),
+                new CheckboxModel("Lendfunding","lendfunding",false),
+                new CheckboxModel("Institutionnels","institutionnels",false)
+            ];
+            this.Agreements=[
+                new CheckboxModel("CJA","CJA",false),
+                new CheckboxModel("CIF","CIF",false),
+                new CheckboxModel("Courtier","Courtier",false),
+                new CheckboxModel("IOSB","IOSB",false),
+                new CheckboxModel("Carte-T","Carte_T",false)
+            ];
+            this.Expertises = [
+                new CheckboxModel("Credit","credit",false),
+                new CheckboxModel("Retraite","retraite",false),
+                new CheckboxModel("Placement","placement",false),
+                new CheckboxModel("Allocation","allocation",false),
+                new CheckboxModel("Epargne","epargne",false),
+                new CheckboxModel("Investissement","investissement",false),
+                new CheckboxModel("Defiscalisation","defiscalisation",false),
+                new CheckboxModel("Immobilier","immobilier",false),
+                new CheckboxModel("Assurance","assurance",false),
+                new CheckboxModel("Investissement plaisir","investissement_plaisir",false)
+            ];
+            this.Params = new SearchUserParamsModel(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
             if(params["pcategory"]){
                 
                 this.Params.pcategory = [];
