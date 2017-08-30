@@ -18,7 +18,7 @@ export class CreateNewsComponent implements OnInit{
     createError = false;
     isLoading = true;
     errorMsg:string = "";
-    isOkEnabled = false;
+    isOkEnabled:boolean = true;
     image:string = "";
     constructor(
         private router: Router,
@@ -30,15 +30,21 @@ export class CreateNewsComponent implements OnInit{
 
     ngOnInit() {
         this.isLoading = false;
+        this.isOkEnabled = true;
     }
 
     changeListener($event: any) : void {
-        this.isOkEnabled = false;
+        
         this.readThis($event.target);
     }
 
     readThis(inputValue: any): void {
+        this.isOkEnabled = false;
         var file:File = inputValue.files[0];
+        if(!file){
+            this.isOkEnabled = true;
+             return;
+        }
         var myReader:FileReader = new FileReader();
 
         myReader.onloadend = (e) => {
@@ -49,11 +55,32 @@ export class CreateNewsComponent implements OnInit{
     }
 
     OncreateNewsButtonClick(title:string,subtitle:string,description:string,ncategory:string,ntype:string,links:string){
+        this.createError = false;
         this.isLoading = true;
-        if(!title || !description){
-            this.errorMsg = "Input valid data!";
+        if(!title || !description || !subtitle || !links){
+
+            this.errorMsg = "Input valid data! You have to input: ";
+            let len = this.errorMsg.length;
+            if(!title)
+                this.errorMsg = this.errorMsg + " Title";
+            if(!subtitle){
+                if(this.errorMsg.length != len)
+                    this.errorMsg += ","
+                this.errorMsg+=" Subtitle";
+            }
+            if(!links){
+                if(this.errorMsg.length != len)
+                    this.errorMsg += ","
+                this.errorMsg+=" Links";
+            }
+            if(!description){
+                if(this.errorMsg.length != len)
+                    this.errorMsg += ","
+                this.errorMsg+=" Description !";
+            }
             this.createError = true;
             this.isLoading = false;
+            window.scrollTo(0,0);
             return;
         }
         let annonce = {
@@ -67,6 +94,7 @@ export class CreateNewsComponent implements OnInit{
         };
         this.service.CreateNews(annonce)
             .subscribe((result:NewsModel)=>{
+                window.scrollTo(0,0);
                 this.router.navigate(['news',result.id]);
             },
             (err)=>{

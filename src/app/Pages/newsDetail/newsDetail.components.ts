@@ -35,6 +35,7 @@ export class NewsDetailComponent implements OnInit{
         //Add 'implements OnInit' to the class.
         this.IsLoading = true;
         this.activatedRoute.params.forEach((params:Params) => {
+            window.scrollTo(0,0);
             let newsId = params["id"];
             this.service
                 .GetNewsById(newsId)
@@ -55,7 +56,7 @@ export class NewsDetailComponent implements OnInit{
                     if(this.News.image_id){
                         this.service.GetImageById(this.News.image_id)
                             .subscribe((res:Base64ImageModel)=>{
-                                this.Image = res.base64;
+                                this.Image = res.base64?res.base64:"images/demo/patrimoineLogo.png";
                                 isImageLoaded = true;
                                 if(isAuthorLoaded)
                                     this.IsLoading = false;
