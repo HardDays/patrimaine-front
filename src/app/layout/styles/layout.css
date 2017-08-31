@@ -1010,6 +1010,16 @@ box-shadow: 0px 0px 3px 2px rgba(0,255,0,1);
     height: 22px;
     width: 100%;
 }
+div.premium_div{
+    background-color: #dbdae4;
+}
+li.news_list{
+    padding:0px!important;
+}
+div.news_list{
+    padding:15px;
+    margin-bottom: 0px!important;
+}
 .annonce_right{
     float: right;
     width:100%;

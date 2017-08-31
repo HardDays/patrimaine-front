@@ -26,7 +26,8 @@
                 <h1 class="error-msg">Can't find news</h1>
             </div>
             <ul>
-                <li *ngFor="let news of News">
+                <li class="news_list" *ngFor="let news of News">
+                    <div class="news_list" [ngClass]="{'premium_div':news.ntype == 'premium'}">
                     <article>
                         <header>
                             <h2 ><a [routerLink]="['/news/' + news.id]">{{news.title}}</a></h2>
@@ -73,6 +74,7 @@
                             </div>
                         </div>
                     </article>
+                </div>
                 </li>
 
                 <li class="post_banner">
