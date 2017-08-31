@@ -31,9 +31,12 @@
                         <header>
                             <h2 ><a [routerLink]="['/news/' + news.id]">{{news.title}}</a></h2>
                             <span class="date">{{news.created_at | date: dMMy}}</span>
+                            
                         </header>
                         <div class="user_block">
-                            <div class="img"><img class="borderedbox" [src]="Images[news.id]" alt=""></div>
+                            <div class="img" >
+                                <img class="borderedbox" [src]="Images[news.id]" alt="">
+                            </div>
                             <div class="desc">
                                 <span *ngIf="news.sub_category">
                                     <strong>Author category:</strong> 
@@ -64,6 +67,9 @@
                                 <address>
                                     <a [routerLink]="['/users/' + news.user_id]">{{news.user_first_name + " " + news.user_last_name}}</a>
                                 </address>
+                            </div>
+                            <div class="annonce_right">
+                                    <div class="premium_anonce" *ngIf="news.ntype == 'premium'"></div>
                             </div>
                         </div>
                     </article>
