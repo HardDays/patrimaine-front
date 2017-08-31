@@ -30,16 +30,53 @@
             <b>Subtitle: <a >{{News.subtitle}}</a></b>
           </p>
           <p >
-            <b>Author: <a >{{Author.first_name + " " + Author.last_name}}</a></b>
+            <b>Author: <a >{{News.user_first_name + " " + News.user_last_name}}</a></b>
           </p>
-          <p *ngIf="News.ncategory">
-            <b>Category: <a class="upper-first" >{{News.ncategory}}</a></b>
+          <p *ngIf="Ncategory && Ncategory.length != 0">
+            <b>Category: 
+                <a *ngFor="let item of Ncategory; let last = last">
+                <span >
+                  {{item}}
+                </span>
+                <span *ngIf="!last">,</span>
+              </a>
+            </b>
           </p>
           <p *ngIf="News.ntype">
             <b>Type: <a class="upper-first" >{{News.ntype}}</a></b>
           </p>
           <p *ngIf="News.links">
             <b>Links: <a >{{News.links}}</a></b>
+          </p>
+          <p *ngIf="SubCategory && SubCategory.length != 0">
+            <b>Author category: 
+              <a *ngFor="let item of SubCategory; let last = last">
+                <span >
+                  {{item}}
+                </span>
+                <span *ngIf="!last">,</span>
+              </a>
+            </b>
+          </p>
+          <p *ngIf="Expertises && Expertises.length != 0">
+            <b>Author expertises: 
+              <a *ngFor="let item of Expertises; let last = last">
+                <span >
+                  {{item}}
+                </span>
+                <span *ngIf="!last">,</span>
+              </a>
+            </b>
+          </p>
+          <p *ngIf="Agreements && Agreements.length != 0">
+            <b>Author agrements: 
+              <a *ngFor="let item of Agreements; let last = last">
+                <span >
+                  {{item}}
+                </span>
+                <span *ngIf="!last">,</span>
+              </a>
+            </b>
           </p>
       </div>
     </div>

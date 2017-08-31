@@ -73,14 +73,12 @@
           </div>
           <div class="profile-info-content">
             <span *ngIf="User.company.address">
-              <span class="icon-phone"></span>
               {{User.company.address}}
             </span>
             <span *ngIf="User.company.address" >
               <br />
             </span>
             <span *ngIf="User.company.other_address">
-              <span class="icon-envelope"></span>
               {{User.company.other_address}}
             </span>
           </div>
@@ -102,7 +100,7 @@
           </div>
         </div>
         <div class="profile-info" *ngIf="Agreements && Agreements.length != 0">
-          <div class="profile-info-header"><strong class="strong-profile">Agreements</strong></div>
+          <div class="profile-info-header"><strong class="strong-profile">Agrements</strong></div>
           <div class="profile-info-content">
             <span *ngFor="let item of Agreements; let last = last" >
               <span >{{item}}</span><span *ngIf="!last">,</span>

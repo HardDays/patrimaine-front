@@ -35,9 +35,34 @@
                         <div class="user_block">
                             <div class="img"><img class="borderedbox" [src]="Images[news.id]" alt=""></div>
                             <div class="desc">
+                                <span *ngIf="news.sub_category">
+                                    <hr>
+                                    <strong>Category:</strong> 
+                                    <span >
+                                        <a href="#">{{news.sub_category}}</a>
+                                    </span>
+                                    <br />
+                                    
+                                </span>
+                                <span *ngIf="news.expertises && news.expertises.length != 0">
+                                    <hr>
+                                    <strong>Expertises:</strong> 
+                                    <span *ngFor="let item of news.expertises; let last = last" >
+                                        <a href="#">{{item}}</a><span *ngIf="!last">,</span>
+                                    </span>
+                                    <br />
+                                </span> 
+                                <span *ngIf="news.agrements && news.agrements.length != 0">
+                                    <hr>
+                                    <strong>Agreements:</strong> 
+                                    <span *ngFor="let item of news.agrements; let last = last" >
+                                        <a href="#">{{item}}</a><span *ngIf="!last">,</span>
+                                    </span>
+                                    <br />
+                                </span>  
                                 <p>{{news.description}}</p>
                                 <address>
-                                    <a [routerLink]="['/users/' + news.user_id]">{{Users[news.id]}}</a>
+                                    <a [routerLink]="['/users/' + news.user_id]">{{news.user_first_name + " " + news.user_last_name}}</a>
                                 </address>
                             </div>
                         </div>

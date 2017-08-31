@@ -10,6 +10,13 @@ export class NewsModel{
         public ntype:string,
         public links:string,
         public subtitle:string,
-        public image_id:number
+        public image_id:number,
+        public c_type: string,
+        public sub_category: string,
+        public agrements: string[],
+        public expertises: string[],
+        public user_first_name:string,
+        public user_last_name:string
+
     ){}
 }

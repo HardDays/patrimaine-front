@@ -69,22 +69,6 @@
                       {{user.company.name}}
                       <br />
                     </span>
-                    <!--<span *ngIf="(user.company.phone || user.company.email) && (user.company.phone != user.phone || user.company.email != user.email)">
-                      <hr>
-                      <strong>Company contacts:</strong>
-                      <span *ngIf="user.company.phone && user.company.phone != user.phone">
-                        <span class="icon-phone"></span>
-                        {{user.company.phone}}
-                      </span>
-                      <span *ngIf="user.company.phone && user.company.phone != user.phone" >
-                        <br />
-                      </span>
-                      <span [ngClass]="{'company-contact-margin':user.company.phone && user.company.phone != user.phone}" *ngIf="user.company.email && user.company.email != user.email">
-                        <span class="icon-envelope"></span>
-                        {{user.company.email}}
-                        <br />
-                      </span>
-                    </span>-->
                     <span *ngIf="user.company.sub_category">
                       <hr>
                       <strong>Category:</strong> 

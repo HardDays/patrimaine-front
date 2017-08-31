@@ -704,6 +704,7 @@ section.profs .prof .desc a.search:before {
 .user_block .desc p {
     width: 390px;
     margin-top: 0;
+    text-align: justify;
 }
 .user_head {
     display: flex;

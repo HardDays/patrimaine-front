@@ -26,7 +26,6 @@ export class NewsComponent implements OnInit{
     Page: number=1;
     Pages: number[] = [];
     Images: string[] = [];
-    Users:string[]=[];
     IsLoading = true;
     Params: SearchNewsParamsModel; 
     Expertises: CheckboxModel[] = [];
@@ -105,21 +104,28 @@ export class NewsComponent implements OnInit{
         this.Params.limit = 10;
         this.Params.offset = (this.Page - 1)*10;
         this.mainService.GetAllNews(this.Params)
-            .subscribe((res:AllNewsModel)=>{
+            .subscribe((res)=>{
                 this.News = res.news;
                 if(this.News.length == 0){
                     this.IsLoading = false;
                     return;
                 }
-                this.Users = [];
                 for(let k in this.News){
                     if(this.News[k].title && this.News[k].title.length > 40){
                         this.News[k].title = this.News[k].title.slice(0,40) +"...";
                     }
-                    this.mainService.GetUserById(this.News[k].user_id)
-                    .subscribe((user:UserModel)=>{
-                        this.Users[this.News[k].id] = user.first_name + " " + user.last_name;
-                    });
+                    if(this.News[k].description && this.News[k].description.length > 220)
+                        this.News[k].description = this.News[k].description.slice(0,217) + "...";
+
+                    if(this.News[k].agrements)
+                        this.News[k].agrements = this.mainService.GetCheckboxNamesFromCheckboxModel(this.News[k].agrements,this.Agreements);
+                    if(this.News[k].expertises)
+                    this.News[k].expertises = this.mainService.GetCheckboxNamesFromCheckboxModel(this.News[k].expertises,this.Expertises);
+                    if(this.News[k].sub_category){
+                        let sub = this.mainService.GetCheckboxNamesFromCheckboxModel([this.News[k].sub_category],this.Subcategory);
+                        if(sub.length > 0)
+                            this.News[k].sub_category = sub[0];
+                    }
                 }
                 let i = 0;
                 this.Pages = [];
@@ -137,7 +143,7 @@ export class NewsComponent implements OnInit{
                         
                         this.mainService.GetImageById(item.image_id)
                             .subscribe((result:Base64ImageModel)=>{
-                                this.Images[item.id] = result.base64;
+                                this.Images[item.id] = result.base64?result.base64:"images/demo/patrimoineLogo.png";
                                 current+=1;
                                 if(total == current)this.IsLoading = false;
                             });
