@@ -18,7 +18,7 @@
 
     <!-- container body -->
     <!-- ########################################################################################## -->
-    <div class="loading" *ngIf="IsLoading"></div>
+    <div class="loading three_quarter first" *ngIf="IsLoading"></div>
     <div id="content" class="three_quarter first" *ngIf="!IsLoading">
         <!-- ########################################################################################## -->
         <div id="comments">
@@ -36,29 +36,29 @@
                             <div class="img"><img class="borderedbox" [src]="Images[news.id]" alt=""></div>
                             <div class="desc">
                                 <span *ngIf="news.sub_category">
-                                    <hr>
-                                    <strong>Category:</strong> 
+                                    <strong>Author category:</strong> 
                                     <span >
                                         <a href="#">{{news.sub_category}}</a>
                                     </span>
-                                    <br />
+                                    
+                                    <hr>
                                     
                                 </span>
                                 <span *ngIf="news.expertises && news.expertises.length != 0">
-                                    <hr>
-                                    <strong>Expertises:</strong> 
+                                    
+                                    <strong>Author expertises:</strong> 
                                     <span *ngFor="let item of news.expertises; let last = last" >
                                         <a href="#">{{item}}</a><span *ngIf="!last">,</span>
                                     </span>
-                                    <br />
+                                    <hr>
                                 </span> 
                                 <span *ngIf="news.agrements && news.agrements.length != 0">
-                                    <hr>
-                                    <strong>Agreements:</strong> 
+                                    
+                                    <strong>Author agrements:</strong> 
                                     <span *ngFor="let item of news.agrements; let last = last" >
                                         <a href="#">{{item}}</a><span *ngIf="!last">,</span>
                                     </span>
-                                    <br />
+                                    <hr>
                                 </span>  
                                 <p>{{news.description}}</p>
                                 <address>
@@ -114,17 +114,17 @@
                 </select>
                 
                     
-                <h6 class="search-heared">Subcategories</h6>
+                <h6 class="search-heared">Author subcategories</h6>
                 <div class="search_checkbox" *ngFor="let item of Subcategory">
                     <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
                     {{item.name}}
                 </div>
-                <h6 class="search-heared">Expertises</h6>
+                <h6 class="search-heared">Author expertises</h6>
                 <div class="search_checkbox" *ngFor="let item of Expertises">
                     <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
                     {{item.name}}
                 </div>
-                <h6 class="search-heared">Agrements</h6>
+                <h6 class="search-heared">Author agrements</h6>
                 <div class="search_checkbox" *ngFor="let item of Agreements">
                     <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
                     {{item.name}}
