@@ -14,7 +14,7 @@
              
             <div class="ad_create_form" *ngIf="!isLoading">
                 <h1>Create annonce</h1>
-                <form >
+                <form (ngSubmit)="OncreateNewsButtonClick(title,subtitle,description,ncategory,ntype,links)">
                     <label>Title</label>
                     <input type="text" name="title" [(ngModel)]="title" required value="">
                     <br>
@@ -44,7 +44,7 @@
                     <label>Description</label>
                     <textarea name="description" [(ngModel)]="description" required></textarea>
                     <br>
-                    <button [disabled]="!isOkEnabled" (click)="OncreateNewsButtonClick(title,subtitle,description,ncategory,ntype,links)">Create annonce</button>
+                    <button type="submit" [disabled]="!isOkEnabled">Create annonce</button>
                 </form>
             </div>
         </div>

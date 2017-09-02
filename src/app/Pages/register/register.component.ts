@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit{
     RegisterUser(email:string,password:string,fname:string,lname:string,phone:string,pcategory:string)
     {
         window.scrollTo(0,0);
-        if(!email || !password || !fname || !lname || !phone || !pcategory){
+        if(!email || (!password || password.length < 6) || !fname || !lname || !pcategory){
             this.OnRegError({status:400});
             return;
         }
@@ -71,8 +71,8 @@ export class RegisterComponent implements OnInit{
                         worktime:string, description:string, links:string, c_type:string, subcategory:string)
     {
         window.scrollTo(0,0);
-        if(!email || !password || !fname || !lname || !phone || !pcategory ||
-            !cname || !caddress || !coaddress || !cemail || !cphone){
+        if(!email || (!password || password.length < 6) || !fname || !lname || !pcategory ||
+            !cname || !c_type){
             this.OnRegError({status:400});
             return;
         }
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit{
         let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
         let company : RegisterCompanyModel = new RegisterCompanyModel(cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory,this.image);
         
-        this.mainService.CreateUserCompany(user, company, this.GetCheckedCheckboxes(this.Expertises), this.GetCheckedCheckboxes(this.Agreements))
+        this.mainService.CreateUserCompany(user, (company.name && company.c_type)?company:null, this.GetCheckedCheckboxes(this.Expertises), this.GetCheckedCheckboxes(this.Agreements))
             .subscribe(x=>{
                 this.AfterRegistration(x);
             },

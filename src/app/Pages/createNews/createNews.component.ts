@@ -98,6 +98,7 @@ export class CreateNewsComponent implements OnInit{
                 this.router.navigate(['news',result.id]);
             },
             (err)=>{
+                console.log(err);
                 if(err.status == 401){
                     this.errorMsg = "You have to be logged in! We will reddirect you to login page soon!";
                     setTimeout(()=> this.router.navigate(["/login"]),3000);
