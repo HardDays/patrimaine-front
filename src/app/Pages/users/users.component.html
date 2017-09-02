@@ -73,7 +73,7 @@
                       <hr>
                       <strong>Category:</strong> 
                       <span >
-                        <a href="#">{{user.company.sub_category}}</a>
+                        <a>{{user.company.sub_category}}</a>
                       </span>
                       <br />
                       
@@ -82,7 +82,7 @@
                       <hr>
                       <strong>Expertises:</strong> 
                       <span *ngFor="let item of user.company.expertises; let last = last" >
-                        <a href="#">{{item}}</a><span *ngIf="!last">,</span>
+                        <a>{{item}}</a><span *ngIf="!last">,</span>
                       </span>
                       <br />
                     </span> 
@@ -90,7 +90,7 @@
                       <hr>
                       <strong>Agreements:</strong> 
                       <span *ngFor="let item of user.company.agrements; let last = last" >
-                        <a href="#">{{item}}</a><span *ngIf="!last">,</span>
+                        <a>{{item}}</a><span *ngIf="!last">,</span>
                       </span>
                       <br />
                     </span>  
@@ -102,7 +102,7 @@
                 </div>
                 <div class="rating_wrap" *ngIf="user.company">
                     <div *ngIf="user.company" class="like" [ngClass]="{'like-active': MyLikes[user.id]}" (click)="LikeOrUnlikeUser(user.id*1)"><img src="../images/demo/like.png" alt=""> Like {{user.company.likes}}</div>
-                  <div class="stars_wrap">
+                  <div class="stars_wrap" *ngIf="isLogedIn">
                     <div class="stars_empty" (click)="RateOrUnrateUser(user.id,$event)"><div class="stars" [ngStyle]="{'width': 100*(MyRates[user.id]?(MyRates[user.id]-1):0)/4. + '%'}"></div></div>
                     <span>Your rate for<br /> this user</span>
                   </div>

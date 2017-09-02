@@ -14,14 +14,14 @@
   <main id="container" class="clear" *ngIf="!IsLoading">
     <!-- container body -->
     <!-- ########################################################################################## -->
-    <h1 align="center"><a href="">{{Ads.title}}</a></h1>
+    <h1 align="center"><a>{{Ads.title}}</a></h1>
     <p>
     </p>
-    <pre>
+    <div class="news-description">
       {{Ads.description}}
-    </pre>
+    </div>
     <p align="right">
-      <b>Author: <a >{{Author.first_name + " " + Author.last_name}}</a></b>
+      <b>Author: <a [routerLink]="['/users',Author.id]" >{{Author.first_name + " " + Author.last_name}}</a></b>
     </p>
     <!-- ########################################################################################## -->
     <!-- / container body -->

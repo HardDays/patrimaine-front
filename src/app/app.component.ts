@@ -40,11 +40,11 @@ export class AppComponent  implements OnInit {
     }
 
     Logout(){
-        this.onMenuItemClick('index');
-        this.mainService.Logout()
+        //this.onMenuItemClick('index');
+        this.mainService.Logout();/*
             .subscribe(()=>this.router.navigate(["/"]),
             (err)=>this.router.navigate(["/"]),
-            ()=>this.router.navigate(["/"]));
+            ()=>this.router.navigate(["/"]));*/
     }
 
 

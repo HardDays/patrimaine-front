@@ -46,7 +46,7 @@
             <b>Links: <a >{{News.links}}</a></b>
           </p>
           <p >
-            <b>Author: <a >{{News.user_first_name + " " + News.user_last_name}}</a></b>
+            <b>Author: <a [routerLink]="['/users',News.user_id]" >{{News.user_first_name + " " + News.user_last_name}}</a></b>
           </p>
           <p *ngIf="SubCategory && SubCategory.length != 0">
             <b>Author category: 

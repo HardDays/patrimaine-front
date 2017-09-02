@@ -42,7 +42,7 @@
                                 <span *ngIf="news.sub_category">
                                     <strong>Author category:</strong> 
                                     <span >
-                                        <a href="#">{{news.sub_category}}</a>
+                                        <a>{{news.sub_category}}</a>
                                     </span>
                                     
                                     <hr>
@@ -52,7 +52,7 @@
                                     
                                     <strong>Author expertises:</strong> 
                                     <span *ngFor="let item of news.expertises; let last = last" >
-                                        <a href="#">{{item}}</a><span *ngIf="!last">,</span>
+                                        <a>{{item}}</a><span *ngIf="!last">,</span>
                                     </span>
                                     <hr>
                                 </span> 
@@ -60,7 +60,7 @@
                                     
                                     <strong>Author agrements:</strong> 
                                     <span *ngFor="let item of news.agrements; let last = last" >
-                                        <a href="#">{{item}}</a><span *ngIf="!last">,</span>
+                                        <a>{{item}}</a><span *ngIf="!last">,</span>
                                     </span>
                                     <hr>
                                 </span>  

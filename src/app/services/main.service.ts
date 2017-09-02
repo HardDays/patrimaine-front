@@ -39,6 +39,14 @@ import { TokenModel } from '../models/token.model';
         }
         public me: UserModel;
 
+        IsLogedIn():boolean{
+            let token = this.httpService.GetToken();
+            let result = false;
+            if(token && token.token)
+                result = true;
+            return result;
+        }
+
         ParamsToUrlSearchParams(params:any):string{
             let options = new URLSearchParams();
 

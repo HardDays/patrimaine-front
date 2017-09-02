@@ -37,6 +37,7 @@ export class UsersComponent implements OnInit{
     Subcategory:CheckboxModel[]=[];
     Pcategory:CheckboxModel[]=[];
     ErrorMesages:string[] = [];
+    isLogedIn:boolean;
 
     constructor(private router: Router,
         private mainService: MainService,
@@ -45,6 +46,13 @@ export class UsersComponent implements OnInit{
         }
 
     ngOnInit(){
+        this.isLogedIn = this.mainService.IsLogedIn();
+        this.mainService.onAuthChange$
+            .subscribe((res:boolean)=>{
+                this.isLogedIn = res;
+                if(this.isLogedIn)
+                    this.RefreshMyLikesAndRates();
+            })
         this.params.params.forEach((params:Params) => {
             this.mainService.ChangePage('users');
             this.IsLoading = true;
@@ -128,8 +136,8 @@ export class UsersComponent implements OnInit{
                 this.UsersObservable = res.users;
                 let i = 0;
                 this.Pages = [];
-                
-                this.RefreshMyLikesAndRates();
+                if(this.isLogedIn)
+                    this.RefreshMyLikesAndRates();
                 while(i<res.total_count){
                     this.Pages.push(i/10+1);
                     i+=10;
@@ -210,6 +218,8 @@ export class UsersComponent implements OnInit{
     }
     
     LikeOrUnlikeUser(id:number){
+        if(!this.isLogedIn)
+            return;
         if(!this.MyLikes[id])
             this.LikeUser(id);
         else 
@@ -248,6 +258,8 @@ export class UsersComponent implements OnInit{
     }
 
     RateOrUnrateUser(id:number,event:any){
+        if(!this.isLogedIn)
+            return;
         if(!this.MyRates[id]){
             this.RateUser(id,event);
         }

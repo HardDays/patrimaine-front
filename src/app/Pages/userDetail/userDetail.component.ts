@@ -55,18 +55,29 @@ export class UserDetailComponent implements OnInit{
     Agreements:string[] = [];
     Expertises:string[] = [];
     SubCategory: string[] = [];
+    isLogedIn:boolean;
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private service: MainService)
     {
-        this.service.ChangePage('user_detail');
+        
     }
     ngOnInit() {
+        this.isLogedIn = this.service.IsLogedIn();
+        this.service.onAuthChange$
+            .subscribe((res:boolean)=>{
+                this.isLogedIn = res;
+            });
         this.activatedRoute.params.forEach((params:Params) => {
+            this.service.ChangePage('user_detail');
             let userId = params["id"];
             //TODO: REWRITE THIS HARDCODE
             if(userId == 'me'){
+                if(!this.isLogedIn){
+                    this.router.navigate(['/401']);
+                    return;
+                }
                 this.isMe = true;
                 this.service.GetMe()
                     .subscribe((data:UserModel) => {
@@ -98,16 +109,18 @@ export class UserDetailComponent implements OnInit{
             this.Agreements = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.agrements,this.AgreementsCB);
             this.Expertises = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.expertises,this.ExpertisesCB);
             this.SubCategory = this.service.GetCheckboxNamesFromCheckboxModel([this.User.company.sub_category],this.SubcategoryCB);
-            this.service.GetMyLikes()
-                .subscribe((like_result:AllLikesModel[])=>{
-                    let like = like_result.find(x=>x.user_id == this.User.id);
-                    this.IsLiked =like?true:false;
-                    this.service.GetMyRates()
-                        .subscribe((rate_result:AllRatesModel[])=>{
-                            let rate = rate_result.find(x=> x.user_id == this.User.id);
-                            this.IsRated = (rate)?rate.rate:0;
-                        });
-                });
+            if(this.isLogedIn){
+                this.service.GetMyLikes()
+                    .subscribe((like_result:AllLikesModel[])=>{
+                        let like = like_result.find(x=>x.user_id == this.User.id);
+                        this.IsLiked =like?true:false;
+                        this.service.GetMyRates()
+                            .subscribe((rate_result:AllRatesModel[])=>{
+                                let rate = rate_result.find(x=> x.user_id == this.User.id);
+                                this.IsRated = (rate)?rate.rate:0;
+                            });
+                    });
+            }
             if(this.User.company.image_id){
                 this.service.GetImageById(this.User.company.image_id)
                     .subscribe((result:Base64ImageModel)=>{
@@ -127,6 +140,9 @@ export class UserDetailComponent implements OnInit{
         }
     }
     LikeOrUnlikeUser(){
+        if(!this.isLogedIn)
+            return;
+
         if(!this.IsLiked)
             this.LikeUser();
         else 
@@ -165,6 +181,9 @@ export class UserDetailComponent implements OnInit{
     }
 
     RateOrUnrateUser(event:any){
+        if(!this.isLogedIn)
+            return;
+        
         if(this.IsRated < 1){
             this.RateUser(event);
         }
