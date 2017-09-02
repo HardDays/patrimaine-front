@@ -68,6 +68,8 @@ export class UserDetailComponent implements OnInit{
         this.service.onAuthChange$
             .subscribe((res:boolean)=>{
                 this.isLogedIn = res;
+                if(!this.isLogedIn)
+                    this.router.navigate(["/"]);
             });
         this.activatedRoute.params.forEach((params:Params) => {
             this.service.ChangePage('user_detail');
