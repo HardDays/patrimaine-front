@@ -907,6 +907,10 @@ a{
 .error-msg{
     color:red;
 }
+.ok-msg{
+    color:rgba(0,255,0,1);
+    text-align: center;
+}
 .inside-profile-rates
 {
     display: inherit;
@@ -1060,8 +1064,7 @@ a.upper-first::first-letter{
 }
 .subscribe-button{
     position: relative;
-    top: 160px;
-    left: 250px;
+    top: 10px;
     width: 250px;
     height: 40px;
     background: #56AED4;
@@ -1075,10 +1078,78 @@ a.upper-first::first-letter{
 } 
 .height200{
     min-height: 200px;
+    width: 250px
+}
+.height200 img{
+
 }
 .push25{
     margin-bottom: 25px;
 }
 #slider{
     height: 450px!important;
+}
+.profile_edit{
+    border: 1px solid #56AED4;
+    width: 55%;
+    margin: 10px auto;
+    padding: 25px;
+}
+.profile_nav{
+    margin: 10px auto;
+    height: 22px;
+    width: 100%;
+}
+.profile_nav ul{
+    margin: 10px auto;
+    height: 22px;
+    padding: 0px !important;
+    width: 87%;
+}
+.profile_nav ul li{
+    float: left;
+    margin-left: 10px;
+    list-style: none;
+    font-size: 14px;
+}
+.profile_nav ul li.active{
+    font-weight: bold;
+    text-decoration: underline;
+}
+.change_pw, .company_info, .user_info{
+    width:80%;
+    margin:auto;
+}
+.change_pw form, .user_info form, .company_info form{
+    width:80%;
+    margin-left:auto;
+}
+.change_pw form button, .user_info form button, .company_info form button {
+    width: 50%;
+    background: #56AED4;
+    color: white;
+    border: 0;
+    padding: 10px 0;
+    margin-top: 15px;
+    align-content: center;
+    margin-left: 12.5%;
+}
+.change_pw form input, .user_info form input,
+.user_info form select, .company_info form select,
+.company_info form input, .company_info form textarea {
+    width: 75%;
+}
+.edit-company-image{
+    width: 160px;
+    max-height: 220px;
+}
+.left_part{
+    float: left;
+    width:49%;
+    margin-bottom: 10px;
+}
+.rigth_part{
+    float: right;
+    width:49%;
+    margin-bottom: 10px;
 }

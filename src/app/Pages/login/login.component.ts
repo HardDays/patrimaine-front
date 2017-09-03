@@ -1,4 +1,4 @@
-import { Component,OnInit, Input, Output, EventEmitter}      from '@angular/core';
+import { Component,OnInit}      from '@angular/core';
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { HttpService} from '../../services/http.service';
 import {MainService} from "./../../services/main.service";
@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit{
             this.mainService.ChangePage('login');
         }
 
-    @Output() onLoggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
     OnLoginButtonClick(username: string, password:string)
     {
         this.isLoading = true;

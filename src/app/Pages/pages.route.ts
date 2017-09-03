@@ -13,12 +13,14 @@ import { CreateAdComponent } from './createAd/createAd.component';
 import { IndexComponent } from './index/index.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { NotFoundComponent } from './notfound/notfound.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routs = [
     { path:"ad_list",component: AdsComponent, name: 'ad_list' },
     { path:'ads/:id',component: AdsDetailComponent },
     { path:"users",component: UsersComponent },
     { path:"users/:id",component:UserDetailComponent},
+    { path: "profile", component: ProfileComponent, canActivate: [PageAccessGuard]},
     { path:'login',component: LoginComponent },
     { path:'register',component: RegisterComponent },
     { path:'my_ads', component: MyAdsComponent, canActivate: [PageAccessGuard]},

@@ -75,6 +75,7 @@ import { TokenModel } from '../models/token.model';
         }
         GetCheckboxesFromChecked(input:string[],output:CheckboxModel[]):CheckboxModel[]
         {
+            output.find(x=> true).checked = false;
             for(let i of input){
                 output.find(x=> x.value == i).checked = true;
             }
@@ -184,6 +185,9 @@ import { TokenModel } from '../models/token.model';
             return this.httpService.PostData('/users/create',JSON.stringify(params));
         }
         
+        ChangePassword(params:any){
+            return this.httpService.PutData('/users/change_password',JSON.stringify(params));
+        }
 
         UpdateUser(id:number, user:any){
             return this.httpService.PutData('/users/update/'+id,JSON.stringify(user));
@@ -230,7 +234,7 @@ import { TokenModel } from '../models/token.model';
             this.onAuthChange$.next(false);
             this.cookiesService.delete('token');
             //window.localStorage.removeItem('token');
-            return this.httpService.PostData("/auth/logout",null);
+            return this.httpService.PostData("/auth/logout","");
             
         }
 

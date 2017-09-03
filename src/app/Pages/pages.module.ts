@@ -23,6 +23,7 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 import { MyNewsComponent } from './myNews/myNews.component';
 import { CookieService } from 'ng2-cookies';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     imports:      [ CommonModule,FormsModule,RouterModule ],
@@ -31,14 +32,16 @@ import { CookieService } from 'ng2-cookies';
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent, NewsComponent,
-        NewsDetailComponent, CreateNewsComponent, MyNewsComponent
+        NewsDetailComponent, CreateNewsComponent, MyNewsComponent,
+        ProfileComponent
     ],
     exports: [
         AdsComponent, IndexComponent, UsersComponent,
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent,NewsComponent,
-        NewsDetailComponent, CreateNewsComponent, MyNewsComponent
+        NewsDetailComponent, CreateNewsComponent, MyNewsComponent,
+        ProfileComponent
     ],
     providers: [HttpService, PageAccessGuard,CookieService]
 })

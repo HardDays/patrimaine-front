@@ -26,6 +26,7 @@
           <a class="drop" routerLink="/users/me">{{me.first_name + " " + me.last_name}}</a>
             <ul *ngIf="IsDropped">
               <li><a (click)="onMenuItemClick()" routerLink="/users/me">My profile</a></li>
+              <li><a (click)="onMenuItemClick()" routerLink="/profile">Edit profile</a></li>
               <li><a (click)="onMenuItemClick()" routerLink="/my_ads">My ads</a></li>
               <li><a (click)="onMenuItemClick()" routerLink="/create_ad">Create ad</a></li>
               <!--<li><a routerLink="/my_annonces">My annonces</a></li>-->
