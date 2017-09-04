@@ -157,6 +157,10 @@ export class ProfileComponent implements OnInit {
                 this.isLoading = false;
             }
         }
+        else{
+            this.ImageBase64="images/demo/patrimoineLogo.png";
+            this.isLoading = false;
+        }
     }
 
     changeListener($event: any) : void {
