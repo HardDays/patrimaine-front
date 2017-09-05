@@ -1083,6 +1083,22 @@ a.upper-first::first-letter{
 .height200 img{
 
 }
+.height20{
+    height: 20px;
+}
+.height40{
+    height: 40px;
+}
+img.height222{
+    max-height: 222px;
+    width:222px;
+}
+div.height222{
+    height: 222px;
+}
+.height57{
+    height: 57px;
+}
 .push25{
     margin-bottom: 25px;
 }

@@ -27,7 +27,7 @@
                     <h1 class="error-msg">{{changePwErrMsg}}</h1>
                 </div>
                 <div *ngIf="changePwOk">
-                    <h1 class="ok-msg">Your password was changed!</h1>
+                    <h1 class="ok-msg">Your password was changed! We will reddirect you to login page soon!</h1>
                 </div>
                 <form (ngSubmit)="ChangePassword(old_pw,new_pw)">
                     <label>Old password</label>

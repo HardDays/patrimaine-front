@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
         this.service.onAuthChange$
             .subscribe((res:boolean)=>{
                 if(!res)
-                    this.router.navigate(["/"]);
+                    this.router.navigate(["/login"]);
             });
         this.service.GetMe()
             .subscribe((res:UserModel)=>{
@@ -90,6 +90,10 @@ export class ProfileComponent implements OnInit {
             .subscribe((res:UserModel)=>{
                 this.RefreshUser(res);
                 this.changePwOk = true;
+                
+                setTimeout(()=> {
+                    this.service.Logout();
+                },3000);
             },
         (err)=>{
             this.changePwErrMsg = "Old password is incorrect!";
