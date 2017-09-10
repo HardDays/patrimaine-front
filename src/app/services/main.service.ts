@@ -205,7 +205,9 @@ import { TokenModel } from '../models/token.model';
     
             return this.httpService.PostData('/auth/login',JSON.stringify(params));
         }
-
+        GetMyAccess(){
+            return this.httpService.GetData("/access/my_access","");
+        }
         BaseInitAfterLogin(data:TokenModel){
             this.cookiesService.set('token',data.token);
             this.httpService.BaseInitByToken(data.token);

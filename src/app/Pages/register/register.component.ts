@@ -7,6 +7,7 @@ import { UserModel } from '../../models/user.model';
 import { CheckboxModel } from '../../models/checkbox.model';
 import { RegisterUserModel } from '../../models/register.user.model';
 import { RegisterCompanyModel } from '../../models/register.company.model';
+import { TokenModel } from '../../models/token.model';
 
 @Component({
     moduleId:module.id,
@@ -51,15 +52,17 @@ export class RegisterComponent implements OnInit{
     RegisterUser(email:string,password:string,fname:string,lname:string,phone:string,pcategory:string)
     {
         window.scrollTo(0,0);
+        this.regError = false;
+        this.isLoading = true;
         if(!email || (!password || password.length < 6) || !fname || !lname || !pcategory){
             this.OnRegError({status:400});
             return;
         }
-        this.isLoading = true;
+        
         let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
         this.mainService.CreateUser(user)
             .subscribe(x=>{
-                this.AfterRegistration(x);
+                this.AfterRegistration(x,password);
             },
         (err)=>{
             this.OnRegError(err);
@@ -71,18 +74,20 @@ export class RegisterComponent implements OnInit{
                         worktime:string, description:string, links:string, c_type:string, subcategory:string)
     {
         window.scrollTo(0,0);
+        this.regError = false;
+        this.isLoading = true;
         if(!email || (!password || password.length < 6) || !fname || !lname || !pcategory ||
             !cname || !c_type){
             this.OnRegError({status:400});
             return;
         }
-        this.isLoading = true;
+        
         let user : RegisterUserModel = new RegisterUserModel(email,password,fname,lname,phone,pcategory);
         let company : RegisterCompanyModel = new RegisterCompanyModel(cname, caddress, coaddress, cemail, cphone, worktime, description, links, c_type, subcategory,this.image);
         
         this.mainService.CreateUserCompany(user, (company.name && company.c_type)?company:null, this.GetCheckedCheckboxes(this.Expertises), this.GetCheckedCheckboxes(this.Agreements))
             .subscribe(x=>{
-                this.AfterRegistration(x);
+                this.AfterRegistration(x,password);
             },
         (err)=>{
             this.OnRegError(err);
@@ -119,10 +124,17 @@ export class RegisterComponent implements OnInit{
             }
             myReader.readAsDataURL(file);
         }
-        AfterRegistration(user: UserModel){
+        AfterRegistration(user: UserModel,password:string){
             if(user && user.id){
-                this.isLoading = false;
+                //this.isLoading = false;
                 this.regOk = true;
+                this.mainService.UserLogin(user.email,password)
+                    .subscribe((data:TokenModel)=>{
+                        if(data && data.token){
+                            this.mainService.BaseInitAfterLogin(data);
+                            this.router.navigate(["/users/me"]);
+                        }
+                    });
             }
         }
         GetCheckedCheckboxes(input:CheckboxModel[]): string[]

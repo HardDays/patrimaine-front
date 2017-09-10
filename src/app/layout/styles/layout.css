@@ -833,7 +833,9 @@ address {
     border: 0;
     padding: 10px 0;
 }
-
+#container .reg_block{
+    margin:40px 0px;
+}
 .register_block {
     display: flex;
     display: -webkit-flex;
@@ -844,6 +846,7 @@ address {
     color: #56AED4;
     padding-bottom: 15px;
     border-bottom: 1px solid #56AED4;
+    text-align: center;
 }
 .register_block .reg_block {
     width: 40%;
@@ -977,12 +980,12 @@ a{
     text-align: center;
     color: red;
 }
-input:required:invalid, select:required:invalid{
+input:required:invalid, select:required:invalid, textarea:required:invalid{
     -webkit-box-shadow: 0px 0px 3px 2px rgba(255,0,0,1);
     -moz-box-shadow: 0px 0px 3px 2px rgba(255,0,0,1);
     box-shadow: 0px 0px 3px 2px rgba(255,0,0,1);
 }
-input:required:valid, select:required:valid{
+input:required:valid, select:required:valid, textarea:required:valid{
     -webkit-box-shadow: 0px 0px 3px 2px rgba(0,255,0,1);
 -moz-box-shadow: 0px 0px 3px 2px rgba(0,255,0,1);
 box-shadow: 0px 0px 3px 2px rgba(0,255,0,1);
@@ -1168,4 +1171,16 @@ div.height222{
     float: right;
     width:49%;
     margin-bottom: 10px;
+}
+.user-type{
+    width: 100%;
+    background: #56AED4;
+    color: white;
+    border: 0;
+    padding: 10px 0;
+}
+.main-block{
+    width: auto !important;
+    min-width: 400px;
+    margin: 10px auto !important;
 }

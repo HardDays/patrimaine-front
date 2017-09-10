@@ -1,18 +1,22 @@
 <div class="wrapper row3">
   <main id="container" class="clear">
     <!-- container body -->
-    <div class="loading" *ngIf="isLoading"></div>
+    
     <div *ngIf="regOk">
-      <h1> Your account was created! Please <a routerLink="/login">sign in</a>! </h1>
+      <h1> Your account was created! You will redirect to your page soon! </h1>
     </div>
     <div *ngIf="regError">
       <h1 class="error-msg">{{regErrorMsg}}</h1>
     </div>
-    <div class="register_block" *ngIf="!isLoading && !regOk">
-      <div class="reg_block reg_left">
+    <div class="register_block">
+      <div class="loading" *ngIf="isLoading"></div>
+      <div class="reg_block main-block"  *ngIf="!isLoading">
         <h2 *ngIf="!isPro">Professionnels du chiffre et du droit</h2>
         <h2 *ngIf="isPro">Concepteurs de Solutions</h2>
+        <button type="button" (click)="isPro = !isPro" class="user-type"> Change user type</button>
+        
         <form (ngSubmit)="RegisterUser(email,password,fname,lname,phone,pcategory)">
+          <br>
           <label>Email *</label>
           <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
           <label>Password *</label>
@@ -35,6 +39,7 @@
             <option value="immobilier">Professionnels de l'immobilier</option>
           </select>
           <br>
+          
           <button *ngIf="!isPro" type="submit">Register</button>
         </form>
 
@@ -114,9 +119,6 @@
           </div><br>
           <button [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,pcategory,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">Register</button>
         </form>
-      </div>
-      <div class="reg_block reg_right">
-          <button (click)="ChangeUserType()"> Change user type</button>
       </div>
     </div>
 

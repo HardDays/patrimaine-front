@@ -30,11 +30,21 @@ export class CreateAdComponent implements OnInit{
     }
 
     OncreateAdButtonClick(title:string,description:string){
+        this.createError = false;
         this.isLoading = true;
         if(!title || !description){
-            this.errorMsg = "Input valid data!";
+            this.errorMsg = "Input valid data! You have to input: ";
+            let len = this.errorMsg.length;
+            if(!title)
+                this.errorMsg = this.errorMsg + " Title";
+            if(!description){
+                if(this.errorMsg.length != len)
+                    this.errorMsg += ","
+                this.errorMsg+=" Description !";
+            }
             this.createError = true;
             this.isLoading = false;
+            window.scrollTo(0,0);
             return;
         }
         this.service.CreateAd(title,description)
