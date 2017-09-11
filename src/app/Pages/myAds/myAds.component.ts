@@ -49,4 +49,7 @@ export class MyAdsComponent implements OnInit{
                     .subscribe((result:AllAdsModel)=>{this.myAds = result.ads;});
             });
     }
+    OnEditAd(ad : AdsModel){
+        this.router.navigate(['edit_ads',ad.id]);
+    }
 }

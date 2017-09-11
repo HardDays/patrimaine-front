@@ -29,7 +29,7 @@
               <li><a (click)="onMenuItemClick()" routerLink="/profile">Edit profile</a></li>
               <li *ngIf="createAdAccess"><a (click)="onMenuItemClick()" routerLink="/my_ads">My ads</a></li>
               <li *ngIf="createAdAccess"><a (click)="onMenuItemClick()" routerLink="/create_ad">Create ad</a></li>
-              <!--<li><a routerLink="/my_annonces">My annonces</a></li>-->
+              <li *ngIf="createNewsAccess"><a (click)="onMenuItemClick()" routerLink="/my_annonces">My annonces</a></li>
               <li *ngIf="createNewsAccess"><a (click)="onMenuItemClick()" routerLink="/create_news">Create annonce</a></li>
               <li style="cursor:pointer;"><a (click)="Logout()" >Logout</a></li>
             </ul>

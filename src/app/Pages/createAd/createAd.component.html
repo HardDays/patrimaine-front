@@ -19,8 +19,8 @@
                     <input type="text" name="title" [(ngModel)]="title" required>
                     <br>
                     <label>Description</label>
-                    <textarea name="description" [(ngModel)]="description" required ></textarea><br>
-                    <button (click)="OncreateAdButtonClick(title,description)">Create ad</button>
+                    <app-tinymce name="description" [(ngModel)]="description" required ></app-tinymce><br>
+                    <button class="create_button" (click)="OncreateAdButtonClick(title,description)">Create ad</button>
                 </form>
             </div>
         </div>

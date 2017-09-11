@@ -14,6 +14,10 @@ import { IndexComponent } from './index/index.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MyNewsComponent } from './myNews/myNews.component';
+import { EditNewsComponent } from './editNews/editNews.component';
+import { EditAdComponent } from './editAd/editAd.component';
+
 
 export const routs = [
     { path:"ad_list",component: AdsComponent, name: 'ad_list' },
@@ -28,6 +32,9 @@ export const routs = [
     { path: 'news_list', component: NewsComponent},
     { path: 'news/:id', component: NewsDetailComponent},
     { path: 'create_news', component: CreateNewsComponent, canActivate:[PageAccessGuard]},
+    { path: 'edit_news/:id', component: EditNewsComponent, canActivate:[PageAccessGuard]},
+    { path: 'edit_ads/:id', component: EditAdComponent, canActivate:[PageAccessGuard]},
+    { path:'my_annonces',component: MyNewsComponent, canActivate: [PageAccessGuard]},
     { path:"", pathMatch : "full",component:IndexComponent },
     { path: "401", component: UnauthorizedComponent},
     { path: "404", component: NotFoundComponent},

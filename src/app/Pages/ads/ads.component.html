@@ -37,7 +37,7 @@
                         <div class="user_block">
                             <div class="img"><img class="borderedbox" src="../images/demo/imgl.gif" alt=""></div>
                             <div class="desc">
-                                <p>{{ad.description}}</p>
+                                <p [innerHTML]="ad.description"></p>
                                 <address>
                                     <a [routerLink]="['/users/' + ad.user_id]">{{Users[ad.id]}}</a>
                                 </address>

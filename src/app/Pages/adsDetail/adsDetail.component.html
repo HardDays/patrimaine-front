@@ -17,8 +17,7 @@
     <h1 align="center"><a>{{Ads.title}}</a></h1>
     <p>
     </p>
-    <div class="news-description">
-      {{Ads.description}}
+    <div class="news-description" [innerHTML]="Ads.description">
     </div>
     <p align="right">
       <b>Author: <a [routerLink]="['/users',Author.id]" >{{Author.first_name + " " + Author.last_name}}</a></b>

@@ -47,6 +47,7 @@ export class CreateAdComponent implements OnInit{
             window.scrollTo(0,0);
             return;
         }
+        console.log(description);
         this.service.CreateAd(title,description)
             .subscribe((result:AdsModel)=>{
                 this.router.navigate(['ads',result.id]);

@@ -28,6 +28,8 @@ ng2-cookies@1.0.12 MIT
 
 @angular/http@4.3.5 MIT
 
+angular2-tinymce@2.1.2 ISC
+
 intl@1.2.5 MIT
 The MIT License (MIT)
 

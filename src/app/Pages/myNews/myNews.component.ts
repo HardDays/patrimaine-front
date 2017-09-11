@@ -34,8 +34,9 @@ export class MyNewsComponent implements OnInit{
                         this.User = data;
                         // TODO: create getting my news
                         this.service.GetAllNews({user_id:data.id})
-                            .subscribe((result:NewsModel[])=>{
-                                this.myNews = result;
+                            .subscribe((result:AllNewsModel)=>{
+                                
+                                this.myNews = result.news;
                                 this.IsLoading = false;
                             });
                     }
@@ -49,5 +50,9 @@ export class MyNewsComponent implements OnInit{
                 this.service.GetAllNews({user_id:this.User.id})
                     .subscribe((result:AllNewsModel)=>{this.myNews = result.news;});
             });
+    }
+
+    OnEditAd(ad : NewsModel){
+        this.router.navigate(['edit_news',ad.id]);
     }
 }

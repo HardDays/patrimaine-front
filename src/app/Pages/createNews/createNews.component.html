@@ -15,36 +15,42 @@
             <div class="ad_create_form" *ngIf="!isLoading">
                 <h1>Create annonce</h1>
                 <form (ngSubmit)="OncreateNewsButtonClick(title,subtitle,description,ncategory,ntype,links)">
-                    <label>Title</label>
-                    <input type="text" name="title" [(ngModel)]="title" required value="">
+                    <div class="create_news_lt">
+                        <label>Title</label>
+                        <input type="text" name="title" [(ngModel)]="title" required value="">
+                        <br>
+                        <label>Subtitle</label>
+                        <input type="text" name="subtitle" [(ngModel)]="subtitle" required value="">
+                        <br>
+                        <label>Description</label>
+                        <app-tinymce name="description" [(ngModel)]="description" required></app-tinymce>
+                    </div>
+                    <div class="create_news_rt">
+                        <label>Logo image</label>
+                        <input type="file" accept="image/*" name="logo_img" [(ngModel)]="logo_img" (change)="changeListener($event)">
+                        <br>
+                        <label>Links</label>
+                        <input type="text" name="links" [(ngModel)]="links" required value="">
+                        <br>
+                        <label>Category</label>
+                        <select name="ncategory" [(ngModel)]="ncategory" >
+                        <option value="finance">Finance / Epargne / Assurance</option>
+                        <option value="ecologique">Placement écologique</option>
+                        <option value="immobilier">Investissement Immobilier</option>
+                        <option value="plaisir">Investissement plaisir</option>
+                        </select>
+                        <br>
+                        <label>Type</label>
+                        <select name="ntype" [(ngModel)]="ntype">
+                            <option value="standart" selected>Standart</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                        
+                        
+                    </div>
+                    <div class="create_news_clearfix"></div>
                     <br>
-                    <label>Subtitle</label>
-                    <input type="text" name="subtitle" [(ngModel)]="subtitle" required value="">
-                    <br>
-                    <label>Logo image</label>
-                    <input type="file" accept="image/*" name="logo_img" [(ngModel)]="logo_img" (change)="changeListener($event)">
-                    <br>
-                    <label>Category</label>
-                    <select name="ncategory" [(ngModel)]="ncategory" >
-                      <option value="finance">Finance / Epargne / Assurance</option>
-                      <option value="ecologique">Placement écologique</option>
-                      <option value="immobilier">Investissement Immobilier</option>
-                      <option value="plaisir">Investissement plaisir</option>
-                    </select>
-                    <br>
-                    <label>Type</label>
-                    <select name="ntype" [(ngModel)]="ntype">
-                        <option value="standart" selected>Standart</option>
-                        <option value="premium">Premium</option>
-                    </select>
-                    <br>
-                    <label>Links</label>
-                    <input type="text" name="links" [(ngModel)]="links" required value="">
-                    <br>
-                    <label>Description</label>
-                    <textarea name="description" [(ngModel)]="description" required></textarea>
-                    <br>
-                    <button type="submit" [disabled]="!isOkEnabled">Create annonce</button>
+                    <button class="annonce_button" type="submit" [disabled]="!isOkEnabled">Create annonce</button>
                 </form>
             </div>
         </div>

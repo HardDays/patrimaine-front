@@ -24,16 +24,19 @@ import { NotFoundComponent } from './notfound/notfound.component';
 import { MyNewsComponent } from './myNews/myNews.component';
 import { CookieService } from 'ng2-cookies';
 import { ProfileComponent } from './profile/profile.component';
+import { TinymceModule } from 'angular2-tinymce';
+import { EditNewsComponent } from './editNews/editNews.component';
+import { EditAdComponent } from './editAd/editAd.component';
 
 @NgModule({
-    imports:      [ CommonModule,FormsModule,RouterModule ],
+    imports:      [ CommonModule,FormsModule,RouterModule,TinymceModule.withConfig({ }) ],
     declarations: [
         AdsComponent, IndexComponent, UsersComponent, 
         AdsDetailComponent, UserDetailComponent, LoginComponent,
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent, NewsComponent,
         NewsDetailComponent, CreateNewsComponent, MyNewsComponent,
-        ProfileComponent
+        ProfileComponent,EditNewsComponent, EditAdComponent
     ],
     exports: [
         AdsComponent, IndexComponent, UsersComponent,
@@ -41,7 +44,7 @@ import { ProfileComponent } from './profile/profile.component';
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent,NewsComponent,
         NewsDetailComponent, CreateNewsComponent, MyNewsComponent,
-        ProfileComponent
+        ProfileComponent,EditNewsComponent, EditAdComponent
     ],
     providers: [HttpService, PageAccessGuard,CookieService]
 })

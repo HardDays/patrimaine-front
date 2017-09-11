@@ -17,8 +17,7 @@
     <h1 align="center"><a>{{News.title}}</a></h1>
     <p>
     </p>
-    <div class="news-description">
-      {{News.description}}
+    <div class="news-description" [innerHTML]="News.description">
       <hr>
     </div>
     <div>
@@ -43,7 +42,7 @@
             <b>Type: <a class="upper-first" >{{News.ntype}}</a></b>
           </p>
           <p *ngIf="News.links">
-            <b>Links: <a >{{News.links}}</a></b>
+            <b>Links: <a [innerHTML]="News.links"></a></b>
           </p>
           <p >
             <b>Author: <a [routerLink]="['/users',News.user_id]" >{{News.user_first_name + " " + News.user_last_name}}</a></b>

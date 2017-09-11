@@ -1,0 +1,32 @@
+<div class="wrapper row2">
+        
+      </div>
+      <!-- ################################################################################################ -->
+      <!-- ################################################################################################ -->
+      <!-- ################################################################################################ -->
+  <div class="wrapper row3">
+      <main id="container" class="clear">
+          <div class="ads_creation reg_block">
+              <div *ngIf="createError">
+                  <h1 class="error-msg">{{errorMsg}}</h1>
+              </div>
+              <div *ngIf="editOk">
+                <a [routerLink]="['/ads',Ad.id]"><h1 class="ok-msg">Annonce was updated!</h1></a>
+             </div>
+              <div class="loading" *ngIf="isLoading"></div>
+               
+              <div class="ad_create_form" *ngIf="!isLoading">
+                  <h1>Create annonce</h1>
+                  <form (ngSubmit)="UpdateNews()">
+                    <label>Title</label>
+                    <input type="text" name="title" [ngModel]="Ad.title" (ngModelChange)="Ad.title=$event" required value="">
+                    <br>
+                    <label>Description</label>
+                    <app-tinymce name="description" [ngModel]="Ad.description" (ngModelChange)="Ad.description=$event" required></app-tinymce>
+                    <br>
+                    <button class="annonce_button" type="submit" [disabled]="!isOkEnabled">Update annonce</button>
+                  </form>
+              </div>
+          </div>
+      </main>
+  </div>

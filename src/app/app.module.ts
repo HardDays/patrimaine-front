@@ -12,6 +12,7 @@ import {MainService} from "./services/main.service";
 import { PageModule } from './Pages/pages.module';
 import { routs } from './Pages/pages.route';
 import { CookieService } from 'ng2-cookies';
+import { TinymceModule} from 'angular2-tinymce';
 
 @NgModule({
     imports:      [ 
@@ -19,7 +20,10 @@ import { CookieService } from 'ng2-cookies';
         RouterModule.forRoot(routs),
         PageModule,
         HttpModule,
-        FormsModule
+        FormsModule,
+        TinymceModule.withConfig({
+            skin_url: "/assets/skins/lightgray"
+        })
     ],
     declarations: [ AppComponent],
     providers: [ MainService, HttpModule, CookieService],

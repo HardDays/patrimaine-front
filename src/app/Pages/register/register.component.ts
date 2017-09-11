@@ -128,13 +128,15 @@ export class RegisterComponent implements OnInit{
             if(user && user.id){
                 //this.isLoading = false;
                 this.regOk = true;
-                this.mainService.UserLogin(user.email,password)
-                    .subscribe((data:TokenModel)=>{
-                        if(data && data.token){
-                            this.mainService.BaseInitAfterLogin(data);
-                            this.router.navigate(["/users/me"]);
-                        }
-                    });
+                setTimeout(()=>{
+                    this.mainService.UserLogin(user.email,password)
+                        .subscribe((data:TokenModel)=>{
+                            if(data && data.token){
+                                this.mainService.BaseInitAfterLogin(data);
+                                this.router.navigate(["/users/me"]);
+                            }
+                        });
+                },3000);
             }
         }
         GetCheckedCheckboxes(input:CheckboxModel[]): string[]

@@ -119,13 +119,8 @@ import { TokenModel } from '../models/token.model';
             return this.httpService.DeleteData('/ads/delete/'+ad.id);
         }
 
-        UpdateAd(id:number,title:string,desc:string){
-            let ad = {title:title,description:desc};
-            let params = new URLSearchParams();
-            params.set('ad',JSON.stringify(ad));
-            return this.httpService.PutData('/ads/update/' + id,JSON.stringify(params))
-                .map((resp:Response)=>resp.json())
-                .catch((error:any) =>{return Observable.throw(error);});
+        UpdateAd(id:number,params:any){
+            return this.httpService.PutData('/ads/update/' + id,JSON.stringify(params));
         }
 
 
@@ -254,8 +249,7 @@ import { TokenModel } from '../models/token.model';
             return this.httpService.PostData('/news/create',JSON.stringify(params));
         }
 
-        UpdateNews(id:number, title:string, descr:string){
-            let params = {ad:{title:title,description:descr}};
+        UpdateNews(id:number, params:any){
             return this.httpService.PutData('/news/update/'+id,JSON.stringify(params));
         }
 

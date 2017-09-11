@@ -64,13 +64,13 @@
                                     </span>
                                     <hr>
                                 </span>  
-                                <p>{{news.description}}</p>
+                                <p [innerHTML]="news.description"></p>
                                 <address>
                                     <a [routerLink]="['/users/' + news.user_id]">{{news.user_first_name + " " + news.user_last_name}}</a>
                                 </address>
                             </div>
                             <div class="annonce_right">
-                                    <div class="premium_anonce" *ngIf="news.ntype == 'premium'"></div>
+                                <div class="premium_anonce"  *ngIf="news.ntype == 'premium'"></div>
                             </div>
                         </div>
                     </article>

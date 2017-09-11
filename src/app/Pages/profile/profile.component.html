@@ -45,16 +45,31 @@
                         <h1 class="ok-msg">User data was updated!</h1>
                     </div>
                 <form (ngSubmit)="UpdateUserInfo()">
-                    <label>Email</label>
+                    <label>
+                        <img src="../images/demo/icon_mail.png" alt=""> 
+                        Email
+                    </label>
                     <input type="email" name="email" size="22" [ngModel]="me.email" (ngModelChange)="me.email=$event" placeholder="Email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
-                    <label>First name</label>
+                    <label>
+                        <img src="../images/demo/icon_name.png" alt=""> 
+                        First name
+                    </label>
                     <input type="text" name="fname" size="22" [ngModel]="me.first_name" (ngModelChange)="me.first_name=$event" placeholder="First name" required><br>
-                    <label>Last Name</label>
+                    <label>
+                        <img src="../images/demo/icon_name.png" alt=""> 
+                        Last Name
+                    </label>
                     <input type="text" name="lname" size="22" [ngModel]="me.last_name" (ngModelChange)="me.last_name=$event" placeholder="Last name" required><br>
-                    <label>Phone</label>
+                    <label>
+                        <img src="../images/demo/icon_phone.png" alt=""> 
+                        Phone
+                    </label>
                     <input type="text" name="phone" size="22" [ngModel]="me.phone" (ngModelChange)="me.phone=$event" placeholder="+0123456789"><br>
             
-                    <label>Category</label>
+                    <label>
+                        <img src="../images/demo/icon_category.png" alt=""> 
+                        Category
+                    </label>
                     <select name="pcategory" [ngModel]="me.pcategory" (ngModelChange)="me.pcategory=$event" required>
                         <option value="assureurs">Assureurs</option>
                         <option value="avocats">Avocats</option>
@@ -89,9 +104,9 @@
                     <!--<label>Company ID</label>
                     <input type="text" name="companyid" [(ngModel)]="companyid"><br>-->
                     <label>Description</label>
-                    <textarea name="description" [ngModel]="me.company.description" (ngModelChange)="me.company.description=$event"></textarea><br>
+                    <app-tinymce name="description" [ngModel]="me.company.description" (ngModelChange)="me.company.description=$event"></app-tinymce><br>
                     <label>Social links</label>
-                    <textarea name="links" [ngModel]="me.company.links" (ngModelChange)="me.company.links=$event"></textarea><br>
+                    <app-tinymce name="links" [ngModel]="me.company.links" (ngModelChange)="me.company.links=$event"></app-tinymce><br>
                     <label>Logo image</label>
                     <div>
                         <img class="edit-company-image" [src]="ImageBase64">

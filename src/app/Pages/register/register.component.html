@@ -18,7 +18,7 @@
         <form (ngSubmit)="RegisterUser(email,password,fname,lname,phone,pcategory)">
           <br>
           <label>Email *</label>
-          <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+          <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
           <label>Password *</label>
           <input type="password" name="password" value="" minlength="6" [(ngModel)]="password" required><br>
           <label>First Name *</label>
@@ -40,7 +40,7 @@
           </select>
           <br>
           
-          <button *ngIf="!isPro" type="submit">Register</button>
+          <button class="reg-button" *ngIf="!isPro" type="submit">Register</button>
         </form>
 
         
@@ -71,9 +71,9 @@
           <!--<label>Company ID</label>
           <input type="text" name="companyid" [(ngModel)]="companyid"><br>-->
           <label>Description</label>
-          <textarea name="description" [(ngModel)]="description"></textarea><br>
+          <app-tinymce name="description" [(ngModel)]="description"></app-tinymce><br>
           <label>Social links</label>
-          <textarea name="links" [(ngModel)]="links"></textarea><br>
+          <app-tinymce name="links" [(ngModel)]="links"></app-tinymce><br>
           <label>Logo image</label>
           <input type="file" accept="image/*" name="logo_img" [(ngModel)]="logo_img" (change)="changeListener($event)"><br>
           <div class="part_reg">
@@ -117,7 +117,7 @@
               </div>
             </div>
           </div><br>
-          <button [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,pcategory,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">Register</button>
+          <button class="reg-button" [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,pcategory,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">Register</button>
         </form>
       </div>
     </div>

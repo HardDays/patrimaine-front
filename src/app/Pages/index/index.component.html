@@ -73,7 +73,7 @@
           <div class="one_ads" *ngFor="let item of lastAnnonces">
             <p class="c height20">{{item.ncategory}}</p>
             <h6>{{item.title}}</h6>
-            <p class="height40">{{item.description}}</p>
+            <p class="height40" [innerHTML]="item.description"></p>
             <a [routerLink]="['/news/' + item.id]">Voir l'offre »</a>
             <p class="d">{{item.created_at | date: dMMy}}</p>
             <div class="clear"></div>
@@ -88,7 +88,7 @@
           <div class="one_ads" *ngFor="let item of premiumAnnonces">
             <p class="c height20">{{item.ncategory}}</p>
             <h6>{{item.title}}</h6>
-            <p class="height40">{{item.description}}</p>
+            <p class="height40" [innerHTML]="item.description"></p>
             <a [routerLink]="['/news/' + item.id]">Voir l'offre »</a>
             <p class="d">{{item.created_at | date: dMMy}}</p>
             <div class="clear"></div>
@@ -159,7 +159,7 @@
         </div>
         <div class="borderedbox pad15">
           <h6 class="push10">{{item.title}}</h6>
-          <p class="nospace push10 height57">{{item.description}}</p>
+          <p class="nospace push10 height57" [innerHTML]="item.description"></p>
           <div class="nospace push10">
             <span class="cat">{{item.sub_category}}</span>
             <span class="date">{{item.created_at | date: dMMy}}</span>

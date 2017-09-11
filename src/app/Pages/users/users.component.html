@@ -101,7 +101,9 @@
                   </div>-->
                 </div>
                 <div class="rating_wrap" *ngIf="user.company">
-                    <div *ngIf="user.company" class="like" [ngClass]="{'like-active': MyLikes[user.id]}" (click)="LikeOrUnlikeUser(user.id*1)"><img src="../images/demo/like.png" alt=""> Like {{user.company.likes}}</div>
+                    <div *ngIf="user.company" class="like" [ngClass]="{'like-active': MyLikes[user.id]}" (click)="LikeOrUnlikeUser(user.id*1)">
+                      <img [src]="MyLikes[user.id]?'../images/demo/like_active.png':'../images/demo/like.png'" alt=""> 
+                      Like {{user.company.likes}}</div>
                   <div class="stars_wrap" *ngIf="isLogedIn">
                     <div class="stars_empty" (click)="RateOrUnrateUser(user.id,$event)"><div class="stars" [ngStyle]="{'width': 100*(MyRates[user.id]?(MyRates[user.id]-1):0)/4. + '%'}"></div></div>
                     <span>Your rate for<br /> this user</span>
