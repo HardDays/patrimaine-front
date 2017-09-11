@@ -22,7 +22,8 @@ import { TinymceModule} from 'angular2-tinymce';
         HttpModule,
         FormsModule,
         TinymceModule.withConfig({
-            skin_url: "/assets/skins/lightgray"
+            skin_url: "/assets/skins/lightgray",
+            menubar:false
         })
     ],
     declarations: [ AppComponent],

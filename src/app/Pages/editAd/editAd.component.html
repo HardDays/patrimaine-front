@@ -16,13 +16,13 @@
               <div class="loading" *ngIf="isLoading"></div>
                
               <div class="ad_create_form" *ngIf="!isLoading">
-                  <h1>Create annonce</h1>
+                  <h1>Edit ad</h1>
                   <form (ngSubmit)="UpdateNews()">
                     <label>Title</label>
                     <input type="text" name="title" [ngModel]="Ad.title" (ngModelChange)="Ad.title=$event" required value="">
                     <br>
                     <label>Description</label>
-                    <app-tinymce name="description" [ngModel]="Ad.description" (ngModelChange)="Ad.description=$event" required></app-tinymce>
+                    <app-tinymce name="description" [ngModel]="Ad.description" (ngModelChange)="Ad.description=$event"></app-tinymce>
                     <br>
                     <button class="annonce_button" type="submit" [disabled]="!isOkEnabled">Update annonce</button>
                   </form>

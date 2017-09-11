@@ -11,12 +11,13 @@
         <div class="profile_edit" *ngIf="!isLoading">
             <div class="profile_nav">
                 <ul>
-                    <li [ngClass]="{'active':currentTab == 'password'}">
-                        <a (click)="ChangeTabTo('password')">Change password</a>
-                    </li>
                     <li [ngClass]="{'active':currentTab == 'user'}">
                         <a (click)="ChangeTabTo('user')">Edit user profile</a>
                     </li>
+                    <li [ngClass]="{'active':currentTab == 'password'}">
+                        <a (click)="ChangeTabTo('password')">Change password</a>
+                    </li>
+                    
                     <li *ngIf="me.company" [ngClass]="{'active':currentTab == 'company'}">
                         <a (click)="ChangeTabTo('company')">Edit company profile</a>
                     </li>

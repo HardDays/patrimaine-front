@@ -15,6 +15,7 @@
             <div class="ad_create_form" *ngIf="!isLoading">
                 <h1>Create annonce</h1>
                 <form (ngSubmit)="OncreateNewsButtonClick(title,subtitle,description,ncategory,ntype,links)">
+                    <div class="create_news_main">
                     <div class="create_news_lt">
                         <label>Title</label>
                         <input type="text" name="title" [(ngModel)]="title" required value="">
@@ -22,8 +23,11 @@
                         <label>Subtitle</label>
                         <input type="text" name="subtitle" [(ngModel)]="subtitle" required value="">
                         <br>
-                        <label>Description</label>
-                        <app-tinymce name="description" [(ngModel)]="description" required></app-tinymce>
+                        <label>Type</label>
+                        <select name="ntype" [(ngModel)]="ntype">
+                            <option value="standart" selected>Standart</option>
+                            <option value="premium">Premium</option>
+                        </select>
                     </div>
                     <div class="create_news_rt">
                         <label>Logo image</label>
@@ -39,15 +43,11 @@
                         <option value="immobilier">Investissement Immobilier</option>
                         <option value="plaisir">Investissement plaisir</option>
                         </select>
-                        <br>
-                        <label>Type</label>
-                        <select name="ntype" [(ngModel)]="ntype">
-                            <option value="standart" selected>Standart</option>
-                            <option value="premium">Premium</option>
-                        </select>
-                        
-                        
                     </div>
+                    </div>
+                    <br>
+                    <label>Description</label>
+                    <app-tinymce item-height="500px" name="description" [(ngModel)]="description" required></app-tinymce>
                     <div class="create_news_clearfix"></div>
                     <br>
                     <button class="annonce_button" type="submit" [disabled]="!isOkEnabled">Create annonce</button>

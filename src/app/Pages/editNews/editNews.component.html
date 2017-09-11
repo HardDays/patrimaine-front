@@ -16,8 +16,9 @@
               <div class="loading" *ngIf="isLoading"></div>
                
               <div class="ad_create_form" *ngIf="!isLoading">
-                  <h1>Create annonce</h1>
+                  <h1>Edit annonce</h1>
                   <form (ngSubmit)="UpdateNews()">
+                    <div class="create_news_main">
                     <div class="create_news_lt">
                         <label>Title</label>
                         <input type="text" name="title" [ngModel]="News.title" (ngModelChange)="News.title=$event" required value="">
@@ -25,15 +26,15 @@
                         <label>Subtitle</label>
                         <input type="text" name="subtitle" [ngModel]="News.subtitle" (ngModelChange)="News.subtitle=$event" required value="">
                         <br>
-                        <label>Description</label>
-                        <app-tinymce name="description" [ngModel]="News.description" (ngModelChange)="News.description=$event" required></app-tinymce>
+                        <label>Type</label>
+                        <select name="ntype" [ngModel]="News.ntype" (ngModelChange)="News.ntype=$event">
+                            <option value="standart" selected>Standart</option>
+                            <option value="premium">Premium</option>
+                        </select>
                     </div>
                     <div class="create_news_rt">
                         <label>Logo image</label>
-                        <div>
-                            <img class="edit-company-image" [src]="image">
                             <input type="file" accept="image/*" name="logo_img" [(ngModel)]="logo_img" (change)="changeListener($event)">
-                        </div>
                         <br>
                         <label>Links</label>
                         <input type="text" name="links" [ngModel]="News.links" (ngModelChange)="News.links=$event" required>
@@ -46,13 +47,12 @@
                             <option value="immobilier">Investissement Immobilier</option>
                             <option value="plaisir">Investissement plaisir</option>
                         </select>
-                        <br>
-                        <label>Type</label>
-                        <select name="ntype" [ngModel]="News.ntype" (ngModelChange)="News.ntype=$event">
-                            <option value="standart" selected>Standart</option>
-                            <option value="premium">Premium</option>
-                        </select>
+                        
                     </div>
+                    </div>
+                    <br>
+                    <label>Description</label>
+                    <app-tinymce name="description" [ngModel]="News.description" (ngModelChange)="News.description=$event" required></app-tinymce>
                     <div class="create_news_clearfix"></div>
                     <br>
                     <button class="annonce_button" type="submit" [disabled]="!isOkEnabled">Update annonce</button>

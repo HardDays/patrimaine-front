@@ -17,7 +17,7 @@ import { CheckboxModel } from '../../models/checkbox.model';
 export class ProfileComponent implements OnInit {
     me:UserModel = new UserModel();
     isLoading  = false;
-    currentTab = "password";
+    currentTab = "user";
     ImageBase64:string = null;
     Expertises: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
