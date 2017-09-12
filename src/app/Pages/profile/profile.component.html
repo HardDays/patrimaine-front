@@ -50,22 +50,22 @@
                         <img src="../images/demo/icon_mail.png" alt=""> 
                         Email
                     </label>
-                    <input type="email" name="email" size="22" [ngModel]="me.email" (ngModelChange)="me.email=$event" placeholder="Email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                    <input type="email" name="email" size="22" [ngModel]="me.email" (ngModelChange)="me.email=$event" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
                     <label>
                         <img src="../images/demo/icon_name.png" alt=""> 
                         First name
                     </label>
-                    <input type="text" name="fname" size="22" [ngModel]="me.first_name" (ngModelChange)="me.first_name=$event" placeholder="First name" required><br>
+                    <input type="text" name="fname" size="22" [ngModel]="me.first_name" (ngModelChange)="me.first_name=$event"  required><br>
                     <label>
                         <img src="../images/demo/icon_name.png" alt=""> 
                         Last Name
                     </label>
-                    <input type="text" name="lname" size="22" [ngModel]="me.last_name" (ngModelChange)="me.last_name=$event" placeholder="Last name" required><br>
+                    <input type="text" name="lname" size="22" [ngModel]="me.last_name" (ngModelChange)="me.last_name=$event"  required><br>
                     <label>
                         <img src="../images/demo/icon_phone.png" alt=""> 
                         Phone
                     </label>
-                    <input type="text" name="phone" size="22" [ngModel]="me.phone" (ngModelChange)="me.phone=$event" placeholder="+0123456789"><br>
+                    <input type="text" name="phone" size="22" [ngModel]="me.phone" (ngModelChange)="me.phone=$event" ><br>
             
                     <label>
                         <img src="../images/demo/icon_category.png" alt=""> 
@@ -93,7 +93,7 @@
                 </div>
                 <form (ngSubmit)="UpdateUserCompany()">
                     <label>Name *</label>
-                    <input type="text" name="cname" [ngModel]="me.company.name" (ngModelChange)="me.company.name=$event" placeholder="Name" required><br>
+                    <input type="text" name="cname" [ngModel]="me.company.name" (ngModelChange)="me.company.name=$event" required><br>
                     <label>Address</label>
                     <input type="text" name="caddress" [ngModel]="me.company.address" (ngModelChange)="me.company.address=$event"><br>
                     <label>Other Address</label>

@@ -1020,9 +1020,9 @@ input:required:valid, select:required:valid, textarea:required:valid, app-tinymc
 .premium_anonce{
     background-image: url(../../images/demo/premium.png);
     background-repeat: no-repeat;
-    background-size: 40px;
-    background-position-x: center;
-    height: 40px;
+    background-size: 100px;
+    background-position-x: right;
+    height: 50px;
     width: 100%;
 }
 div.news_list.premium_div {
@@ -1035,6 +1035,7 @@ li.news_list{
 div.news_list{
     padding:15px;
     margin-bottom: 0px!important;
+    color: black;
 }
 .annonce_right{
     float: right;
@@ -1222,4 +1223,7 @@ div.height222{
 }
 .create_news_main{
     height: 180px;
+}
+.three_quarter{
+    width: 74.23312883435584%!important;
 }
