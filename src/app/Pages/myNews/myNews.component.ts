@@ -37,7 +37,13 @@ export class MyNewsComponent implements OnInit{
                             .subscribe((result:AllNewsModel)=>{
                                 
                                 this.myNews = result.news;
+                                for(let k in this.myNews ){
+                                    if(this.myNews[k].title && this.myNews[k].title.length > 40){
+                                        this.myNews[k].title = this.myNews[k].title.slice(0,40) +"...";
+                                    }
+                                }
                                 this.IsLoading = false;
+                                
                             });
                     }
                 });

@@ -35,6 +35,11 @@ export class MyAdsComponent implements OnInit{
                         this.service.GetAllAds({user_id:data.id})
                             .subscribe((result:AllAdsModel)=>{
                                 this.myAds = result.ads;
+                                for(let k in this.myAds ){
+                                    if(this.myAds[k].title && this.myAds[k].title.length > 40){
+                                        this.myAds[k].title = this.myAds[k].title.slice(0,40) +"...";
+                                    }
+                                }
                                 this.IsLoading = false;
                             });
                     }

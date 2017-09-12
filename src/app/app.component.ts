@@ -34,6 +34,7 @@ export class AppComponent  implements OnInit {
                             this.me = data;
                             this.mainService.GetMyAccess()
                                 .subscribe((result:string[])=>{
+                                    console.log(result);
                                     this.createAdAccess = result.find(x=> x=="can_create_ads") != null;
                                     this.createNewsAccess = result.find(x=> x=="can_create_news") != null;
                                 });
