@@ -10,6 +10,7 @@ import { AllAdsModel } from '../../models/allads.model';
 import { UserModel } from '../../models/user.model';
 import { Base64ImageModel } from '../../models/base64image.model';
 import { CheckboxModel } from '../../models/checkbox.model';
+import { ReviewModel } from '../../models/review.model';
 
 @Component({
     moduleId:module.id,
@@ -23,6 +24,9 @@ export class IndexComponent implements OnInit{
     premiumAnnonces:NewsModel[] = [];
     offresAds:AdsModel[] = [];
     images:string[] = [];
+    Reviews:ReviewModel[] = [];
+    review:ReviewModel = new ReviewModel();
+    Access:string[]=[];
     Ncategory:CheckboxModel[]=[
         new CheckboxModel("Finance","finance",false),
         new CheckboxModel("Ecologique","ecologique",false),
@@ -51,6 +55,28 @@ export class IndexComponent implements OnInit{
         }
     ngOnInit(){
         this.isLoading = true;
+        if(this.mainService.IsLogedIn()){
+            this.mainService.GetMyAccess()
+            .subscribe((result:string[])=>{
+                this.Access = [];
+                for(let i of result){
+                    this.Access[i] = true;
+                }
+            });
+        }
+        this.mainService.onAuthChange$.subscribe((bool:boolean)=>{
+            if(!bool)
+                this.Access = [];
+            else{
+                this.mainService.GetMyAccess()
+                .subscribe((result:string[])=>{
+                    this.Access = [];
+                    for(let i of result){
+                        this.Access[i] = true;
+                    }
+                });
+            }
+        })
         this.mainService.GetAllNews({limit:3})
             .subscribe((resLast:AllNewsModel)=>{
                 this.lastAnnonces = resLast.news;
@@ -60,6 +86,13 @@ export class IndexComponent implements OnInit{
                         this.lastAnnonces[i].description = this.lastAnnonces[i].description.slice(0,99) + "...";
                     this.lastAnnonces[i].ncategory = this.mainService.GetCheckboxNamesFromCheckboxModel([this.lastAnnonces[i].ncategory],this.Ncategory)[0];
                 }
+
+                
+                this.mainService.GetAllReviews(null)
+                    .subscribe((reviews:ReviewModel[])=>{
+                        this.Reviews = reviews;
+                        this.review = this.Reviews[0];
+                    });
                 this.mainService.GetAllNews({limit:3,ntype:['premium']})
                     .subscribe((resPrem:AllNewsModel)=>{
                         this.premiumAnnonces = resPrem.news;
@@ -73,7 +106,6 @@ export class IndexComponent implements OnInit{
                             .subscribe((resAds:AllAdsModel)=>{
                                 this.offresAds = resAds.ads;
                                 let current = 0;
-                                console.log(this.offresAds);
                                 for(let i in this.offresAds)
                                 {
                                     if(this.offresAds[i].description.length > 101)
@@ -86,13 +118,19 @@ export class IndexComponent implements OnInit{
                                                     .subscribe((res:Base64ImageModel)=>{
                                                         this.images[this.offresAds[i].user_id] = res.base64?res.base64:"images/demo/patrimoineLogo.png";
                                                         current += 1;
-                                                        if(current == 4) this.isLoading = false;
+                                                        if(current == 4){ 
+                                                            this.isLoading = false;
+                                                            scrollTo(0,0);
+                                                        }
                                                     });
                                             }
                                             else{
                                                 this.images[this.offresAds[i].user_id] = "images/demo/patrimoineLogo.png";
                                                 current += 1;
-                                                if(current == 4) this.isLoading = false;
+                                                if(current == 4){ 
+                                                    this.isLoading = false;
+                                                    scrollTo(0,0);
+                                                }
                                             }
                                         })
                                 }

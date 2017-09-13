@@ -1068,9 +1068,11 @@ input::-webkit-inner-spin-button {
 }
 .image-news-info{
     width:200px;
+    margin-bottom: 50px;
 }
 .news-info-right{
     margin-left:250px;
+    margin-bottom: 50px;
 }
 a.upper-first::first-letter{
     text-transform: uppercase;
@@ -1226,4 +1228,27 @@ div.height222{
 }
 .three_quarter{
     width: 74.23312883435584%!important;
+}
+.rev_nav{
+    height: 20px;
+    width: 20px;
+    background-image: url(../../images/circle.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+}
+.rev_nav.current{
+    background-image: url(../../images/circle_active.png);
+}
+.review_title{
+    margin-bottom:0px;
+}
+.review_author{
+    margin-top: 0px;
+    font-size: 14px;
+}
+
+.review_author>span{
+    font-weight: bold;
 }

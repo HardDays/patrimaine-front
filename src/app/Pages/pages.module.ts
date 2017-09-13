@@ -27,6 +27,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { TinymceModule } from 'angular2-tinymce';
 import { EditNewsComponent } from './editNews/editNews.component';
 import { EditAdComponent } from './editAd/editAd.component';
+import { CreateReviewComponent } from './createReview/createReview.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { EditReviewComponent } from './editReview/editReview.component';
 
 @NgModule({
     imports:      [ CommonModule,FormsModule,RouterModule,TinymceModule.withConfig({ }) ],
@@ -36,7 +39,8 @@ import { EditAdComponent } from './editAd/editAd.component';
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent, NewsComponent,
         NewsDetailComponent, CreateNewsComponent, MyNewsComponent,
-        ProfileComponent,EditNewsComponent, EditAdComponent
+        ProfileComponent,EditNewsComponent, EditAdComponent, CreateReviewComponent,
+        ReviewsComponent, EditReviewComponent
     ],
     exports: [
         AdsComponent, IndexComponent, UsersComponent,
@@ -44,7 +48,8 @@ import { EditAdComponent } from './editAd/editAd.component';
         RegisterComponent, CreateAdComponent, MyAdsComponent,
         UnauthorizedComponent, NotFoundComponent,NewsComponent,
         NewsDetailComponent, CreateNewsComponent, MyNewsComponent,
-        ProfileComponent,EditNewsComponent, EditAdComponent
+        ProfileComponent,EditNewsComponent, EditAdComponent,CreateReviewComponent,
+        ReviewsComponent, EditReviewComponent
     ],
     providers: [HttpService, PageAccessGuard,CookieService]
 })

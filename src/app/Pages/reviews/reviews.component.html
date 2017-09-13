@@ -1,0 +1,32 @@
+<div class="wrapper row2">
+    
+  </div>
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <main id="container" class="clear">
+      <div class="loading" *ngIf="IsLoading"></div>
+      <div id="comments" *ngIf="!IsLoading">
+              <div *ngIf="Reviews.length == 0">
+                      <h1 class="error-msg">You have no reviews</h1>
+                  </div>
+      <ul>
+          <li *ngFor="let item of Reviews" class="users_ad">
+              <article>
+                  <div class="delete_button">
+                      <button (click)="OnDeleteReview(item)" ></button>
+                  </div>
+                  <div class="delete_button">
+                      <button class="edit" (click)="OnDeleteReview(item)" ></button>
+                  </div>
+                  <header class="my_ad_header">
+                      <h2 ><a [routerLink]="['/edit_review',item.id]">{{item.title}}</a></h2>
+                  </header>
+                  
+              </article>
+          </li>
+      </ul>
+      </div>
+  </main>
+</div>

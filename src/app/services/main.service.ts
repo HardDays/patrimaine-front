@@ -260,4 +260,20 @@ import { TokenModel } from '../models/token.model';
         GetImageById(id:number){
             return this.httpService.GetData('/images/info/'+id,"");
         }
+
+        GetAllReviews(params:any){
+            return this.httpService.GetData('/reviews/all',JSON.stringify(params));
+        }
+        GetReviewById(id:number){
+            return this.httpService.GetData('/reviews/info/'+id,"");
+        }
+        CreateReview(params:any){
+            return this.httpService.PostData('/reviews/create',JSON.stringify(params));
+        }
+        UpdateReview(id:number,params:any){
+            return this.httpService.PutData('/reviews/update/'+id,JSON.stringify(params));
+        }
+        DeleteReview(id:number){
+            return this.httpService.DeleteData('/reviews/delete/' + id);
+        }
     }

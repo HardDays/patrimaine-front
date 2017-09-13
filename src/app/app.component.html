@@ -27,10 +27,12 @@
             <ul *ngIf="IsDropped">
               <li><a (click)="onMenuItemClick()" routerLink="/users/me">My profile</a></li>
               <li><a (click)="onMenuItemClick()" routerLink="/profile">Edit profile</a></li>
-              <li *ngIf="createAdAccess"><a (click)="onMenuItemClick()" routerLink="/my_ads">My ads</a></li>
-              <li *ngIf="createAdAccess"><a (click)="onMenuItemClick()" routerLink="/create_ad">Create ad</a></li>
-              <li *ngIf="createNewsAccess"><a (click)="onMenuItemClick()" routerLink="/my_annonces">My annonces</a></li>
-              <li *ngIf="createNewsAccess"><a (click)="onMenuItemClick()" routerLink="/create_news">Create annonce</a></li>
+              <li *ngIf="Access['can_create_ads']"><a (click)="onMenuItemClick()" routerLink="/my_ads">My ads</a></li>
+              <li *ngIf="Access['can_create_ads']"><a (click)="onMenuItemClick()" routerLink="/create_ad">Create ad</a></li>
+              <li *ngIf="Access['can_create_news']"><a (click)="onMenuItemClick()" routerLink="/my_annonces">My annonces</a></li>
+              <li *ngIf="Access['can_create_news']"><a (click)="onMenuItemClick()" routerLink="/create_news">Create annonce</a></li>
+              <li *ngIf="Access['can_crud_reviews']"><a (click)="onMenuItemClick()" routerLink="/edit_review">Reviews</a></li>
+              <li *ngIf="Access['can_crud_reviews']"><a (click)="onMenuItemClick()" routerLink="/create_review">Create review</a></li>
               <li style="cursor:pointer;"><a (click)="Logout()" >Logout</a></li>
             </ul>
           </li>

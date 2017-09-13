@@ -214,7 +214,7 @@
         </ul>
         <h5>Forum de la gestion de Patrimoine</h5>
         <p>Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-        <a href="http://patrimoine-forum.herokuapp.com" class="big_and_nice_link">Aller sur le forum</a>
+        <a href="https://patrimoine-forum-th.herokuapp.com" class="big_and_nice_link">Aller sur le forum</a>
       </div>
       <div class="clear"></div>
     </section>
@@ -223,16 +223,15 @@
     <h3 class="section_zag blue_zag">Témoignages</h3>
     <section class="last_sec push50">
       <div class="text_block">
-        <h4>Titre du témoignage</h4>
-        <p>Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-        <a routerLink="/ad_list">En savoir plus »</a>
+        <h4 class="review_title">{{review.title}}</h4>
+        <p class="review_author">Author: <span>{{review.author}}</span></p>
+        <p [innerHTML]="review.body"></p>
+        <a *ngIf="Access['can_crud_reviews']" [routerLink]="['/edit_review',review.id]">En savoir plus »</a>
       </div>
       <div class="img"><img src="images/demo/sec_3.jpg" alt=""></div>
       <div class="clear"></div>
       <ul class="revs_links">
-        <li class="current">Antoine et Marie <small>(Particuliers Investisseurs)</small></li>
-        <li>Claude <small>(Conseiller en Gestion de Patrimoine)</small></li>
-        <li>Philippe <small>(Concepteur de solutions)</small></li>
+        <li class="rev_nav" *ngFor="let item of Reviews" [ngClass]="{'current': review.id == item.id}" style="cursor: pointer;" (click)="review=item"></li>
       </ul>
     </section>
     <hr class="nospace push50">

@@ -17,6 +17,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { MyNewsComponent } from './myNews/myNews.component';
 import { EditNewsComponent } from './editNews/editNews.component';
 import { EditAdComponent } from './editAd/editAd.component';
+import { CreateReviewComponent } from './createReview/createReview.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { EditReviewComponent } from './editReview/editReview.component';
 
 
 export const routs = [
@@ -35,6 +38,9 @@ export const routs = [
     { path: 'edit_news/:id', component: EditNewsComponent, canActivate:[PageAccessGuard]},
     { path: 'edit_ads/:id', component: EditAdComponent, canActivate:[PageAccessGuard]},
     { path:'my_annonces',component: MyNewsComponent, canActivate: [PageAccessGuard]},
+    { path:'create_review',component:CreateReviewComponent,canActivate: [PageAccessGuard]},
+    { path:'edit_review', component: ReviewsComponent, canActivate: [PageAccessGuard]},
+    { path: 'edit_review/:id', component: EditReviewComponent, canActivate:[PageAccessGuard]},
     { path:"", pathMatch : "full",component:IndexComponent },
     { path: "401", component: UnauthorizedComponent},
     { path: "404", component: NotFoundComponent},
