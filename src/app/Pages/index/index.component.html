@@ -222,11 +222,11 @@
     <div class="clear"></div>
     <h3 class="section_zag blue_zag">Témoignages</h3>
     <section class="last_sec push50">
-      <div class="text_block">
+      <div class="text_block height341">
         <h4 class="review_title">{{review.title}}</h4>
         <p class="review_author">Author: <span>{{review.author}}</span></p>
-        <p [innerHTML]="review.body"></p>
-        <a *ngIf="Access['can_crud_reviews']" [routerLink]="['/edit_review',review.id]">En savoir plus »</a>
+        <p class="review_body" [innerHTML]="review.body"></p>
+        <a *ngIf="Access['can_crud_reviews']" [routerLink]="['/edit_review',review.id]">Edit review »</a>
       </div>
       <div class="img"><img src="images/demo/sec_3.jpg" alt=""></div>
       <div class="clear"></div>

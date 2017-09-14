@@ -64,7 +64,7 @@ export class CreateReviewComponent implements OnInit{
         })
             .subscribe((result:ReviewModel)=>{
                 this.createOk = true;
-                setTimeout(this.router.navigate(['/']),3000);
+                setTimeout(this.router.navigate(['/edit_review']),3000);
             },
             (err)=>{
                 if(err.status == 401){

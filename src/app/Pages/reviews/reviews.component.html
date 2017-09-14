@@ -18,7 +18,7 @@
                       <button (click)="OnDeleteReview(item)" ></button>
                   </div>
                   <div class="delete_button">
-                      <button class="edit" (click)="OnDeleteReview(item)" ></button>
+                      <button class="edit" (click)="OnEditReview(item)" ></button>
                   </div>
                   <header class="my_ad_header">
                       <h2 ><a [routerLink]="['/edit_review',item.id]">{{item.title}}</a></h2>
