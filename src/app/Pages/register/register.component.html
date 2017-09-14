@@ -15,11 +15,11 @@
         <h2 *ngIf="isPro">Concepteurs de Solutions</h2>
         <button type="button" (click)="isPro = !isPro" class="user-type"> Change user type</button>
         
-        <form (ngSubmit)="RegisterUser(email,password,fname,lname,phone,pcategory)">
+        <form *ngIf="!isPro" (ngSubmit)="RegisterUser(email,password,fname,lname,phone,pcategory)">
           <br>
           <label>Email *</label>
           <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
-          <label>Password *</label>
+          <label>Password *( minimum 6 characters)</label>
           <input type="password" name="password" value="" minlength="6" [(ngModel)]="password" required><br>
           <label>First Name *</label>
           <input type="text" name="fname" [(ngModel)]="fname" required><br>
@@ -44,17 +44,31 @@
         </form>
 
         
-        <form *ngIf="isPro">
-          <!--<label>Email</label>
-          <input type="text" name="email" [(ngModel)]="email"><br>
-          <label>Password</label>
-          <input type="password" name="password" [(ngModel)]="password"><br>
-          <label>First Name</label>
-          <input type="text" name="fname" [(ngModel)]="fname"><br>
-          <label>Last Name</label>
-          <input type="text" name="lname" [(ngModel)]="lname"><br>
+        <form *ngIf="isPro" (ngSubmit)="RegisterUserCompany(email,password,fname,lname,phone,pcategory,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">
+          <br>
+          <label>Email *</label>
+          <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+          <label>Password *</label>
+          <input type="password" name="password" value="" minlength="6" [(ngModel)]="password" required><br>
+          <label>First Name *</label>
+          <input type="text" name="fname" [(ngModel)]="fname" required><br>
+          <label>Last Name *</label>
+          <input type="text" name="lname" [(ngModel)]="lname" required><br>
           <label>Phone</label>
-          <input type="text" name="phone" [(ngModel)]="phone"><br>-->
+          <input type="text" name="phone" [(ngModel)]="phone"><br>
+
+          <label>Category *</label>
+          <select name="pcategory" value="" [(ngModel)]="pcategory" required>
+            <option value="assureurs">Assureurs</option>
+            <option value="avocats">Avocats</option>
+            <option value="patrimoine">Conseillers en gestion de patrimoine</option>
+            <option value="prets">Courtiers de prêts</option>
+            <option value="comptables">Experts-comptables</option>
+            <option value="notaires">Notaires</option>
+            <option value="immobilier">Professionnels de l'immobilier</option>
+          </select>
+          <br>
+
           <h3>Company</h3>
           <label>Name *</label>
           <input type="text" name="cname" [(ngModel)]="cname" required><br>
@@ -117,7 +131,7 @@
               </div>
             </div>
           </div><br>
-          <button class="reg-button" [disabled]="!isOkEnabled" (click)="RegisterUserCompany(email,password,fname,lname,phone,pcategory,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">Register</button>
+          <button class="reg-button" [disabled]="!isOkEnabled" type="submit">Register</button>
         </form>
       </div>
     </div>

@@ -14,13 +14,13 @@
              
             <div class="ad_create_form" *ngIf="!isLoading">
                 <h1>Create Ad</h1>
-                <form >
+                <form (ngSubmit)="OncreateAdButtonClick(title,description)">
                     <label>Title</label>
                     <input type="text" name="title" [(ngModel)]="title" required>
                     <br>
                     <label>Description</label>
                     <app-tinymce name="description" [(ngModel)]="description"></app-tinymce><br>
-                    <button class="create_button" (click)="OncreateAdButtonClick(title,description)">Create ad</button>
+                    <button class="create_button" type="submit">Create ad</button>
                 </form>
             </div>
         </div>

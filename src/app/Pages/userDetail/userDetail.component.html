@@ -109,8 +109,7 @@
         </div>
         <div class="profile-info" *ngIf="User.company.description">
           <div class="profile-info-header"><strong class="strong-profile">About</strong></div>
-          <div class="profile-info-content">
-            {{User.company.description}}
+          <div class="profile-info-content" [innerHTML]="User.company.description">
           </div>
         </div>
         <div class="profile-info">
@@ -128,7 +127,9 @@
         
     </div>
     <div class="">
-      <div *ngIf="User.company" class="like in-profile" style="margin-right: 10px;" [ngClass]="{'like-active': IsLiked}" (click)="LikeOrUnlikeUser()"><img src="../images/demo/like.png" alt=""> Like {{User.company.likes}}</div> 
+      <div *ngIf="User.company" class="like in-profile" style="margin-right: 10px;" [ngClass]="{'like-active': IsLiked}" (click)="LikeOrUnlikeUser()">
+        <img [src]="IsLiked?'../images/demo/like_active.png':'../images/demo/like.png'" alt=""> Like {{User.company.likes}}
+      </div> 
   </div>
     
     
