@@ -203,6 +203,15 @@ import { TokenModel } from '../models/token.model';
         GetMyAccess(){
             return this.httpService.GetData("/access/my_access","");
         }
+        GetUserAccess(id:number){
+            return this.httpService.GetData("/access/user_access/"+id,"");
+        }
+        SetAdminAccess(id:number){
+            return this.httpService.PostData("/access/grant_admin_access/" + id,"");
+        }
+        DeleteAdminAccess(id:number){
+            return this.httpService.PostData("/access/grant_user_access/" + id,"");
+        }
         BaseInitAfterLogin(data:TokenModel){
             this.cookiesService.set('token',data.token);
             this.httpService.BaseInitByToken(data.token);

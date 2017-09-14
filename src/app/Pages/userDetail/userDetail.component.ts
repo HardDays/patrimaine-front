@@ -25,6 +25,8 @@ export class UserDetailComponent implements OnInit{
     ErrorMesage:string = "";
     IsLiked = false;
     IsRated = 0;
+    UserAccess:string[] = [];
+    MyAccess:string[] = [];
     ExpertisesCB: CheckboxModel[] = [
         new CheckboxModel("Credit","credit",false),
         new CheckboxModel("Retraite","retraite",false),
@@ -112,6 +114,16 @@ export class UserDetailComponent implements OnInit{
             this.Expertises = this.service.GetCheckboxNamesFromCheckboxModel(this.User.company.expertises,this.ExpertisesCB);
             this.SubCategory = this.service.GetCheckboxNamesFromCheckboxModel([this.User.company.sub_category],this.SubcategoryCB);
             if(this.isLogedIn){
+                if(!this.isMe){
+                    this.service.GetMyAccess()
+                    .subscribe((result:string[])=>{
+                        this.MyAccess = [];
+                        for(let i of result){
+                            this.MyAccess[i] = true;
+                        }
+                        this.LoadUserAccess();
+                    });
+                }
                 this.service.GetMyLikes()
                     .subscribe((like_result:AllLikesModel[])=>{
                         let like = like_result.find(x=>x.user_id == this.User.id);
@@ -141,8 +153,45 @@ export class UserDetailComponent implements OnInit{
             this.IsLoading = false;
         }
     }
+
+    GrantAdminAccess(){
+        
+        this.IsLoading = true;
+        this.service.SetAdminAccess(this.User.id)
+        .subscribe((result:string[])=>{
+            console.log(result);
+            this.UserAccess = [];
+            for(let i of result){
+                this.UserAccess[i] = true;
+            }
+            this.IsLoading = false;
+        });
+    }
+    DeleteAdminAccess(){
+        this.IsLoading = true;
+        this.service.DeleteAdminAccess(this.User.id)
+            .subscribe((result:string[])=>{
+                console.log(result);
+                this.UserAccess = [];
+                for(let i of result){
+                    this.UserAccess[i] = true;
+                }
+                this.IsLoading = false;
+            });
+    }
+
+    LoadUserAccess(){
+        return this.service.GetUserAccess(this.User.id)
+            .subscribe((result:string[])=>{
+                this.UserAccess = [];
+                for(let i of result){
+                    this.UserAccess[i] = true;
+                }
+        });
+    }
+
     LikeOrUnlikeUser(){
-        if(!this.isLogedIn)
+        if(!this.isLogedIn || this.isMe)
             return;
 
         if(!this.IsLiked)
