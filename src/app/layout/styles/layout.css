@@ -1070,7 +1070,7 @@ input::-webkit-inner-spin-button {
     text-align: justify;
 }
 .left{
-    float:left;
+    float:left!important;
 }
 .image-news-info{
     width:200px;
@@ -1094,9 +1094,12 @@ a.upper-first::first-letter{
     padding: 10px 0;
 }
 .right{
-    float: right;
+    float: right!important;
     margin-bottom: 20px;
 } 
+.text_align_justify{
+    text-align: justify!important;
+}
 .height200{
     min-height: 200px;
     width: 250px

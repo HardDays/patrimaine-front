@@ -84,6 +84,8 @@ export class IndexComponent implements OnInit{
                 {
                     if(this.lastAnnonces[i].description.length > 101)
                         this.lastAnnonces[i].description = this.lastAnnonces[i].description.slice(0,99) + "...";
+                    if(this.lastAnnonces[i].title.length > 53)
+                        this.lastAnnonces[i].title = this.lastAnnonces[i].title.slice(0,52) + "...";
                     this.lastAnnonces[i].ncategory = this.mainService.GetCheckboxNamesFromCheckboxModel([this.lastAnnonces[i].ncategory],this.Ncategory)[0];
                 }
 
@@ -100,6 +102,9 @@ export class IndexComponent implements OnInit{
                         {
                             if(this.premiumAnnonces[i].description.length > 101)
                                 this.premiumAnnonces[i].description = this.premiumAnnonces[i].description.slice(0,99) + "...";
+                            if(this.premiumAnnonces[i].title.length > 53)
+                                this.premiumAnnonces[i].title = this.premiumAnnonces[i].title.slice(0,52) + "...";
+                            
                             this.premiumAnnonces[i].ncategory = this.mainService.GetCheckboxNamesFromCheckboxModel([this.premiumAnnonces[i].ncategory],this.Ncategory)[0];
                         }
                         this.mainService.GetAllAds({limit:4})
@@ -110,6 +115,8 @@ export class IndexComponent implements OnInit{
                                 {
                                     if(this.offresAds[i].description.length > 101)
                                         this.offresAds[i].description = this.offresAds[i].description.slice(0,99) + "...";
+                                    if(this.offresAds[i].title.length > 17)
+                                        this.offresAds[i].title = this.offresAds[i].title.slice(0,16) + "...";
                                     this.offresAds[i].sub_category = this.mainService.GetCheckboxNamesFromCheckboxModel([this.offresAds[i].sub_category],this.Subcategory)[0];
                                     this.mainService.GetUserById(this.offresAds[i].user_id)
                                         .subscribe((resUser:UserModel)=>{

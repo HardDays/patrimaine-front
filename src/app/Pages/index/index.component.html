@@ -64,8 +64,8 @@
       </li>
     </ul>
     <hr class="nospace push50">
-    <h3 class="section_zag blue_zag">La place des annonces (Patrimoniales)</h3>
-    <section class="ads push50">
+    <h3 class="section_zag blue_zag" *ngIf=" lastAnnonces.length > 0 || premiumAnnonces.length > 0">La place des annonces (Patrimoniales)</h3>
+    <section class="ads push50" *ngIf="lastAnnonces.length > 0">
       <div class="lasts_ads">
         <!-- Последние опубликованные анонсы -->
         <h5 class="blue_zag">Dernières annonces publiées</h5>
@@ -81,7 +81,7 @@
           <a routerLink="/news_list" class="all_annonces">Voir toutes les annonces »</a>
         </div>
       </div>
-      <div class="lasts_ads premium_ads">
+      <div class="lasts_ads premium_ads" *ngIf="premiumAnnonces.length > 0">
         <!-- Премиум аннонсы -->
         <h5 class="blue_zag">Les annonces premiums</h5>
         <div class="list">
@@ -181,7 +181,7 @@
     <section class="profs push50">
       <div class="prof">
         <div class="img" style="background-image: url(images/demo/business-people.jpg)"></div>
-        <div class="desc">
+        <div class="desc text_align_justify">
           <h4>Professionnels du chiffre et du droit</h4>
           <p>Un professionnel de la gestion du patrimoine affilié, c'est consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Aenean euismod bibendum laoreet proin gravida dolor sit amet lacus ...</p>
           <!--<a routerLink="#">En savoir plus »</a><br>-->
@@ -190,7 +190,7 @@
       </div>
       <hr class="divide_line">
       <div class="prof prof_right">
-        <div class="desc">
+        <div class="desc text_align_justify">
           <h4>Concepteurs de solutions patrimoniales</h4>
           <p>Un concepteur de produits financiers affilié, c'est consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Aenean euismod bibendum laoreet proin gravida dolor sit amet lacus ...</p>
           <!--<a routerLink="#">En savoir plus »</a><br>-->
@@ -203,7 +203,7 @@
     <div class="clear"></div>
     <h3 class="section_zag blue_zag">Les grandes lignes de la gestion de patrimoine</h3>
     <section class="big_img push50">
-      <div class="white_block">
+      <div class="white_block text_align_justify">
         <h4>Comprendre la gestion patrimoniale</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.</p>
         <p>Proin sodales pulvinar tempor.</p>
@@ -221,7 +221,7 @@
     <hr class="nospace push50">
     <div class="clear"></div>
     <h3 class="section_zag blue_zag">Témoignages</h3>
-    <section class="last_sec push50">
+    <section *ngIf="Reviews.length > 0" class="last_sec push50">
       <div class="text_block height341">
         <h4 class="review_title">{{review.title}}</h4>
         <p class="review_author">Author: <span>{{review.author}}</span></p>
@@ -238,15 +238,16 @@
     <h3 class="section_zag blue_zag">Presse</h3>
     <!-- news_list -->
     <!--<section class="news_list push50">-->
-        <section class="last_sec push50">
-      <div class="text_block">
-        <h4>Titre du témoignage</h4>
-        <p>Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
-        <a routerLink="/news_list">En savoir plus »</a>
-      </div>
-      <div class="img"><img src="images/demo/sec_3.jpg" alt=""></div>
-      <div class="clear"></div>
-    	<div class="owl-carousel news_list_carousel">
+      <section class="last_sec push50">
+        <div class="img left"><img src="images/demo/sec_3.jpg" alt=""></div>
+        <div class="text_block right text_align_justify">
+          <h4>Titre du témoignage</h4>
+          <p>Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+          
+        </div>
+      
+        <div class="clear"></div>
+        <div class="owl-carousel news_list_carousel">
     	  <!--<div class="one-new">
     			<img src="images/demo/sec_3.jpg" align="">
     			<a routerLink="/news_list">En savoir plus »</a>
