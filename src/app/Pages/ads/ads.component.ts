@@ -96,8 +96,12 @@ export class AdsComponent implements OnInit{
                 this.AdsObservable = res.ads;
                 this.Users = [];
                 for(let k in this.AdsObservable){
-                    if(this.AdsObservable[k].title && this.AdsObservable[k].title.length > 40){
-                        this.AdsObservable[k].title = this.AdsObservable[k].title.slice(0,40) +"...";
+
+                    if(this.AdsObservable[k].title && this.AdsObservable[k].title.length > 53)
+                    {
+                        let title = this.AdsObservable[k].title.slice(0,50);
+                        let index = title.lastIndexOf(" ");
+                        this.AdsObservable[k].title = index>0?title.slice(0,index):title + "...";
                     }
 
                     this.mainService.GetUserById(this.AdsObservable[k].user_id)

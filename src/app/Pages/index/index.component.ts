@@ -82,10 +82,17 @@ export class IndexComponent implements OnInit{
                 this.lastAnnonces = resLast.news;
                 for(let i in this.lastAnnonces)
                 {
-                    if(this.lastAnnonces[i].description.length > 101)
-                        this.lastAnnonces[i].description = this.lastAnnonces[i].description.slice(0,99) + "...";
+                    if(this.lastAnnonces[i].description.length > 101){
+                        let desc = this.lastAnnonces[i].description.slice(0,98);
+                        let index = desc.lastIndexOf(" ");
+                        this.lastAnnonces[i].description = index>0?desc.slice(0,index):desc + "...";
+                    }
                     if(this.lastAnnonces[i].title.length > 53)
-                        this.lastAnnonces[i].title = this.lastAnnonces[i].title.slice(0,52) + "...";
+                    {
+                        let title = this.offresAds[i].title.slice(0,50);
+                        let index = title.lastIndexOf(" ");
+                        this.lastAnnonces[i].title = index>0?title.slice(0,index):title + "...";
+                    }
                     this.lastAnnonces[i].ncategory = this.mainService.GetCheckboxNamesFromCheckboxModel([this.lastAnnonces[i].ncategory],this.Ncategory)[0];
                 }
 
@@ -100,11 +107,18 @@ export class IndexComponent implements OnInit{
                         this.premiumAnnonces = resPrem.news;
                         for(let i in this.premiumAnnonces)
                         {
-                            if(this.premiumAnnonces[i].description.length > 101)
-                                this.premiumAnnonces[i].description = this.premiumAnnonces[i].description.slice(0,99) + "...";
+                            if(this.premiumAnnonces[i].description.length > 101){
+                                let desc = this.premiumAnnonces[i].description.slice(0,98);
+                                let index = desc.lastIndexOf(" ");
+                                this.premiumAnnonces[i].description = index>0?desc.slice(0,index):desc + "...";
+                            }
                             if(this.premiumAnnonces[i].title.length > 53)
-                                this.premiumAnnonces[i].title = this.premiumAnnonces[i].title.slice(0,52) + "...";
-                            
+                            {
+                                let title = this.premiumAnnonces[i].title.slice(0,50);
+                                let index = title.lastIndexOf(" ");
+                                this.premiumAnnonces[i].title = index>0?title.slice(0,index):title + "...";
+                            }
+
                             this.premiumAnnonces[i].ncategory = this.mainService.GetCheckboxNamesFromCheckboxModel([this.premiumAnnonces[i].ncategory],this.Ncategory)[0];
                         }
                         this.mainService.GetAllAds({limit:4})
@@ -113,10 +127,17 @@ export class IndexComponent implements OnInit{
                                 let current = 0;
                                 for(let i in this.offresAds)
                                 {
-                                    if(this.offresAds[i].description.length > 101)
-                                        this.offresAds[i].description = this.offresAds[i].description.slice(0,99) + "...";
+                                    if(this.offresAds[i].description.length > 101){
+                                        let desc = this.offresAds[i].description.slice(0,98);
+                                        let index = desc.lastIndexOf(" ");
+                                        this.offresAds[i].description = index>0?desc.slice(0,index):desc + "...";
+                                    }
                                     if(this.offresAds[i].title.length > 17)
-                                        this.offresAds[i].title = this.offresAds[i].title.slice(0,16) + "...";
+                                    {
+                                        let title = this.offresAds[i].title.slice(0,16);
+                                        let index = title.lastIndexOf(" ");
+                                        this.offresAds[i].title = index>0?title.slice(0,index):title + "...";
+                                    }
                                     this.offresAds[i].sub_category = this.mainService.GetCheckboxNamesFromCheckboxModel([this.offresAds[i].sub_category],this.Subcategory)[0];
                                     this.mainService.GetUserById(this.offresAds[i].user_id)
                                         .subscribe((resUser:UserModel)=>{
