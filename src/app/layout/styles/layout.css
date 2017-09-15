@@ -1165,7 +1165,7 @@ div.height222{
     width:80%;
     margin-left:auto;
 }
-.change_pw form button, .user_info form button, .company_info form button {
+.change_pw form button, .user_info form button, .company_info form button.confirm_profile {
     width: 50%;
     background: #00406b;
     color: white;
@@ -1269,4 +1269,13 @@ div.height222{
 }
 .height341{
     height: 341px;
+}
+.about_div{
+    float: right;
+    width: 40%;
+    height: 200px;
+    background-image: url("../../images/about.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
 }

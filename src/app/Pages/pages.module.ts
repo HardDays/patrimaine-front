@@ -30,6 +30,7 @@ import { EditAdComponent } from './editAd/editAd.component';
 import { CreateReviewComponent } from './createReview/createReview.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { EditReviewComponent } from './editReview/editReview.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
     imports:      [ CommonModule,FormsModule,RouterModule,TinymceModule.withConfig({ }) ],
@@ -40,7 +41,7 @@ import { EditReviewComponent } from './editReview/editReview.component';
         UnauthorizedComponent, NotFoundComponent, NewsComponent,
         NewsDetailComponent, CreateNewsComponent, MyNewsComponent,
         ProfileComponent,EditNewsComponent, EditAdComponent, CreateReviewComponent,
-        ReviewsComponent, EditReviewComponent
+        ReviewsComponent, EditReviewComponent,AboutComponent
     ],
     exports: [
         AdsComponent, IndexComponent, UsersComponent,
@@ -49,7 +50,7 @@ import { EditReviewComponent } from './editReview/editReview.component';
         UnauthorizedComponent, NotFoundComponent,NewsComponent,
         NewsDetailComponent, CreateNewsComponent, MyNewsComponent,
         ProfileComponent,EditNewsComponent, EditAdComponent,CreateReviewComponent,
-        ReviewsComponent, EditReviewComponent
+        ReviewsComponent, EditReviewComponent,AboutComponent
     ],
     providers: [HttpService, PageAccessGuard,CookieService]
 })

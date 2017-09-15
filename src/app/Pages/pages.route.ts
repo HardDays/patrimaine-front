@@ -20,6 +20,7 @@ import { EditAdComponent } from './editAd/editAd.component';
 import { CreateReviewComponent } from './createReview/createReview.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { EditReviewComponent } from './editReview/editReview.component';
+import { AboutComponent } from './about/about.component';
 
 
 export const routs = [
@@ -41,6 +42,7 @@ export const routs = [
     { path:'create_review',component:CreateReviewComponent,canActivate: [PageAccessGuard]},
     { path:'edit_review', component: ReviewsComponent, canActivate: [PageAccessGuard]},
     { path: 'edit_review/:id', component: EditReviewComponent, canActivate:[PageAccessGuard]},
+    { path: 'about', component: AboutComponent},
     { path:"", pathMatch : "full",component:IndexComponent },
     { path: "401", component: UnauthorizedComponent},
     { path: "404", component: NotFoundComponent},
