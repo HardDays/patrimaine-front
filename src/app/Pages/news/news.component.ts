@@ -114,13 +114,13 @@ export class NewsComponent implements OnInit{
                     if(this.News[k].description && this.News[k].description.length > 220){
                         let desc = this.News[k].description.slice(0,217);
                         let index = desc.lastIndexOf(" ");
-                        this.News[k].description = index>0?desc.slice(0,index):desc + "...";
+                        this.News[k].description = (index>0?desc.slice(0,index):desc) + "...";
                     }
-                    if(this.News[k].title && this.News[k].title.length > 53)
+                    if(this.News[k].title && this.News[k].title.length > 33)
                     {
-                        let title = this.News[k].title.slice(0,50);
+                        let title = this.News[k].title.slice(0,32);
                         let index = title.lastIndexOf(" ");
-                        this.News[k].title = index>0?title.slice(0,index):title + "...";
+                        this.News[k].title = (index>0?title.slice(0,index):title) + "...";
                     }
                     if(this.News[k].agrements)
                         this.News[k].agrements = this.mainService.GetCheckboxNamesFromCheckboxModel(this.News[k].agrements,this.Agreements);
