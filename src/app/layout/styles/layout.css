@@ -1262,10 +1262,12 @@ div.height222{
     font-weight: bold;
 }
 .review_body{
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
+    text-align: justify;
+    width: 100%;
 }
 .height341{
     height: 341px;
