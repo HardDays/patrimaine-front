@@ -1,0 +1,28 @@
+<div class="wrapper row2">
+      
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+<div class="wrapper row3">
+    <main id="container" class="clear">
+        <div class="ads_creation reg_block">
+            <div *ngIf="createError">
+                <h1 class="error-msg">{{errorMsg}}</h1>
+            </div>
+            <div class="loading" *ngIf="isLoading"></div>
+             
+            <div class="ad_create_form" *ngIf="!isLoading">
+                <h1>Create Ad</h1>
+                <form (ngSubmit)="OncreateAdButtonClick(title,description)">
+                    <label>Title</label>
+                    <input type="text" name="title" [(ngModel)]="title" required>
+                    <br>
+                    <label>Description</label>
+                    <app-tinymce name="description" [(ngModel)]="description"></app-tinymce><br>
+                    <button class="create_button" type="submit">Create ad</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>

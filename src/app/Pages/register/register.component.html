@@ -1,0 +1,143 @@
+<div class="wrapper row3">
+  <main id="container" class="clear">
+    <!-- container body -->
+    
+    <div *ngIf="regOk">
+      <h1> Your account was created! You will redirect to your page soon! </h1>
+    </div>
+    <div *ngIf="regError">
+      <h1 class="error-msg">{{regErrorMsg}}</h1>
+    </div>
+    <div class="register_block">
+      <div class="loading" *ngIf="isLoading"></div>
+      <div class="reg_block main-block"  *ngIf="!isLoading">
+        <h2 *ngIf="!isPro">Professionnels du chiffre et du droit</h2>
+        <h2 *ngIf="isPro">Concepteurs de Solutions</h2>
+        <button type="button" (click)="isPro = !isPro" class="user-type"> Change user type</button>
+        
+        <form *ngIf="!isPro" (ngSubmit)="RegisterUser(email,password,fname,lname,phone,pcategory)">
+          <br>
+          <label>Email *</label>
+          <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+          <label>Password *( minimum 6 characters)</label>
+          <input type="password" name="password" value="" minlength="6" [(ngModel)]="password" required><br>
+          <label>First Name *</label>
+          <input type="text" name="fname" [(ngModel)]="fname" required><br>
+          <label>Last Name *</label>
+          <input type="text" name="lname" [(ngModel)]="lname" required><br>
+          <label>Phone</label>
+          <input type="text" name="phone" [(ngModel)]="phone"><br>
+
+          <label>Category *</label>
+          <select name="pcategory" value="" [(ngModel)]="pcategory" required>
+            <option value="assureurs">Assureurs</option>
+            <option value="avocats">Avocats</option>
+            <option value="patrimoine">Conseillers en gestion de patrimoine</option>
+            <option value="prets">Courtiers de prêts</option>
+            <option value="comptables">Experts-comptables</option>
+            <option value="notaires">Notaires</option>
+            <option value="immobilier">Professionnels de l'immobilier</option>
+          </select>
+          <br>
+          
+          <button class="reg-button" *ngIf="!isPro" type="submit">Register</button>
+        </form>
+
+        
+        <form *ngIf="isPro" (ngSubmit)="RegisterUserCompany(email,password,fname,lname,phone,pcategory,cname,caddress,coaddress,cemail,cphone,worktime,description,links,c_type,subcategory)">
+          <br>
+          <label>Email *</label>
+          <input type="email" name="email" [(ngModel)]="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+          <label>Password *</label>
+          <input type="password" name="password" value="" minlength="6" [(ngModel)]="password" required><br>
+          <label>First Name *</label>
+          <input type="text" name="fname" [(ngModel)]="fname" required><br>
+          <label>Last Name *</label>
+          <input type="text" name="lname" [(ngModel)]="lname" required><br>
+          <label>Phone</label>
+          <input type="text" name="phone" [(ngModel)]="phone"><br>
+
+          <label>Category *</label>
+          <select name="pcategory" value="" [(ngModel)]="pcategory" required>
+            <option value="assureurs">Assureurs</option>
+            <option value="avocats">Avocats</option>
+            <option value="patrimoine">Conseillers en gestion de patrimoine</option>
+            <option value="prets">Courtiers de prêts</option>
+            <option value="comptables">Experts-comptables</option>
+            <option value="notaires">Notaires</option>
+            <option value="immobilier">Professionnels de l'immobilier</option>
+          </select>
+          <br>
+
+          <h3>Company</h3>
+          <label>Name *</label>
+          <input type="text" name="cname" [(ngModel)]="cname" required><br>
+          <label>Address</label>
+          <input type="text" name="caddress" [(ngModel)]="caddress"><br>
+          <label>Other Address</label>
+          <input type="text" name="coaddress" [(ngModel)]="coaddress"><br>
+          <label>Email</label>
+          <input type="text" name="cemail" [(ngModel)]="cemail" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+          <label>Phone</label>
+          <input type="text" name="cphone" [(ngModel)]="cphone"><br>
+          <label>Worktime</label>
+          <input type="text" name="worktime" [(ngModel)]="worktime"><br>
+          <!--<label>Company ID</label>
+          <input type="text" name="companyid" [(ngModel)]="companyid"><br>-->
+          <label>Description</label>
+          <app-tinymce name="description" [(ngModel)]="description"></app-tinymce><br>
+          <label>Social links</label>
+          <app-tinymce name="links" [(ngModel)]="links"></app-tinymce><br>
+          <label>Logo image</label>
+          <input type="file" accept="image/*" name="logo_img" [(ngModel)]="logo_img" (change)="changeListener($event)"><br>
+          <div class="part_reg">
+            <div>
+              <label>Company type *</label>
+              <select name="c_type" [(ngModel)]="c_type" required>
+                <option value="concepteur">Concepteur</option>
+                <option value="conseiller">Conseiller</option>
+                <option value="both">Both</option>
+              </select>
+            </div>
+            <div>
+              <label>Subcategory</label>
+              <select name="subcategory" [(ngModel)]="subcategory">
+                <option value="classique">Classique</option>
+                <option value="e_brooker">E-brooker</option>
+                <option value="fintech">Fintech</option>
+                <option value="crowdfunding">Crowdfunding</option>
+                <option value="lendfunding">Lendfunding</option>
+                <option value="institutionnels">Institutionnels</option>
+              </select>
+            </div>
+          </div><br>
+          <div class="part_reg">
+            <div class="expertises-div">
+              <label>Expertises</label>
+              <div class="form-group" *ngFor="let item of Expertises">
+                  <label>
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                  </label>
+              </div>
+            </div>
+            <div class="expertises-div">
+              <label>Agrements</label>
+              <div class="form-group" *ngFor="let item of Agreements">
+                  <label>
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                  </label>
+              </div>
+            </div>
+          </div><br>
+          <button class="reg-button" [disabled]="!isOkEnabled" type="submit">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ########################################################################################## -->
+    <!-- / container body -->
+    <div class="clear"></div>
+  </main>
+</div>

@@ -1,0 +1,63 @@
+<div class="wrapper row2">
+        
+      </div>
+      <!-- ################################################################################################ -->
+      <!-- ################################################################################################ -->
+      <!-- ################################################################################################ -->
+  <div class="wrapper row3">
+      <main id="container" class="clear">
+          <div class="ads_creation reg_block">
+              <div *ngIf="createError">
+                  <h1 class="error-msg">{{errorMsg}}</h1>
+              </div>
+              <div *ngIf="editOk">
+                <a [routerLink]="['/news',News.id]"><h1 class="ok-msg">Annonce was updated!</h1></a>
+             </div>
+              <div class="loading" *ngIf="isLoading"></div>
+               
+              <div class="ad_create_form" *ngIf="!isLoading">
+                  <h1>Edit annonce</h1>
+                  <form (ngSubmit)="UpdateNews()">
+                    <div class="create_news_main">
+                    <div class="create_news_lt">
+                        <label>Title</label>
+                        <input type="text" name="title" [ngModel]="News.title" (ngModelChange)="News.title=$event" required value="">
+                        <br>
+                        <label>Subtitle</label>
+                        <input type="text" name="subtitle" [ngModel]="News.subtitle" (ngModelChange)="News.subtitle=$event" required value="">
+                        <br>
+                        <label>Type</label>
+                        <select name="ntype" [ngModel]="News.ntype" (ngModelChange)="News.ntype=$event">
+                            <option value="standart" selected>Standart</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                    </div>
+                    <div class="create_news_rt">
+                        <label>Logo image</label>
+                            <input type="file" accept="image/*" name="logo_img" [(ngModel)]="logo_img" (change)="changeListener($event)">
+                        <br>
+                        <label>Links</label>
+                        <input type="text" name="links" [ngModel]="News.links" (ngModelChange)="News.links=$event" required>
+                        <br>
+                        
+                        <label>Category</label>
+                        <select name="ncategory" [ngModel]="News.ncategory" (ngModelChange)="News.ncategory=$event" >
+                            <option value="finance">Finance / Epargne / Assurance</option>
+                            <option value="ecologique">Placement écologique</option>
+                            <option value="immobilier">Investissement Immobilier</option>
+                            <option value="plaisir">Investissement plaisir</option>
+                        </select>
+                        
+                    </div>
+                    </div>
+                    <br>
+                    <label>Description</label>
+                    <app-tinymce name="description" [ngModel]="News.description" (ngModelChange)="News.description=$event" required></app-tinymce>
+                    <div class="create_news_clearfix"></div>
+                    <br>
+                    <button class="annonce_button" type="submit" [disabled]="!isOkEnabled">Update annonce</button>
+                  </form>
+              </div>
+          </div>
+      </main>
+  </div>

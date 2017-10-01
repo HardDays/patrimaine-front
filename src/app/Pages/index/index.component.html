@@ -1,0 +1,321 @@
+<div class="wrapper">
+  <div id="slider" style="background-color:rgba(255,255,255,255);z-index: -1;"> 
+    <!-- ############################################################################################################# -->
+      <img src='/images/demo/slider/11.png' style="display: block;margin: 0 auto;">
+    			
+    <div id="slidewrap" style="background-color:transparent">
+      <div class="heading"><span id="slidecaption">Portail pour Professionnels du chiffre et du droit</span></div>
+    		
+    </div>
+
+    
+    <!--<div class="owl-carousel">
+    	<div class="one-new" >
+    			<img src='/images/demo/slider/1.png'>
+    			<h4>Portail pour Professionnels du chiffre et du droit</h4>
+    		</div>
+    		<div class="one-new">
+    			<h4>The title of news_list</h4>
+    			<h6>The subtitle of news_list</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a routerLink="/news_list">En savoir plus »</a>
+    			<img src="images/demo/sec_3.jpg" align="">
+    		</div>
+    		<div class="one-new">
+    			<img src="images/demo/sec_3.jpg" align="">
+    			<h4>The title of news_list</h4>
+    			<h6>The subtitle of news_list</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a routerLink="/news_list">En savoir plus »</a>
+    		</div>
+    	</div>-->
+    
+    <!-- ############################################################################################################# --> 
+  </div>
+</div>
+<!-- ################################################################################################ --> 
+<!-- ################################################################################################ --> 
+<!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <div class="loading" *ngIf="isLoading"></div>
+  <main id="container" *ngIf="!isLoading" class="clear"> 
+    <!-- container body --> 
+    <!-- ########################################################################################## -->
+    <ul class="nospace push25 center clear">
+      <li class="one_quarter first">
+        <div class="push30"><span class="circle icon-flag"></span></div>
+        <p class="nospace push10">Vous êtes un professionnel du chiffre et du droit</p>
+        <!--<p class="nospace"><a >Read more &raquo;</a></p>-->
+      </li>
+      <li class="one_quarter">
+        <div class="push30"><span class="circle icon-book"></span></div>
+        <p class="nospace push10">Vous êtes un concepteur de solutions patrimoniales</p>
+        <!--<p class="nospace"><a >Read more &raquo;</a></p>-->
+      </li>
+      <li class="one_quarter">
+        <div class="push30"><span class="circle icon-trophy"></span></div>
+        <p class="nospace push10">Vous êtes un chef d'entreprise ou professionnel</p>
+        <!--<p class="nospace"><a >Read more &raquo;</a></p>-->
+      </li>
+      <li class="one_quarter">
+        <div class="push30"><span class="circle icon-group"></span></div>
+        <p class="nospace push10">Vous êtes un particulier</p>
+        <!--<p class="nospace"><a >Read more &raquo;</a></p>-->
+      </li>
+    </ul>
+    <hr class="nospace push50">
+    <h3 class="section_zag blue_zag" *ngIf=" lastAnnonces.length > 0 || premiumAnnonces.length > 0">La place des annonces (Patrimoniales)</h3>
+    <section class="ads push50" *ngIf="lastAnnonces.length > 0">
+      <div class="lasts_ads">
+        <!-- Последние опубликованные анонсы -->
+        <h5 class="blue_zag">Dernières annonces publiées</h5>
+        <div class="list">
+          <div class="one_ads" *ngFor="let item of lastAnnonces">
+            <p class="c height20">{{item.ncategory}}</p>
+            <h6>{{item.title}}</h6>
+            <div class="height40" [innerHTML]="item.description"></div>
+            <a [routerLink]="['/news/' + item.id]">Voir l'offre »</a>
+            <p class="d">{{item.created_at | date: dMMy}}</p>
+            <div class="clear"></div>
+          </div>
+          <a routerLink="/news_list" class="all_annonces">Voir toutes les annonces »</a>
+        </div>
+      </div>
+      <div class="lasts_ads premium_ads" *ngIf="premiumAnnonces.length > 0">
+        <!-- Премиум аннонсы -->
+        <h5 class="blue_zag">Les annonces premiums</h5>
+        <div class="list">
+          <div class="one_ads" *ngFor="let item of premiumAnnonces">
+            <p class="c height20">{{item.ncategory}}</p>
+            <h6>{{item.title}}</h6>
+            <div class="height40" [innerHTML]="item.description"></div>
+            <a [routerLink]="['/news/' + item.id]">Voir l'offre »</a>
+            <p class="d">{{item.created_at | date: dMMy}}</p>
+            <div class="clear"></div>
+          </div>
+          <a [routerLink]="['/news_list',{'ntype':'premium'}]" class="all_annonces">Voir toutes les annonces premiums »</a>
+        </div>
+      </div>
+      <div class="clear push50"></div>
+      <div class="ads_form">
+        <h5 class="blue_zag">Rechercher une annonce</h5>
+        <form action="">
+          <div class="left_form_part">
+          	
+            <label>Comany type</label>
+            <select name="search.c_type" [ngModel]="search.c_type" (ngModelChange)="search.c_type = $event">
+              <option value=""></option>
+              <option value="concepteur">Concepteur</option>
+              <option value="conseiller">Conseiller</option>
+              <option value="both">Both</option>
+            </select>
+            <br>
+            <label>Title</label>
+            <input type="text" value="" name="search.title" size="22" [ngModel]="search.title" (ngModelChange)="search.title = $event" placeholder="Title">
+            
+          </div>
+          <div class="center_form_part">
+              
+              <label>Subcategory</label>
+              <select name="search.subcategory" [ngModel]="search.subcategory" (ngModelChange)="search.subcategory = $event">
+                  <option value=""></option>
+                  <option value="classique">Classique</option>
+                  <option value="e_brooker">E-brooker</option>
+                  <option value="fintech">Fintech</option>
+                  <option value="crowdfunding">Crowdfunding</option>
+                  <option value="lendfunding">Lendfunding</option>
+                  <option value="institutionnels">Institutionnels</option>
+              </select>
+              <br>
+              <label>Description</label>
+              <input type="text" name="search.description"  value="" size="22" [ngModel]="search.description" (ngModelChange)="search.description = $event" placeholder="Description">
+              
+          </div>
+          <div class="right_form_part">
+            <label>Annonce type</label>
+            <select name="ntype" [ngModel]="search.ntype" (ngModelChange)="search.ntype = $event" >
+                <option value=""></option>
+                <option value="standart">Standart</option>
+                <option value="premium">Premium</option>
+            </select>
+            <br>
+            <br>
+            <button type="submit" (click)="SearchAnnonces()" style="margin-top: 10px;">Lancer la recherche »</button>
+          </div>
+          <div class="clear"></div>
+        </form>
+        <a routerLink="/create_ad" class="add_olx push50"><img src="images/demo/add_olx_icon.png" alt="">&nbsp;&nbsp;Déposer une annonce</a>
+      </div>
+
+      <!-- Специальные предложения -->
+      <h5 class="blue_zag text-center">Offres exclusives</h5>
+      	<div class="nospace push50 clear offres_carousel owl-carousel">
+	      <ul class="nospace push50 clear">
+      <li class="one_quarter" *ngFor="let item of offresAds">
+        <div>
+          <a   [routerLink]="['/users',item.user_id]">
+            <img class="height222" [src]="images[item.user_id]" alt="">
+          </a>
+        </div>
+        <div class="borderedbox pad15">
+          <h6 class="push10">{{item.title}}</h6>
+          <div class="nospace push20 height57" [innerHTML]="item.description"></div>
+          <div class="nospace push10">
+            <span class="cat">{{item.sub_category}}</span>
+            <span class="date">{{item.created_at | date: dMMy}}</span>
+          </div>
+          <p class="nospace clear"><a [routerLink]="['ads',item.id]">Voir l'offre &raquo;</a></p>
+        </div>
+      </li>
+      
+    	</ul>
+      	</div>
+      <p class="text-center">Vous voulez nous soumettre une solution patrimoniale différentiante ou nous solliciter pour une solution sur mesure, <a routerLink="">contactez-nous</a></p>
+    </section>
+    <!-- ########################################################################################## --> 
+    <!-- / container body -->
+
+    <hr class="nospace push50">
+    <h3 class="section_zag blue_zag">PROFESSIONNELS (DU PATRIMOINE)</h3>
+    <p class="subzag push50">Sur Place du Patrimoine, les professionnels du chiffre et du droit se rencontrent et remontent leur expérience pratique de gestion du patrimoine. Pour les particuliers et les chefs d'entreprises : l'occasion de les contacter, d'obtenir un conseil, de consulter leurs offres et de noter leurs prestations.</p>
+    <section class="profs push50">
+      <div class="prof">
+        <div class="img" style="background-image: url(images/demo/business-people.jpg)"></div>
+        <div class="desc text_align_justify">
+          <h4>Professionnels du chiffre et du droit</h4>
+          <p>Un professionnel de la gestion du patrimoine affilié, c'est consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Aenean euismod bibendum laoreet proin gravida dolor sit amet lacus ...</p>
+          <!--<a routerLink="#">En savoir plus »</a><br>-->
+          <a routerLink="/users" class="search">Trouver un professionnel</a><a routerLink="/register" class="search">Devenir priofessionnel affilié</a>
+        </div>
+      </div>
+      <hr class="divide_line">
+      <div class="prof prof_right">
+        <div class="desc text_align_justify">
+          <h4>Concepteurs de solutions patrimoniales</h4>
+          <p>Un concepteur de produits financiers affilié, c'est consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Aenean euismod bibendum laoreet proin gravida dolor sit amet lacus ...</p>
+          <!--<a routerLink="#">En savoir plus »</a><br>-->
+          <a routerLink="/users" class="search">Trouver un concepteur</a><a routerLink="/register" class="search">Devenir concepteur affilié</a>
+        </div>
+        <div class="img" style="background-image: url(images/demo/business-people2.jpg)"></div>
+      </div>
+    </section>
+    <hr class="nospace push50">
+    <div class="clear"></div>
+    <h3 class="section_zag blue_zag">Les grandes lignes de la gestion de patrimoine</h3>
+    <section class="big_img push50">
+      <div class="white_block text_align_justify">
+        <h4>Comprendre la gestion patrimoniale</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.</p>
+        <p>Proin sodales pulvinar tempor.</p>
+        <ul>
+          <li>Cum sociis natoque penatibus</li>
+          <li>et magnis dis parturient montes,</li>
+          <li>nascetur ridiculus mus.</li>
+        </ul>
+        <h5>Forum de la gestion de Patrimoine</h5>
+        <p>Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+        <a href="https://patrimoine-forum-th.herokuapp.com" class="big_and_nice_link">Aller sur le forum</a>
+      </div>
+      <div class="clear"></div>
+    </section>
+    <hr class="nospace push50">
+    <div class="clear"></div>
+    <h3 class="section_zag blue_zag">Témoignages</h3>
+    <section *ngIf="Reviews.length > 0" class="last_sec push50">
+      <div class="text_block height341">
+        <h4 class="review_title">{{review.title}}</h4>
+        <p class="review_author">Author: <span>{{review.author}}</span></p>
+        <div class="review_body" [innerHTML]="review.body"></div>
+        <a *ngIf="Access['can_crud_reviews']" [routerLink]="['/edit_review',review.id]">Edit review »</a>
+      </div>
+      <div class="img"><img src="images/demo/sec_3.jpg" alt=""></div>
+      <div class="clear"></div>
+      <ul class="revs_links">
+        <li class="rev_nav" *ngFor="let item of Reviews" [ngClass]="{'current': review.id == item.id}" style="cursor: pointer;" (click)="review=item"></li>
+      </ul>
+    </section>
+    <hr class="nospace push50">
+    <h3 class="section_zag blue_zag">Presse</h3>
+    <!-- news_list -->
+    <!--<section class="news_list push50">-->
+      <section class="last_sec push50">
+        <div class="img left"><img src="images/demo/sec_3.jpg" alt=""></div>
+        <div class="text_block right text_align_justify">
+          <h4>Titre du témoignage</h4>
+          <p>Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+          
+        </div>
+      
+        <div class="clear"></div>
+        <div class="owl-carousel news_list_carousel">
+    	  <!--<div class="one-new">
+    			<img src="images/demo/sec_3.jpg" align="">
+    			<a routerLink="/news_list">En savoir plus »</a>
+    		</div>
+    		<div class="one-new">
+    			<h4>The title of news_list</h4>
+    			<h6>The subtitle of news_list</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a routerLink="/news_list">En savoir plus »</a>
+    			<img src="images/demo/sec_3.jpg" align="">
+    		</div>
+    		<div class="one-new">
+    			<img src="images/demo/sec_3.jpg" align="">
+    			<h4>The title of news_list</h4>
+    			<h6>The subtitle of news_list</h6>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+    			<a routerLink="/news_list">En savoir plus »</a>
+    		</div>-->
+    	</div>
+    </section>
+    <hr class="nospace push50">
+    <h3 class="section_zag blue_zag">Partenaires</h3>
+    <section class="logos">
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    	<div><img src="images/demo/patrimoineLogo.png" alt=""></div>
+    </section>
+  </main>
+</div>
+      <!-- JAVASCRIPTS --> 
+    <script src="../../layout/scripts/jquery.min.js"></script> 
+    <script src="../../layout/scripts/owl.carousel.min.js"></script>
+    <script src="../../layout/scripts/supersized/supersized.min.js"></script> 
+    <script>
+jQuery(function ($) {
+    $.supersized({
+        slides: [{
+           // image: '../images/demo/slider/1.png',
+            title: 'Portail pour Professionnels du chiffre et du droit'
+        }, {
+            //image: '../images/demo/slider/2.png',
+            title: "Solutions patrimoniales pour Particuliers et Chefs d'entreprises"
+        }, {
+            //image: '../images/demo/slider/3.png',
+            title: ''
+        }]
+    });
+});
+
+$(document).ready(function(){
+   $('.owl-carousel').owlCarousel();
+	  $(".offres_carousel").owlCarousel({
+	  	items: 4,
+	  	margin: 10,
+	  	nav: true,
+	  	navText: ['« Voir le précédent', 'Voir la prochaine »']
+	  });
+
+	  $(".news_list_carousel").owlCarousel({
+	  	items: 2,
+	  	margin: 50,
+	  	nav: true,
+	  	navText: ['« Voir le précédent', 'Voir la prochaine »']
+	  });
+	});
+</script>

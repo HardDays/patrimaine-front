@@ -1,0 +1,167 @@
+<div class="wrapper row2">
+    
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row3">
+        <main id="container" class="clear">
+        <!-- container body -->
+        <div class="loading" *ngIf="isLoading"></div>
+        <div class="profile_edit" *ngIf="!isLoading">
+            <div class="profile_nav">
+                <ul>
+                    <li [ngClass]="{'active':currentTab == 'user'}">
+                        <a (click)="ChangeTabTo('user')">Edit user profile</a>
+                    </li>
+                    <li [ngClass]="{'active':currentTab == 'password'}">
+                        <a (click)="ChangeTabTo('password')">Change password</a>
+                    </li>
+                    
+                    <li *ngIf="me.company" [ngClass]="{'active':currentTab == 'company'}">
+                        <a (click)="ChangeTabTo('company')">Edit company profile</a>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="currentTab == 'password'" class="change_pw">
+                <div *ngIf="changePwErr">
+                    <h1 class="error-msg">{{changePwErrMsg}}</h1>
+                </div>
+                <div *ngIf="changePwOk">
+                    <h1 class="ok-msg">Your password was changed! We will reddirect you to login page soon!</h1>
+                </div>
+                <form (ngSubmit)="ChangePassword(old_pw,new_pw)">
+                    <label>Old password</label>
+                    <input type="password" name="old_pw" value="" [(ngModel)]="old_pw" required><br>
+                    <label>New password</label>
+                    <input type="password" name="new_pw" value="" minlength="6" [(ngModel)]="new_pw" required>
+                    <button type="submit"> Change password</button>
+                </form>
+            </div>
+            <div *ngIf="currentTab == 'user'" class="user_info">
+                    <div *ngIf="changeUserErr">
+                        <h1 class="error-msg">{{changeUserErrMsg}}</h1>
+                    </div>
+                    <div *ngIf="changeUserOk">
+                        <h1 class="ok-msg">User data was updated!</h1>
+                    </div>
+                <form (ngSubmit)="UpdateUserInfo()">
+                    <label>
+                        <img src="../images/demo/icon_mail.png" alt=""> 
+                        Email
+                    </label>
+                    <input type="email" name="email" size="22" [ngModel]="me.email" (ngModelChange)="me.email=$event" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                    <label>
+                        <img src="../images/demo/icon_name.png" alt=""> 
+                        First name
+                    </label>
+                    <input type="text" name="fname" size="22" [ngModel]="me.first_name" (ngModelChange)="me.first_name=$event"  required><br>
+                    <label>
+                        <img src="../images/demo/icon_name.png" alt=""> 
+                        Last Name
+                    </label>
+                    <input type="text" name="lname" size="22" [ngModel]="me.last_name" (ngModelChange)="me.last_name=$event"  required><br>
+                    <label>
+                        <img src="../images/demo/icon_phone.png" alt=""> 
+                        Phone
+                    </label>
+                    <input type="text" name="phone" size="22" [ngModel]="me.phone" (ngModelChange)="me.phone=$event" ><br>
+            
+                    <label>
+                        <img src="../images/demo/icon_category.png" alt=""> 
+                        Category
+                    </label>
+                    <select name="pcategory" [ngModel]="me.pcategory" (ngModelChange)="me.pcategory=$event" required>
+                        <option value="assureurs">Assureurs</option>
+                        <option value="avocats">Avocats</option>
+                        <option value="patrimoine">Conseillers en gestion de patrimoine</option>
+                        <option value="prets">Courtiers de prêts</option>
+                        <option value="comptables">Experts-comptables</option>
+                        <option value="notaires">Notaires</option>
+                        <option value="immobilier">Professionnels de l'immobilier</option>
+                    </select>
+                    <br>
+                    <button type="submit">Confirm</button>
+                </form>
+            </div>
+            <div *ngIf="currentTab == 'company'" class="company_info">
+                <div *ngIf="changeCompanyErr">
+                    <h1 class="error-msg">{{changeCompanyErrMsg}}</h1>
+                </div>
+                <div *ngIf="changeCompanyOk">
+                    <h1 class="ok-msg">Company data was updated!</h1>
+                </div>
+                <form (ngSubmit)="UpdateUserCompany()">
+                    <label>Name *</label>
+                    <input type="text" name="cname" [ngModel]="me.company.name" (ngModelChange)="me.company.name=$event" required><br>
+                    <label>Address</label>
+                    <input type="text" name="caddress" [ngModel]="me.company.address" (ngModelChange)="me.company.address=$event"><br>
+                    <label>Other Address</label>
+                    <input type="text" name="coaddress" [ngModel]="me.company.other_address" (ngModelChange)="me.company.other_address=$event"><br>
+                    <label>Email</label>
+                    <input type="text" name="cemail" [ngModel]="me.company.email" (ngModelChange)="me.company.email=$event" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                    <label>Phone</label>
+                    <input type="text" name="cphone" [ngModel]="me.company.phone" (ngModelChange)="me.company.phone=$event"><br>
+                    <!--<label>Company ID</label>
+                    <input type="text" name="companyid" [(ngModel)]="companyid"><br>-->
+                    <label>Description</label>
+                    <app-tinymce name="description" [ngModel]="me.company.description" (ngModelChange)="me.company.description=$event"></app-tinymce><br>
+                    <label>Social links</label>
+                    <app-tinymce name="links" [ngModel]="me.company.links" (ngModelChange)="me.company.links=$event"></app-tinymce><br>
+                    <label>Logo image</label>
+                    <div>
+                        <img class="edit-company-image" [src]="ImageBase64">
+                        <input type="file" accept="image/*" name="logo_img" [(ngModel)]="logo_img" (change)="changeListener($event)">
+                    </div>
+                    <br>
+                    <div class="part_reg">
+                        <div class="left_part">
+                        <label>Company type *</label>
+                        <select name="c_type" [ngModel]="me.company.c_type" (ngModelChange)="me.company.c_type=$event" required>
+                            <option value="concepteur">Concepteur</option>
+                            <option value="conseiller">Conseiller</option>
+                            <option value="both">Both</option>
+                        </select>
+                        </div>
+                        <div class="rigth_part">
+                        <label>Subcategory</label>
+                        <select name="subcategory" [ngModel]="me.company.sub_category" (ngModelChange)="me.company.sub_category=$event">
+                            <option value="classique">Classique</option>
+                            <option value="e_brooker">E-brooker</option>
+                            <option value="fintech">Fintech</option>
+                            <option value="crowdfunding">Crowdfunding</option>
+                            <option value="lendfunding">Lendfunding</option>
+                            <option value="institutionnels">Institutionnels</option>
+                        </select>
+                        </div>
+                    </div><br>
+                    <div class="part_reg">
+                        <div class="expertises-div left_part">
+                        <label>Expertises</label>
+                        <div class="form-group" *ngFor="let item of Expertises">
+                            <label>
+                                <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                                {{item.name}}
+                            </label>
+                        </div>
+                        </div>
+                        <div class="expertises-div rigth_part">
+                        <label>Agrements</label>
+                        <div class="form-group" *ngFor="let item of Agreements">
+                            <label>
+                                <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                                {{item.name}}
+                            </label>
+                        </div>
+                        </div>
+                    </div><br>
+                    <button type="submit" class="confirm_profile" >Confirm</button>
+                </form>
+            </div>
+
+        </div>
+
+
+
+        </main>
+    </div>

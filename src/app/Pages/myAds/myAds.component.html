@@ -1,0 +1,32 @@
+<div class="wrapper row2">
+      
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+<div class="wrapper row3">
+    <main id="container" class="clear">
+        <div class="loading" *ngIf="IsLoading"></div>
+        <div id="comments" *ngIf="!IsLoading">
+            <div *ngIf="myAds.length == 0">
+                <h1 class="error-msg">You have no ads</h1>
+            </div>
+            <ul>
+                <li *ngFor="let ad of myAds" class="users_ad">
+                    <article>
+                        <div class="delete_button">
+                            <button (click)="OnDeleteAd(ad)" ></button>
+                        </div>
+                        <div class="delete_button">
+                            <button class="edit" (click)="OnEditAd(ad)" ></button>
+                        </div>
+                        <header class="my_ad_header">
+                            <h2 ><a [routerLink]="['/ads/' + ad.id]">{{ad.title}}</a></h2>
+                        </header>
+                        
+                    </article>
+                </li>
+            </ul>
+        </div>
+    </main>
+</div>

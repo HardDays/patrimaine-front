@@ -1,0 +1,35 @@
+<div class="wrapper row2">
+    
+  </div>
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <main id="container" class="clear">
+      <div class="ads_creation reg_block">
+          <div *ngIf="createError">
+              <h1 class="error-msg">{{errorMsg}}</h1>
+          </div>
+          <div *ngIf="createOk">
+            <a routerLink="/"><h1 class="ok-msg">Review was created! Your will be redirected to review list soon !</h1></a>
+         </div>
+          <div class="loading" *ngIf="isLoading"></div>
+           
+          <div class="ad_create_form" *ngIf="!isLoading">
+              <h1>Create Ad</h1>
+              <form (ngSubmit)="OncreateReviewButtonClick()">
+                <label>Author</label>
+                <input type="text" name="author" [ngModel]="Review.author" (ngModelChange)="Review.author=$event" required>
+                <br>
+                <label>Title</label>
+                <input type="text" name="title" [ngModel]="Review.title" (ngModelChange)="Review.title=$event" required>
+                <br>
+                <label>Description</label>
+                <app-tinymce name="description" [ngModel]="Review.body" (ngModelChange)="Review.body=$event" required></app-tinymce>
+                <br>
+                <button class="create_button" type="submit">Create review</button>
+              </form>
+          </div>
+      </div>
+  </main>
+</div>

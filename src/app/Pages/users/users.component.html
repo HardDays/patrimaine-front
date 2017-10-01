@@ -1,0 +1,197 @@
+<div class="wrapper">
+</div>
+<!-- ################################################################################################ --> 
+<!-- ################################################################################################ --> 
+<!-- ################################################################################################ -->
+<div class="wrapper row2">
+  <!--<div id="breadcrumb">
+     ########################################################################################## 
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="#">Lorem</a></li>
+      <li><a href="#">Ipsum</a></li>
+      <li><a href="#">Dolor</a></li>
+    </ul>
+     ########################################################################################## 
+  </div>-->
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <main id="container" class="clear">
+    <!-- container body -->
+    <!-- ########################################################################################## -->
+    <div class="loading three_quarter first" *ngIf="IsLoading"></div>
+    <div id="content" class="three_quarter first" *ngIf="!IsLoading">
+      <!-- ########################################################################################## -->
+      <div id="comments">
+        <div *ngIf="UsersObservable.length == 0">
+            <h1 class="error-msg">Can't find users</h1>
+        </div>
+        <ul >
+          <li *ngFor="let user of UsersObservable">
+            <article>
+              <div class="user_head">
+                <h2><a  [routerLink]="['/users/' + user.id]" >{{user.first_name + " " + user.last_name}}</a></h2>
+                <span class="date">Last update: {{user.updated_at | date: " MMMM d, y HH:mm"}}</span>
+                
+              </div>
+              <div class="user_block">
+                <div *ngIf="user.company" class="img">
+                  <img class="borderedbox" [src]="Images[user.id]" alt="">
+                  <div class="rating_wrap" *ngIf="user.company">
+                    <div class="stars_wrap">
+                      <div class="stars_empty" ><div class="stars" [ngStyle]="{'width': 100*(user.company.rate?(user.company.rate-1):0)/4. + '%'}"></div></div>
+                      <span> Average rate of<br />this user</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="desc">
+                  <p *ngIf="user.phone || user.email">
+                    <strong>Contacts:</strong>
+                    <span *ngIf="user.phone">
+                      <span class="icon-phone"></span>
+                      {{user.phone}}
+                    </span>
+                    <span *ngIf="user.phone" >
+                      <br />
+                    </span>
+                    <span [ngClass]="{'contact-margin':user.phone}" *ngIf="user.email">
+                      <span class="icon-envelope"></span>
+                      {{user.email}}
+                    </span>
+                  </p>
+                  <p *ngIf="user.company">
+                    <span *ngIf="user.company.name">
+                      <hr>
+                      <strong>Company name:</strong>
+                      {{user.company.name}}
+                      <br />
+                    </span>
+                    <span *ngIf="user.company.sub_category">
+                      <hr>
+                      <strong>Category:</strong> 
+                      <span >
+                        <a>{{user.company.sub_category}}</a>
+                      </span>
+                      <br />
+                      
+                    </span>
+                    <span *ngIf="user.company.expertises && user.company.expertises.length != 0">
+                      <hr>
+                      <strong>Expertises:</strong> 
+                      <span *ngFor="let item of user.company.expertises; let last = last" >
+                        <a>{{item}}</a><span *ngIf="!last">,</span>
+                      </span>
+                      <br />
+                    </span> 
+                    <span *ngIf="user.company.agrements && user.company.agrements.length != 0">
+                      <hr>
+                      <strong>Agreements:</strong> 
+                      <span *ngFor="let item of user.company.agrements; let last = last" >
+                        <a>{{item}}</a><span *ngIf="!last">,</span>
+                      </span>
+                      <br />
+                    </span>  
+                  </p>
+                  <!--<div class="user_block_text" *ngIf="user.company && user.company.description">
+                    <hr>
+                     <strong>About:</strong> {{user.company.description}}
+                  </div>-->
+                </div>
+                <div class="rating_wrap" *ngIf="user.company">
+                    <div *ngIf="user.company" class="like" [ngClass]="{'like-active': MyLikes[user.id]}" (click)="LikeOrUnlikeUser(user.id*1)">
+                      <img [src]="MyLikes[user.id]?'../images/demo/like_active.png':'../images/demo/like.png'" alt=""> 
+                      Like {{user.company.likes}}</div>
+                  <div class="stars_wrap" *ngIf="isLogedIn">
+                    <div class="stars_empty" (click)="RateOrUnrateUser(user.id,$event)"><div class="stars" [ngStyle]="{'width': 100*(MyRates[user.id]?(MyRates[user.id]-1):0)/4. + '%'}"></div></div>
+                    <span>Your rate for<br /> this user</span>
+                  </div>
+                </div>
+              </div>
+              
+            </article>
+          </li>
+          <li class="post_banner">
+            <img src="../images/demo/ads_demo_hor.jpg" alt="">
+          </li>
+        </ul>
+      </div>
+      <div class="pagination">
+        <ul>
+            <li *ngIf="Page > 1"><a (click)="PrevOrNextPage(false)" >« Previous</a></li>
+            <li *ngFor="let i of Pages" ><a (click)="ChangePageNumber(i*1)" [ngClass]="Page*1 == i*1 ? 'active-page':''" >{{i}}</a></li>
+            <li *ngIf="Page < Pages.length"><a (click)="PrevOrNextPage(true)" >Next »</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar one_quarter">
+      
+      <div class="sdb_holder" id="comments">
+        <form class="filter">
+          <h6>User inforation</h6>
+          <input type="text" name="user_name" value="" size="22" [ngModel]="Params.user_name" (ngModelChange)="Params.user_name=$event" placeholder="First- Lastname">
+          <input type="text" name="user_email" value="" size="22" [ngModel]="Params.user_email" (ngModelChange)="Params.user_email=$event" placeholder="Email">
+
+          <h6 class="search-heared">User category</h6>
+          <div class="search_checkbox" *ngFor="let item of Pcategory">
+                <input style="float:left;" type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                <div style="margin-left:18px;margin-bottom:3px!important;">{{item.name}}</div>
+          </div>
+          <button type="button" (click)="isAdvancedSearch=!isAdvancedSearch">
+            <span size="5">{{isAdvancedSearch?"&uArr;":"&dArr;"}}</span> 
+            Advanced Search 
+            <span size="5">{{isAdvancedSearch?"&uArr;":"&dArr;"}}</span>
+          </button>
+          <div *ngIf="isAdvancedSearch">
+          <br />
+          <h5>Advanced Search</h5>
+          <h6 class="search-heared">Company</h6>
+          <input type="text" name="name" id="name" value="" size="22" [ngModel]="Params.name" (ngModelChange)="Params.name = $event"  placeholder="Name">
+          <h6 class="search-heared">Address</h6>
+          <input type="text" name="address" id="address" value="" size="22" [ngModel]="Params.address" (ngModelChange)="Params.address = $event"  placeholder="Address">
+          <input type="text" name="other_address" id="other_address" value="" size="22" [ngModel]="Params.other_address" (ngModelChange)="Params.other_address = $event"  placeholder="Other address">
+
+          <h6 class="search-heared">Email</h6>
+          <input type="text" name="email" id="email" value="" size="22" [ngModel]="Params.email" (ngModelChange)="Params.email = $event"  placeholder="Email">
+          
+          
+          <h6 class="search-heared">Company type</h6>
+              <select name="c_type" [ngModel]="Params.c_type" (ngModelChange)="Params.c_type = $event" >
+                <option value=""></option>
+                <option value="concepteur">Concepteur</option>
+                <option value="conseiller">Conseiller</option>
+                <option value="both">Both</option>
+            </select>
+          
+            
+          <h6 class="search-heared">Subcategories</h6>
+            <div class="search_checkbox" *ngFor="let item of Subcategory">
+                  <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                  {{item.name}}
+            </div>
+          <h6 class="search-heared">Expertises</h6>
+            <div class="search_checkbox" *ngFor="let item of Expertises">
+                  <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                  {{item.name}}
+            </div>
+            <h6 class="search-heared">Agrements</h6>
+            <div class="search_checkbox" *ngFor="let item of Agreements">
+                  <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                  {{item.name}}
+            </div>
+          </div>
+          <button type="submit" (click)="OnSearchSubmit()">Relancer la recherche »</button>
+        </form>
+        <div class="side_banner">
+          <img src="../images/demo/ads_demo.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </main>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->

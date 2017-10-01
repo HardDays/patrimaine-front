@@ -1,0 +1,112 @@
+
+<div class="wrapper row2">
+    <!--<div id="breadcrumb">
+    ########################################################################################## 
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Lorem</a></li>
+        <li><a href="#">Ipsum</a></li>
+        <li><a href="#">Dolor</a></li>
+    </ul>
+     ########################################################################################## 
+    </div>-->
+</div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+<div class="wrapper row3">
+    
+    <main id="container" class="clear" >
+    <!-- container body -->
+    <!-- ########################################################################################## -->
+    <div class="loading three_quarter first" *ngIf="IsLoading"></div>
+    <div id="content" class="three_quarter first" *ngIf="!IsLoading">
+        <!-- ########################################################################################## -->
+        
+        <div id="comments" >
+            <div *ngIf="AdsObservable.length == 0">
+                <h1 class="error-msg">Can't find ads</h1>
+            </div>
+            <ul>
+                <li *ngFor="let ad of AdsObservable">
+                    <article>
+                        <header>
+                            <h2 ><a [routerLink]="['/ads/' + ad.id]">{{ad.title}}</a></h2>
+                            <span class="date">Last update: {{ad.updated_at | date: "d MMMM, y"}}</span>
+                        </header>
+                        <div class="user_block">
+                            <div class="img"><img class="borderedbox" src="../images/demo/imgl.gif" alt=""></div>
+                            <div class="desc">
+                                <p [innerHTML]="ad.description"></p>
+                                <address>
+                                    <a [routerLink]="['/users/' + ad.user_id]">{{Users[ad.id]}}</a>
+                                </address>
+                            </div>
+                        </div>
+                    </article>
+                </li>
+
+                <li class="post_banner">
+                    <img src="../images/demo/ads_demo_hor.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+        <!-- ########################################################################################## -->
+        <div class="pagination">
+            <ul>
+                <li *ngIf="Page > 1"><a (click)="PrevOrNextPage(false)" >« Previous</a></li>
+                <li *ngFor="let i of Pages" ><a (click)="ChangePageNumber(i*1)" [ngClass]="Page*1 == i*1 ? 'active-page':''" >{{i}}</a></li>
+                <li *ngIf="Page < Pages.length"><a (click)="PrevOrNextPage(true)" >Next »</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- ########################################################################################## -->
+    <!-- ########################################################################################## -->
+    <div class="sidebar one_quarter">
+        <!-- ########################################################################################## -->
+
+        <div class="sdb_holder" id="comments">
+            <form class="filter">
+                <h6 class="search-heared">Mot clé</h6>
+                <input type="text" name="title" id="title" value="" size="22" [ngModel]="Params.title" (ngModelChange)="Params.title = $event"  placeholder="Title">
+                <input type="text" name="description" id="description" value="" size="22" [ngModel]="Params.description" (ngModelChange)="Params.description = $event"  placeholder="Description">
+                <h6 class="search-heared">Address</h6>
+                <input type="text" name="address" id="address" value="" size="22" [ngModel]="Params.address" (ngModelChange)="Params.address = $event"  placeholder="Address">
+                
+                <h6 class="search-heared">Company type</h6>
+                <select name="c_type" [ngModel]="Params.c_type" (ngModelChange)="Params.c_type = $event" >
+                    <option value=""></option>
+                    <option value="concepteur">Concepteur</option>
+                    <option value="conseiller">Conseiller</option>
+                    <option value="both">Both</option>
+                </select>
+                
+                    
+                <h6 class="search-heared">Subcategories</h6>
+                <div class="search_checkbox" *ngFor="let item of Subcategory">
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                </div>
+                <h6 class="search-heared">Expertises</h6>
+                <div class="search_checkbox" *ngFor="let item of Expertises">
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                </div>
+                <h6 class="search-heared">Agrements</h6>
+                <div class="search_checkbox" *ngFor="let item of Agreements">
+                    <input type="checkbox" [checked]="item.checked" (change)="item.checked = !item.checked">
+                    {{item.name}}
+                </div>
+                <button type="submit" (click)="OnSearchSubmit()">Relancer la recherche »</button>
+            </form>
+            <div class="side_banner">
+                <img src="../images/demo/ads_demo.jpg" alt="">
+            </div>
+        </div>
+        <!-- ########################################################################################## -->
+    </div>
+    <!-- ########################################################################################## -->
+    <!-- / container body -->
+    <div class="clear"></div>
+    </main>
+</div>

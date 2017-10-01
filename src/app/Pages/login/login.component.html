@@ -1,0 +1,28 @@
+<div class="wrapper row2">
+  
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <main id="container" class="clear">
+    <!-- container body -->
+    <div class="loading" *ngIf="isLoading"></div>
+    <div class="login_form" *ngIf="!isLoading">
+      <div class="error-msg" *ngIf="isLoginErr"><h2>Invalid login or password!</h2></div>
+      <h1>Login</h1>
+      <form (ngSubmit)="OnLoginButtonClick(email,password)">
+        <label>Email</label>
+        <input type="text" name="email" [(ngModel)]="email">
+        <br>
+        <label>Password</label>
+        <input type="password" name="password" [(ngModel)]="password"><br>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <!-- ########################################################################################## -->
+    <!-- / container body -->
+    <div class="clear"></div>
+  </main>
+</div>
